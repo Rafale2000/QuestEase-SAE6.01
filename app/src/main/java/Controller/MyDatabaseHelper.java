@@ -9,9 +9,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     // Database Name and Version
     private static final String DATABASE_NAME = "myDatabase.db";
     private static final int DATABASE_VERSION = 1;
-    private static final String TABLE_CHOSE = "choseATrouverPrixJust";
+    public static final String TABLE_CHOSE = "choseATrouverPrixJust";
     public static final String KEY_ID = "idChoseATrouver";
+    public static final String KEY_XP = "experience";
     public static final String KEY_NOM = "nom";
+    public static final String KEY_EMAIL = "email";
+    public static final String KEY_RES = "resultatPasse";
     public static final String KEY_PRIX = "prix";
     public static final String KEY_PATH_TO_PICTURE = "PathToPicture";
     // Constructor
@@ -39,7 +42,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         String utilisateur_TABLE = "CREATE TABLE Utilisateur("
                 + "idUtilisateur INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "psswrd TEXT NOT NULL,"
+                + "username TEXT NOT NULL UNIQUE,"
+                + "xp INTEGER NOT NULL,"
                 + "email TEXT NOT NULL)";
         db.execSQL(utilisateur_TABLE);
 
