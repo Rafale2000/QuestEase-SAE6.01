@@ -20,11 +20,57 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // Define your table structure here
         String CREATE_TABLE = "CREATE TABLE choseATrouverPrixJust ("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + "idChoseATrouver INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + "name TEXT, "
                 + "prix int,"
                 + "PathToPicture TEXT)";
         db.execSQL(CREATE_TABLE);
+
+        String infoSecu_TABLE = "CREATE TABLE infoSecu("
+                + "idInfo INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "psswrd TEXT NOT NULL,"
+                + "email TEXT NOT NULL,"
+                + "FOREIGN KEY (idIndice) REFERENCES Indice(idIndice))";
+        db.execSQL(infoSecu_TABLE);
+
+        String utilisateur_TABLE = "CREATE TABLE Utilisateur("
+                + "idUtilisateur INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "psswrd TEXT NOT NULL,"
+                + "email TEXT NOT NULL)";
+        db.execSQL(utilisateur_TABLE);
+
+        String Indice_TABLE = "CREATE TABLE Indice("
+                + "idIndice INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "indice TEXT NOT NULL)";
+        db.execSQL(Indice_TABLE);
+
+        String MotCryptex_TABLE = "CREATE TABLE motCryptex("
+                + "idCryptex INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "mot TEXT NOT NULL,"
+                + "difficulte int NOT NULL,"
+                + "FOREIGN KEY (idIndice) REFERENCES Indice(idIndice))";
+        db.execSQL(MotCryptex_TABLE);
+
+        String MotPendu_TABLE = "CREATE TABLE motPendu("
+                + "idPendu INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "mot TEXT NOT NULL,"
+                + "difficulte int NOT NULL,"
+                + "FOREIGN KEY (idIndice) REFERENCES Indice(idIndice))";
+        db.execSQL(MotPendu_TABLE);
+
+        String Son_TABLE = "CREATE TABLE son("
+                + "idSon INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "pathToSound TEXT NOT NULL,"
+                + "FOREIGN KEY (idIndice) REFERENCES Indice(idIndice))";
+        db.execSQL(Son_TABLE);
+
+        String Resultat_TABLE = "CREATE TABLE Resultat("
+                + "idResultat INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "mot TEXT NOT NULL,"
+                + "difficulte int NOT NULL)";
+        db.execSQL(Resultat_TABLE);
+
+
     }
 
     // Called when the database needs to be upgraded

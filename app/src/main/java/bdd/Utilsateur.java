@@ -1,16 +1,20 @@
 package bdd;
 
+import java.util.ArrayList;
+
 public class Utilsateur {
     private int id; // This will be auto-incremented by the database
     private String firstName;
     private String lastName;
     private int xp;
+    private ArrayList<Integer> resultatPasse;
 
     // Constructor
     public Utilsateur(String firstName, String lastName, int xp) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.xp = xp;
+
     }
 
     public Utilsateur(){
