@@ -8,61 +8,62 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import Model.bdd.ChoseATrouverPrixJuste;
 import Model.bdd.MotCryptex;
+import Model.bdd.MotPendu;
 
-public class MotCryptexHandler extends MyDatabaseHelper {
+public class MotPenduHandler extends MyDatabaseHelper {
     private SQLiteOpenHelper dbHelper;
-    public MotCryptexHandler(Context context){
+    public MotPenduHandler(Context context){
         super(context);
         dbHelper = new MyDatabaseHelper(context);
     }
 
-    public int addMotCryptex (MotCryptex motCryptex){
+    public int addMotPendu (MotPendu motPendu){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_ID_INDICE, motCryptex.getId());
-        values.put(KEY_MOT, motCryptex.getMot());
-        values.put(KEY_DIFF, motCryptex.getDiff());
-        values.put(KEY_ID_INDICE, motCryptex.getIdIndice());
+        values.put(KEY_ID_PENDU, motPendu.getId());
+        values.put(KEY_MOT, motPendu.getMot());
+        values.put(KEY_DIFF, motPendu.getDiff());
+        values.put(KEY_ID_INDICE, motPendu.getIdIndice());
         long insertId = db.insert(TABLE_MOTCRYPTEX, null, values);
         db.close();
         return (int) insertId;
     }
 
-    public MotCryptex getCryptex(int id) {
+    public MotPendu getMotPendu(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_MOTCRYPTEX, new String[] { KEY_ID_CRYPTEX,
-                        KEY_MOT, KEY_DIFF, KEY_ID_INDICE }, KEY_ID_CRYPTEX + "=?",
+        Cursor cursor = db.query(TABLE_MOTPENDU, new String[] { KEY_ID_PENDU,
+                        KEY_MOT, KEY_DIFF, KEY_ID_INDICE }, KEY_ID_PENDU + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
         assert cursor != null;
-        return new MotCryptex(Integer.parseInt(cursor.getString(0)),
+        return new MotPendu(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), cursor.getInt(2), cursor.getInt(3));
 
     }
 
     /**
      * supprime une chose à trouver
-     * @param motCryptex
+     * @param motPendu
      */
-    public void deleteCryptex(MotCryptex motCryptex) {
+    public void deleteMotPendu(MotPendu motPendu) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.delete(TABLE_MOTCRYPTEX, KEY_ID_CRYPTEX + " = ?",
-                new String[] { String.valueOf(motCryptex.getId()) });
+        db.delete(TABLE_MOTPENDU, KEY_ID_PENDU + " = ?",
+                new String[] { String.valueOf(motPendu.getId()) });
         db.close();
     }
 
 
-    public int updateCryptex(MotCryptex motCryptex){
+    public int updatePendu(MotPendu motPendu){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_MOT,motCryptex.getMot());
-        values.put(KEY_DIFF,motCryptex.getDiff());
-        values.put(KEY_ID_INDICE,motCryptex.getIdIndice());
-        long updateId=db.update(TABLE_CHOSE,values,
-                KEY_ID_CRYPTEX + " = ?",
-                new String[]{String.valueOf(motCryptex.getId())});
+        values.put(KEY_ID_PENDU,motPendu.getMot());
+        values.put(KEY_DIFF,motPendu.getDiff());
+        values.put(KEY_ID_INDICE,motPendu.getIdIndice());
+        long updateId=db.update(TABLE_MOTPENDU,values,
+                KEY_ID_PENDU + " = ?",
+                new String[]{String.valueOf(motPendu.getId())});
         db.close();
         return (int) updateId;
     }
