@@ -48,7 +48,7 @@ public class ChoseATrouverPrixJusteHandler extends MyDatabaseHelper {
      */
     public void deleteChose(ChoseATrouverPrixJuste chose) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.delete(TABLE_CHOSE, KEY_ID + " = ?",
+        db.delete(TABLE_CHOSE, KEY_ID_CHOSE + " = ?",
                 new String[] { String.valueOf(chose.getId()) });
         db.close();
     }
@@ -61,7 +61,7 @@ public class ChoseATrouverPrixJusteHandler extends MyDatabaseHelper {
         values.put(KEY_PRIX,chose.getValeur());
         values.put(KEY_PATH_TO_PICTURE,chose.getCheminImage());
         long updateId=db.update(TABLE_CHOSE,values,
-                KEY_ID + " = ?",
+                KEY_ID_CHOSE + " = ?",
                 new String[]{String.valueOf(chose.getId())});
         db.close();
         return (int) updateId;

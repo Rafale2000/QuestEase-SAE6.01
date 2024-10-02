@@ -17,10 +17,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_PRIX = "prix";
     public static final String KEY_PATH_TO_PICTURE = "PathToPicture";
 
-    //TABLE motCryptex
-    public static final String KEY_ID_CRYPTEX = "idMotCryptex";
+    //TABLE motCryptex et motPendu
     public static final String TABLE_MOTCRYPTEX = "motCryptex";
-    public static final String KEY_MOT_CRYPTEX = "mot";
+    public static final String TABLE_MOTPENDU = "motPendu";
+    public static final String KEY_ID_CRYPTEX = "idMotCryptex";
+    public static final String KEY_ID_PENDU = "idMotPendu";
+    public static final String KEY_MOT = "mot";
     public static final String KEY_DIFF = "diff";
     public static final String KEY_ID_INDICE = "idIndice";
 
@@ -61,16 +63,16 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
         String MotCryptex_TABLE = "CREATE TABLE " +TABLE_MOTCRYPTEX+ "("
                 + KEY_ID_CRYPTEX +" PRIMARY KEY AUTOINCREMENT,"
-                + KEY_MOT_CRYPTEX+ "TEXT NOT NULL UNIQUE,"
+                + KEY_MOT+ "TEXT NOT NULL UNIQUE,"
                 + KEY_DIFF+ "int NOT NULL,"
                 + "FOREIGN KEY ("+KEY_ID_INDICE+") REFERENCES Indice("+KEY_ID_INDICE+"))";
         db.execSQL(MotCryptex_TABLE);
 
-        String MotPendu_TABLE = "CREATE TABLE motPendu("
-                + "idPendu INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "mot TEXT NOT NULL,"
-                + "difficulte int NOT NULL,"
-                + "FOREIGN KEY (idIndice) REFERENCES Indice(idIndice))";
+        String MotPendu_TABLE = "CREATE TABLE "+ TABLE_MOTPENDU+"("
+                + KEY_ID_PENDU+" INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_MOT +"TEXT NOT NULL,"
+                + KEY_DIFF+" int NOT NULL,"
+                + "FOREIGN KEY ("+KEY_ID_INDICE+") REFERENCES Indice("+KEY_ID_INDICE+"))";
         db.execSQL(MotPendu_TABLE);
 
         String Son_TABLE = "CREATE TABLE son("
