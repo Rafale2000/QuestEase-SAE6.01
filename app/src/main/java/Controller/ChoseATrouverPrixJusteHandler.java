@@ -20,7 +20,7 @@ public class ChoseATrouverPrixJusteHandler extends MyDatabaseHelper {
     public int addMoteChose(ChoseATrouverPrixJuste chose) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, chose.getId());
+        values.put(KEY_ID_CHOSE, chose.getId());
         values.put(KEY_NOM, chose.getNom());
         values.put(KEY_PRIX, chose.getValeur());
         values.put(KEY_PATH_TO_PICTURE, chose.getCheminImage());
@@ -31,8 +31,8 @@ public class ChoseATrouverPrixJusteHandler extends MyDatabaseHelper {
 
     public ChoseATrouverPrixJuste getChose(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_CHOSE, new String[] { KEY_ID,
-                        KEY_NOM, KEY_PRIX, KEY_PATH_TO_PICTURE }, KEY_ID + "=?",
+        Cursor cursor = db.query(TABLE_CHOSE, new String[] { KEY_ID_CHOSE,
+                        KEY_NOM, KEY_PRIX, KEY_PATH_TO_PICTURE }, KEY_ID_CHOSE + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
