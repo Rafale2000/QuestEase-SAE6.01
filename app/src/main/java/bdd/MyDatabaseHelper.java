@@ -69,8 +69,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 + "mot TEXT NOT NULL,"
                 + "difficulte int NOT NULL)";
         db.execSQL(Resultat_TABLE);
-
-
     }
 
     // Called when the database needs to be upgraded
