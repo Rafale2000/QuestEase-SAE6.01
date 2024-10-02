@@ -1,4 +1,4 @@
-package bdd;
+package Model.bdd;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;

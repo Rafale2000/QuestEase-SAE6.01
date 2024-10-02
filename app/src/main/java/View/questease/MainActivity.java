@@ -1,4 +1,4 @@
-package com.example.questease;
+package View.questease;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +11,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.questease.R;
 
 public class MainActivity extends AppCompatActivity {
 

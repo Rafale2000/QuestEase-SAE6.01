@@ -1,4 +1,4 @@
-package bdd;
+package Controller;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,7 +9,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     // Database Name and Version
     private static final String DATABASE_NAME = "myDatabase.db";
     private static final int DATABASE_VERSION = 1;
-
+    private static final String TABLE_CHOSE = "choseATrouverPrixJust";
+    public static final String KEY_ID = "idChoseATrouver";
+    public static final String KEY_NOM = "nom";
+    public static final String KEY_PRIX = "prix";
+    public static final String KEY_PATH_TO_PICTURE = "PathToPicture";
     // Constructor
     public MyDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -18,13 +22,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     // Called when the database is created for the first time
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Define your table structure here
-        String CREATE_TABLE = "CREATE TABLE choseATrouverPrixJust ("
-                + "idChoseATrouver INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + "name TEXT, "
-                + "prix int,"
-                + "PathToPicture TEXT)";
-        db.execSQL(CREATE_TABLE);
+        String CREATE_TABLE_CHOSE = "CREATE TABLE " + TABLE_CHOSE + " ("
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + KEY_NOM + " TEXT, "
+                + KEY_PRIX + " INTEGER, "
+                + KEY_PATH_TO_PICTURE + " TEXT)";
+        db.execSQL(CREATE_TABLE_CHOSE);
+
 
         String infoSecu_TABLE = "CREATE TABLE infoSecu("
                 + "idInfo INTEGER PRIMARY KEY AUTOINCREMENT,"

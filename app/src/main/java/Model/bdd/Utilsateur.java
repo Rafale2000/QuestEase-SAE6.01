@@ -1,4 +1,4 @@
-package bdd;
+package Model.bdd;
 
 import java.util.ArrayList;
 
@@ -14,14 +14,12 @@ public class Utilsateur {
         this.firstName = firstName;
         this.lastName = lastName;
         this.xp = xp;
-
     }
 
     public Utilsateur(){
         this.lastName = "Doe";
         this.firstName = "john";
         this.xp = 0;
-
     }
 
     // Getters and Setters for all fields

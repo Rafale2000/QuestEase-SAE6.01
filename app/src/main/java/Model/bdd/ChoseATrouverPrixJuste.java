@@ -1,4 +1,4 @@
-package bdd;
+package Model.bdd;
 
 public class ChoseATrouverPrixJuste {
 }

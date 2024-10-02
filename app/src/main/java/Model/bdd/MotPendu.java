@@ -1,11 +1,13 @@
-package bdd;
+package Model.bdd;
 
-public class MotCryptex {
+
+
+public class MotPendu {
     private int id;
     private String mot;
     private int diff;
 
-    public MotCryptex(int id, String mot, int diff) {
+    public MotPendu(int id,String mot, int diff) {
         this.id = id;
         this.mot = mot;
         this.diff = diff;
@@ -14,6 +16,7 @@ public class MotCryptex {
     public int getId() {
         return id;
     }
+
 
     public String getMot() {
         return mot;

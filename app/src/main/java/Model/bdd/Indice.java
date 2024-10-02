@@ -1,4 +1,4 @@
-package bdd;
+package Model.bdd;
 
 
 import java.util.ArrayList;
