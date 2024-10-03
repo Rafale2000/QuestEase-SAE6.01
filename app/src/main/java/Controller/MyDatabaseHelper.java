@@ -30,6 +30,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_DIFF = "diff";
     public static final String KEY_ID_INDICE = "idIndice";
 
+    //TABLE SON
+    public static final String TABLE_SON = "Son";
+    public static final String KEY_ID_SON = "idSon";
+    public static final String KEY_PATH_SON = "cheminSon";
+
 
     // Constructor
     public MyDatabaseHelper(Context context) {
@@ -80,10 +85,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 + "FOREIGN KEY ("+KEY_ID_INDICE+") REFERENCES Indice("+KEY_ID_INDICE+"))";
         db.execSQL(MotPendu_TABLE);
 
-        String Son_TABLE = "CREATE TABLE son("
-                + "idSon INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "pathToSound TEXT NOT NULL,"
-                + "FOREIGN KEY (idIndice) REFERENCES Indice(idIndice))";
+        String Son_TABLE = "CREATE TABLE "+ TABLE_SON +"("
+                +  KEY_ID_SON +"INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_PATH_SON+ " TEXT NOT NULL,"
+                + "FOREIGN KEY ("+KEY_ID_INDICE+") REFERENCES Indice("+KEY_ID_INDICE+"))";
         db.execSQL(Son_TABLE);
 
         String Resultat_TABLE = "CREATE TABLE Resultat("
