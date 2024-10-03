@@ -9,12 +9,15 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     // Database Name and Version
     private static final String DATABASE_NAME = "myDatabase.db";
     private static final int DATABASE_VERSION = 1;
-
+    public static final String KEY_ID = "idChoseATrouver";
+    public static final String KEY_XP = "experience";
 
     //TABLE choseATrouverPrixJust
     public static final String TABLE_CHOSE = "choseATrouverPrixJust";
     public static final String KEY_ID_CHOSE = "idChoseATrouver";
     public static final String KEY_NOM = "nom";
+    public static final String KEY_EMAIL = "email";
+    public static final String KEY_RES = "resultatPasse";
     public static final String KEY_PRIX = "prix";
     public static final String KEY_PATH_TO_PICTURE = "PathToPicture";
 
@@ -40,6 +43,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_IDSECU = "idinfoSecu";
     public static final String KEY_EMAILSECU = "email";
     public static final String KEY_PASSWORD = "password";
+    //TABLE SON
+    public static final String TABLE_SON = "Son";
+    public static final String KEY_ID_SON = "idSon";
+    public static final String KEY_PATH_SON = "cheminSon";
+
 
     // Constructor
     public MyDatabaseHelper(Context context) {
@@ -90,10 +98,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 + "FOREIGN KEY ("+KEY_ID_INDICE+") REFERENCES Indice("+KEY_ID_INDICE+"))";
         db.execSQL(MotPendu_TABLE);
 
-        String Son_TABLE = "CREATE TABLE son("
-                + "idSon INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "pathToSound TEXT NOT NULL,"
-                + "FOREIGN KEY (idIndice) REFERENCES Indice(idIndice))";
+        String Son_TABLE = "CREATE TABLE "+ TABLE_SON +"("
+                +  KEY_ID_SON +"INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_PATH_SON+ " TEXT NOT NULL,"
+                + "FOREIGN KEY ("+KEY_ID_INDICE+") REFERENCES Indice("+KEY_ID_INDICE+"))";
         db.execSQL(Son_TABLE);
 
         String Resultat_TABLE = "CREATE TABLE Resultat("
