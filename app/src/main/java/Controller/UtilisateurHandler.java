@@ -18,20 +18,24 @@ public class UtilisateurHandler extends MyDatabaseHelper {
         dbHelper = new MyDatabaseHelper(context);
     }
 
-    public Utilisateur addUtilisateur (Utilisateur U){
+    public int addUtilisateur (Utilisateur U){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, U.getUsername());
-        values.put(KEY_NOM, U.getUsername());
+        values.put(KEY_IDUSER, U.getId());
+        values.put(KEY_NOMUSER, U.getUsername());
         values.put(KEY_XP, U.getXp());
         values.put(KEY_RES, U.getResultatPasse());
         values.put(KEY_EMAIL, U.getEmail());
+
+        long insertId = db.insert(TABLE_UTILISATEUR, null, values);
+
+        return (int) insertId;
     }
 
     public Utilisateur getUtilisateur(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_CHOSE, new String[] { KEY_ID,
-                        KEY_NOM, KEY_XP, KEY_RES, KEY_EMAIL}, KEY_ID + "=?",
+        Cursor cursor = db.query(TABLE_UTILISATEUR, new String[] { KEY_IDUSER,
+                        KEY_NOM, KEY_XP, KEY_RES, KEY_EMAIL}, KEY_IDUSER + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -49,7 +53,7 @@ public class UtilisateurHandler extends MyDatabaseHelper {
      */
     public void deleteUtil(Utilisateur Util) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.delete(TABLE_CHOSE, KEY_ID + " = ?",
+        db.delete(TABLE_UTILISATEUR, KEY_IDUSER + " = ?",
                 new String[] { String.valueOf(Util.getId()) });
         db.close();
     }
@@ -61,8 +65,8 @@ public class UtilisateurHandler extends MyDatabaseHelper {
         values.put(KEY_XP,Util.getXp());
         values.put(KEY_RES,Util.getResultatPasse());
         values.put(KEY_EMAIL,Util.getEmail());
-        long updateId=db.update(TABLE_CHOSE,values,
-                KEY_ID + " = ?",
+        long updateId=db.update(TABLE_UTILISATEUR,values,
+                KEY_IDUSER + " = ?",
                 new String[]{String.valueOf(Util.getId())});
         db.close();
         return (int) updateId;

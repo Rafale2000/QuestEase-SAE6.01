@@ -9,15 +9,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     // Database Name and Version
     private static final String DATABASE_NAME = "myDatabase.db";
     private static final int DATABASE_VERSION = 1;
-    public static final String KEY_ID = "idChoseATrouver";
-    public static final String KEY_XP = "experience";
+
 
     //TABLE choseATrouverPrixJust
     public static final String TABLE_CHOSE = "choseATrouverPrixJust";
     public static final String KEY_ID_CHOSE = "idChoseATrouver";
     public static final String KEY_NOM = "nom";
-    public static final String KEY_EMAIL = "email";
-    public static final String KEY_RES = "resultatPasse";
     public static final String KEY_PRIX = "prix";
     public static final String KEY_PATH_TO_PICTURE = "PathToPicture";
 
@@ -30,6 +27,19 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_DIFF = "diff";
     public static final String KEY_ID_INDICE = "idIndice";
 
+    //TABLE Utilisateur
+    public static final String TABLE_UTILISATEUR = "Utilisateur";
+    public static final String KEY_NOMUSER = "pseudoUser";
+    public static final String KEY_IDUSER = "idUtilisateur";
+    public static final String KEY_XP = "experience";
+    public static final String KEY_RES = "resultatPasse";
+    public static final String KEY_EMAIL = "email";
+
+    //TABLE infoSecu
+    public static final String TABLE_INFOSECU = "info_Secu";
+    public static final String KEY_IDSECU = "idinfoSecu";
+    public static final String KEY_EMAILSECU = "email";
+    public static final String KEY_PASSWORD = "password";
 
     // Constructor
     public MyDatabaseHelper(Context context) {
@@ -54,12 +64,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 + "FOREIGN KEY (idIndice) REFERENCES Indice(idIndice))";
         db.execSQL(infoSecu_TABLE);
 
-        String utilisateur_TABLE = "CREATE TABLE Utilisateur("
-                + "idUtilisateur INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "username TEXT NOT NULL UNIQUE,"
-                + "xp INTEGER NOT NULL,"
-                + "email TEXT NOT NULL)";
-        db.execSQL(utilisateur_TABLE);
+        String CREATE_TABLE_USER = "CREATE TABLE" + TABLE_UTILISATEUR + " ("
+                + KEY_IDUSER + "idUtilisateur INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_NOMUSER + "username TEXT NOT NULL UNIQUE,"
+                + KEY_XP + "xp INTEGER NOT NULL,"
+                + KEY_EMAIL + "email TEXT NOT NULL)";
+        db.execSQL(CREATE_TABLE_USER);
 
         String Indice_TABLE = "CREATE TABLE Indice("
                 + "idIndice INTEGER PRIMARY KEY AUTOINCREMENT,"

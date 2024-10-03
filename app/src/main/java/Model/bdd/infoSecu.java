@@ -6,10 +6,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class infoSecu {
+    private int id;
     private String psswrd;
     private String email;
 
-    public infoSecu(String psswrd, String email) {
+    public infoSecu(int I, String psswrd, String email) {
+        this.id = I;
         this.psswrd = psswrd;
         this.email = this.hashEmail(email);
     }
@@ -34,5 +36,29 @@ public class infoSecu {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getPsswrd() {
+        return psswrd;
+    }
+
+    public void setPsswrd(String psswrd) {
+        this.psswrd = psswrd;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
