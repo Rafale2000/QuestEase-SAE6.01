@@ -10,11 +10,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "myDatabase.db";
     private static final int DATABASE_VERSION = 1;
     public static final String KEY_ID = "idChoseATrouver";
+    public static final String KEY_XP = "experience";
 
     //TABLE choseATrouverPrixJust
     public static final String TABLE_CHOSE = "choseATrouverPrixJust";
     public static final String KEY_ID_CHOSE = "idChoseATrouver";
     public static final String KEY_NOM = "nom";
+    public static final String KEY_EMAIL = "email";
+    public static final String KEY_RES = "resultatPasse";
     public static final String KEY_PRIX = "prix";
     public static final String KEY_PATH_TO_PICTURE = "PathToPicture";
 
@@ -31,13 +34,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_UTILISATEUR = "Utilisateur";
     public static final String KEY_NOMUSER = "pseudoUser";
     public static final String KEY_IDUSER = "idUtilisateur";
-    public static final String KEY_XP = "experience";
-    public static final String KEY_EMAIL = "email";
 
     //TABLE infoSecu
-    public static final String TABLE_INFOSECU = "info_Secu";
+    public static final String TABLE_INFOSECU = "infoSecu";
     public static final String KEY_IDSECU = "idinfoSecu";
-    public static final String KEY_EMAILSECU = "email";
     public static final String KEY_PASSWORD = "password";
     //TABLE SON
     public static final String TABLE_SON = "Son";
@@ -46,6 +46,19 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     //TABLE INDICE
     public static final String TABLE_INDICE = "Indice";
+    public static final String KEY_INDICE= "indice";
+
+    //TABLE RESULTAT
+    public static final String TABLE_RESULTAT = "Resultat";
+    public static final String KEY_IS_TRESOR = "IsTresor";
+    public static final String KEY_IS_EPREUVE1 = "IsEreuve1";
+    public static final String KEY_IS_EPREUVE2 = "IsEreuve2";
+    public static final String KEY_IS_EPREUVE3 = "IsEreuve3";
+    public static final String KEY_IS_EPREUVE4 = "IsEreuve4";
+    public static final String KEY_ID_PARTIE = "idPartie";
+
+
+
 
 
     // Constructor
@@ -63,11 +76,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 + KEY_PATH_TO_PICTURE + " TEXT NOT NULL)";
         db.execSQL(CREATE_TABLE_CHOSE);
 
-        String infoSecu_TABLE = "CREATE TABLE infoSecu("
-                + "idInfo INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "psswrd TEXT NOT NULL,"
-                + "email TEXT NOT NULL,"
-                + "FOREIGN KEY (idIndice) REFERENCES Indice(idIndice))";
+        String infoSecu_TABLE = "CREATE TABLE " + TABLE_INFOSECU+ "("
+                +  KEY_IDSECU +"INTEGER PRIMARY KEY AUTOINCREMENT,"
+                +  KEY_PASSWORD +" TEXT NOT NULL,"
+                +  KEY_EMAIL +"TEXT NOT NULL,"
+                + "FOREIGN KEY ("+KEY_ID_INDICE+") REFERENCES Indice("+KEY_ID_INDICE+"))";
         db.execSQL(infoSecu_TABLE);
 
         String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_UTILISATEUR + " ("
@@ -77,9 +90,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 + KEY_EMAIL + "email TEXT NOT NULL)";
         db.execSQL(CREATE_TABLE_USER);
 
-        String Indice_TABLE = "CREATE TABLE Indice("
-                + "idIndice INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "indice TEXT NOT NULL)";
+        String Indice_TABLE = "CREATE TABLE "+ TABLE_INDICE+"("
+                + KEY_ID_INDICE +"INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_INDICE +"TEXT NOT NULL)";
         db.execSQL(Indice_TABLE);
 
         String MotCryptex_TABLE = "CREATE TABLE " +TABLE_MOTCRYPTEX+ "("
@@ -102,11 +115,19 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 + "FOREIGN KEY ("+KEY_ID_INDICE+") REFERENCES Indice("+KEY_ID_INDICE+"))";
         db.execSQL(Son_TABLE);
 
-        String Resultat_TABLE = "CREATE TABLE Resultat("
-                + "idResultat INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "mot TEXT NOT NULL,"
-                + "difficulte int NOT NULL)";
+        String Resultat_TABLE = "CREATE TABLE " + TABLE_RESULTAT + " ("
+                + KEY_ID_PARTIE + " INTEGER NOT NULL, "
+                + KEY_IDUSER + " INTEGER NOT NULL, "
+                + KEY_IS_EPREUVE1 + " INTEGER NOT NULL, "  // Utiliser INTEGER pour représenter BOOLEAN
+                + KEY_IS_EPREUVE2 + " INTEGER NOT NULL, "
+                + KEY_IS_EPREUVE3 + " INTEGER NOT NULL, "
+                + KEY_IS_EPREUVE4 + " INTEGER NOT NULL, "
+                + "PRIMARY KEY (" + KEY_ID_PARTIE + ", " + KEY_IDUSER + "), "  // Clé composite correcte
+                + "FOREIGN KEY (" + KEY_IDUSER + ") REFERENCES Indice(" + KEY_IDUSER + ")"
+                + ");";
+
         db.execSQL(Resultat_TABLE);
+
     }
 
     // Called when the database needs to be upgraded
