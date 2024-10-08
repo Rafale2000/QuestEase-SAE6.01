@@ -10,14 +10,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "myDatabase.db";
     private static final int DATABASE_VERSION = 1;
     public static final String KEY_ID = "idChoseATrouver";
-    public static final String KEY_XP = "experience";
 
     //TABLE choseATrouverPrixJust
     public static final String TABLE_CHOSE = "choseATrouverPrixJust";
     public static final String KEY_ID_CHOSE = "idChoseATrouver";
     public static final String KEY_NOM = "nom";
-    public static final String KEY_EMAIL = "email";
-    public static final String KEY_RES = "resultatPasse";
     public static final String KEY_PRIX = "prix";
     public static final String KEY_PATH_TO_PICTURE = "PathToPicture";
 
@@ -64,7 +61,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 + KEY_PRIX + " INTEGER NOT NULL, "
                 + KEY_PATH_TO_PICTURE + " TEXT NOT NULL)";
         db.execSQL(CREATE_TABLE_CHOSE);
-
 
         String infoSecu_TABLE = "CREATE TABLE infoSecu("
                 + "idInfo INTEGER PRIMARY KEY AUTOINCREMENT,"
