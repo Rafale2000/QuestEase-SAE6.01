@@ -1,20 +1,17 @@
 package Model.bdd;
 
 
-import java.util.ArrayList;
+
 
 public class Indice {
 
     private int id;
 
-    private String indice;
+    private String hint;
 
-    private ArrayList<Integer> sonMot;
-
-    public Indice(int id, String indice, ArrayList<Integer> sonMot) {
+    public Indice(int id, String hint) {
         this.id = id;
-        this.indice = indice;
-        this.sonMot = sonMot;
+        this.hint = hint;
     }
 
     public int getId() {
@@ -25,11 +22,11 @@ public class Indice {
         this.id = id;
     }
 
-    public String getIndice() {
-        return indice;
+    public String getHint() {
+        return hint;
     }
 
     public void setIndice(String indice) {
-        this.indice = indice;
+        this.hint = hint;
     }
 }

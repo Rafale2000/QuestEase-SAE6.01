@@ -34,9 +34,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_UTILISATEUR = "Utilisateur";
     public static final String KEY_NOMUSER = "pseudoUser";
     public static final String KEY_IDUSER = "idUtilisateur";
-    public static final String KEY_XP = "experience";
-    public static final String KEY_RES = "resultatPasse";
-    public static final String KEY_EMAIL = "email";
 
     //TABLE infoSecu
     public static final String TABLE_INFOSECU = "info_Secu";
@@ -47,6 +44,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_SON = "Son";
     public static final String KEY_ID_SON = "idSon";
     public static final String KEY_PATH_SON = "cheminSon";
+
+    //TABLE INDICE
+    public static final String TABLE_INDICE = "Indice";
+    public static final String KEY_INDICE= "indice";
 
 
     // Constructor
@@ -72,7 +73,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 + "FOREIGN KEY (idIndice) REFERENCES Indice(idIndice))";
         db.execSQL(infoSecu_TABLE);
 
-        String CREATE_TABLE_USER = "CREATE TABLE" + TABLE_UTILISATEUR + " ("
+        String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_UTILISATEUR + " ("
                 + KEY_IDUSER + "idUtilisateur INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + KEY_NOMUSER + "username TEXT NOT NULL UNIQUE,"
                 + KEY_XP + "xp INTEGER NOT NULL,"

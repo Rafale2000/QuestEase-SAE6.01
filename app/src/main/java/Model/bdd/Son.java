@@ -2,11 +2,22 @@ package Model.bdd;
 
 public class Son {
     private int id;
-    private byte son;
+    private String cheminSon;
+    private int IdIndice;
 
-    public Son(int id, byte son) {
+    public Son(int id, String cheminSon, int idIndice) {
         this.id = id;
-        this.son = son;
+        this.cheminSon = cheminSon;
+        IdIndice = idIndice;
+    }
+
+
+    public int getIdIndice() {
+        return IdIndice;
+    }
+
+    public void setIdIndice(int idIndice) {
+        IdIndice = idIndice;
     }
 
     public int getId() {
@@ -18,11 +29,11 @@ public class Son {
         this.id = id;
     }
 
-    public byte getSon() {
-        return son;
+    public String getSon() {
+        return this.cheminSon;
     }
 
-    public void setSon(byte son) {
-        this.son = son;
+    public void setSon(String son) {
+        this.cheminSon = cheminSon;
     }
 }
