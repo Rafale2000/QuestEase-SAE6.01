@@ -31,6 +31,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_UTILISATEUR = "Utilisateur";
     public static final String KEY_NOMUSER = "pseudoUser";
     public static final String KEY_IDUSER = "idUtilisateur";
+    public static final String KEY_XP = "experience";
+    public static final String KEY_EMAIL = "email";
 
     //TABLE infoSecu
     public static final String TABLE_INFOSECU = "info_Secu";
@@ -44,7 +46,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     //TABLE INDICE
     public static final String TABLE_INDICE = "Indice";
-    public static final String KEY_INDICE= "indice";
 
 
     // Constructor
