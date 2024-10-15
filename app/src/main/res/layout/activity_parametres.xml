@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_marginBaseline="50dp"
+    tools:context=".Parametres">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        tools:ignore="MissingConstraints">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <!-- Logo à gauche de la Toolbar -->
+            <ImageView
+                android:id="@+id/logo_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:contentDescription="Logo"
+                android:src="@drawable/baseline_arrow_back_24" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Paramètres"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <LinearLayout
+        android:id="@+id/checkbox_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar"
+        tools:ignore="NotSibling">
+
+        <CheckBox
+            android:id="@+id/checkbox_child_1"
+            android:layout_width="360dp"
+            android:layout_height="38dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="50dp"
+            android:text="Deutéranomalie"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/checkbox_child_2"
+            android:layout_width="358dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="Deutéranopie"
+            android:textStyle="bold"/>
+
+        <CheckBox
+            android:id="@+id/checkbox_child_3"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="Protanomalie"
+            android:textStyle="bold"/>
+
+
+        <CheckBox
+            android:id="@+id/checkbox_child_4"
+            android:layout_width="363dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="Protanopie"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+
+
+    <CheckBox
+        android:id="@+id/checkbox_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mode daltonien"
+        android:drawableStart="@drawable/baseline_invert_colors_off_24"
+        app:checkedState="indeterminate"
+        tools:ignore="MissingConstraints"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="91dp" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="350dp"
+        tools:ignore="MissingConstraints"
+        android:layout_marginLeft="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/albinismetext"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:checked="false"
+                android:drawableStart="@drawable/baseline_light_24"
+                android:text="Albinisme oculo-cutané"
+                android:textStyle="bold"
+
+                />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/albinisme"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:checked="false"
+                android:paddingEnd="10dp"
+
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/cécitéTexte"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/eye_svgrepo_com"
+                android:text="Cécité nocturne"
+                android:textStyle="bold"/>
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/cecité"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="10dp"
+                android:checked="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/poledTexte"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/baseline_hearing_24"
+                android:text="assistance vocale"
+                android:textStyle="bold" />
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/poled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:checked="false"/>
+                </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp">
+            <TextView
+                android:id="@+id/périphériqueRéduite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/baseline_filter_tilt_shift_24"
+                android:text="Vision périphérique réduite"
+                android:textStyle="bold" />
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/periphérique"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+
+                android:paddingEnd="10dp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp">
+
+            <TextView
+                android:id="@+id/DiplopienystagmusTexte"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Diplopie/Nystagmus"
+                android:drawableStart="@drawable/baseline_join_full_24"
+                android:textStyle="bold" />
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/Diplopienystagmus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:layout_marginEnd="10dp"
+        android:textStyle="bold"
+       />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp">
+
+            <TextView
+                android:id="@+id/MyopiepresbytieTexte"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/eye_slash_svgrepo_com_1_"
+                android:text="Myopie/Presbytie"
+                android:textStyle="bold" />
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/Myopiepresbytie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:layout_marginEnd="10dp"
+        />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp">
+
+            <TextView
+                android:id="@+id/VisionCentraleRéduiteTexte"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableStart="@drawable/baseline_panorama_fish_eye_24"
+                android:text="Vision centrale réduite"
+                android:textStyle="bold" />
+    <com.google.android.material.materialswitch.MaterialSwitch
+        android:id="@+id/VisionCentraleRéduite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:checked="false"
+         />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

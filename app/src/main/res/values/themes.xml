@@ -1,9 +1,18 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Questease" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<resources>
+    <!-- Mode clair -->
+    <!-- <style name="Theme.Questease" parent="Theme.Material3.DayNight"> -->
+    <style name="Theme.Questease" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Couleurs principales pour le mode clair -->
+        <item name="colorPrimary">#6200EE</item> <!-- Couleur principale -->
+        <item name="colorPrimaryVariant">#3700B3</item> <!-- Variante principale -->
+        <item name="colorOnPrimary">#FFFFFF</item> <!-- Texte sur fond coloré -->
+        <item name="colorButtonBackground">#00F600</item> <!-- Couleur du bouton personnalisé -->
+        <item name="colorButtonBackground2">#606060</item>
+        <item name="colorButtonText">#000000</item> <!-- Texte du bouton -->
+        <item name="colorProfileBackground">#4c4745</item>
+        <item name="iconcolor">#000000</item>
+        <item name="texte">#000000</item>
+
     </style>
 
-    <style name="Theme.Questease" parent="Base.Theme.Questease" />
 </resources>

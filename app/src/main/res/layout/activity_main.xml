@@ -6,16 +6,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+
     <TextView
         android:id="@+id/banner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_purple"
+        android:background="?attr/colorPrimary"
         android:text="Bienvenue"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:gravity="center"
         android:padding="16dp"
+
         android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,52 +25,50 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/Jouer"
-        style="@style/Widget.Material3.Button.ElevatedButton"
         android:layout_width="400dp"
         android:layout_height="124dp"
         android:layout_marginTop="132dp"
+        android:backgroundTint="?attr/colorButtonBackground"
 
-        android:background="@drawable/tamere"
-        android:elevation="8dp"
+
         android:text="Jouer"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="?attr/colorButtonText"
         android:textSize="30dp"
         android:textStyle="bold|italic"
 
         app:cornerRadius="24dp"
         app:icon="@drawable/baseline_play_circle_outline_24"
         app:iconGravity="start"
-        app:iconPadding="8dp"
+        app:iconPadding="0dp"
         app:iconSize="70dp"
+
         app:iconTint="@android:color/black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/black"
-        app:strokeWidth="2dp"/>
+         />
 
 
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/Paramètres"
-        style="@style/Widget.Material3.Button.ElevatedButton"
         android:layout_width="400dp"
         android:layout_height="124dp"
         android:layout_marginTop="324dp"
-        app:cornerRadius="24dp"
-        app:strokeColor="@color/black"
-        app:strokeWidth="2dp"
-        android:background="@drawable/tamere"
 
         android:text="Paramètres"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:backgroundTint="?attr/colorButtonBackground2"
+        android:textColor="?attr/colorButtonText"
         android:textSize="30dp"
         android:textStyle="bold|italic"
 
-
+        app:cornerRadius="24dp"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp"
 
         app:icon="@drawable/baseline_settings_24"
         app:iconGravity="start"
@@ -76,11 +76,12 @@
         app:iconSize="70dp"
         app:iconTint="@android:color/black"
 
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+
 
 
 

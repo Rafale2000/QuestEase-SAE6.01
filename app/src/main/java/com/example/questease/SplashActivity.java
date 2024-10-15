@@ -15,7 +15,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        // Récupérer les logos
+        
         ImageView logo1 = findViewById(R.id.logo1);
         ImageView logo2 = findViewById(R.id.logo2);
 

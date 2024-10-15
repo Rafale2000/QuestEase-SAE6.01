@@ -1,0 +1,8 @@
+<resources>
+    <attr name="colorButtonBackground" format="color" />
+    <attr name="colorButtonText" format="color" />
+    <attr name="colorButtonBackground2" format="color"/>
+    <attr name="colorProfileBackground" format="color"/>
+    <attr name="iconcolor" format="color"/>
+    <attr name="texte" format="color"/>
+</resources>
