@@ -7,101 +7,97 @@
     android:layout_height="match_parent"
     app:layout_marginBaseline="50dp"
     tools:context=".Parametres">
-    <com.google.android.material.appbar.AppBarLayout
+    <fragment
+        android:id="@+id/toolbar_fragment"
+        android:name="com.example.questease.ToolbarFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        tools:ignore="MissingConstraints">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-            <!-- Logo à gauche de la Toolbar -->
-            <ImageView
-                android:id="@+id/logo_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:contentDescription="Logo"
-                android:src="@drawable/baseline_arrow_back_24" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Paramètres"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                android:textStyle="bold"/>
-        </androidx.appcompat.widget.Toolbar>
-
-    </com.google.android.material.appbar.AppBarLayout>
+        tools:ignore="MissingConstraints" />
     <LinearLayout
+        android:id="@+id/checkboxes_daltonisme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_fragment"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+        <CheckBox
+            android:id="@+id/checkbox_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mode daltonien"
+            android:textSize="24dp"
+            android:drawableStart="@drawable/baseline_invert_colors_off_24"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
+        <LinearLayout
         android:id="@+id/checkbox_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="@id/toolbar"
-        tools:ignore="NotSibling">
+        app:layout_constraintTop_toBottomOf="@id/checkbox_parent"
+        >
 
         <CheckBox
-            android:id="@+id/checkbox_child_1"
+            android:id="@+id/deuteranomalie"
             android:layout_width="360dp"
-            android:layout_height="38dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="50dp"
             android:text="Deutéranomalie"
+            android:textSize="24dp"
             android:textStyle="bold" />
 
         <CheckBox
-            android:id="@+id/checkbox_child_2"
+            android:id="@+id/deuteranopie"
             android:layout_width="358dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:text="Deutéranopie"
+            android:textSize="24dp"
             android:textStyle="bold"/>
 
         <CheckBox
-            android:id="@+id/checkbox_child_3"
+            android:id="@+id/protanomalie"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:text="Protanomalie"
+            android:textSize="24dp"
             android:textStyle="bold"/>
 
 
         <CheckBox
-            android:id="@+id/checkbox_child_4"
+            android:id="@+id/protanopie"
             android:layout_width="363dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
+            android:textSize="24dp"
             android:text="Protanopie"
             android:textStyle="bold"/>
 
     </LinearLayout>
+    </LinearLayout>
 
-
-
-    <CheckBox
-        android:id="@+id/checkbox_parent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Mode daltonien"
-        android:drawableStart="@drawable/baseline_invert_colors_off_24"
-        app:checkedState="indeterminate"
-        tools:ignore="MissingConstraints"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="91dp" />
 
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/checkboxes_daltonisme"
+        app:layout_constraintBottom_toTopOf="@+id/parametresvue"
+
+        tools:ignore="MissingConstraints">
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/parametresvue"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -118,6 +114,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:textSize="24dp"
                 android:checked="false"
                 android:drawableStart="@drawable/baseline_light_24"
                 android:text="Albinisme oculo-cutané"
@@ -128,7 +125,7 @@
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/albinisme"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:checked="false"
                 android:paddingEnd="10dp"
 
@@ -149,6 +146,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="24dp"
                 android:drawableStart="@drawable/eye_svgrepo_com"
                 android:text="Cécité nocturne"
                 android:textStyle="bold"/>
@@ -172,6 +170,7 @@
                 android:layout_weight="1"
                 android:drawableStart="@drawable/baseline_hearing_24"
                 android:text="assistance vocale"
+                android:textSize="24dp"
                 android:textStyle="bold" />
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/poled"
@@ -189,6 +188,7 @@
                 android:id="@+id/périphériqueRéduite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:textSize="24dp"
                 android:layout_weight="1"
                 android:drawableStart="@drawable/baseline_filter_tilt_shift_24"
                 android:text="Vision périphérique réduite"
@@ -198,7 +198,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
-
                 android:paddingEnd="10dp"
                 />
 
@@ -215,6 +214,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Diplopie/Nystagmus"
+                android:textSize="24dp"
                 android:drawableStart="@drawable/baseline_join_full_24"
                 android:textStyle="bold" />
     <com.google.android.material.materialswitch.MaterialSwitch
@@ -238,6 +238,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="24dp"
                 android:drawableStart="@drawable/eye_slash_svgrepo_com_1_"
                 android:text="Myopie/Presbytie"
                 android:textStyle="bold" />
@@ -260,6 +261,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="24dp"
                 android:drawableStart="@drawable/baseline_panorama_fish_eye_24"
                 android:text="Vision centrale réduite"
                 android:textStyle="bold" />

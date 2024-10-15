@@ -1,7 +1,7 @@
 <resources>
     <!-- Mode clair -->
-    <!-- <style name="Theme.Questease" parent="Theme.Material3.DayNight"> -->
-    <style name="Theme.Questease" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+     <style name="Theme.Questease" parent="Theme.Material3.DayNight.NoActionBar">
+    <!--<style name="Theme.Questease" parent="Theme.MaterialComponents.DayNight.NoActionBar">-->
         <!-- Couleurs principales pour le mode clair -->
         <item name="colorPrimary">#6200EE</item> <!-- Couleur principale -->
         <item name="colorPrimaryVariant">#3700B3</item> <!-- Variante principale -->
@@ -13,6 +13,35 @@
         <item name="iconcolor">#000000</item>
         <item name="texte">#000000</item>
 
+    </style>
+    
+    <style name="Theme.Questease.deuteranomalie" parent="Theme.Questease">
+        <item name="colorPrimary">#9F63FF</item> <!-- Adaptation de violet à un ton plus perceptible -->
+        <item name="colorPrimaryVariant">#7D4DC3</item> <!-- Variante assombrie du violet -->
+        <item name="colorOnPrimary">#FFFFFF</item> <!-- Blanc, pas de changement -->
+        <item name="colorButtonBackground">#00A4A4</item> <!-- Conversion de vert vif en vert cyan -->
+        <item name="colorButtonBackground2">#5A5A5A</item> <!-- Légère adaptation du gris pour un meilleur contraste -->
+        <item name="colorButtonText">#000000</item> <!-- Noir, pas de changement -->
+        <item name="colorProfileBackground">#484545</item> <!-- Gris foncé, légère adaptation pour le contraste -->
+        <item name="iconcolor">#000000</item> <!-- Noir, pas de changement -->
+        <item name="texte">#000000</item> <!-- Noir, pas de changement -->
+
+    </style>
+    <style name="Theme.Questease.Deuteranopia" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Couleurs principales adaptées pour la deutéranopie -->
+        <item name="colorPrimary">#5A5AFF</item> <!-- Couleur principale modifiée -->
+        <item name="colorPrimaryVariant">#4B4BB2</item> <!-- Variante principale -->
+        <item name="colorOnPrimary">#FFFFFF</item> <!-- Texte sur fond coloré, gardé en blanc pour le contraste -->
+
+        <!-- Boutons et éléments interactifs -->
+        <item name="colorButtonBackground">#33B200</item> <!-- Couleur du bouton, vert ajusté pour deutéranopie -->
+        <item name="colorButtonBackground2">#808080</item> <!-- Variante de fond du bouton, gris neutre -->
+        <item name="colorButtonText">#000000</item> <!-- Texte du bouton, noir pour contraste -->
+
+        <!-- Autres couleurs d'interface -->
+        <item name="colorProfileBackground">#595959</item> <!-- Fond de profil, gris pour un meilleur contraste -->
+        <item name="iconcolor">#000000</item> <!-- Couleur des icônes, noir pour visibilité -->
+        <item name="texte">#000000</item> <!-- Couleur du texte, noir pour le contraste sur fond clair -->
     </style>
 
 </resources>
