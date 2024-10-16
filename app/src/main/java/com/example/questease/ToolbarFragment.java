@@ -1,5 +1,6 @@
 package com.example.questease;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -63,5 +64,18 @@ public class ToolbarFragment extends Fragment {
         }
 
         return view;
+    }
+
+
+    public void onBackButtonClicked(View view) {
+        Intent intent;
+        if (getActivity() instanceof SplashActivity){
+            intent = new Intent(requireActivity(), Searchlobby.class);
+        }
+        else {
+            intent = new Intent(requireActivity(), MainActivity.class);
+        }
+        startActivity(intent);
+        requireActivity().finish();
     }
 }
