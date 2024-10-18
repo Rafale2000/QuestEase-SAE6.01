@@ -29,6 +29,7 @@ android {
 }
 
 dependencies {
+    implementation libs.datastore.core.android
     def fragment_version = "1.8.3"
 
     // Java language implementation
@@ -43,4 +44,7 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation "androidx.datastore:datastore-core:1.0.0"
+
 }

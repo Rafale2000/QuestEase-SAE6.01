@@ -5,4 +5,5 @@
     <attr name="colorProfileBackground" format="color"/>
     <attr name="iconcolor" format="color"/>
     <attr name="texte" format="color"/>
+    <attr name="bordercolor" format="color"/>
 </resources>

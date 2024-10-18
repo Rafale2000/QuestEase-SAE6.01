@@ -41,7 +41,7 @@ public class Parametres extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (daltonisme.isChecked()) {
-                    setTheme(R.style.Theme_Questease_deuteranomalie);
+
                     deuteranomalie.setVisibility(View.VISIBLE);
                     deuteranopie.setVisibility(View.VISIBLE);
                     protanomalie.setVisibility(View.VISIBLE);
@@ -67,6 +67,7 @@ public class Parametres extends AppCompatActivity {
         protanomalie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setTheme(R.style.Theme_Questease_Protanomalie);
                 if (protanomalie.isChecked()) {
                     deuteranomalie.setChecked(false);
                     deuteranopie.setChecked(false);
@@ -78,6 +79,7 @@ public class Parametres extends AppCompatActivity {
         protanopie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setTheme(R.style.Theme_Questease_Protanopie);
                 if(protanopie.isChecked()) {
                     deuteranomalie.setChecked(false);
                     deuteranopie.setChecked(false);
@@ -88,6 +90,7 @@ public class Parametres extends AppCompatActivity {
         deuteranomalie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setTheme(R.style.Theme_Questease_deuteranomalie);
                 if(deuteranomalie.isChecked()) {
                     protanomalie.setChecked(false);
                     deuteranopie.setChecked(false);
@@ -98,6 +101,7 @@ public class Parametres extends AppCompatActivity {
         deuteranopie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setTheme(R.style.Theme_Questease_Deuteranopie);
                 if(deuteranopie.isChecked()) {
                     protanomalie.setChecked(false);
                     deuteranomalie.setChecked(false);
@@ -106,5 +110,9 @@ public class Parametres extends AppCompatActivity {
             }
         });
         }
+
+
+
+
 
     }

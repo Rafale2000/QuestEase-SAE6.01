@@ -12,7 +12,7 @@
         <item name="colorProfileBackground">#4c4745</item>
         <item name="iconcolor">#000000</item>
         <item name="texte">#000000</item>
-
+        <item name="bordercolor">#000000</item> <!-- couleur utilisé pour contraster les samples de couleur et le fond -->
     </style>
     
     <style name="Theme.Questease.deuteranomalie" parent="Theme.Questease">
@@ -27,7 +27,7 @@
         <item name="texte">#000000</item> <!-- Noir, pas de changement -->
 
     </style>
-    <style name="Theme.Questease.Deuteranopia" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Questease.Deuteranopie" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Couleurs principales adaptées pour la deutéranopie -->
         <item name="colorPrimary">#5A5AFF</item> <!-- Couleur principale modifiée -->
         <item name="colorPrimaryVariant">#4B4BB2</item> <!-- Variante principale -->
@@ -42,6 +42,40 @@
         <item name="colorProfileBackground">#595959</item> <!-- Fond de profil, gris pour un meilleur contraste -->
         <item name="iconcolor">#000000</item> <!-- Couleur des icônes, noir pour visibilité -->
         <item name="texte">#000000</item> <!-- Couleur du texte, noir pour le contraste sur fond clair -->
+    </style>
+    <style name="Theme.Questease.Protanomalie" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Couleurs principales pour le mode clair adaptées à la protanomalie -->
+        <item name="colorPrimary">#6B8AFF</item> <!-- Couleur principale ajustée (plus bleutée) -->
+        <item name="colorPrimaryVariant">#5A6FCE</item> <!-- Variante principale ajustée -->
+        <item name="colorOnPrimary">#FFFFFF</item> <!-- Texte sur fond coloré (inchangé) -->
+
+        <item name="colorButtonBackground">#00E500</item> <!-- Couleur du bouton personnalisé (plus vert) -->
+        <item name="colorButtonBackground2">#808080</item> <!-- Couleur secondaire pour les boutons (gris neutre) -->
+        <item name="colorButtonText">#000000</item> <!-- Texte du bouton (inchangé) -->
+
+        <item name="colorProfileBackground">#4D4745</item> <!-- Couleur de fond pour les profils (léger ajustement du contraste) -->
+
+        <item name="iconcolor">#000000</item> <!-- Couleur des icônes (inchangé) -->
+        <item name="texte">#000000</item> <!-- Couleur du texte (inchangé) -->
+
+        <item name="bordercolor">#5C5C5C</item> <!-- Couleur de la bordure pour mieux contraster (gris moyen) -->
+    </style>
+    <style name="Theme.Questease.Protanopie" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Couleurs principales pour le mode clair adaptées à la protanopie -->
+        <item name="colorPrimary">#6B8AFF</item> <!-- Couleur principale ajustée (bleue) -->
+        <item name="colorPrimaryVariant">#5A6FCE</item> <!-- Variante principale ajustée -->
+        <item name="colorOnPrimary">#FFFFFF</item> <!-- Texte sur fond coloré (inchangé) -->
+
+        <item name="colorButtonBackground">#00CC00</item> <!-- Couleur du bouton personnalisé (vert moins saturé) -->
+        <item name="colorButtonBackground2">#808080</item> <!-- Couleur secondaire pour les boutons (gris neutre) -->
+        <item name="colorButtonText">#000000</item> <!-- Texte du bouton (inchangé) -->
+
+        <item name="colorProfileBackground">#4D4745</item> <!-- Couleur de fond pour les profils (léger ajustement du contraste) -->
+
+        <item name="iconcolor">#000000</item> <!-- Couleur des icônes (inchangé) -->
+        <item name="texte">#000000</item> <!-- Couleur du texte (inchangé) -->
+
+        <item name="bordercolor">#5C5C5C</item> <!-- Couleur de la bordure pour mieux contraster (gris moyen) -->
     </style>
 
 </resources>
