@@ -1,9 +1,9 @@
 package com.example.questease;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -40,5 +40,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS my_table");
         onCreate(db);
     }
+
+    public Cursor getValue(SQLiteDatabase db){
+        // Exécute la requête SQL pour récupérer toutes les valeurs de la table
+        System.out.println(db.rawQuery("SELECT * FROM parametre " , null));;
+        return db.rawQuery("SELECT * FROM parametre " , null);
+    }
 }
+
 

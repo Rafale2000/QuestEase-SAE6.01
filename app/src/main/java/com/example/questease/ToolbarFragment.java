@@ -66,12 +66,15 @@ public class ToolbarFragment extends Fragment {
         return view;
     }
 
-
+// permet de retourner au menu principale ou le lobby de recherche
+// en appuyant sur la fléche
     public void onBackButtonClicked(View view) {
         Intent intent;
+        // si c'est dans le salon de la partie, retourner dans le salon des lobby
         if (getActivity() instanceof SplashActivity){
             intent = new Intent(requireActivity(), Searchlobby.class);
         }
+        // sinon on revient au menu principale
         else {
             intent = new Intent(requireActivity(), MainActivity.class);
         }
