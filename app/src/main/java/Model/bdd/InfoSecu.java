@@ -5,12 +5,12 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class infoSecu {
+public class InfoSecu {
     private int id;
     private String psswrd;
     private String email;
 
-    public infoSecu(int I, String psswrd, String email) {
+    public InfoSecu(int I, String psswrd, String email) {
         this.id = I;
         this.psswrd = psswrd;
         this.email = this.hashEmail(email);
