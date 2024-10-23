@@ -48,10 +48,10 @@
             android:layout_marginLeft="40dp"
             android:text="Deutéranomalie"
             android:textSize="24dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <CheckBox
-            android:id="@+id/deuteranopie"
+                android:id="@+id/deuteranopie"
             android:layout_width="358dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
@@ -216,7 +216,7 @@
             android:layout_marginTop="5dp">
 
             <TextView
-                android:id="@+id/cécitéTexte"
+                android:id="@+id/ceciteTexte"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -225,7 +225,7 @@
                 android:text="Cécité nocturne"
                 android:textStyle="bold"/>
             <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/cecité"
+                android:id="@+id/cecite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingEnd="10dp"
@@ -259,16 +259,16 @@
             android:layout_height="wrap_content"
             android:paddingTop="5dp">
             <TextView
-                android:id="@+id/périphériqueRéduite"
+                android:id="@+id/peripheriqueText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="24dp"
                 android:layout_weight="1"
                 android:drawableStart="@drawable/baseline_filter_tilt_shift_24"
                 android:text="Vision périphérique réduite"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
             <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/periphérique"
+                android:id="@+id/peripherique"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
@@ -340,7 +340,7 @@
                 android:text="Vision centrale réduite"
                 android:textStyle="bold" />
     <com.google.android.material.materialswitch.MaterialSwitch
-        android:id="@+id/VisionCentraleRéduite"
+        android:id="@+id/VisionCentraleReduite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
@@ -348,6 +348,12 @@
          />
 
         </LinearLayout>
+    <Button
+        android:id="@+id/gyroscope"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="page gyroscope">
+    </Button>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,7 +36,7 @@ public class Utils  {
             albinisme = cursor.getInt(cursor.getColumnIndex("albinisme"));
         }
         if (daltonisme == "Deutéranomalie") {
-            activity.setTheme(R.style.Theme_Questease_deuteranomalie);
+            activity.setTheme(R.style.Theme_Questease_Deuteranomalie);
         } else if (daltonisme == "Deutéranopie") {
             activity.setTheme(R.style.Theme_Questease_Deuteranopie);
         } else if (daltonisme == "Protanomalie") {

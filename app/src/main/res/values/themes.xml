@@ -15,7 +15,7 @@
         <item name="bordercolor">#000000</item> <!-- couleur utilisé pour contraster les samples de couleur et le fond -->
     </style>
     
-    <style name="Theme.Questease.deuteranomalie" parent="Theme.Questease">
+    <style name="Theme.Questease.Deuteranomalie" parent="Theme.Questease">
         <item name="colorPrimary">#9F63FF</item> <!-- Adaptation de violet à un ton plus perceptible -->
         <item name="colorPrimaryVariant">#7D4DC3</item> <!-- Variante assombrie du violet -->
         <item name="colorOnPrimary">#FFFFFF</item> <!-- Blanc, pas de changement -->
@@ -27,7 +27,7 @@
         <item name="texte">#000000</item> <!-- Noir, pas de changement -->
 
     </style>
-    <style name="Theme.Questease.Deuteranopie" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.Questease.deuteranopie" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Couleurs principales adaptées pour la deutéranopie -->
         <item name="colorPrimary">#5A5AFF</item> <!-- Couleur principale modifiée -->
         <item name="colorPrimaryVariant">#4B4BB2</item> <!-- Variante principale -->

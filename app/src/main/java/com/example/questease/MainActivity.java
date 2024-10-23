@@ -2,6 +2,7 @@ package com.example.questease;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -18,12 +19,17 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.datastore.preferences.core.Preferences;
 import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.SharedPreferences;
 public class MainActivity extends AppCompatActivity {
     DatabaseHelper dbHelper;
+    private boolean isCreated = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPreferences = getSharedPreferences("QuestEasePrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        ApplyParameters(sharedPreferences);
+        isCreated = true;
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -31,17 +37,11 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Configuration des boutons
         Button jouer = findViewById(R.id.Jouer);
         Button paramètres = findViewById(R.id.Paramètres);
 
-
-        dbHelper = new DatabaseHelper(this);
-
-
-
-        
-        
-        
         jouer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -51,53 +51,45 @@ public class MainActivity extends AppCompatActivity {
         });
 
         paramètres.setOnClickListener(new View.OnClickListener() {
-
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Parametres.class);
                 startActivity(intent);
             }
         });
-
-
     }
-    private void initializedatabase() {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-
-        if (isTableEmpty(db, "parametres")) {
-            ContentValues values = new ContentValues();
-            values.put("daltonisme", 0);
-            values.put("cecite", 0);
-            values.put("assistance_vocale", 0);
-            values.put("vision_peripherique", 0);
-            values.put("diplopie", 0);
-            values.put("myopie", 0);
-            values.put("vision_centrale_reduite", 0);
-            values.put("albinisme", 0);
-            db.insert("parametres", null, values);
-        } else {
-            Log.d("Database", "La table n'est pas vide, aucune initialisation nécessaire.");
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (!isCreated) {
+            recreate();
+        }
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        this.isCreated = false;
+    }
+    public void ApplyParameters(SharedPreferences sharedPreferences){
+        //Protanomalie = 1
+        //Protanopie = 2
+        //deuteranomalie = 3
+        //deuteranopie = 4
+        Log.d("SharedPreferences", "Valeur de daltonisme: " + sharedPreferences.getInt("daltonisme", 0));
+        Log.d("SharedPreferences","je vais essayer d'appliquer un thème");
+        if(sharedPreferences.getInt("daltonisme",0)== 1) {
+            setTheme(R.style.Theme_Questease_Protanomalie);
+        }
+        else if(sharedPreferences.getInt("daltonisme",0)== 2){
+            setTheme(R.style.Theme_Questease_Protanopie);
+        } else if (sharedPreferences.getInt("daltonisme",0)==3) {
+            setTheme(R.style.Theme_Questease_Deuteranomalie);
+        } else if (sharedPreferences.getInt("daltonisme",0) == 4) {
+            setTheme(R.style.Theme_Questease_deuteranopie);
         }
     }
 
-    private boolean isTableEmpty(SQLiteDatabase db, String tableName) {
-        Cursor cursor = null;
-        try {
-            cursor = db.rawQuery("SELECT COUNT(*) FROM " + tableName, null);
-            if (cursor.moveToFirst()) {
-                int count = cursor.getInt(0);
-                return count == 0;
-            }
-        } catch (Exception e) {
-            Log.e("Database", "Erreur lors de la vérification de la table", e);
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-        return false;
-    }
 
 
 }

@@ -1,4 +1,7 @@
 <resources>
+    <attr name="colorPrimary" format="color"/>
+    <attr name="colorPrimaryVariant" format="color"/>
+    <attr name="colorOnPrimary" format="color"/>
     <attr name="colorButtonBackground" format="color" />
     <attr name="colorButtonText" format="color" />
     <attr name="colorButtonBackground2" format="color"/>
@@ -7,3 +10,4 @@
     <attr name="texte" format="color"/>
     <attr name="bordercolor" format="color"/>
 </resources>
+

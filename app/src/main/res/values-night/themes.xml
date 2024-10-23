@@ -11,5 +11,57 @@
         <item name="colorProfileBackground">#899295</item>
         <item name="iconcolor">#FFFFFF</item>
         <item name="texte">#FFFFFF</item>
+        <item name="bordercolor">#000000</item>
     </style>
+    <style name="Theme.Questease.Deuteranomalie" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">#3366CC</item> <!-- Bleu vif, facilement perçu -->
+        <item name="colorPrimaryVariant">#254E88</item> <!-- Bleu plus foncé -->
+        <item name="colorOnPrimary">#FFFFFF</item> <!-- Texte blanc sur fond bleu -->
+        <item name="colorButtonBackground">#F60000</item> <!-- Vert clair (atténué) -->
+        <item name="colorButtonBackground2">#CCCCFF</item> <!-- Bleu clair pour variation -->
+        <item name="colorButtonText">#000000</item> <!-- Texte noir -->
+        <item name="colorProfileBackground">#B3B3CC</item> <!-- Gris-bleu pour profil -->
+        <item name="iconcolor">#FFFFFF</item> <!-- Blanc pour les icônes -->
+        <item name="texte">#FFFFFF</item> <!-- Texte blanc général -->
+        <item name="bordercolor">#000000</item> <!-- Bordure noire pour contraste -->
+    </style>
+    <style name="Theme.Questease.Deuteranopie" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">#336699</item> <!-- Bleu plus foncé pour éviter confusion rouge-vert -->
+        <item name="colorPrimaryVariant">#204060</item> <!-- Bleu profond -->
+        <item name="colorOnPrimary">#FFFFFF</item> <!-- Texte blanc sur fond bleu -->
+        <item name="colorButtonBackground">#FF9933</item> <!-- Orange vif pour les boutons -->
+        <item name="colorButtonBackground2">#FFCC66</item> <!-- Orange clair pour variation -->
+        <item name="colorButtonText">#000000</item> <!-- Texte noir -->
+        <item name="colorProfileBackground">#B3B3B3</item> <!-- Gris pour fond de profil -->
+        <item name="iconcolor">#FFFFFF</item> <!-- Icônes blanches -->
+        <item name="texte">#FFFFFF</item> <!-- Texte blanc -->
+        <item name="bordercolor">#000000</item> <!-- Bordure noire -->
+    </style>
+    <style name="Theme.Questease.Protanomalie" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">#4C4CB3</item> <!-- Bleu-violet adapté -->
+        <item name="colorPrimaryVariant">#2E2E66</item> <!-- Violet plus foncé -->
+        <item name="colorOnPrimary">#FFFFFF</item> <!-- Texte blanc sur fond violet -->
+        <item name="colorButtonBackground">#FFB84D</item> <!-- Orange clair pour boutons -->
+        <item name="colorButtonBackground2">#FFD27F</item> <!-- Orange plus clair pour variation -->
+        <item name="colorButtonText">#000000</item> <!-- Texte noir -->
+        <item name="colorProfileBackground">#C0C0C0</item> <!-- Gris clair pour le profil -->
+        <item name="iconcolor">#FFFFFF</item> <!-- Icônes blanches -->
+        <item name="texte">#FFFFFF</item> <!-- Texte blanc -->
+        <item name="bordercolor">#000000</item> <!-- Bordure noire -->
+    </style>
+    <style name="Theme.Questease.Protanopie" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">#333399</item> <!-- Bleu foncé, évitant rouge-vert -->
+        <item name="colorPrimaryVariant">#1A1A66</item> <!-- Bleu profond pour contraste -->
+        <item name="colorOnPrimary">#FFFFFF</item> <!-- Texte blanc sur bleu foncé -->
+        <item name="colorButtonBackground">#FFCC66</item> <!-- Jaune clair pour boutons -->
+        <item name="colorButtonBackground2">#FFDDAA</item> <!-- Jaune plus clair pour variation -->
+        <item name="colorButtonText">#000000</item> <!-- Texte noir -->
+        <item name="colorProfileBackground">#D3D3D3</item> <!-- Gris pour fond de profil -->
+        <item name="iconcolor">#FFFFFF</item> <!-- Icônes blanches -->
+        <item name="texte">#FFFFFF</item> <!-- Texte blanc -->
+        <item name="bordercolor">#000000</item> <!-- Bordure noire -->
+    </style>
+
 </resources>
+
+
