@@ -31,7 +31,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "myopie INTEGER,"+
                 "vision_centrale_reduite INTEGER,"+
                 "albinisme INTEGER)";
+        String tableSM = "CREATE TABLE jeuSM("+
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "idJoueur INTEGER NOT NULL," +
+                "reponse1 BOOLEAN NOT NULL," +
+                "reponse2 BOOLEAN NOT NULL)";
         db.execSQL(CREATE_TABLE);
+        db.execSQL(tableSM);
     }
 
     @Override
@@ -45,6 +51,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Exécute la requête SQL pour récupérer toutes les valeurs de la table
         System.out.println(db.rawQuery("SELECT * FROM parametre " , null));;
         return db.rawQuery("SELECT * FROM parametre " , null);
+    }
+
+    public Cursor getReponseSM(SQLiteDatabase db){
+        return db.rawQuery("SELECT * FROM jeuSM " , null);
     }
 }
 

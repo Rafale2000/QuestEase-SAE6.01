@@ -31,7 +31,7 @@
         android:layout_width="202dp"
         android:layout_height="42dp"
         android:layout_marginTop="88dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         android:text="indice 2: Commencez par les affirmation de Jeanne"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -96,45 +96,54 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <CheckBox
-        android:id="@+id/checkBox"
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="520dp"
-        android:text="Sincère"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="472dp"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <CheckBox
-        android:id="@+id/checkBox2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="588dp"
-        android:text="Menteur"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <RadioButton
+            android:id="@+id/radioButtonSincere"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sincère" />
 
-    <CheckBox
-        android:id="@+id/checkBox3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="520dp"
-        android:layout_marginEnd="72dp"
-        android:text="Sincère"
+        <RadioButton
+            android:id="@+id/radioButtonMenteur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menteur" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="156dp"
+        android:layout_height="98dp"
+        android:layout_marginTop="472dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <CheckBox
-        android:id="@+id/checkBox4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="588dp"
-        android:layout_marginEnd="68dp"
-        android:text="Menteur"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <RadioButton
+            android:id="@+id/radioButtonSincere2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sincère" />
+
+        <RadioButton
+            android:id="@+id/radioButtonMenteur2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Menteur" />
+
+    </RadioGroup>
+
 
     <Button
         android:id="@+id/button5"
