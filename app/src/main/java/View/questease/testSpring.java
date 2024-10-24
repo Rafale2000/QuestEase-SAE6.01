@@ -2,6 +2,7 @@ package View.questease;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.annotation.OptIn;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,41 +25,18 @@ import retrofit2.Response;
 
 
 public class testSpring extends AppCompatActivity {
+    private TextView textView;
 
 
-    private MotCryptexAdapter adapter;
-    private List<MotCryptex> motCryptestList = new ArrayList<>();
-
-    @SuppressLint("MissingInflatedId")
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_spring);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MotCryptexAdapter(motCryptestList);
-        recyclerView.setAdapter(adapter);
+        this.textView = findViewById(R.id.textView);
 
         // Appel à l'API
         MotCryptexApi lobbyApi = RetrofitInstance.getRetrofitInstance().create(MotCryptexApi.class);
-        retrofit2.Call<List<MotCryptex>> call = lobbyApi.getLobbies();
+        //retrofit2.Call<List<MotCryptex>> call = lobbyApi.getLobbies();
+        retrofit2.Call<MotCryptex> callRdm = lobbyApi.getRandom();
 
-        call.enqueue(new Callback<List<MotCryptex>>() {
-            @Override
-            public void onResponse(Call<List<MotCryptex>> call, Response<List<MotCryptex>> response) {
-                if (response.isSuccessful()) {
-                    assert response.body() != null;
-                    motCryptestList.addAll(response.body());
-                    adapter.notifyDataSetChanged();
-                }
-            }
-
-            @OptIn(markerClass = UnstableApi.class)
-            @Override
-            public void onFailure(Call<List<MotCryptex>> call, Throwable t) {
-                androidx.media3.common.util.Log.e("API Error", "Request failed: " + t.getMessage()); // Log the error
-                // Optional: display an error message to the user
-            }
-        });
     }
 }

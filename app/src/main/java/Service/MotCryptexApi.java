@@ -12,6 +12,9 @@ import retrofit2.http.GET;
 public interface MotCryptexApi {
     @GET("/motcryptex")
     Call<List<MotCryptex>> getLobbies();
+
+    @GET("/motcryptex/random")
+    Call<MotCryptex> getRandom();
 }
 
 
