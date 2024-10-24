@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import Model.bdd.infoSecu;
+import Model.bdd.InfoSecu;
 
 
 public class infoSecuHandler extends MyDatabaseHelper{
@@ -18,11 +18,11 @@ public class infoSecuHandler extends MyDatabaseHelper{
         dbHelper = new MyDatabaseHelper(context);
     }
 
-    public int addInfoSecu (infoSecu I){
+    public int addInfoSecu (InfoSecu I){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_IDSECU, I.getId());
-        values.put(KEY_EMAILSECU, I.getEmail());
+        values.put(KEY_EMAIL, I.getEmail());
         values.put(KEY_PASSWORD, I.getPsswrd());
 
         long insertId = db.insert(TABLE_UTILISATEUR, null, values);
@@ -30,16 +30,16 @@ public class infoSecuHandler extends MyDatabaseHelper{
         return (int) insertId;
     }
 
-    public infoSecu getInfoSecu(int id) {
+    public InfoSecu getInfoSecu(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.query(TABLE_INFOSECU, new String[] { KEY_IDSECU,
-                        KEY_EMAILSECU, KEY_PASSWORD}, KEY_IDSECU + "=?",
+                        KEY_EMAIL, KEY_PASSWORD}, KEY_IDSECU + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
         assert cursor != null;
-        return new infoSecu(cursor.getInt(0),
+        return new InfoSecu(cursor.getInt(0),
                 cursor.getString(1), cursor.getString(2));
 
         }
@@ -49,17 +49,17 @@ public class infoSecuHandler extends MyDatabaseHelper{
      * supprime une chose à trouver
      * @param I
      */
-    public void deleteSecu(infoSecu I) {
+    public void deleteSecu(InfoSecu I) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(TABLE_INFOSECU, KEY_IDSECU + " = ?",
                 new String[] { String.valueOf(I.getId()) });
         db.close();
     }
 
-    public int updateSecu(infoSecu I){
+    public int updateSecu(InfoSecu I){
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_EMAILSECU,I.getEmail());
+        values.put(KEY_EMAIL,I.getEmail());
         values.put(KEY_PASSWORD,I.getPsswrd());
         long updateId=db.update(TABLE_INFOSECU,values,
                 KEY_IDSECU + " = ?",
