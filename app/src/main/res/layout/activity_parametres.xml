@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mode daltonien"
-            android:textSize="24dp"
+            android:textSize="@dimen/text_size_large"
             android:drawableStart="@drawable/baseline_invert_colors_off_24"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="40dp"
             android:text="Deutéranomalie"
-            android:textSize="24dp"
+            android:textSize="@dimen/text_size_large"
             android:textStyle="bold"/>
 
         <CheckBox
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:text="Deutéranopie"
-            android:textSize="24dp"
+            android:textSize="@dimen/text_size_large"
             android:textStyle="bold"/>
 
         <CheckBox
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:text="Protanomalie"
-            android:textSize="24dp"
+            android:textSize="@dimen/text_size_large"
             android:textStyle="bold"/>
 
 
@@ -74,7 +74,7 @@
             android:layout_width="363dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:textSize="24dp"
+            android:textSize="@dimen/text_size_large"
             android:text="Protanopie"
             android:textStyle="bold"/>
 
@@ -96,8 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Exemples couleurs utilisées"
-            android:textSize="19dp"
-            >
+            android:textSize="@dimen/text_size_medium">
 
         </TextView>
     </LinearLayout>
@@ -116,7 +115,6 @@
             android:id="@+id/PrimaryColorButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
-
             app:cornerRadius="8dp"
             android:layout_marginHorizontal="10dp"
             android:backgroundTint="?attr/colorPrimary"
@@ -181,17 +179,19 @@
         android:layout_marginLeft="20dp">
 
         <LinearLayout
+            android:id ="@+id/layout_albinisme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/albinismetext"
+                android:id="@+id/albinismeText"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textSize="24dp"
+                android:textSize="@dimen/text_size_large"
                 android:checked="false"
                 android:drawableStart="@drawable/baseline_light_24"
+                android:drawableTint="?attr/iconcolor"
                 android:text="Albinisme oculo-cutané"
                 android:textStyle="bold"
 
@@ -210,6 +210,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layout_cecite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -220,7 +221,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textSize="24dp"
+                android:textSize="@dimen/text_size_large"
                 android:drawableStart="@drawable/eye_svgrepo_com"
                 android:text="Cécité nocturne"
                 android:textStyle="bold"/>
@@ -233,6 +234,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layout_poled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp">
@@ -244,7 +246,8 @@
                 android:layout_weight="1"
                 android:drawableStart="@drawable/baseline_hearing_24"
                 android:text="assistance vocale"
-                android:textSize="24dp"
+                android:drawableTint="?attr/iconcolor"
+                android:textSize="@dimen/text_size_large"
                 android:textStyle="bold" />
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/poled"
@@ -255,6 +258,7 @@
                 </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layout_peripherique"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="5dp">
@@ -262,7 +266,8 @@
                 android:id="@+id/peripheriqueText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="24dp"
+                android:drawableTint="?attr/iconcolor"
+                android:textSize="@dimen/text_size_large"
                 android:layout_weight="1"
                 android:drawableStart="@drawable/baseline_filter_tilt_shift_24"
                 android:text="Vision périphérique réduite"
@@ -278,6 +283,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layout_diplopie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="5dp">
@@ -288,7 +294,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Diplopie/Nystagmus"
-                android:textSize="24dp"
+                android:drawableTint="?attr/iconcolor"
+                android:textSize="@dimen/text_size_large"
                 android:drawableStart="@drawable/baseline_join_full_24"
                 android:textStyle="bold" />
     <com.google.android.material.materialswitch.MaterialSwitch
@@ -303,6 +310,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layout_myopie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="5dp">
@@ -311,8 +319,9 @@
                 android:id="@+id/MyopiepresbytieTexte"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:drawableTint="?attr/iconcolor"
                 android:layout_weight="1"
-                android:textSize="24dp"
+                android:textSize="@dimen/text_size_large"
                 android:drawableStart="@drawable/eye_slash_svgrepo_com_1_"
                 android:text="Myopie/Presbytie"
                 android:textStyle="bold" />
@@ -326,16 +335,18 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/layout_vision_centrale_reduite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="5dp">
 
             <TextView
-                android:id="@+id/VisionCentraleRéduiteTexte"
+                android:id="@+id/VisionCentraleReduiteTexte"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:drawableTint="?attr/iconcolor"
                 android:layout_weight="1"
-                android:textSize="24dp"
+                android:textSize="@dimen/text_size_large"
                 android:drawableStart="@drawable/baseline_panorama_fish_eye_24"
                 android:text="Vision centrale réduite"
                 android:textStyle="bold" />

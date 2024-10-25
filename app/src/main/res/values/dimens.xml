@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_small">14sp</dimen>
+    <dimen name="text_size_medium">19sp</dimen>
+    <dimen name="text_size_large">24sp</dimen>
+    <dimen name="text_size_xlarge">31sp</dimen>
+
+
+    <dimen name="text_size_small_large">19sp</dimen>
+    <dimen name="text_size_medium_large">24sp</dimen>
+    <dimen name="text_size_large_large">31sp</dimen>
+    <dimen name="text_size_xlarge_large">35sp</dimen>
+</resources>

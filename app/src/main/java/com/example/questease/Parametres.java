@@ -3,10 +3,14 @@ package com.example.questease;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -14,7 +18,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.example.questease.MainActivity;
-public class Parametres extends AppCompatActivity {
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class Parametres extends Theme {
     private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "QuestEasePrefs";
     private boolean isCreated = false;
@@ -26,6 +35,7 @@ public class Parametres extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        //applique le thème
         ApplyParameters(sharedPreferences);
         setContentView(R.layout.activity_parametres);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -41,12 +51,40 @@ public class Parametres extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        //ApplyParameters(sharedPreferences);
+        //elements a taille variable
+        TextView colorSampleText = findViewById(R.id.colorSamplesText);
+        TextView albinismeText = findViewById(R.id.albinismeText);
+        TextView ceciteTexte = findViewById(R.id.ceciteTexte);
+        TextView poledTexte = findViewById(R.id.poledTexte);
+        TextView peripheriqueText = findViewById(R.id.peripheriqueText);
+        TextView DiplopienystagmusTexte = findViewById(R.id.DiplopienystagmusTexte);
+        TextView MyopiepresbytieTexte = findViewById(R.id.MyopiepresbytieTexte);
+        TextView VisionCentraleReduiteTexte = findViewById(R.id.VisionCentraleReduiteTexte);
         CheckBox daltonisme = findViewById(R.id.checkbox_parent);
         CheckBox deuteranomalie = findViewById(R.id.deuteranomalie);
         CheckBox deuteranopie = findViewById(R.id.deuteranopie);
         CheckBox protanomalie = findViewById(R.id.protanomalie);
         CheckBox protanopie = findViewById(R.id.protanopie);
+        List<View> views = new ArrayList<>(Arrays.asList(
+                colorSampleText,
+                albinismeText,
+                ceciteTexte,
+                poledTexte,
+                peripheriqueText,
+                DiplopienystagmusTexte,
+                MyopiepresbytieTexte,
+                VisionCentraleReduiteTexte,
+                daltonisme,
+                deuteranomalie
+                ,deuteranopie
+                ,protanomalie
+                ,protanopie
+        ));
+
+
+        if(sharedPreferences.getBoolean("myopie",false) == true){
+            adjustTextSize(views);
+        }
         deuteranomalie.setVisibility(View.GONE);
         deuteranopie.setVisibility(View.GONE);
         protanomalie.setVisibility(View.GONE);
@@ -78,7 +116,6 @@ public class Parametres extends AppCompatActivity {
         deuteranomalie.setChecked(sharedPreferences.getInt("daltonisme",0) == 3);
         deuteranopie.setChecked(sharedPreferences.getInt("daltonisme",0) == 4);
 
-        // Vérifiez et créez des entrées si elles n'existent pas
         initializeBooleanPreference("vision_centrale_reduite", false);
         initializeBooleanPreference("myopie", false);
         initializeBooleanPreference("diplopie", false);
@@ -88,37 +125,85 @@ public class Parametres extends AppCompatActivity {
         initializeBooleanPreference("albinisme", false);
         initializePreference("daltonisme",0);
 
+        LinearLayout layout_vision = findViewById(R.id.layout_vision_centrale_reduite);
+        LinearLayout layout_myopie = findViewById(R.id.layout_myopie);
+        LinearLayout layout_diplopie = findViewById(R.id.layout_diplopie);
+        LinearLayout layout_peripherique = findViewById(R.id.layout_peripherique);
+        LinearLayout layout_vocal = findViewById(R.id.layout_poled);
+        LinearLayout layout_cecite = findViewById(R.id.layout_cecite);
+        LinearLayout layout_albinisme = findViewById(R.id.layout_albinisme);
+
+
+
+        layout_vision.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                VisionCentraleReduite.performClick();
+            }
+
+        });
         VisionCentraleReduite.setOnClickListener(view -> {
             boolean isChecked = VisionCentraleReduite.isChecked();
             sharedPreferences.edit().putBoolean("vision_centrale_reduite", isChecked).apply();
 
         });
-
+        layout_myopie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Myopiepresbytie.performClick();
+            }
+        });
         Myopiepresbytie.setOnClickListener(view -> {
             boolean isChecked = Myopiepresbytie.isChecked();
             sharedPreferences.edit().putBoolean("myopie", isChecked).apply();
+            recreate();
         });
-
+        layout_diplopie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Diplopienystagmus.performClick();
+            }
+        });
         Diplopienystagmus.setOnClickListener(view -> {
             boolean isChecked = Diplopienystagmus.isChecked();
             sharedPreferences.edit().putBoolean("diplopie", isChecked).apply();
         });
-
+        layout_peripherique.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                peripherique.performClick();
+            }
+        });
         peripherique.setOnClickListener(view -> {
             boolean isChecked = peripherique.isChecked();
             sharedPreferences.edit().putBoolean("vision_peripherique", isChecked).apply();
         });
-
+        layout_vocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                vocal.performClick();
+            }
+        });
         vocal.setOnClickListener(view -> {
             boolean isChecked = vocal.isChecked();
             sharedPreferences.edit().putBoolean("assistance_vocale", isChecked).apply();
         });
-
+        layout_cecite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cecite.performClick();
+            }
+        });
         cecite.setOnClickListener(view -> {
             boolean isChecked = cecite.isChecked();
             sharedPreferences.edit().putBoolean("cecite", isChecked).apply();
         });
-
+        layout_albinisme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                albinisme.performClick();
+            }
+        });
         albinisme.setOnClickListener(view -> {
             boolean isChecked = albinisme.isChecked();
             sharedPreferences.edit().putBoolean("albinisme", isChecked).apply();
@@ -218,6 +303,7 @@ public class Parametres extends AppCompatActivity {
             sharedPreferences.edit().putBoolean(key, defaultValue).apply();
         }
     }
+
     /*@Override
     protected void onRestart() {
         super.onRestart();
@@ -230,22 +316,4 @@ public class Parametres extends AppCompatActivity {
         super.onPause();
         this.isCreated = false;
     }*/
-
-    public void ApplyParameters(SharedPreferences sharedPreferences){
-        //Protanomalie = 1
-        //Protanopie = 2
-        //deuteranomalie = 3
-        //deuteranopie = 4
-        Log.d("SharedPreferences", "Valeur de daltonisme: " + sharedPreferences.getInt("daltonisme", 0));
-        Log.d("SharedPreferences","je vais essayer d'appliquer un thème");
-        if(sharedPreferences.getInt("daltonisme",0)== 1) {
-            setTheme(R.style.Theme_Questease_Protanomalie);}
-        else if(sharedPreferences.getInt("daltonisme",0)== 2){
-            setTheme(R.style.Theme_Questease_Protanopie);
-        } else if (sharedPreferences.getInt("daltonisme",0)==3) {
-            setTheme(R.style.Theme_Questease_Deuteranomalie);
-        } else if (sharedPreferences.getInt("daltonisme",0) == 4) {
-            setTheme(R.style.Theme_Questease_deuteranopie);
-        }
-    }
 }

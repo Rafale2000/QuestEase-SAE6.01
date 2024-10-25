@@ -3,10 +3,13 @@ package com.example.questease;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.database.Cursor;
 import android.util.Log;
@@ -20,7 +23,14 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.datastore.preferences.core.Preferences;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.SharedPreferences;
-public class MainActivity extends AppCompatActivity {
+import android.widget.TextView;
+import android.widget.Toolbar;
+
+import com.google.android.material.button.MaterialButton;
+
+import org.w3c.dom.Text;
+
+public class MainActivity extends Theme {
     DatabaseHelper dbHelper;
     private boolean isCreated = false;
     @Override
@@ -41,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         // Configuration des boutons
         Button jouer = findViewById(R.id.Jouer);
         Button paramètres = findViewById(R.id.Paramètres);
-
         jouer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        /*if(sharedPreferences.getBoolean("myopie",false)){
+            Resources res = getResources();
+            jouer.setTextSize(TypedValue.COMPLEX_UNIT_PX, res.getDimension(R.dimen.text_size_large_large));
+            paramètres.setTextSize(TypedValue.COMPLEX_UNIT_PX, res.getDimension(R.dimen.text_size_medium_large));
+            TextView banner = findViewById(R.id.banner);
+            banner.setTextSize(TypedValue.COMPLEX_UNIT_PX, res.getDimension(R.dimen.text_size_xlarge_large));
+        }*/
     }
 
     @Override
@@ -71,24 +88,10 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         this.isCreated = false;
     }
-    public void ApplyParameters(SharedPreferences sharedPreferences){
-        //Protanomalie = 1
-        //Protanopie = 2
-        //deuteranomalie = 3
-        //deuteranopie = 4
-        Log.d("SharedPreferences", "Valeur de daltonisme: " + sharedPreferences.getInt("daltonisme", 0));
-        Log.d("SharedPreferences","je vais essayer d'appliquer un thème");
-        if(sharedPreferences.getInt("daltonisme",0)== 1) {
-            setTheme(R.style.Theme_Questease_Protanomalie);
-        }
-        else if(sharedPreferences.getInt("daltonisme",0)== 2){
-            setTheme(R.style.Theme_Questease_Protanopie);
-        } else if (sharedPreferences.getInt("daltonisme",0)==3) {
-            setTheme(R.style.Theme_Questease_Deuteranomalie);
-        } else if (sharedPreferences.getInt("daltonisme",0) == 4) {
-            setTheme(R.style.Theme_Questease_deuteranopie);
-        }
-    }
+
+
+
+
 
 
 
