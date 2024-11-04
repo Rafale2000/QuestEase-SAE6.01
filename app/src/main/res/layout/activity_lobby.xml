@@ -55,11 +55,10 @@
         android:layout_marginEnd="11dp"
         android:text="Person1"
         android:textColor="@color/black"
-        android:textSize="30dp"
+        android:textSize="@dimen/text_size_xlarge"
         app:backgroundTint="?attr/colorProfileBackground"
         app:iconSize="70dp"
         app:icon="@drawable/baseline_person_24"
-
         app:cornerRadius="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -75,7 +74,7 @@
         android:layout_marginEnd="6dp"
         android:text="Person2"
         android:textColor="?attr/texte"
-        android:textSize="30dp"
+        android:textSize="@dimen/text_size_xlarge"
         app:backgroundTint="?attr/colorProfileBackground"
         app:cornerRadius="24dp"
         app:icon="@drawable/baseline_person_24"
@@ -94,7 +93,7 @@
         android:gravity="center"
         android:text="Joueurs prêts 0/2"
         android:textColor="?attr/texte"
-        android:textSize="18sp"
+        android:textSize="@dimen/text_size_medium"
         app:layout_constraintTop_toBottomOf="@id/Person1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,10 +111,10 @@
         android:backgroundTint="?attr/colorButtonBackground"
         android:text="Prêt"
         android:textColor="@color/black"
-        android:textSize="30dp"
+        android:textSize="@dimen/text_size_xlarge"
         app:cornerRadius="24dp"
         app:iconSize="70dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_joueurs_prets" />
+        app:layout_constraintTop_toBottomOf="@id/text_joueurs_prets"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

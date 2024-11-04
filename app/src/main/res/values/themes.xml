@@ -10,9 +10,10 @@
         <item name="colorButtonBackground2">#606060</item>
         <item name="colorButtonText">#000000</item> <!-- Texte du bouton -->
         <item name="colorProfileBackground">#4c4745</item>
-        <item name="iconcolor">#000000</item>
+        <item name="iconcolor">#F6F6F6</item>
         <item name="texte">#000000</item>
         <item name="bordercolor">#000000</item> <!-- couleur utilisé pour contraster les samples de couleur et le fond -->
+
     </style>
     
     <style name="Theme.Questease.Deuteranomalie" parent="Theme.Questease">
