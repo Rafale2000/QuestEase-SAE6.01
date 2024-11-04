@@ -28,6 +28,7 @@ android {
 
 dependencies {
     implementation libs.datastore.core.android
+    implementation libs.filament.android
     def fragment_version = "1.8.3"
 
     // Java language implementation

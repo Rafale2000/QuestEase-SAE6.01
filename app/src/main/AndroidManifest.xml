@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Questease"
         tools:targetApi="31">
         <activity
+            android:name=".PrixJuste"
+            android:exported="true">  </activity>
+        <activity
             android:name=".Gyroscope"
             android:exported="false" />
         <activity
