@@ -1,6 +1,7 @@
 package com.example.questease;
 
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.util.List;
 
@@ -30,6 +32,21 @@ public class Theme extends AppCompatActivity {
         }
     }
 
+    public void applyFont(List<View> views) {
+        Typeface typeface = ResourcesCompat.getFont(this, R.font.opendyslexic_regular);
+        for (View view : views) {
+            if (view instanceof TextView) {
+                TextView textView = (TextView) view;
+                textView.setTypeface(typeface);
+            } else if (view instanceof Button) {
+                Button button = (Button) view;
+                button.setTypeface(typeface);
+            } else if (view instanceof CheckBox) {
+                CheckBox checkBox = (CheckBox) view;
+                checkBox.setTypeface(typeface);
+            }
+        }
+    }
 
     public void adjustTextSize(List<View> views) {
         // Convertir la taille de texte souhaitée en pixels pour la comparaison

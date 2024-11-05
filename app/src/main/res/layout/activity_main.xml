@@ -15,7 +15,7 @@
         android:textColor="@android:color/black"
         android:gravity="center"
         android:padding="16dp"
-        android:textSize="@dimen/text_size_xlarge"
+        android:textSize="@dimen/text_size_large"
         android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,7 @@
         android:text="Jouer"
         android:textAlignment="center"
         android:textColor="?attr/colorButtonText"
-        android:textSize="@dimen/text_size_xlarge"
+        android:textSize="@dimen/text_size_large"
         android:textStyle="bold|italic"
 
         app:cornerRadius="24dp"
@@ -48,17 +48,18 @@
         app:layout_constraintTop_toTopOf="parent"
          />
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/Paramètres"
+        android:id="@+id/Parametres"
         android:layout_width="400dp"
         android:layout_height="124dp"
         android:layout_marginTop="324dp"
 
-        android:text="Paramètres"
+        android:text="Parametres"
         android:textAlignment="center"
         android:backgroundTint="?attr/colorButtonBackground2"
         android:textColor="?attr/colorButtonText"
-        android:textSize="@dimen/text_size_xlarge"
+        android:textSize="@dimen/text_size_large"
         android:textStyle="bold|italic"
+
         app:cornerRadius="24dp"
         app:strokeColor="@color/black"
         app:strokeWidth="2dp"

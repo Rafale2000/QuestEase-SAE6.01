@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,8 +16,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
 
-public class Searchlobby extends Theme {
+import java.util.ArrayList;
+import java.util.List;
 
+public class Searchlobby extends Theme {
+    private List<View> views = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +29,7 @@ public class Searchlobby extends Theme {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         ApplyParameters(sharedPreferences);
         setContentView(R.layout.activity_searchlobby);
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -34,6 +41,26 @@ public class Searchlobby extends Theme {
             Intent intent = new Intent(Searchlobby.this, Lobby.class);
             startActivity(intent);
         });
+
+        views.add(creerLobby);
+        ScrollView scrollView = findViewById(R.id.scrollView);
+        getButtons(scrollView);
+        if(sharedPreferences.getBoolean("myopie",false)){
+            adjustTextSize(views);
+        }
+        if(sharedPreferences.getBoolean("dyslexie",false)){
+         applyFont(views);
+        }
     }
 
+    private void getButtons(ViewGroup parent) {
+        for (int i = 0; i < parent.getChildCount(); i++) {
+            View child = parent.getChildAt(i);
+            if (child instanceof MaterialButton) {
+                views.add((MaterialButton) child);
+            } else if (child instanceof ViewGroup) {
+                getButtons((ViewGroup) child);
+            }
+        }
+    }
 }

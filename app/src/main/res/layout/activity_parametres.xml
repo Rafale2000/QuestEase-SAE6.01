@@ -179,26 +179,26 @@
         android:layout_marginLeft="20dp">
 
         <LinearLayout
-            android:id ="@+id/layout_albinisme"
+            android:id ="@+id/Dyslexie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/albinismeText"
+                android:id="@+id/DyslexieText"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:textSize="@dimen/text_size_large"
                 android:checked="false"
-                android:drawableStart="@drawable/baseline_light_24"
+                android:drawableStart="@drawable/baseline_text_format_24"
                 android:drawableTint="?attr/iconcolor"
-                android:text="Albinisme oculo-cutané"
+                android:text="Dyslexie"
                 android:textStyle="bold"
 
                 />
 
             <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/albinisme"
+                android:id="@+id/DyslexieSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
@@ -210,23 +210,24 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layout_cecite"
+            android:id="@+id/contrasteÉlevé"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="5dp">
 
             <TextView
-                android:id="@+id/ceciteTexte"
+                android:id="@+id/contrasteÉlevéText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="@dimen/text_size_large"
-                android:drawableStart="@drawable/eye_svgrepo_com"
-                android:text="Cécité nocturne"
+                android:drawableStart="@drawable/baseline_bedtime_24"
+                android:drawableTint="?attr/iconcolor"
+                android:text="Contraste élevé"
                 android:textStyle="bold"/>
             <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/cecite"
+                android:id="@+id/contrasteÉlevéSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingEnd="10dp"
@@ -257,76 +258,28 @@
                 android:checked="false"/>
                 </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layout_peripherique"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp">
-            <TextView
-                android:id="@+id/peripheriqueText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:drawableTint="?attr/iconcolor"
-                android:textSize="@dimen/text_size_large"
-                android:layout_weight="1"
-                android:drawableStart="@drawable/baseline_filter_tilt_shift_24"
-                android:text="Vision périphérique réduite"
-                android:textStyle="bold"/>
-            <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/peripherique"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="false"
-                android:paddingEnd="10dp"
-                />
 
-        </LinearLayout>
+
+
 
         <LinearLayout
-            android:id="@+id/layout_diplopie"
+            android:id="@+id/tailleTexte"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="5dp">
 
             <TextView
-                android:id="@+id/DiplopienystagmusTexte"
+                android:id="@+id/tailleTexteTexte"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Diplopie/Nystagmus"
                 android:drawableTint="?attr/iconcolor"
+                android:layout_weight="1"
                 android:textSize="@dimen/text_size_large"
-                android:drawableStart="@drawable/baseline_join_full_24"
+                android:drawableStart="@drawable/baseline_text_increase_24"
+                android:text="Taille texte"
                 android:textStyle="bold" />
     <com.google.android.material.materialswitch.MaterialSwitch
-        android:id="@+id/Diplopienystagmus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:layout_marginEnd="10dp"
-        android:textStyle="bold"
-       />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/layout_myopie"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp">
-
-            <TextView
-                android:id="@+id/MyopiepresbytieTexte"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:drawableTint="?attr/iconcolor"
-                android:layout_weight="1"
-                android:textSize="@dimen/text_size_large"
-                android:drawableStart="@drawable/eye_slash_svgrepo_com_1_"
-                android:text="Myopie/Presbytie"
-                android:textStyle="bold" />
-    <com.google.android.material.materialswitch.MaterialSwitch
-        android:id="@+id/Myopiepresbytie"
+        android:id="@+id/tailleTexteSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="false"
@@ -334,31 +287,7 @@
         />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layout_vision_centrale_reduite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp">
 
-            <TextView
-                android:id="@+id/VisionCentraleReduiteTexte"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:drawableTint="?attr/iconcolor"
-                android:layout_weight="1"
-                android:textSize="@dimen/text_size_large"
-                android:drawableStart="@drawable/baseline_panorama_fish_eye_24"
-                android:text="Vision centrale réduite"
-                android:textStyle="bold" />
-    <com.google.android.material.materialswitch.MaterialSwitch
-        android:id="@+id/VisionCentraleReduite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:checked="false"
-         />
-
-        </LinearLayout>
     <Button
         android:id="@+id/gyroscope"
         android:layout_width="match_parent"

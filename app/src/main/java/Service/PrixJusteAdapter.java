@@ -1,4 +1,4 @@
-package Service;
+/*package Service;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -58,4 +58,4 @@ public class PrixJusteAdapter extends RecyclerView.Adapter<MotCryptexAdapter.Lob
             lobbyPlayer = itemView.findViewById(android.R.id.text2);
         }
     }
-}
+}*/
