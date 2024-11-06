@@ -12,10 +12,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.questease.DatabaseHelper;
+import com.example.questease.Parametres;
 import com.example.questease.R;
 import android.content.SharedPreferences;
 import android.widget.TextView;
 
+import com.example.questease.Searchlobby;
 import com.example.questease.Theme;
 import java.util.List;
 
