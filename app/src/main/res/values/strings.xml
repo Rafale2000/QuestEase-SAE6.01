@@ -8,4 +8,5 @@
     <string name="entrez_un_nombre">Entrez un nombre</string>
     <string name="nombre_essay">Nombre essayé: x</string>
     <string name="indice">Indice</string>
+    <string name="valider">Valider</string>
 </resources>
