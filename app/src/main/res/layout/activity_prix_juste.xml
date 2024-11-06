@@ -4,8 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:id="@+id/main"
-    >
+    android:id="@+id/main">
 
     <!-- Top Bar with Exit and Switch Button -->
     <LinearLayout
@@ -13,20 +12,17 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Button to Exit -->
         <Button
             android:id="@+id/btn_exit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/exit" />
 
-        <!-- Space to push Switch button to the right -->
         <Space
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!-- Button to Switch between keyboard and handwriting -->
         <Button
             android:id="@+id/btn_switch_input"
             android:layout_width="wrap_content"
@@ -34,7 +30,6 @@
             android:background="@drawable/change_input_selector" />
     </LinearLayout>
 
-    <!-- Text displaying remaining attempts -->
     <TextView
         android:id="@+id/tv_attempts"
         android:layout_width="match_parent"
@@ -43,14 +38,12 @@
         android:text="@string/nbr_coup"
         android:textSize="18sp" />
 
-    <!-- Content Block with a Hint on the left and Image on the right -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal">
 
-        <!-- Hint Text Block -->
         <TextView
             android:id="@+id/tv_hint"
             android:layout_width="wrap_content"
@@ -59,7 +52,6 @@
             android:gravity="center"
             android:text="@string/indice" />
 
-        <!-- Image Display -->
         <ImageView
             android:id="@+id/image_view"
             android:layout_width="100dp"
@@ -69,7 +61,6 @@
             android:src="@drawable/benjamin" />
     </LinearLayout>
 
-    <!-- Input for Number Guess -->
     <EditText
         android:id="@+id/input_number"
         android:layout_width="match_parent"
@@ -77,7 +68,6 @@
         android:hint="@string/entrez_un_nombre"
         android:inputType="number" />
 
-    <!-- Displaying Number Tried Before -->
     <TextView
         android:id="@+id/tv_previous_number"
         android:layout_width="match_parent"
@@ -85,5 +75,13 @@
         android:gravity="center"
         android:text="@string/nombre_essay"
         android:textSize="18sp" />
+
+    <!-- New Button -->
+    <Button
+        android:id="@+id/btn_valider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/valider"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
