@@ -1,7 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?> //Mergé depuis la BDD
 <network-security-config>
     <base-config cleartextTrafficPermitted="true">
         <trust-anchors>
             <certificates src="system" />
+            <certificates src="user" /> //Mergé depuis la BDD
         </trust-anchors>
     </base-config>
 </network-security-config>

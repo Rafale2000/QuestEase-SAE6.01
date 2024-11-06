@@ -1,35 +1,22 @@
-package com.example.questease;
+package View.questease;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.database.Cursor;
-import android.util.Log;
+
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.datastore.preferences.core.Preferences;
-import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.questease.DatabaseHelper;
+import com.example.questease.R;
 import android.content.SharedPreferences;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
-import com.google.android.material.button.MaterialButton;
-
-import org.w3c.dom.Text;
-
+import com.example.questease.Theme;
 import java.util.List;
 
 public class MainActivity extends Theme {
