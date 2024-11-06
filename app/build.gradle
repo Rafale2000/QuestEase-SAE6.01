@@ -29,6 +29,7 @@ android {
 dependencies {
     implementation libs.datastore.core.android
     implementation libs.filament.android
+    implementation libs.games.activity
     def fragment_version = "1.8.3"
 
     // Java language implementation
@@ -45,5 +46,7 @@ dependencies {
     androidTestImplementation libs.espresso.core
     implementation "androidx.datastore:datastore-preferences:1.0.0"
     implementation "androidx.datastore:datastore-core:1.0.0"
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
 
 }
