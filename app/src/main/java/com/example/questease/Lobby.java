@@ -2,9 +2,11 @@ package com.example.questease;
 
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,5 +46,14 @@ public class Lobby extends Theme {
         if(sharedPreferences.getBoolean("dyslexie",false)){
             applyFont(views);
         }
+        Button jouer = findViewById(R.id.button2);
+        jouer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Lobby.this, TrouveLeSon.class));
+
+            }
+        });
+
     }
 }
