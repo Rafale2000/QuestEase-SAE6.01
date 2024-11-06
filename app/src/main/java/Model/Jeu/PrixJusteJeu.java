@@ -1,4 +1,4 @@
-package Model.jeu;
+package Model.Jeu;
 
 import java.util.Random;
 
@@ -6,9 +6,8 @@ public class PrixJusteJeu {
     private final int targetNumber;
     private int remainingAttempts;
 
-    public PrixJusteJeu(int initialAttempts) {
-        Random random = new Random();
-        this.targetNumber = random.nextInt(100) + 1; // Generate number between 1 and 100
+    public PrixJusteJeu(int initialAttempts, int targetNumber) {
+        this.targetNumber = targetNumber;
         this.remainingAttempts = initialAttempts;
     }
 
@@ -22,16 +21,16 @@ public class PrixJusteJeu {
             return Result.CORRECT;
         } else if (guess < targetNumber) {
             remainingAttempts--;
-            return Result.TOO_LOW;
+            return Result.TROP_BAS;
         } else {
             remainingAttempts--;
-            return Result.TOO_HIGH;
+            return Result.TROP_HAUT;
         }
     }
 
     public enum Result {
         CORRECT,
-        TOO_LOW,
-        TOO_HIGH
+        TROP_BAS,
+        TROP_HAUT
     }
 }
