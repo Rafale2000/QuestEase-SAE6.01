@@ -24,7 +24,7 @@
         <item name="colorButtonBackground2">#5A5A5A</item> <!-- Légère adaptation du gris pour un meilleur contraste -->
         <item name="colorButtonText">#000000</item> <!-- Noir, pas de changement -->
         <item name="colorProfileBackground">#484545</item> <!-- Gris foncé, légère adaptation pour le contraste -->
-        <item name="iconcolor">#000000</item> <!-- Noir, pas de changement -->
+        <item name="iconcolor">#FFFFFF</item> <!-- Noir, pas de changement -->
         <item name="texte">#000000</item> <!-- Noir, pas de changement -->
 
     </style>
@@ -41,7 +41,7 @@
 
         <!-- Autres couleurs d'interface -->
         <item name="colorProfileBackground">#595959</item> <!-- Fond de profil, gris pour un meilleur contraste -->
-        <item name="iconcolor">#000000</item> <!-- Couleur des icônes, noir pour visibilité -->
+        <item name="iconcolor">#FFFFFF</item> <!-- Couleur des icônes, noir pour visibilité -->
         <item name="texte">#000000</item> <!-- Couleur du texte, noir pour le contraste sur fond clair -->
     </style>
     <style name="Theme.Questease.Protanomalie" parent="Theme.Material3.DayNight.NoActionBar">

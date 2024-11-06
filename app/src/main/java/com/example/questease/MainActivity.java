@@ -30,6 +30,8 @@ import com.google.android.material.button.MaterialButton;
 
 import org.w3c.dom.Text;
 
+import java.util.List;
+
 public class MainActivity extends Theme {
     DatabaseHelper dbHelper;
     private boolean isCreated = false;
@@ -50,7 +52,15 @@ public class MainActivity extends Theme {
 
         // Configuration des boutons
         Button jouer = findViewById(R.id.Jouer);
-        Button paramètres = findViewById(R.id.Paramètres);
+        Button parametres = findViewById(R.id.Parametres);
+        TextView banner = findViewById(R.id.banner);
+        List<View> views = List.of(jouer, parametres, banner);
+        if(sharedPreferences.getBoolean("tailleTexte",false)){
+            adjustTextSize(views);
+        }
+        if(sharedPreferences.getBoolean("dyslexie",false)){
+           applyFont(views);
+        }
         jouer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +69,7 @@ public class MainActivity extends Theme {
             }
         });
 
-        paramètres.setOnClickListener(new View.OnClickListener() {
+        parametres.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, Parametres.class);
@@ -67,13 +77,7 @@ public class MainActivity extends Theme {
             }
         });
 
-        /*if(sharedPreferences.getBoolean("myopie",false)){
-            Resources res = getResources();
-            jouer.setTextSize(TypedValue.COMPLEX_UNIT_PX, res.getDimension(R.dimen.text_size_large_large));
-            paramètres.setTextSize(TypedValue.COMPLEX_UNIT_PX, res.getDimension(R.dimen.text_size_medium_large));
-            TextView banner = findViewById(R.id.banner);
-            banner.setTextSize(TypedValue.COMPLEX_UNIT_PX, res.getDimension(R.dimen.text_size_xlarge_large));
-        }*/
+
     }
 
     @Override
