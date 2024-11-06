@@ -1,4 +1,4 @@
-package Model.bdd;
+package Model.BDD;
 
 public class Son {
     private int id;

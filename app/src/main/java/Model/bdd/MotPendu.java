@@ -1,4 +1,4 @@
-package Model.bdd;
+package Model.BDD;
 
 
 
