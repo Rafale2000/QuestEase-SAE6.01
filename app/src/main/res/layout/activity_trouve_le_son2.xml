@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TrouveLeSon2">
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+
+        <LinearLayout
+            android:id="@+id/bannerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/quitter"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="left"
+                android:src="@drawable/baseline_close_24"
+                android:scaleType="fitCenter"
+                app:tint="@android:color/black" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/Regles"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:backgroundTint="#40FFFFFF"
+                android:text="Identifiez le son"
+                android:textColor="@android:color/black"
+                app:icon="@drawable/baseline_arrow_drop_down_24"
+                app:iconGravity="textStart"
+                app:iconTint="@android:color/black"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                app:iconPadding="8dp"
+                app:iconSize="25dp" />
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp">
+
+            </ImageView>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="50dp"
+            android:gravity="center">
+
+
+            <TextView
+                android:id="@+id/role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:textSize="@dimen/text_size_large"
+                android:text="Vous êtes le Rédacteur"
+                />
+            <TextView
+                android:id="@+id/messages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textSize="@dimen/text_size_medium"
+                android:text="Messages"/>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="8dp"
+                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@android:color/white"
+                >
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="test"
+
+                            android:gravity="center"/>
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="ça doit être un raton laveur"
+                            android:gravity="center"/>
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="salut à tous c'est fanta aujourd'hui on se retrouve pour la météo du bitcoin"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                </ScrollView>
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/messageEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Entrez la réponse"
+                android:inputType="text" />
+
+
+            <Button
+                android:id="@+id/sendButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="?attr/colorButtonBackground"
+                android:text="valider"
+                app:cornerRadius="10dp"
+                android:textColor="@color/black"
+                android:layout_gravity="end" />
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

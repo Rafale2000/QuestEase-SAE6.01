@@ -1,4 +1,4 @@
-package com.example.questease;
+/*package com.example.questease;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -58,4 +58,4 @@ public class PrixJuste extends AppCompatActivity {
             }
         });
     }
-}
+}*/

@@ -76,8 +76,6 @@ public class MainActivity extends Theme {
                 startActivity(intent);
             }
         });
-
-
     }
 
     @Override

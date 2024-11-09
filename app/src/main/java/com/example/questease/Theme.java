@@ -1,17 +1,32 @@
 package com.example.questease;
 
+import android.app.Dialog;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.RenderEffect;
+import android.graphics.Shader;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
+
+
+
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
+
+
 
 public class Theme extends AppCompatActivity {
     public void ApplyParameters(SharedPreferences sharedPreferences){
@@ -96,6 +111,27 @@ public class Theme extends AppCompatActivity {
                 }
             }
         }
+    }
+    public void showTutorialPopup(String title, String content, ViewGroup view) {
+
+        RenderEffect blurEffect = RenderEffect.createBlurEffect(
+                10, 10, Shader.TileMode.CLAMP);
+        view.setRenderEffect(blurEffect);
+
+        view.setRenderEffect(blurEffect);
+        Dialog tutorialDialog = new Dialog(this);
+        tutorialDialog.setContentView(R.layout.popuprules);
+        tutorialDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        FloatingActionButton closeButton = tutorialDialog.findViewById(R.id.closeButton);
+        closeButton.setOnClickListener(v -> {
+            tutorialDialog.dismiss();
+            view.setRenderEffect(null);
+        });
+        TextView cardTitle = tutorialDialog.findViewById(R.id.cardTitle);
+        cardTitle.setText(title);
+        TextView cardContent = tutorialDialog.findViewById(R.id.cardContent);
+        cardContent.setText(content);
+        tutorialDialog.show();
     }
 
 }
