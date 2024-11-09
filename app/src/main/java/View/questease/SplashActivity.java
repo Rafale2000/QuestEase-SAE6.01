@@ -1,12 +1,12 @@
-package com.example.questease;
+package View.questease;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.questease.R;
 
 public class SplashActivity extends AppCompatActivity {
     //salut
