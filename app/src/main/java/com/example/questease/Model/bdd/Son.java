@@ -1,4 +1,4 @@
-package Model.BDD;
+package com.example.questease.Model.bdd;
 
 public class Son {
     private int id;

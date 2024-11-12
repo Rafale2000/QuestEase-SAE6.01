@@ -1,6 +1,4 @@
-package Model.BDD;
-
-import java.util.ArrayList;
+package com.example.questease.Model.bdd;
 
 public class Utilisateur {
     private int id; // This will be auto-incremented by the database

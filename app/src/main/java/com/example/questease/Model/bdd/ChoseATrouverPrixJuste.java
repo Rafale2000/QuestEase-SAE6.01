@@ -1,4 +1,4 @@
-package Model.bdd;
+package com.example.questease.Model.bdd;
 
 public class ChoseATrouverPrixJuste {
     private int id;

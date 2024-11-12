@@ -1,22 +1,24 @@
-package Model.BDD;
+package com.example.questease.Model.bdd;
 
-public class MotCryptex {
+
+
+public class MotPendu {
     private int id;
     private String mot;
     private int diff;
     private int idIndice;
 
-    public MotCryptex(int id, String mot, int diff, int idIndice) {
+    public MotPendu(int id,String mot, int diff, int idIndice) {
         this.id = id;
         this.mot = mot;
         this.diff = diff;
         this.idIndice = idIndice;
-
     }
 
     public int getId() {
         return id;
     }
+
 
     public String getMot() {
         return mot;

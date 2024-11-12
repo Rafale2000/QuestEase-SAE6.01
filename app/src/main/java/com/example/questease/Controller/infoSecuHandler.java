@@ -1,14 +1,15 @@
-package Controller;
+package com.example.questease.Controller;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import Model.bdd.InfoSecu;
+
+import com.example.questease.Model.bdd.InfoSecu;
 
 
-public class infoSecuHandler extends MyDatabaseHelper{
+public class infoSecuHandler extends MyDatabaseHelper {
 
     private SQLiteOpenHelper dbHelper;
 

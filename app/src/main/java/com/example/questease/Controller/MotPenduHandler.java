@@ -1,4 +1,4 @@
-package Controller;
+package com.example.questease.Controller;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,9 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import Model.bdd.ChoseATrouverPrixJuste;
-import Model.bdd.MotCryptex;
-import Model.bdd.MotPendu;
+import com.example.questease.Model.bdd.MotPendu;
 
 public class MotPenduHandler extends MyDatabaseHelper {
     private SQLiteOpenHelper dbHelper;

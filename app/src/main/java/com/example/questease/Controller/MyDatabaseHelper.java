@@ -1,4 +1,4 @@
-package Controller;
+package com.example.questease.Controller;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

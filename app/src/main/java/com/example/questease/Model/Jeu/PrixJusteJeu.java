@@ -1,6 +1,4 @@
-package Model.Jeu;
-
-import java.util.Random;
+package com.example.questease.Model.Jeu;
 
 public class PrixJusteJeu {
     private final int targetNumber;

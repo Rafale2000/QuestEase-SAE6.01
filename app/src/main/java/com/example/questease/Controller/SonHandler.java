@@ -1,4 +1,4 @@
-package Controller;
+package com.example.questease.Controller;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,8 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-
-import Model.bdd.Son;
+import com.example.questease.Model.bdd.Son;
 
 public class SonHandler extends MyDatabaseHelper {
     private SQLiteOpenHelper dbHelper;
