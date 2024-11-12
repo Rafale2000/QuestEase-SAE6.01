@@ -14,12 +14,14 @@ import java.util.List;
 
 import android.view.View;
 
+import com.example.questease.Model.BDD.ChoseATrouverPrixJuste;
+
 public class ChoseAdapteur extends RecyclerView.Adapter<ChoseAdapteur.LobbyViewHolder> {
 
 
-    private List<Model.BDD.ChoseATrouverPrixJuste> choseList;
+    private List<ChoseATrouverPrixJuste> choseList;
 
-    public ChoseAdapteur(List<Model.BDD.ChoseATrouverPrixJuste> choseList) {
+    public ChoseAdapteur(List<ChoseATrouverPrixJuste> choseList) {
         this.choseList = choseList;
     }
 
@@ -33,7 +35,7 @@ public class ChoseAdapteur extends RecyclerView.Adapter<ChoseAdapteur.LobbyViewH
 
     @Override
     public void onBindViewHolder(@NonNull LobbyViewHolder holder, int position) {
-        Model.BDD.ChoseATrouverPrixJuste chose = choseList.get(position);
+        ChoseATrouverPrixJuste chose = choseList.get(position);
 
         // Log data being bound to the view holder
         Log.d("ziz","zizi");
