@@ -1,4 +1,4 @@
-/*package Service;
+package Service;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -9,17 +9,14 @@ import androidx.media3.common.util.Log;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
-
-import Model.bdd.MotCryptex;
-
 import android.view.View;
+import com.example.questease.Model.BDD.MotCryptex;
 
-public class PrixJusteAdapter extends RecyclerView.Adapter<MotCryptexAdapter.LobbyViewHolder> {
-
+public class PrixJusteAdapter extends RecyclerView.Adapter<PrixJusteAdapter.LobbyViewHolder> {
 
     private List<MotCryptex> motCryptexList;
 
-    public MotCryptexAdapter(List<MotCryptex> motCryptexList) {
+    public PrixJusteAdapter(List<MotCryptex> motCryptexList) {
         this.motCryptexList = motCryptexList;
     }
 
@@ -36,7 +33,6 @@ public class PrixJusteAdapter extends RecyclerView.Adapter<MotCryptexAdapter.Lob
         MotCryptex motCryptex = motCryptexList.get(position);
 
         // Log data being bound to the view holder
-        Log.e("ziz","zizi");
         Log.e("onBindViewHolder", "Mot: " + motCryptex.getMot() + ", Diff: " + motCryptex.getDiff());
 
         holder.lobbyName.setText(motCryptex.getMot());
@@ -58,4 +54,4 @@ public class PrixJusteAdapter extends RecyclerView.Adapter<MotCryptexAdapter.Lob
             lobbyPlayer = itemView.findViewById(android.R.id.text2);
         }
     }
-}*/
+}
