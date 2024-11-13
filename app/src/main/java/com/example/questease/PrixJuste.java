@@ -1,5 +1,7 @@
 package com.example.questease;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,9 +19,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import Controller.ControllerPrixJuste;
-import Model.Jeu.PrixJusteJeu;
-import Model.BDD.ChoseATrouverPrixJuste;
+
+import com.example.questease.Controller.ControllerPrixJuste;
+import com.example.questease.Model.BDD.ChoseATrouverPrixJuste;
+import com.example.questease.Model.Jeu.PrixJusteJeu;
+
 import Service.HandlerObjectAPI;
 import Service.ChoseCallback;
 
@@ -65,7 +69,9 @@ public class PrixJuste extends AppCompatActivity {
         btnValider = findViewById(R.id.btn_valider);
         //path de l'image
         imageView = findViewById(R.id.image_view);
+        Log.d(TAG, chose.getCheminImage());
         imageView.setImageResource(getResources().getIdentifier(chose.getCheminImage(), "drawable", getPackageName()));
+
         numberOfAttempts.setText("Nombre de coups restant : " + controllerPrixJuste.getRemainingAttempts());
 
         //TODO faire fonctionner
@@ -88,6 +94,9 @@ public class PrixJuste extends AppCompatActivity {
                     numberOfAttempts.setText("Nombre de coups restant : " + controllerPrixJuste.getRemainingAttempts());
                     previousNumber.setText("Nombre essayé : " + guess + " - " + result);
                     inputNumber.setText("");
+                    //faire en sorte d'envoyer la proposition à l'autre joueur
+                    //puis récup la sienne en la testant
+
                 } catch (NumberFormatException e) {
                     Toast.makeText(PrixJuste.this, "Veuillez entrer un nombre valide.", Toast.LENGTH_SHORT).show();
                 }
