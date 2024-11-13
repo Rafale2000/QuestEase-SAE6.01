@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.questease.Model.bdd.Son;
+import com.example.questease.Model.BDD.Son;
 
 public class SonHandler extends MyDatabaseHelper {
     private SQLiteOpenHelper dbHelper;

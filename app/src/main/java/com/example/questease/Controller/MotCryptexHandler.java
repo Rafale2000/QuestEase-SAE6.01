@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.questease.Model.bdd.MotCryptex;
+import com.example.questease.Model.BDD.MotCryptex;
 
 public class MotCryptexHandler extends MyDatabaseHelper {
     private SQLiteOpenHelper dbHelper;

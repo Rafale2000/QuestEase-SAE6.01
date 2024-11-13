@@ -7,9 +7,11 @@ import android.widget.TextView;
 
 import androidx.media3.common.util.Log;
 
+import com.example.questease.Model.BDD.MotCryptex;
+
 import Service.MotCryptexApi;
 import Service.RetrofitInstance;
-import Model.bdd.MotCryptex;
+
 
 import java.util.List;
 

@@ -3,7 +3,9 @@ package Service;
 import android.content.Context;
 import android.util.Log;
 
-import Model.BDD.ChoseATrouverPrixJuste;
+
+import com.example.questease.Model.BDD.ChoseATrouverPrixJuste;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -18,7 +20,7 @@ public class HandlerObjectAPI {
     // Get random Chose with callback handling
     public void GetRandomChose(ChoseCallback callback) {
         ChoseAPI lobbyApi = RetrofitInstance.getRetrofitInstance().create(ChoseAPI.class);
-        Call<Model.BDD.ChoseATrouverPrixJuste> call = lobbyApi.getChoseRandom();
+        Call<ChoseATrouverPrixJuste> call = lobbyApi.getChoseRandom();
         call.enqueue(new Callback<ChoseATrouverPrixJuste>() {
             @Override
             public void onResponse(Call<ChoseATrouverPrixJuste> call, Response<ChoseATrouverPrixJuste> response) {

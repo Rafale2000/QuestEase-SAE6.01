@@ -1,4 +1,4 @@
-package com.example.questease.Model.bdd.jeu;
+package com.example.questease.Model.BDD.jeu;
 
 import java.util.Random;
 import java.util.Scanner;

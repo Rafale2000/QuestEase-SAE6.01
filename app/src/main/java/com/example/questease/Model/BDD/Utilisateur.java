@@ -1,4 +1,4 @@
-package com.example.questease.Model.bdd;
+package com.example.questease.Model.BDD;
 
 public class Utilisateur {
     private int id; // This will be auto-incremented by the database

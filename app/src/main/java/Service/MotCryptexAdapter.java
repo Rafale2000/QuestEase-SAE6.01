@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import Model.bdd.MotCryptex;
+
 
 import android.view.View;
+
+import com.example.questease.Model.BDD.MotCryptex;
 
 public class MotCryptexAdapter extends RecyclerView.Adapter<MotCryptexAdapter.LobbyViewHolder> {
 

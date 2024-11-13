@@ -3,9 +3,11 @@ package Service;
 
 
 
+import com.example.questease.Model.BDD.MotCryptex;
+
 import java.util.List;
 
-import Model.bdd.MotCryptex;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 
