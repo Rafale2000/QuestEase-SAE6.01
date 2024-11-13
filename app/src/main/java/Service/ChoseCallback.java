@@ -1,6 +1,7 @@
 package Service;
 
-import Model.BDD.ChoseATrouverPrixJuste;
+
+import com.example.questease.Model.BDD.ChoseATrouverPrixJuste;
 
 public interface ChoseCallback {
     void onChoseReceived(ChoseATrouverPrixJuste chose);
