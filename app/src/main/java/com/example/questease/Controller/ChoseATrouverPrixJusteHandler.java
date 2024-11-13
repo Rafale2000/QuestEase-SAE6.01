@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.questease.Model.bdd.ChoseATrouverPrixJuste;
+import com.example.questease.Model.BDD.ChoseATrouverPrixJuste;
 
 public class ChoseATrouverPrixJusteHandler extends MyDatabaseHelper {
     private SQLiteOpenHelper dbHelper;
