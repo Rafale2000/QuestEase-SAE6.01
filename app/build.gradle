@@ -26,6 +26,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    packaging {
+        resources {
+            excludes += ["META-INF/LICENSE.md"]
+        }
+    }
 }
 
 dependencies {
@@ -33,15 +39,12 @@ dependencies {
     implementation libs.filament.android
     implementation libs.media3.common
     implementation libs.games.activity
+    androidTestImplementation libs.junit.jupiter
     def fragment_version = "1.8.3"
 
     // Java language implementation
     implementation "androidx.fragment:fragment:$fragment_version"
-
     implementation 'com.google.android.material:material:1.9.0'
-
-
-
     implementation libs.appcompat
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation libs.material
@@ -54,5 +57,4 @@ dependencies {
     implementation "androidx.datastore:datastore-core:1.0.0"
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
-
 }
