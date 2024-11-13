@@ -9,4 +9,7 @@
     <string name="nombre_essay">Nombre essayé: x</string>
     <string name="indice">Indice</string>
     <string name="valider">Valider</string>
+    <string name="indice_motCryptex">indice_motCryptex</string>
+    <string name="entrez_le_mot">entrez_le_mot</string>
+    <string name="confirm">confirm</string>
 </resources>

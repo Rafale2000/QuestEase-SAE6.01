@@ -14,19 +14,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Questease"
-        android:usesCleartextTraffic="true"
-        >
-
-
-
-
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name="View.questease.motCryptexActivity"
+            android:exported="false" />
         <!-- Activities -->
         <activity
             android:name=".TrouveLeSon"
             android:exported="false" />
         <activity
             android:name=".PrixJuste"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Gyroscope"
             android:exported="false" />
