@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import androidx.appcompat.widget.Toolbar;
 import android.widget.TextView;
 
+import View.questease.MainActivity;
+import View.questease.SplashActivity;
 
 
 /**
