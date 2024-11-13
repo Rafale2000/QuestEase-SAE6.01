@@ -1,4 +1,4 @@
-package Service;
+package Service.PrixJusteAPI;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
