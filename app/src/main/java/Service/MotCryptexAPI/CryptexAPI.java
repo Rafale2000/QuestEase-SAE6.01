@@ -1,17 +1,16 @@
 package Service.MotCryptexAPI;
 
 import retrofit2.Call;
-import com.example.questease.Model.BDD.ChoseATrouverPrixJuste;
+
 import com.example.questease.Model.BDD.Indice;
 import com.example.questease.Model.BDD.MotCryptex;
 
 import java.util.List;
 
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-public interface MotCryptexAPI {
+public interface CryptexAPI {
     @GET("/chose")
     Call<List<MotCryptex>> getMotCryptexList();
 
