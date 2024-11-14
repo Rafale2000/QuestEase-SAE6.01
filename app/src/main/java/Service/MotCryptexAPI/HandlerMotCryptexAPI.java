@@ -3,11 +3,8 @@ package Service.MotCryptexAPI;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.questease.Model.BDD.ChoseATrouverPrixJuste;
 import com.example.questease.Model.BDD.MotCryptex;
 
-import Service.ChoseAPI;
-import Service.ChoseCallback;
 import Service.RetrofitInstance;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,7 +12,7 @@ import retrofit2.Response;
 
 public class HandlerMotCryptexAPI {
     private Context context;
-    MotCryptexAPI mcAPI = RetrofitInstance.getRetrofitInstance().create(MotCryptexAPI.class);
+    CryptexAPI mcAPI = RetrofitInstance.getRetrofitInstance().create(CryptexAPI.class);
 
     public HandlerMotCryptexAPI(Context context) {
         this.context = context;
