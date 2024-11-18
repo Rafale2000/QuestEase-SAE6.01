@@ -1,3 +1,4 @@
+/*
 package com.example.questease;
 
 import static android.content.ContentValues.TAG;
@@ -58,7 +59,10 @@ public class PrixJuste extends AppCompatActivity {
         });
     }
 
-    // Initialize the UI after retrieving the data
+    /**
+     * Initialize l'interface utilisateur et met en place des écouteurs pour certaines fonctionnalitées.
+     * @param chose
+
     private void initializeUI(ChoseATrouverPrixJuste chose) {
         numberOfAttempts = findViewById(R.id.tv_attempts);
         previousNumber = findViewById(R.id.tv_previous_number);
@@ -74,7 +78,7 @@ public class PrixJuste extends AppCompatActivity {
 
         numberOfAttempts.setText("Nombre de coups restant : " + controllerPrixJuste.getRemainingAttempts());
 
-        //TODO faire fonctionner
+        //TODO faire fonctionner le changement d'image du bouton
         Button btnSwitchInput = findViewById(R.id.btn_switch_input);
         btnSwitchInput.setOnClickListener(view -> {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -106,3 +110,4 @@ public class PrixJuste extends AppCompatActivity {
         });
     }
 }
+*/

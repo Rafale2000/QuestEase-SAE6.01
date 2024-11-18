@@ -1,4 +1,4 @@
-package com.example.questease;
+package View.questease;
 
 
 
@@ -9,10 +9,11 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.questease.R;
 
 import java.util.ArrayList;
 import java.util.List;

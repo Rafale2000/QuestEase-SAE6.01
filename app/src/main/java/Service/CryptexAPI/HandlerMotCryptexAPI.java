@@ -1,7 +1,8 @@
-package Service.MotCryptexAPI;
+package Service.CryptexAPI;
 
 import android.content.Context;
 import android.util.Log;
+
 
 import com.example.questease.Model.BDD.MotCryptex;
 
@@ -12,7 +13,7 @@ import retrofit2.Response;
 
 public class HandlerMotCryptexAPI {
     private Context context;
-    CryptexAPI mcAPI = RetrofitInstance.getRetrofitInstance().create(CryptexAPI.class);
+    MotCryptexAPI mcAPI = RetrofitInstance.getRetrofitInstance().create(MotCryptexAPI.class);
 
     public HandlerMotCryptexAPI(Context context) {
         this.context = context;

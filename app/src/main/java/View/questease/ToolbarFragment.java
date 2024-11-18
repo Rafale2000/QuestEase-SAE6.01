@@ -1,4 +1,4 @@
-package com.example.questease;
+package View.questease;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,10 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.appcompat.widget.Toolbar;
-import android.widget.TextView;
 
-import View.questease.MainActivity;
-import View.questease.SplashActivity;
+import com.example.questease.R;
 
 
 /**
