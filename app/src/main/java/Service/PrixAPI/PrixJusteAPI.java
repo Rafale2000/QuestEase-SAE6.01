@@ -1,4 +1,4 @@
-package Service.PrixJusteAPI;
+package Service.PrixAPI;
 
 public interface PrixJusteAPI {
 }
