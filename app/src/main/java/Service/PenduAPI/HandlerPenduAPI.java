@@ -1,4 +1,4 @@
-package Service.MotPendu;
+package Service.PenduAPI;
 
 public class HandlerPenduAPI {
 }
