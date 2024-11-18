@@ -1,4 +1,4 @@
-package Service.MotCryptexAPI;
+package Service.CryptexAPI;
 
 import retrofit2.Call;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
-public interface CryptexAPI {
+public interface MotCryptexAPI {
     @GET("/chose")
     Call<List<MotCryptex>> getMotCryptexList();
 

@@ -2,6 +2,7 @@ package View.questease;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -10,17 +11,22 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.questease.Model.BDD.Indice;
 import com.example.questease.Model.BDD.MotCryptex;
-import com.example.questease.PrixJusteActivity;
 import com.example.questease.R;
 import com.example.questease.Theme;
 
-import Service.MotCryptexAPI.HandlerMotCryptexAPI;
-import Service.MotCryptexAPI.MotCryptexCallback;
+import Service.CryptexAPI.HandlerMotCryptexAPI;
+import Service.CryptexAPI.MotCryptexCallback;
+import Service.IndiceAPI.HandleIndiceAPI;
+import Service.IndiceAPI.IndiceCallBack;
 
 public class motCryptexActivity extends Theme {
 
-    private MotCryptex Mc;
+    private MotCryptex mc;
+    private Indice ind;
+    public TextView textViewIndice;
+    private Button buttonConfirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +39,30 @@ public class motCryptexActivity extends Theme {
             return insets;
         });
 
+        TextView mot = (TextView) findViewById(R.id.input_word);
+        this.textViewIndice = findViewById(R.id.indice_motCryptex); //indice_mot_cryptex
+        this.buttonConfirm = findViewById(R.id.btn_confirm);
         HandlerMotCryptexAPI handlerMotCryptexAPI = new HandlerMotCryptexAPI(this);
         handlerMotCryptexAPI.GetRandomMotCryptex(new MotCryptexCallback() {
 
             @Override
-            public MotCryptex onMotCryptexReceived(MotCryptex motCryptex) {
-                Mc = motCryptex;
-                return motCryptex;
+            public void onMotCryptexReceived(MotCryptex motCryptex) {
+                mc = motCryptex;
+
+                HandleIndiceAPI handleIndiceAPI = new HandleIndiceAPI(motCryptexActivity.this);
+                handleIndiceAPI.GetIndice(motCryptex.getIndice().getId(), new IndiceCallBack() { //nul pointeur execption de mc
+
+                    @Override
+                    public void OnIndiceReceived(Indice indice) {
+                        textViewIndice.setText(indice.getHint());
+                    }
+
+                    @Override
+                    public void OnFailure(String errorMessage) {
+                        Log.e("PrixJuste", "Error retrieving data: " + errorMessage);
+                        Toast.makeText(motCryptexActivity.this, "Failed to load game data", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
             @Override
@@ -49,8 +72,20 @@ public class motCryptexActivity extends Theme {
             }
         });
 
-        TextView indice = (TextView) findViewById(R.id.indice_motCryptex);
-        TextView mot = (TextView) findViewById(R.id.input_word);
+        buttonConfirm.setOnClickListener(v -> {
+            if(this.textViewIndice.getText().toString() != null){
+                if(this.textViewIndice.getText().toString().equals(mc.getIndice().getHint())){
+                    Toast.makeText(this, "Bravo", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
+
+
+
+
+
 
     }
 
