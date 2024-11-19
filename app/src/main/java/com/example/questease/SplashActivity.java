@@ -1,12 +1,10 @@
-package View.questease;
+package com.example.questease;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.questease.R;
 
 public class SplashActivity extends AppCompatActivity {
     //salut
@@ -21,12 +19,12 @@ public class SplashActivity extends AppCompatActivity {
 
 
 
-        // Lancer MainActivity après 6 secondes
+
         new Handler().postDelayed(() -> {
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
-        }, 2000);  // 6 secondes de délai avant de charger MainActivity
+        }, 2000);
     }
 
 

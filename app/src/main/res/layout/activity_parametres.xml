@@ -68,7 +68,6 @@
             android:textSize="@dimen/text_size_large"
             android:textStyle="bold"/>
 
-
         <CheckBox
             android:id="@+id/protanopie"
             android:layout_width="363dp"

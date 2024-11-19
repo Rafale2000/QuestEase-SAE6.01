@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RotatingPictures">
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
+
+        <LinearLayout
+            android:id="@+id/bannerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/quitter"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="left"
+                android:src="@drawable/baseline_close_24"
+                android:scaleType="fitCenter"
+                app:tint="@android:color/black" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/Regles"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:alpha="0.5"
+                android:backgroundTint="#40FFFFFF"
+                android:text="Règles"
+                android:textColor="@android:color/black"
+                app:icon="@drawable/baseline_arrow_drop_down_24"
+                app:iconGravity="textStart"
+                app:iconTint="@android:color/black"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                app:iconPadding="8dp"
+                app:iconSize="25dp" />
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp">
+
+            </ImageView>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="50dp"
+            android:gravity="center">
+
+
+            <TextView
+                android:id="@+id/role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:textSize="@dimen/text_size_large"
+                android:text="Vous êtes le Libraire"
+                />
+            <TextView
+                android:id="@+id/consigne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textSize="@dimen/text_size_medium"
+                android:text="Alignez les étoiles"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/map1">
+
+            </ImageView>
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/map2">
+
+                </ImageView>
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/map3">
+
+                </ImageView>
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/map4">
+
+                </ImageView>
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/sendButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="?attr/colorButtonBackground"
+                android:text="envoyer à l'archéologue"
+                app:cornerRadius="10dp"
+                android:textColor="@color/black"
+                android:layout_gravity="end" />
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package View.questease;
+package com.example.questease;
 
 import android.app.Dialog;
 import android.content.SharedPreferences;
@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 
-import com.example.questease.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;

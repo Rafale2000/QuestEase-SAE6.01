@@ -1,6 +1,6 @@
 package Service;
 
-import android.content.Context;
+/*import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.TextView;
@@ -52,4 +52,4 @@ public class TextViewUpdater {
             }
         });
     }
-}
+}*/

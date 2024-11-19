@@ -1,4 +1,4 @@
-package View.questease;
+package com.example.questease;
 
 
 
@@ -13,10 +13,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.questease.R;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import View.questease.TrouveLeSon;
 
 public class Lobby extends Theme {
     private SharedPreferences sharedPreferences;

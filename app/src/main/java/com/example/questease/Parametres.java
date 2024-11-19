@@ -1,4 +1,4 @@
-    package View.questease;
+    package com.example.questease;
 
     import android.content.Intent;
     import android.content.SharedPreferences;
@@ -15,12 +15,13 @@
     import androidx.core.view.ViewCompat;
     import androidx.core.view.WindowInsetsCompat;
 
-    import com.example.questease.R;
     import com.google.android.material.materialswitch.MaterialSwitch;
 
     import java.util.ArrayList;
     import java.util.Arrays;
     import java.util.List;
+
+    import View.questease.Gyroscope;
 
     public class Parametres extends Theme {
         private SharedPreferences sharedPreferences;

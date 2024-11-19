@@ -1,4 +1,4 @@
-package Service;
+/*package Service;
 
 
 
@@ -18,5 +18,5 @@ public interface MotCryptexApi {
     @GET("/motcryptex/random")
     Call<MotCryptex> getRandom();
 }
-
+*/
 

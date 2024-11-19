@@ -1,4 +1,4 @@
-package Service;
+/*package Service;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -60,4 +60,4 @@ public class ChoseAdapteur extends RecyclerView.Adapter<ChoseAdapteur.LobbyViewH
             lobbyPlayer = itemView.findViewById(android.R.id.text2);
         }
     }
-}
+}*/

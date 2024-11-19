@@ -1,4 +1,4 @@
-package Service;
+/*package Service;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -61,5 +61,5 @@ public class MotCryptexAdapter extends RecyclerView.Adapter<MotCryptexAdapter.Lo
         }
     }
 }
-
+*/
 

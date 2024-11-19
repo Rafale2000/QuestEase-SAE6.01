@@ -1,4 +1,4 @@
-package Service;
+/*package Service;
 
 import android.content.Context;
 import android.util.Log;
@@ -40,3 +40,4 @@ public class HandlerObjectAPI {
         });
     }
 }
+*/

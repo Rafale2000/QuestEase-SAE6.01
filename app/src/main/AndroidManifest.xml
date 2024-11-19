@@ -16,6 +16,13 @@
         android:theme="@style/Theme.Questease"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".RotatingPictures2"
+            android:exported="false" />
+        <activity
+            android:name=".RotatingPictures"
+            android:exported="false" />
+
+        <activity
             android:name="View.questease.motCryptexActivity"
             android:exported="false" />
         <!-- Activities -->
@@ -50,6 +57,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".WebSocketService"
+            android:enabled="true"
+            android:exported="false"/>
+
+
     </application>
 
 </manifest>
