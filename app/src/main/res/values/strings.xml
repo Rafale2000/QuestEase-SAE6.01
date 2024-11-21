@@ -9,7 +9,13 @@
     <string name="nombre_essay">Nombre essayé: x</string>
     <string name="indice">Indice</string>
     <string name="valider">Valider</string>
-    <string name="indice_motCryptex">indice_motCryptex</string>
-    <string name="entrez_le_mot">entrez_le_mot</string>
+    <string name="indice_motCryptex">indice motCryptex</string>
+    <string name="entrez_le_mot">entrez le mot</string>
     <string name="confirm">confirm</string>
+    <string name="reset">effacer</string>
+    <string name="resolution_cryptex">Avez-vous résolu le cryptex ? Quel message y avez-vous trouvé ?</string>
+    <string name="nbr_coup_restant">Nombre de coups restant : %d</string>
+    <string name="nbr_essaye">Nombre essayé : %1$d - %2$s</string>
+
+
 </resources>
