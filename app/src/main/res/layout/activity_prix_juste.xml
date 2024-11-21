@@ -16,7 +16,10 @@
             android:id="@+id/btn_exit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/exit" />
+            android:text="@string/exit"
+            android:backgroundTint="?attr/colorButtonBackground"
+            android:textSize="@dimen/text_size_medium"
+            />
 
         <Space
             android:layout_width="0dp"
@@ -27,7 +30,9 @@
             android:id="@+id/btn_switch_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/change_input_selector" />
+            android:background="@drawable/change_input_selector"
+            android:backgroundTint="?attr/colorButtonBackground"
+            android:textSize="@dimen/text_size_medium"/>
     </LinearLayout>
 
     <TextView
@@ -36,7 +41,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/nbr_coup"
-        android:textSize="18sp" />
+        android:textSize="@dimen/text_size_medium"
+         />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,7 +56,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/indice" />
+            android:text="@string/indice"
+            android:textSize="@dimen/text_size_small"
+            />
 
         <ImageView
             android:id="@+id/image_view"
@@ -66,7 +74,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/entrez_un_nombre"
-        android:inputType="number" />
+        android:inputType="number"
+        android:textSize="@dimen/text_size_medium"/>
 
     <TextView
         android:id="@+id/tv_previous_number"
@@ -74,13 +83,48 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/nombre_essay"
-        android:textSize="18sp" />
+        android:textSize="@dimen/text_size_small_large" />
 
-    <Button
-        android:id="@+id/btn_valider"
-        android:layout_width="wrap_content"
+    <!-- Buttons for validation and reset -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/valider"
-        android:layout_gravity="center_horizontal" />
+        android:orientation="horizontal"
+        >
 
+        <Button
+            android:id="@+id/btn_valider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|left"
+            android:backgroundTint="?attr/colorButtonBackground"
+            android:text="@string/valider"
+            android:textSize="@dimen/text_size_medium"
+             />
+
+        <Button
+            android:id="@+id/btn_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reset"
+            android:layout_gravity="center"
+            android:backgroundTint="?attr/colorButtonBackground"
+            android:textSize="@dimen/text_size_medium"
+            />
+
+        <Button
+            android:id="@+id/btn_fleche"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|right"
+            android:background="@drawable/return_fleche"
+            android:drawableTint="?attr/colorButtonBackground" />
+    </LinearLayout>
+
+    <com.example.questease.Controller.DrawView
+        android:id="@+id/draw_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#9a9aa2" />
 </LinearLayout>
