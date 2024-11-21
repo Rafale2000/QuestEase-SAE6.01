@@ -28,6 +28,12 @@ public class motCryptexActivity extends Theme {
     private Indice ind;
     public TextView textViewIndice;
     private Button buttonConfirm;
+    private String title = "Comment jouer au jeu du Cryptex ?";
+    private String content =
+               "Trouvez le mot de passe du cryptex grâce à l'indice qui " +
+            "\n vous est donné. Une fois le cryptex ouvert, " +
+            "\n vous obtiendrez un indice vous permettant de" +
+            "\n compléter la chasse !";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +89,7 @@ public class motCryptexActivity extends Theme {
             }
         });
 
+        showTutorialPopup(title, content, findViewById(R.id.main));
 
 
 

@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context="View.questease.motCryptexActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,16 +15,49 @@
         android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent">
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Regles"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:alpha="0.5"
+            android:backgroundTint="#40FFFFFF"
+            android:text="Identifiez le son"
+            android:textColor="@android:color/black"
+            app:icon="@drawable/baseline_arrow_drop_down_24"
+            app:iconGravity="textStart"
+            app:iconTint="@android:color/black"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:iconPadding="8dp"
+            app:iconSize="25dp"
+            />
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <ImageView
+                android:id="@+id/quitter"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="left"
+                android:src="@drawable/baseline_close_24"
+                android:scaleType="fitCenter"
+                app:tint="@android:color/white" />
+        </androidx.appcompat.widget.Toolbar>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_exit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/exit" />
         </LinearLayout>
 
         <Space
@@ -36,11 +70,11 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/indice_motCryptex"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_size_medium"/>
 
         <Space
             android:layout_width="0dp"
-            android:layout_height="180dp" />
+            android:layout_height="60dp" />
 
         <TextView
             android:id="@+id/flavour_text"
@@ -48,17 +82,18 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Avez-vous résolu le cryptex ? Quel message y avez-vous trouvé ?"
-            android:textSize="18sp" />
+            android:textSize="@dimen/text_size_medium" />
 
         <Space
             android:layout_width="0dp"
-            android:layout_height="80dp" />
+            android:layout_height="60dp" />
 
         <EditText
             android:id="@+id/input_word"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/entrez_le_mot"
+            android:textSize="@dimen/text_size_medium"
             android:inputType="text" />
 
 
@@ -72,6 +107,8 @@
                 android:id="@+id/btn_confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="?attr/colorPrimary"
+                android:textSize="@dimen/text_size_medium"
                 android:text="@string/confirm" />
         </LinearLayout>
 
