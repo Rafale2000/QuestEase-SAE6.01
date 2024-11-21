@@ -23,26 +23,32 @@
             android:exported="false" />
 
         <activity
-            android:name="View.questease.motCryptexActivity"
-            android:exported="false" />
+            android:name="View.questease.MotCryptexActivity"
+            android:exported="true" />
         <!-- Activities -->
         <activity
-            android:name=".TrouveLeSon"
+            android:name="View.questease.TrouveLeSon"
             android:exported="false" />
         <activity
-            android:name=".PrixJuste"
+            android:name="View.questease.PrixJuste"
             android:exported="true" />
+
+
+        <activity android:name="View.questease.PrixJusteActivity"
+            android:exported="true"/>
+
+
         <activity
-            android:name=".Gyroscope"
+            android:name="View.questease.Gyroscope"
             android:exported="false" />
         <activity
-            android:name=".Searchlobby"
+            android:name="View.questease.Searchlobby"
             android:exported="false" />
         <activity
-            android:name=".Parametres"
+            android:name="View.questease.Parametres"
             android:exported="false" />
         <activity
-            android:name=".Lobby"
+            android:name="View.questease.Lobby"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
