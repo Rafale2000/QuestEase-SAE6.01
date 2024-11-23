@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.button.MaterialButton
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="290dp"
+    android:layout_height="100dp"
+    android:backgroundTint="?attr/colorButtonBackground2"
+    android:text="Default Lobby Name"
+    android:textAlignment="center"
+    android:textColor="?attr/colorButtonText"
+    android:textSize="@dimen/text_size_large"
+    android:textStyle="bold|italic"
+    app:cornerRadius="24dp"
+    app:icon="@drawable/baseline_person_24"
+    app:iconPadding="0dp"
+    app:iconSize="40dp"
+    app:iconTint="@android:color/black" />

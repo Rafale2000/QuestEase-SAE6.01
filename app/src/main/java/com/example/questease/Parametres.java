@@ -44,14 +44,14 @@
                 v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
                 return insets;
             });
-            Button gyroscope = findViewById(R.id.gyroscope);
+            /*Button gyroscope = findViewById(R.id.gyroscope);
             gyroscope.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(Parametres.this, Gyroscope.class);
                     startActivity(intent);
                 }
-            });
+            });*/
             //elements a taille variable
             TextView colorSampleText = findViewById(R.id.colorSamplesText);
             TextView dyslexieText = findViewById(R.id.DyslexieText);
@@ -275,7 +275,7 @@
             }
         }
 
-        /*@Override
+        @Override
         protected void onRestart() {
             super.onRestart();
             if (!isCreated) {
@@ -286,5 +286,5 @@
         protected void onPause(){
             super.onPause();
             this.isCreated = false;
-        }*/
+        }
     }

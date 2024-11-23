@@ -19,7 +19,6 @@ public class WebSocketService extends Service {
     private WebSocketClient webSocketClient;
     private final IBinder binder = new LocalBinder();
 
-    // Permet aux activités de se connecter au Service
     public class LocalBinder extends Binder {
         public WebSocketService getService() {
             return WebSocketService.this;
@@ -39,7 +38,7 @@ public class WebSocketService extends Service {
 
     private void connectWebSocket() {
         try {
-            URI uri = new URI("ws://192.168.118.156:8080/ws");
+            URI uri = new URI("ws://192.168.118.206:8080/ws");
             webSocketClient = new WebSocketClient(uri) {
                 @Override
                 public void onOpen(ServerHandshake handshakedata) {
@@ -50,8 +49,8 @@ public class WebSocketService extends Service {
                     Log.d(TAG, "Message received: " + message);
                     Intent intent = new Intent("WebSocketMessage");
                     intent.putExtra("message", message);
-                    Log.d("WebSocketService", "Broadcast sent with message: " + message);
                     sendBroadcast(intent);
+                    Log.d("WebSocketService", "Broadcast sent with message: " + message);
                 }
 
                 @Override
