@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 
 
@@ -25,7 +26,7 @@ import java.util.List;
 
 
 
-public class Theme extends AppCompatActivity {
+public abstract class Theme extends AppCompatActivity {
     public void ApplyParameters(SharedPreferences sharedPreferences){
         //Protanomalie = 1
         //Protanopie = 2
@@ -110,15 +111,15 @@ public class Theme extends AppCompatActivity {
         }
     }
     public void showTutorialPopup(String title, String content, ViewGroup view) {
-
         RenderEffect blurEffect = RenderEffect.createBlurEffect(
                 10, 10, Shader.TileMode.CLAMP);
         view.setRenderEffect(blurEffect);
 
-        view.setRenderEffect(blurEffect);
         Dialog tutorialDialog = new Dialog(this);
         tutorialDialog.setContentView(R.layout.popuprules);
         tutorialDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        tutorialDialog.setCanceledOnTouchOutside(true);
+        tutorialDialog.setOnCancelListener(dialog -> view.setRenderEffect(null));
         FloatingActionButton closeButton = tutorialDialog.findViewById(R.id.closeButton);
         closeButton.setOnClickListener(v -> {
             tutorialDialog.dismiss();
@@ -130,5 +131,7 @@ public class Theme extends AppCompatActivity {
         cardContent.setText(content);
         tutorialDialog.show();
     }
+
+
 
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/main"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -17,7 +16,7 @@
         app:cardElevation="8dp"
         android:padding="16dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/closeButton"
+        app:layout_constraintBottom_toTopOf="@id/validateButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_chainStyle="packed">
@@ -32,7 +31,8 @@
                 android:id="@+id/cardTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Règles du Jeu"
+                android:layout_marginTop="10dp"
+                android:text="Il vous faut un nom"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 android:paddingBottom="8dp"
                 android:gravity="center"
@@ -42,26 +42,56 @@
                 android:id="@+id/cardContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Le jeu est séparé en deux parties :\n\n - Le premier joueur est l'auditeur, il doit appuyer sur un bouton pour entendre un son et le reconnaître.\n\n - Le rédacteur recevra des messages de l'auditeur et devra entrer dans son terminal de quel élément provient le son."
+                android:text="Pour pouvoir créer ou rejoindre un lobby il vous faut un pseudo"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:textColor="@android:color/black"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Entrez votre nom"
+                app:endIconMode="clear_text"
+                app:boxStrokeColor="@color/black"
+                app:boxStrokeWidth="2dp"
+                app:boxStrokeWidthFocused="3dp"
+                android:layout_marginBottom="10dp"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textInputEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                     />
+            </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/closeButton"
-        android:layout_width="56dp"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/validateButton"
+        android:layout_width="300dp"
         android:layout_height="56dp"
-        android:layout_marginTop="4dp"
-        android:src="@drawable/baseline_close_24"
-        android:backgroundTint="@android:color/white"
-        app:tint="@android:color/black"
+        android:layout_marginTop="16dp"
+        android:text="Valider"
+        android:textAllCaps="true"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        android:backgroundTint="?attr/colorButtonBackground"
+        app:cornerRadius="12dp"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        app:iconTint="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/card"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="Fermer" />
+        android:contentDescription="Valider" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
