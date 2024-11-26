@@ -1,11 +1,9 @@
 package com.example.questease;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,12 +19,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import View.questease.Gyroscope;
 
 public class Parametres extends Theme {
     private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "QuestEasePrefs";
     private boolean isCreated = false;
+    //valeur string en constante
+    private static final String ASSISTANCE_VOCALE_STRING = "assistance_vocale";
+    private static final String DALTONISME_STRING = "daltonisme";
+    private static final String DALTONISME_VALEUR_STRING = "Valeur de daltonisme: ";
+    private static final String DYSLEXIE_STRING = "dyslexie";
+    private static final String TAILLE_TEXTE_STRING = "tailleTexte";
+    private static final String CONTRASTE_ELEVE_STRING = "contrasteEleve";
+    private static final String SHARED_PREFS_STRING = "SharedPreferences";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +74,10 @@ public class Parametres extends Theme {
                 tailleTexteTexte
         ));
 
-        if (sharedPreferences.getBoolean("tailleTexte", false)) {
+        if (sharedPreferences.getBoolean(TAILLE_TEXTE_STRING, false)) {
             adjustTextSize(views);
         }
-        if (sharedPreferences.getBoolean("dyslexie", false)) {
+        if (sharedPreferences.getBoolean(DYSLEXIE_STRING, false)) {
             applyFont(views);
         }
         deuteranomalie.setVisibility(View.GONE);
@@ -84,58 +89,80 @@ public class Parametres extends Theme {
         MaterialSwitch contrasteEleve = findViewById(R.id.contrasteEleveSwitch);
         MaterialSwitch vocal = findViewById(R.id.poled);
 
-        vocal.setChecked(sharedPreferences.getBoolean("assistance_vocale", false));
-        contrasteEleve.setChecked(sharedPreferences.getBoolean("contrasteEleve", false));
-        dyslexie.setChecked(sharedPreferences.getBoolean("dyslexie", false));
-        daltonisme.setChecked(sharedPreferences.getInt("daltonisme", 0) != 0);
-        if (sharedPreferences.getInt("daltonisme", 0) != 0) {
+        vocal.setChecked(sharedPreferences.getBoolean(ASSISTANCE_VOCALE_STRING, false));
+        contrasteEleve.setChecked(sharedPreferences.getBoolean(CONTRASTE_ELEVE_STRING, false));
+        dyslexie.setChecked(sharedPreferences.getBoolean(DYSLEXIE_STRING, false));
+        daltonisme.setChecked(sharedPreferences.getInt(DALTONISME_STRING, 0) != 0);
+        if (sharedPreferences.getInt(DALTONISME_STRING, 0) != 0 && sharedPreferences.getInt(DALTONISME_STRING, 0) != 5) {
             deuteranomalie.setVisibility(View.VISIBLE);
             deuteranopie.setVisibility(View.VISIBLE);
             protanomalie.setVisibility(View.VISIBLE);
             protanopie.setVisibility(View.VISIBLE);
         }
-        Log.e("SharedPreferences", "Valeur de daltonisme: " + sharedPreferences.getInt("daltonisme", 0));
-        tailleTexte.setChecked(sharedPreferences.getBoolean("tailleTexte", false));
-        protanomalie.setChecked(sharedPreferences.getInt("daltonisme", 0) == 1);
-        protanopie.setChecked(sharedPreferences.getInt("daltonisme", 0) == 2);
-        deuteranomalie.setChecked(sharedPreferences.getInt("daltonisme", 0) == 3);
-        deuteranopie.setChecked(sharedPreferences.getInt("daltonisme", 0) == 4);
+        Log.e(SHARED_PREFS_STRING, DALTONISME_VALEUR_STRING + sharedPreferences.getInt(DALTONISME_STRING, 0));
+        tailleTexte.setChecked(sharedPreferences.getBoolean(TAILLE_TEXTE_STRING, false));
+        protanomalie.setChecked(sharedPreferences.getInt(DALTONISME_STRING, 0) == 1);
+        protanopie.setChecked(sharedPreferences.getInt(DALTONISME_STRING, 0) == 2);
+        deuteranomalie.setChecked(sharedPreferences.getInt(DALTONISME_STRING, 0) == 3);
+        deuteranopie.setChecked(sharedPreferences.getInt(DALTONISME_STRING, 0) == 4);
+        contrasteEleve.setChecked(sharedPreferences.getInt(DALTONISME_STRING, 0) == 5);
 
-        initializeBooleanPreference("tailleTexte", false);
-        initializeBooleanPreference("assistance_vocale", false);
-        initializeBooleanPreference("contrasteEleve", false);
-        initializeBooleanPreference("dyslexie", false);
-        initializePreference("daltonisme", 0);
 
-        LinearLayout layout_tailleTexte = findViewById(R.id.tailleTexte);
-        LinearLayout layout_vocal = findViewById(R.id.layout_poled);
-        LinearLayout layout_dyslexie = findViewById(R.id.Dyslexie);
-        LinearLayout layout_contrasteEleve = findViewById(R.id.contrasteEleve);
+        initializeBooleanPreference(TAILLE_TEXTE_STRING, false);
+        initializeBooleanPreference(ASSISTANCE_VOCALE_STRING, false);
+        initializeBooleanPreference(CONTRASTE_ELEVE_STRING, false);
+        initializeBooleanPreference(DYSLEXIE_STRING, false);
+        initializePreference(DALTONISME_STRING, 0);
 
-        layout_tailleTexte.setOnClickListener(view -> tailleTexte.performClick());
-        layout_contrasteEleve.setOnClickListener(view -> contrasteEleve.performClick());
-        layout_vocal.setOnClickListener(view -> vocal.performClick());
-        layout_dyslexie.setOnClickListener(view -> dyslexie.performClick());
+        LinearLayout layoutTailleTexte = findViewById(R.id.tailleTexte);
+        LinearLayout layoutVocal = findViewById(R.id.layout_poled);
+        LinearLayout layoutDyslexie = findViewById(R.id.Dyslexie);
+        LinearLayout layoutContrasteEleve = findViewById(R.id.contrasteEleve);
+
+        layoutTailleTexte.setOnClickListener(view -> tailleTexte.performClick());
+        layoutContrasteEleve.setOnClickListener(view -> contrasteEleve.performClick());
+        layoutVocal.setOnClickListener(view -> vocal.performClick());
+        layoutDyslexie.setOnClickListener(view -> dyslexie.performClick());
 
         vocal.setOnClickListener(view -> {
             boolean isChecked = vocal.isChecked();
-            sharedPreferences.edit().putBoolean("assistance_vocale", isChecked).apply();
+            sharedPreferences.edit().putBoolean(ASSISTANCE_VOCALE_STRING, isChecked).apply();
         });
 
         contrasteEleve.setOnClickListener(view -> {
-            boolean isChecked = contrasteEleve.isChecked();
-            sharedPreferences.edit().putBoolean("contrasteEleve", isChecked).apply();
+            Log.i(TAILLE_TEXTE_STRING, String.valueOf(sharedPreferences.getInt(DALTONISME_STRING, 0)));
+            //enlève le param pour le daltonisme
+            if (contrasteEleve.isChecked()) {
+                if (daltonisme.isChecked()) {
+                    daltonisme.performClick();
+                }
+                sharedPreferences.edit().putInt(DALTONISME_STRING, 5).apply();
+
+            } else {
+                sharedPreferences.edit().putInt(DALTONISME_STRING, 0).apply();
+
+            }
+            recreate();
         });
 
+
+        dyslexie.setOnClickListener(view -> {
+            boolean isChecked = dyslexie.isChecked();
+            sharedPreferences.edit().putBoolean(DYSLEXIE_STRING, isChecked).apply();
+            recreate();
+        });
+
+
         tailleTexte.setOnClickListener(view -> {
+            Log.i("taille ta grand mère", "change taille ");
             boolean isChecked = tailleTexte.isChecked();
-            sharedPreferences.edit().putBoolean("tailleTexte", isChecked).apply();
+            sharedPreferences.edit().putBoolean(TAILLE_TEXTE_STRING, isChecked).apply();
             recreate();
         });
 
         dyslexie.setOnClickListener(view -> {
             boolean isChecked = dyslexie.isChecked();
-            sharedPreferences.edit().putBoolean("dyslexie", isChecked).apply();
+            sharedPreferences.edit().putBoolean(DYSLEXIE_STRING, isChecked).apply();
             recreate();
         });
 
@@ -145,7 +172,8 @@ public class Parametres extends Theme {
                 deuteranopie.setVisibility(View.VISIBLE);
                 protanomalie.setVisibility(View.VISIBLE);
                 protanopie.setVisibility(View.VISIBLE);
-                Log.d("Daltonisme", "Case daltonisme cochee");
+                contrasteEleve.setChecked(false);
+                Log.d(DALTONISME_STRING, "Case daltonisme cochee");
             } else {
                 deuteranomalie.setVisibility(View.GONE);
                 deuteranomalie.setChecked(false);
@@ -155,65 +183,67 @@ public class Parametres extends Theme {
                 protanomalie.setChecked(false);
                 protanopie.setVisibility(View.GONE);
                 protanopie.setChecked(false);
-                sharedPreferences.edit().putInt("daltonisme", 0).apply();
+                sharedPreferences.edit().putInt(DALTONISME_STRING, 0).apply();
                 recreate();
             }
         });
 
         protanomalie.setOnClickListener(view -> {
             if (protanomalie.isChecked()) {
-                sharedPreferences.edit().putInt("daltonisme", 1).apply();
+                sharedPreferences.edit().putInt(DALTONISME_STRING, 1).apply();
                 deuteranomalie.setChecked(false);
                 deuteranopie.setChecked(false);
                 protanopie.setChecked(false);
-                recreate();
             } else {
-                sharedPreferences.edit().putInt("daltonisme", 0).apply();
-                recreate();
+                sharedPreferences.edit().putInt(DALTONISME_STRING, 0).apply();
             }
-            Log.e("SharedPreferences", "Valeur de daltonisme: " + sharedPreferences.getInt("daltonisme", 0));
+            recreate();
+            Log.e(SHARED_PREFS_STRING, DALTONISME_VALEUR_STRING + sharedPreferences.getInt(DALTONISME_STRING, 0));
         });
 
         protanopie.setOnClickListener(view -> {
             if (protanopie.isChecked()) {
-                sharedPreferences.edit().putInt("daltonisme", 2).apply();
+                sharedPreferences.edit().putInt(DALTONISME_STRING, 2).apply();
                 deuteranomalie.setChecked(false);
                 deuteranopie.setChecked(false);
                 protanomalie.setChecked(false);
-                recreate();
+
             } else {
-                sharedPreferences.edit().putInt("daltonisme", 0).apply();
-                recreate();
+                sharedPreferences.edit().putInt(DALTONISME_STRING, 0).apply();
+
             }
-            Log.e("SharedPreferences", "Valeur de daltonisme: " + sharedPreferences.getInt("daltonisme", 0));
+            recreate();
+            Log.e(SHARED_PREFS_STRING, DALTONISME_VALEUR_STRING + sharedPreferences.getInt(DALTONISME_STRING, 0));
         });
 
         deuteranomalie.setOnClickListener(view -> {
             if (deuteranomalie.isChecked()) {
-                sharedPreferences.edit().putInt("daltonisme", 3).apply();
+                sharedPreferences.edit().putInt(DALTONISME_STRING, 3).apply();
                 deuteranopie.setChecked(false);
                 protanomalie.setChecked(false);
                 protanopie.setChecked(false);
-                recreate();
+
             } else {
-                sharedPreferences.edit().putInt("daltonisme", 0).apply();
-                recreate();
+                sharedPreferences.edit().putInt(DALTONISME_STRING, 0).apply();
+
             }
-            Log.e("SharedPreferences", "Valeur de daltonisme: " + sharedPreferences.getInt("daltonisme", 0));
+            recreate();
+            Log.e(SHARED_PREFS_STRING, DALTONISME_VALEUR_STRING + sharedPreferences.getInt(DALTONISME_STRING, 0));
         });
 
         deuteranopie.setOnClickListener(view -> {
             if (deuteranopie.isChecked()) {
-                sharedPreferences.edit().putInt("daltonisme", 4).apply();
+                sharedPreferences.edit().putInt(DALTONISME_STRING, 4).apply();
                 protanomalie.setChecked(false);
                 deuteranomalie.setChecked(false);
                 protanopie.setChecked(false);
-                recreate();
+
             } else {
-                sharedPreferences.edit().putInt("daltonisme", 0).apply();
-                recreate();
+                sharedPreferences.edit().putInt(DALTONISME_STRING, 0).apply();
+
             }
-            Log.e("SharedPreferences", "Valeur de daltonisme: " + sharedPreferences.getInt("daltonisme", 0));
+            recreate();
+            Log.e(SHARED_PREFS_STRING, DALTONISME_VALEUR_STRING + sharedPreferences.getInt(DALTONISME_STRING, 0));
         });
     }
 
