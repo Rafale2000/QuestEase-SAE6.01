@@ -1,4 +1,4 @@
-package com.example.questease;
+package com.example.questease.TestUnitaire;
 
 import com.example.questease.Model.Jeu.PrixJusteJeu;
 

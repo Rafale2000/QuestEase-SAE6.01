@@ -21,6 +21,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "io.cucumber.android.runner.CucumberAndroidJUnitRunner"
+        testInstrumentationRunnerArguments(optionsAnnotationPackage: "app.java.com.example.questease.TestIntegration")
     }
 
     buildTypes {
@@ -48,6 +50,7 @@ dependencies {
 
     implementation libs.games.activity
     androidTestImplementation libs.junit.jupiter
+    androidTestImplementation "io.cucumber:cucumber-android:7.20.0"
     def fragment_version = "1.8.3"
 
     // Java language implementation
@@ -73,4 +76,7 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-gson:2.9.0"
 
+    testImplementation 'info.cukes:cucumber-java:1.2.5'
+    testImplementation 'info.cukes:cucumber-junit:1.2.5'
+    testImplementation 'info.cukes:cucumber-core:1.2.5'
 }
