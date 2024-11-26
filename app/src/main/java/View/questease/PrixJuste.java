@@ -1,4 +1,4 @@
-/*package View.questease;
+package View.questease;
 
 import static android.content.ContentValues.TAG;
 
@@ -28,7 +28,7 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
 
 import Service.ChoseAPI.ChoseCallBack;
-import Service.ChoseHandler;
+import Service.ChoseAPI.ChoseHandler;
 
 
 public class PrixJuste extends Theme {
@@ -103,7 +103,7 @@ public class PrixJuste extends Theme {
     /**
      * Initialize l'interface utilisateur et met en place des écouteurs pour certaines fonctionnalitées.
      * @param chose
-
+    */
     private void initializeUI(ChoseATrouverPrixJuste chose) {
         // Initialisation des TextViews
         TextView numberOfAttempts = findViewById(R.id.tv_attempts);
@@ -174,4 +174,4 @@ public class PrixJuste extends Theme {
 
 
 
-}*/
+}
