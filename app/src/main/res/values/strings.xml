@@ -17,6 +17,13 @@
     <string name="nbr_coup_restant">Nombre de coups restant : %d</string>
     <string name="nbr_essaye">Nombre essayé : %1$d - %2$s</string>
     <string name="error">Erreur</string>
+    <string name="deuteranomalie">Deuteranomalie</string>
+    <string name="protanomalie">Protanomalie</string>
+    <string name="protanopie">Protanopie</string>
+    <string name="dyslexie">Dyslexie</string>
+    <string name="contraste_eleve">Contraste eleve</string>
+    <string name="assistance_vocale">Assistance vocale</string>
+    <string name="taille_texte">Taille texte</string>
 
 
 </resources>
