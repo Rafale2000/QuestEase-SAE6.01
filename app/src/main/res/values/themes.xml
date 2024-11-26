@@ -79,4 +79,23 @@
         <item name="bordercolor">#5C5C5C</item> <!-- Couleur de la bordure pour mieux contraster (gris moyen) -->
     </style>
 
+    <style name="Theme.Questease.ContrasteEleve" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Couleurs principales pour le mode clair adaptées à la protanopie avec contraste élevé -->
+        <item name="colorPrimary">#0033CC</item> <!-- Couleur principale (bleu foncé pour fort contraste) -->
+        <item name="colorPrimaryVariant">#001A66</item> <!-- Variante principale encore plus sombre -->
+        <item name="colorOnPrimary">#FFFFFF</item> <!-- Texte sur fond coloré (blanc pour fort contraste) -->
+
+        <item name="colorButtonBackground">#FF9900</item> <!-- Couleur du bouton personnalisé (orange vif pour contraste élevé) -->
+        <item name="colorButtonBackground2">#B30000</item> <!-- Couleur secondaire pour les boutons (rouge foncé contrasté) -->
+        <item name="colorButtonText">#FFFFFF</item> <!-- Texte du bouton (blanc pour lisibilité) -->
+
+        <item name="colorProfileBackground">#000000</item> <!-- Couleur de fond pour les profils (noir pur pour contraste maximal) -->
+
+        <item name="iconcolor">#FFFFFF</item> <!-- Couleur des icônes (blanc sur fond sombre pour fort contraste) -->
+        <item name="texte">#FFFFFF</item> <!-- Couleur du texte (blanc pour fond sombre) -->
+
+        <item name="bordercolor">#FFFF00</item> <!-- Couleur de la bordure (jaune vif pour fort contraste avec les fonds) -->
+    </style>
+
+
 </resources>
