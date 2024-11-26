@@ -1,69 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:padding="16dp"
-        app:cardBackgroundColor="#9B1111"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="8dp"
-        app:layout_constraintBottom_toTopOf="@id/closeButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="10dp"
-            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/cardTitle"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:padding="16dp"
+            app:cardBackgroundColor="#f6f6f6"
+            app:strokeColor="#e31613"
+            app:strokeWidth="4dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="10dp"
+                android:orientation="vertical">
 
-                android:background="#9B1111"
-                android:gravity="center"
-                android:paddingBottom="8dp"
-                android:text="@string/error"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-                android:textColor="@android:color/black" />
 
-            <TextView
-                android:id="@+id/cardContent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#9B1111"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:text="Il y a eu problème"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                android:textColor="@android:color/black" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/cardTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-    </com.google.android.material.card.MaterialCardView>
+                    android:gravity="center"
+                    android:paddingBottom="8dp"
+                    android:text="@string/erreur_serveur"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:textColor="@android:color/black"
+                    app:drawableStartCompat="@drawable/error" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/closeButton"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="4dp"
-        android:src="@drawable/baseline_close_24"
-        android:backgroundTint="@android:color/white"
-        app:tint="@android:color/black"
-        app:layout_constraintTop_toBottomOf="@id/card"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="Fermer" />
+                <TextView
+                    android:id="@+id/cardContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#0000"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/connexion_impossible"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    android:textColor="@android:color/black" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/closeButton"
+                    android:layout_width="match_parent"
+                    app:cornerRadius="7dp"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="4dp"
+                    app:strokeWidth="3dp"
+                    android:contentDescription="@string/fermer"
+                    android:text="@string/fermer"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card"
+                    />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
