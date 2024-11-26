@@ -1,13 +1,12 @@
-/*
-package com.example.questease;
+/*package View.questease;
 
 import static android.content.ContentValues.TAG;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,39 +14,48 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
 
 import com.example.questease.Controller.ControllerPrixJuste;
+import com.example.questease.Controller.DrawView;
 import com.example.questease.Model.BDD.ChoseATrouverPrixJuste;
 import com.example.questease.Model.Jeu.PrixJusteJeu;
+import com.example.questease.R;
+import com.example.questease.Theme;
+import com.google.mlkit.vision.common.InputImage;
+import com.google.mlkit.vision.text.TextRecognition;
+import com.google.mlkit.vision.text.TextRecognizer;
+import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
-import Service.HandlerObjectAPI;
-import Service.ChoseCallback;
 
-public class PrixJuste extends AppCompatActivity {
-    private TextView numberOfAttempts, previousNumber, indice;
-    private EditText inputNumber;
-    private Button btnExit, btnValider;
-    private PrixJusteJeu prixJuste;
+import Service.ChoseAPI.ChoseCallBack;
+import Service.ChoseHandler;
+
+
+public class PrixJuste extends Theme {
+    private PrixJusteJeu intancePrixJuste;
     private ControllerPrixJuste controllerPrixJuste;
-    private ImageView imageView;
+    private DrawView drawView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prix_juste);
 
-        // Fetch the random object and start the game
-        HandlerObjectAPI handlerObjectAPI = new HandlerObjectAPI(this);
-        handlerObjectAPI.GetRandomChose(new ChoseCallback() {
+        String titre = "règle du prix juste";
+        String contenue = "Un indice est une image s'affiche, il faut trouver le bon prix";
+        showTutorialPopup(titre, contenue, findViewById(R.id.main));
+
+        drawView = findViewById(R.id.draw_view);
+        Button bnt = findViewById(R.id.btn_reset);
+        bnt.setOnClickListener(view -> drawView.clearCanvas());
+
+
+        ChoseHandler handlerObjectAPI = new ChoseHandler(this);
+        handlerObjectAPI.GetRandomChose(new ChoseCallBack() {
             @Override
             public void onChoseReceived(ChoseATrouverPrixJuste chose) {
-                prixJuste = new PrixJusteJeu(10, chose.getValeur());
-                controllerPrixJuste = new ControllerPrixJuste(prixJuste);
+                intancePrixJuste = new PrixJusteJeu(10, chose.getValeur());
+                controllerPrixJuste = new ControllerPrixJuste(intancePrixJuste);
                 initializeUI(chose);
             }
 
@@ -57,6 +65,39 @@ public class PrixJuste extends AppCompatActivity {
                 Toast.makeText(PrixJuste.this, "Failed to load game data", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+    }
+
+    private void recognizeHandwrittenText(EditText editText) {
+        // Capture content from DrawView
+        Bitmap bitmap = Bitmap.createBitmap(drawView.getWidth(), drawView.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawView.draw(canvas);
+
+        InputImage image = InputImage.fromBitmap(bitmap, 0);
+
+        // Initialize TextRecognizer
+        TextRecognizer textRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
+
+        textRecognizer.process(image)
+                .addOnSuccessListener(visionText -> {
+                    String recognizedText = visionText.getText();
+
+
+                    if (editText != null || !visionText.getText().isEmpty()) {
+                        editText.setText(recognizedText);
+                    }
+
+
+
+                    Log.d("MLKit", "Recognized Text: " + recognizedText);
+                    Toast.makeText(this, "Text: " + recognizedText, Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("MLKit", "Text recognition failed", e);
+                    Toast.makeText(this, "Failed to recognize text.", Toast.LENGTH_SHORT).show();
+                });
     }
 
     /**
@@ -64,22 +105,34 @@ public class PrixJuste extends AppCompatActivity {
      * @param chose
 
     private void initializeUI(ChoseATrouverPrixJuste chose) {
-        numberOfAttempts = findViewById(R.id.tv_attempts);
-        previousNumber = findViewById(R.id.tv_previous_number);
-        inputNumber = findViewById(R.id.input_number);
-        btnExit = findViewById(R.id.btn_exit);
-        indice = findViewById(R.id.tv_hint);
+        // Initialisation des TextViews
+        TextView numberOfAttempts = findViewById(R.id.tv_attempts);
+        TextView previousNumber = findViewById(R.id.tv_previous_number);
+        TextView indice = findViewById(R.id.tv_hint);
+
+        // Configuration de l'indice
         indice.setText(chose.getNom());
-        btnValider = findViewById(R.id.btn_valider);
-        //path de l'image
-        imageView = findViewById(R.id.image_view);
-        Log.d(TAG, chose.getCheminImage());
-        imageView.setImageResource(getResources().getIdentifier(chose.getCheminImage(), "drawable", getPackageName()));
 
-        numberOfAttempts.setText("Nombre de coups restant : " + controllerPrixJuste.getRemainingAttempts());
-
-        //TODO faire fonctionner le changement d'image du bouton
+        // Initialisation des Buttons
+        Button btnValider = findViewById(R.id.btn_valider);
         Button btnSwitchInput = findViewById(R.id.btn_switch_input);
+        Button fleche = findViewById(R.id.btn_fleche);
+
+        // Initialisation de l'EditText
+        EditText inputNumber = findViewById(R.id.input_number);
+
+        // Log de vérification pour le chemin de l'image
+        Log.d(TAG, chose.getCheminImage());
+
+        // Initialisation de l'ImageView et chargement de l'image
+        ImageView imageView = findViewById(R.id.image_view);
+        int imageResId = getResources().getIdentifier(chose.getCheminImage(), "drawable", getPackageName());
+        imageView.setImageResource(imageResId);
+
+        // Affichage du nombre de tentatives restantes
+        numberOfAttempts.setText(getString(R.string.nbr_coup_restant, controllerPrixJuste.getRemainingAttempts()));
+
+        // Bouton pour changer de méthode de saisie
         btnSwitchInput.setOnClickListener(view -> {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             if (imm != null) {
@@ -87,19 +140,28 @@ public class PrixJuste extends AppCompatActivity {
             }
         });
 
+        // Bouton pour reconnaître le texte manuscrit
+        fleche.setOnClickListener(view -> recognizeHandwrittenText(inputNumber));
 
-
+        // Bouton pour valider l'entrée utilisateur
         btnValider.setOnClickListener(view -> {
-            String userInput = inputNumber.getText().toString();
+            String userInput = inputNumber.getText().toString().trim();
             if (!userInput.isEmpty()) {
                 try {
+                    // Conversion de l'entrée utilisateur en entier
                     int guess = Integer.parseInt(userInput);
+
+                    // Vérification du nombre et mise à jour de l'interface
                     String result = controllerPrixJuste.CheckGuess(guess);
-                    numberOfAttempts.setText("Nombre de coups restant : " + controllerPrixJuste.getRemainingAttempts());
-                    previousNumber.setText("Nombre essayé : " + guess + " - " + result);
+                    numberOfAttempts.setText(getString(R.string.nbr_coup_restant, controllerPrixJuste.getRemainingAttempts()));
+                    previousNumber.setText(getString(R.string.nbr_essaye, guess, result));
+
+
+                    // Réinitialisation du champ de saisie
                     inputNumber.setText("");
-                    //faire en sorte d'envoyer la proposition à l'autre joueur
-                    //puis récup la sienne en la testant
+                    drawView.clearCanvas();
+
+                    // TODO : Envoyer la proposition à l'autre joueur et gérer sa réponse
 
                 } catch (NumberFormatException e) {
                     Toast.makeText(PrixJuste.this, "Veuillez entrer un nombre valide.", Toast.LENGTH_SHORT).show();
@@ -109,5 +171,7 @@ public class PrixJuste extends AppCompatActivity {
             }
         });
     }
-}
-*/
+
+
+
+}*/

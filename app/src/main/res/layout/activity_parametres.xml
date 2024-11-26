@@ -7,12 +7,14 @@
     android:layout_height="match_parent"
     app:layout_marginBaseline="50dp"
     tools:context=".Parametres">
+
     <fragment
         android:id="@+id/toolbar_fragment"
         android:name="com.example.questease.ToolbarFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints" />
+
     <LinearLayout
         android:id="@+id/checkboxes_daltonisme"
         android:layout_width="wrap_content"
@@ -20,6 +22,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar_fragment"
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
+
         <CheckBox
             android:id="@+id/checkbox_parent"
             android:layout_width="match_parent"
@@ -29,55 +32,53 @@
             android:drawableStart="@drawable/baseline_invert_colors_off_24"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
-
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
-        android:id="@+id/checkbox_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/checkbox_parent">
+            android:id="@+id/checkbox_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/checkbox_parent">
 
-        <CheckBox
-            android:id="@+id/deuteranomalie"
-            android:layout_width="360dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="40dp"
-            android:text="Deutéranomalie"
-            android:textSize="@dimen/text_size_large"
-            android:textStyle="bold"/>
+            <CheckBox
+                android:id="@+id/deuteranomalie"
+                android:layout_width="360dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="40dp"
+                android:text="Deuteranomalie"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold" />
 
-        <CheckBox
+            <CheckBox
                 android:id="@+id/deuteranopie"
-            android:layout_width="358dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:text="Deutéranopie"
-            android:textSize="@dimen/text_size_large"
-            android:textStyle="bold"/>
+                android:layout_width="358dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:text="Deuteranopie"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold" />
 
-        <CheckBox
-            android:id="@+id/protanomalie"
-            android:layout_width="360dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:text="Protanomalie"
-            android:textSize="@dimen/text_size_large"
-            android:textStyle="bold"/>
+            <CheckBox
+                android:id="@+id/protanomalie"
+                android:layout_width="360dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:text="Protanomalie"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold" />
 
-        <CheckBox
-            android:id="@+id/protanopie"
-            android:layout_width="363dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:textSize="@dimen/text_size_large"
-            android:text="Protanopie"
-            android:textStyle="bold"/>
+            <CheckBox
+                android:id="@+id/protanopie"
+                android:layout_width="363dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:textSize="@dimen/text_size_large"
+                android:text="Protanopie"
+                android:textStyle="bold" />
 
-    </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -86,25 +87,21 @@
         android:paddingTop="20dp"
         app:layout_constraintBottom_toTopOf="@id/colorSamples"
         android:gravity="center"
-        android:orientation="vertical"
-        >
-
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/colorSamplesText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Exemples couleurs utilisées"
-            android:textSize="@dimen/text_size_medium">
+            android:text="Exemples couleurs utilisees"
+            android:textSize="@dimen/text_size_medium" />
 
-        </TextView>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/colorSamples"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         app:strokeWidth="2dp"
         app:layout_constraintBottom_toTopOf="@+id/parametresvue"
         android:gravity="center"
@@ -118,9 +115,7 @@
             android:layout_marginHorizontal="10dp"
             android:backgroundTint="?attr/colorPrimary"
             app:strokeWidth="3px"
-            app:strokeColor="?attr/bordercolor"
-            >
-        </com.google.android.material.button.MaterialButton>
+            app:strokeColor="?attr/bordercolor" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/colorPrimaryVariantButton"
@@ -130,9 +125,8 @@
             android:layout_marginHorizontal="10dp"
             android:backgroundTint="?attr/colorPrimaryVariant"
             app:strokeWidth="3px"
-            app:strokeColor="?attr/bordercolor"
-            >
-        </com.google.android.material.button.MaterialButton>
+            app:strokeColor="?attr/bordercolor" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/colorOnPrimaryButton"
             android:layout_width="50dp"
@@ -141,9 +135,8 @@
             android:layout_marginHorizontal="10dp"
             android:backgroundTint="?attr/colorOnPrimary"
             app:strokeWidth="3px"
-            app:strokeColor="?attr/bordercolor"
-            >
-        </com.google.android.material.button.MaterialButton>
+            app:strokeColor="?attr/bordercolor" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/colorButtonBackgroundButton"
             android:layout_width="50dp"
@@ -152,9 +145,8 @@
             android:layout_marginHorizontal="10dp"
             android:backgroundTint="?attr/colorButtonBackground"
             app:strokeWidth="3px"
-            app:strokeColor="?attr/bordercolor"
-            >
-        </com.google.android.material.button.MaterialButton>
+            app:strokeColor="?attr/bordercolor" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/colorButtonBackgroundButton2"
             android:layout_width="50dp"
@@ -163,9 +155,8 @@
             android:layout_marginHorizontal="10dp"
             android:backgroundTint="?attr/colorButtonBackground2"
             app:strokeWidth="3px"
-            app:strokeColor="?attr/bordercolor"
-            >
-        </com.google.android.material.button.MaterialButton>
+            app:strokeColor="?attr/bordercolor" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -178,7 +169,7 @@
         android:layout_marginLeft="20dp">
 
         <LinearLayout
-            android:id ="@+id/Dyslexie"
+            android:id="@+id/Dyslexie"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -192,9 +183,7 @@
                 android:drawableStart="@drawable/baseline_text_format_24"
                 android:drawableTint="?attr/iconcolor"
                 android:text="Dyslexie"
-                android:textStyle="bold"
-
-                />
+                android:textStyle="bold" />
 
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/DyslexieSwitch"
@@ -209,24 +198,25 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/contrasteÉlevé"
+            android:id="@+id/contrasteEleve"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="5dp">
 
             <TextView
-                android:id="@+id/contrasteÉlevéText"
+                android:id="@+id/contrasteEleveText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="@dimen/text_size_large"
                 android:drawableStart="@drawable/baseline_bedtime_24"
                 android:drawableTint="?attr/iconcolor"
-                android:text="Contraste élevé"
-                android:textStyle="bold"/>
+                android:text="Contraste eleve"
+                android:textStyle="bold" />
+
             <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/contrasteÉlevéSwitch"
+                android:id="@+id/contrasteEleveSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingEnd="10dp"
@@ -245,21 +235,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:drawableStart="@drawable/baseline_hearing_24"
-                android:text="assistance vocale"
+                android:text="Assistance vocale"
                 android:drawableTint="?attr/iconcolor"
                 android:textSize="@dimen/text_size_large"
                 android:textStyle="bold" />
+
             <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/poled"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
-                android:checked="false"/>
-                </LinearLayout>
+                android:checked="false" />
 
-
-
-
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/tailleTexte"
@@ -277,22 +265,16 @@
                 android:drawableStart="@drawable/baseline_text_increase_24"
                 android:text="Taille texte"
                 android:textStyle="bold" />
-    <com.google.android.material.materialswitch.MaterialSwitch
-        android:id="@+id/tailleTexteSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:layout_marginEnd="10dp"
-        />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/tailleTexteSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:layout_marginEnd="10dp" />
+
         </LinearLayout>
 
-
-    <Button
-        android:id="@+id/gyroscope"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="page gyroscope">
-    </Button>
-
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

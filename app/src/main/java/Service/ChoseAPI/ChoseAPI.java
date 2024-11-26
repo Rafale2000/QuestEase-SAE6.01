@@ -1,4 +1,4 @@
-package Service;
+package Service.ChoseAPI;
 
 
 //TODO Reprendre les paramètrs du manifest

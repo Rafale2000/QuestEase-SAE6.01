@@ -28,6 +28,7 @@ import java.util.List;
 public class MainActivity extends Theme {
     private WebSocketService webSocketService;
     private boolean isBound = false;
+    private boolean isCreated = false;
 
     private ServiceConnection connection = new ServiceConnection() {
         @Override
@@ -102,5 +103,17 @@ public class MainActivity extends Theme {
             unbindService(connection);
             isBound = false;
         }
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (!isCreated) {
+            recreate();
+        }
+    }
+    @Override
+    protected void onPause(){
+        super.onPause();
+        this.isCreated = false;
     }
 }

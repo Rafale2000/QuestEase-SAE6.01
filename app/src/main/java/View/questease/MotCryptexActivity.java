@@ -22,18 +22,10 @@ import Service.CryptexAPI.MotCryptexCallback;
 import Service.IndiceAPI.HandleIndiceAPI;
 import Service.IndiceAPI.IndiceCallBack;
 
-public class motCryptexActivity extends Theme {
+public class MotCryptexActivity extends Theme {
 
     private MotCryptex mc;
-    private Indice ind;
-    public TextView textViewIndice;
-    private Button buttonConfirm;
-    private String title = "Comment jouer au jeu du Cryptex ?";
-    private String content =
-               "Trouvez le mot de passe du cryptex grâce à l'indice qui " +
-            "\n vous est donné. Une fois le cryptex ouvert, " +
-            "\n vous obtiendrez un indice vous permettant de" +
-            "\n compléter la chasse !";
+    private TextView textViewIndice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +38,8 @@ public class motCryptexActivity extends Theme {
             return insets;
         });
 
-        TextView mot = (TextView) findViewById(R.id.input_word);
         this.textViewIndice = findViewById(R.id.indice_motCryptex); //indice_mot_cryptex
-        this.buttonConfirm = findViewById(R.id.btn_confirm);
+        Button buttonConfirm = findViewById(R.id.btn_confirm);
         HandlerMotCryptexAPI handlerMotCryptexAPI = new HandlerMotCryptexAPI(this);
         handlerMotCryptexAPI.GetRandomMotCryptex(new MotCryptexCallback() {
 
@@ -56,8 +47,8 @@ public class motCryptexActivity extends Theme {
             public void onMotCryptexReceived(MotCryptex motCryptex) {
                 mc = motCryptex;
 
-                HandleIndiceAPI handleIndiceAPI = new HandleIndiceAPI(motCryptexActivity.this);
-                handleIndiceAPI.GetIndice(motCryptex.getIndice().getId(), new IndiceCallBack() { //nul pointeur execption de mc
+                HandleIndiceAPI handleIndiceAPI = new HandleIndiceAPI(MotCryptexActivity.this);
+                handleIndiceAPI.GetIndice(motCryptex.getIndice().getId(), new IndiceCallBack() {
 
                     @Override
                     public void OnIndiceReceived(Indice indice) {
@@ -67,7 +58,7 @@ public class motCryptexActivity extends Theme {
                     @Override
                     public void OnFailure(String errorMessage) {
                         Log.e("PrixJuste", "Error retrieving data: " + errorMessage);
-                        Toast.makeText(motCryptexActivity.this, "Failed to load game data", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MotCryptexActivity.this, "Failed to load game data", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -75,24 +66,25 @@ public class motCryptexActivity extends Theme {
             @Override
             public void onFailure(String errorMessage) {
                 Log.e("PrixJuste", "Error retrieving data: " + errorMessage);
-                Toast.makeText(motCryptexActivity.this, "Failed to load game data", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MotCryptexActivity.this, "Failed to load game data", Toast.LENGTH_SHORT).show();
             }
         });
 
         buttonConfirm.setOnClickListener(v -> {
-            if(this.textViewIndice.getText().toString() != null){
-                if(this.textViewIndice.getText().toString().equals(mc.getIndice().getHint())){
-                    Toast.makeText(this, "Bravo", Toast.LENGTH_SHORT).show();
-                }
-
-
+            this.textViewIndice.getText().toString();
+            if (this.textViewIndice.getText().toString().equals(mc.getIndice().getHint())) {
+                Toast.makeText(this, "Bravo", Toast.LENGTH_SHORT).show();
             }
+
+
         });
 
+        String title = "Comment jouer au jeu du Cryptex ?";
+        String content = "Trouvez le mot de passe du cryptex grâce à l'indice qui " +
+                "\n vous est donné. Une fois le cryptex ouvert, " +
+                "\n vous obtiendrez un indice vous permettant de" +
+                "\n compléter la chasse !";
         showTutorialPopup(title, content, findViewById(R.id.main));
-
-
-
 
 
     }

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Searchlobby">
 
-    <!-- Toolbar Fragment -->
+
     <fragment
         android:id="@+id/toolbar_fragment"
         android:name="com.example.questease.ToolbarFragment"
@@ -27,12 +27,12 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
+            android:id="@+id/layoutlobbies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal">
 
-            <!-- Add buttons dynamically in this LinearLayout -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttontest1"
                 android:layout_width="290dp"
@@ -47,118 +47,7 @@
                 app:icon="@drawable/baseline_person_24"
                 app:iconPadding="0dp"
                 app:iconSize="40dp"
-                app:iconTint="@android:color/black"
-                />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttontest2"
-                android:layout_width="290dp"
-                android:layout_height="100dp"
-                android:backgroundTint="?attr/colorButtonBackground2"
-                android:text="lobby de theos"
-                android:textAlignment="center"
-                android:textColor="?attr/colorButtonText"
-                android:textSize="@dimen/text_size_large"
-                android:textStyle="bold|italic"
-                app:cornerRadius="24dp"
-                app:icon="@drawable/baseline_person_24"
-                app:iconPadding="0dp"
-                app:iconSize="40dp"
-                app:iconTint="@android:color/black"
-                />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttontest3"
-                android:layout_width="290dp"
-                android:layout_height="100dp"
-                android:backgroundTint="?attr/colorButtonBackground2"
-                android:text="lobby de rafale"
-                android:textAlignment="center"
-                android:textColor="?attr/colorButtonText"
-                android:textSize="@dimen/text_size_large"
-                android:textStyle="bold|italic"
-                app:cornerRadius="24dp"
-                app:icon="@drawable/baseline_person_24"
-                app:iconPadding="0dp"
-                app:iconSize="40dp"
-                app:iconTint="@android:color/black"
-                />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttontest4"
-                android:layout_width="290dp"
-                android:layout_height="100dp"
-                android:backgroundTint="?attr/colorButtonBackground2"
-                android:text="lobby de aymeric"
-                android:textAlignment="center"
-                android:textColor="?attr/colorButtonText"
-                android:textSize="@dimen/text_size_large"
-                android:textStyle="bold|italic"
-                app:cornerRadius="24dp"
-                app:icon="@drawable/baseline_person_24"
-                app:iconPadding="0dp"
-                app:iconSize="40dp"
-                app:iconTint="@android:color/black"
-                />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttontest5"
-                android:layout_width="290dp"
-                android:layout_height="100dp"
-                android:backgroundTint="?attr/colorButtonBackground2"
-                android:text="lobby de orulirn"
-                android:textAlignment="center"
-                android:textColor="?attr/colorButtonText"
-                android:textSize="@dimen/text_size_large"
-                android:textStyle="bold|italic"
-                app:cornerRadius="24dp"
-                app:icon="@drawable/baseline_person_24"
-                app:iconPadding="0dp"
-                app:iconSize="40dp"
-                app:iconTint="@android:color/black"
-                />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttontest6"
-                android:layout_width="290dp"
-                android:layout_height="100dp"
-                android:backgroundTint="?attr/colorButtonBackground2"
-                android:text="lobby de xaryuxe"
-                android:textAlignment="center"
-                android:textColor="?attr/colorButtonText"
-                android:textSize="@dimen/text_size_large"
-                android:textStyle="bold|italic"
-                app:cornerRadius="24dp"
-                app:icon="@drawable/baseline_person_24"
-                app:iconPadding="0dp"
-                app:iconSize="40dp"
-                app:iconTint="@android:color/black"
-                />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttontest7"
-                android:layout_width="290dp"
-                android:layout_height="100dp"
-                android:backgroundTint="?attr/colorButtonBackground2"
-                android:text="Créer un lobby"
-                android:textAlignment="center"
-                android:textColor="?attr/colorButtonText"
-                android:textSize="@dimen/text_size_large"
-                android:textStyle="bold|italic"
-                app:cornerRadius="24dp"
-                app:icon="@drawable/baseline_person_24"
-                app:iconPadding="0dp"
-                app:iconSize="40dp"
-                app:iconTint="@android:color/black"
-                />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttontest8"
-                android:layout_width="290dp"
-                android:layout_height="100dp"
-                android:backgroundTint="?attr/colorButtonBackground2"
-                android:text="Créer un lobby"
-                android:textAlignment="center"
-                android:textColor="?attr/colorButtonText"
-                android:textSize="@dimen/text_size_large"
-                android:textStyle="bold|italic"
-                app:cornerRadius="24dp"
-                app:icon="@drawable/baseline_person_24"
-                app:iconPadding="0dp"
-                app:iconSize="40dp"
+                android:visibility="gone"
                 app:iconTint="@android:color/black"
                 />
         </LinearLayout>
