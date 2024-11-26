@@ -27,21 +27,36 @@ import java.util.List;
 
 
 public abstract class Theme extends AppCompatActivity {
+
+    private static final String DALTONISME_STRING = "daltonisme";
+
     public void ApplyParameters(SharedPreferences sharedPreferences){
         //Protanomalie = 1
         //Protanopie = 2
         //deuteranomalie = 3
         //deuteranopie = 4
-        Log.d("SharedPreferences", "Valeur de daltonisme: " + sharedPreferences.getInt("daltonisme", 0));
+        //contraste élevé = 5
+        Log.d("SharedPreferences", "Valeur de daltonisme: " + sharedPreferences.getInt(DALTONISME_STRING, 0));
         Log.d("SharedPreferences","je vais essayer d'appliquer un thème");
-        if(sharedPreferences.getInt("daltonisme",0)== 1) {
-            setTheme(R.style.Theme_Questease_Protanomalie);}
-        else if(sharedPreferences.getInt("daltonisme",0)== 2){
-            setTheme(R.style.Theme_Questease_Protanopie);
-        } else if (sharedPreferences.getInt("daltonisme",0)==3) {
-            setTheme(R.style.Theme_Questease_Deuteranomalie);
-        } else if (sharedPreferences.getInt("daltonisme",0) == 4) {
-            setTheme(R.style.Theme_Questease_deuteranopie);
+        switch (sharedPreferences.getInt(DALTONISME_STRING,0)){
+            case 1:
+                setTheme(R.style.Theme_Questease_Protanomalie);
+                break;
+            case 2:
+                setTheme(R.style.Theme_Questease_Protanopie);
+                break;
+            case 3:
+                setTheme(R.style.Theme_Questease_Deuteranomalie);
+                break;
+            case 4:
+                setTheme(R.style.Theme_Questease_deuteranopie);
+                break;
+            case 5:
+                setTheme(R.style.Theme_Questease_ContrasteEleve);
+                break;
+            default:
+                setTheme(R.style.Theme_Questease);
+                break;
         }
     }
 
@@ -63,9 +78,9 @@ public abstract class Theme extends AppCompatActivity {
 
     public void adjustTextSize(List<View> views) {
         // Convertir la taille de texte souhaitée en pixels pour la comparaison
-        float textSizeLargePx = getResources().getDimension(R.dimen.text_size_large);
 
         for (View view : views) {
+            Log.d("bla", "view: ");
             float textSize14spInPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, this.getResources().getDisplayMetrics());
             float textSize19spInPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 19, this.getResources().getDisplayMetrics());
             float textSize24spInPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 24, this.getResources().getDisplayMetrics());
@@ -110,6 +125,7 @@ public abstract class Theme extends AppCompatActivity {
             }
         }
     }
+
     public void showTutorialPopup(String title, String content, ViewGroup view) {
         RenderEffect blurEffect = RenderEffect.createBlurEffect(
                 10, 10, Shader.TileMode.CLAMP);
