@@ -12,7 +12,7 @@
         <item name="colorProfileBackground">#4c4745</item>
         <item name="iconcolor">#F6F6F6</item>
         <item name="texte">#000000</item>
-        <item name="bordercolor">#000000</item> <!-- couleur utilisé pour contraster les samples de couleur et le fond -->
+        <item name="bordercolor">#000000</item><!-- couleur utilisé pour contraster les samples de couleur et le fond -->
 
     </style>
     
