@@ -14,10 +14,12 @@ import androidx.activity.EdgeToEdge;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
 import com.example.questease.Searchlobby;
 import com.example.questease.Theme;
 import com.example.questease.WebSocketService;
 import com.example.questease.Parametres;
+
 import android.content.SharedPreferences;
 import android.widget.TextView;
 
@@ -104,6 +106,7 @@ public class MainActivity extends Theme {
             isBound = false;
         }
     }
+
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -111,8 +114,9 @@ public class MainActivity extends Theme {
             recreate();
         }
     }
+
     @Override
-    protected void onPause(){
+    protected void onPause() {
         super.onPause();
         this.isCreated = false;
     }

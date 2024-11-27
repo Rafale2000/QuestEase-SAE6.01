@@ -1,7 +1,6 @@
 package com.example.questease;
 
 
-
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -41,6 +40,7 @@ public class Lobby extends Theme {
             isBound = true;
             webSocketService.sendMessage("requestLobbies", "salut à tous c'est fanta de Lobby");
         }
+
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;
@@ -59,13 +59,13 @@ public class Lobby extends Theme {
                     String message = jsonObject.getString("message");
 
 
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -85,10 +85,10 @@ public class Lobby extends Theme {
         views.add(findViewById(R.id.Person2));
         views.add(findViewById(R.id.button2));
         views.add(findViewById(R.id.text_joueurs_prets));
-        if(sharedPreferences.getBoolean("tailleTexte",false)){
+        if (sharedPreferences.getBoolean("tailleTexte", false)) {
             adjustTextSize(views);
         }
-        if(sharedPreferences.getBoolean("dyslexie",false)){
+        if (sharedPreferences.getBoolean("dyslexie", false)) {
             applyFont(views);
         }
         Button jouer = findViewById(R.id.button2);
@@ -103,12 +103,12 @@ public class Lobby extends Theme {
         String name = intent.getStringExtra("p1");
         String name2 = intent.getStringExtra("p2");
         String lobbyName = intent.getStringExtra("lobbyName");
-        if (lobbyName != null){
+        if (lobbyName != null) {
             this.lobbyname = lobbyName;
         }
         Button person1 = findViewById(R.id.Person2);
         Button person2 = findViewById(R.id.Person1);
-        if (name2!=null){
+        if (name2 != null) {
             person2.setText(name2);
         }
 
@@ -124,12 +124,13 @@ public class Lobby extends Theme {
         Log.d("SearchLobby", "lancement du BroadcastReceiver");
 
     }
+
     @Override
     protected void onStop() {
         Log.d("Lobby", "le big on stop est lancé la ");
         super.onStop();
         Log.d("Lobby", "le big on stop est passé par le super ");
-        Log.d("lobbyname",lobbyname);
+        Log.d("lobbyname", lobbyname);
 
         if (webSocketService != null && lobbyname != null) {
             // Envoyer une requête pour quitter le lobby
@@ -140,9 +141,6 @@ public class Lobby extends Theme {
         }
 
     }
-
-
-
 
 
 }

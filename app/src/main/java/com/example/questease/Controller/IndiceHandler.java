@@ -11,12 +11,13 @@ import com.example.questease.Model.BDD.Indice;
 
 public class IndiceHandler extends MyDatabaseHelper {
     private SQLiteOpenHelper dbHelper;
-    public IndiceHandler(Context context){
+
+    public IndiceHandler(Context context) {
         super(context);
         dbHelper = new MyDatabaseHelper(context);
     }
 
-    public int addindice (Indice indice){
+    public int addindice(Indice indice) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_ID_INDICE, indice.getId());
@@ -29,35 +30,36 @@ public class IndiceHandler extends MyDatabaseHelper {
 
     public Indice getIndice(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_INDICE, new String[] { KEY_ID_INDICE,
-                        KEY_PATH_SON }, KEY_ID_INDICE + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+        Cursor cursor = db.query(TABLE_INDICE, new String[]{KEY_ID_INDICE,
+                        KEY_PATH_SON}, KEY_ID_INDICE + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
         assert cursor != null;
-        return new Indice(cursor.getInt(0),cursor.getString(1));
+        return new Indice(cursor.getInt(0), cursor.getString(1));
 
     }
 
     /**
      * supprime une chose à trouver
+     *
      * @param indice
      */
     public void deleteIndice(Indice indice) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(TABLE_INDICE, KEY_ID_INDICE + " = ?",
-                new String[] { String.valueOf(indice.getId()) });
+                new String[]{String.valueOf(indice.getId())});
         db.close();
     }
 
 
-    public int updateIndice(Indice indice){
+    public int updateIndice(Indice indice) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_ID_INDICE, indice.getId());
         values.put(KEY_PATH_SON, indice.getHint());
-        long updateId=db.update(TABLE_INDICE,values,
+        long updateId = db.update(TABLE_INDICE, values,
                 KEY_ID_INDICE + " = ?",
                 new String[]{String.valueOf(indice.getId())});
         db.close();

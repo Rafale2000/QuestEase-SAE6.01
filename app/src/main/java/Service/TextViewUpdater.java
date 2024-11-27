@@ -12,7 +12,6 @@ import com.example.questease.Model.BDD.MotCryptex;
 import Service.MotCryptexApi;
 import Service.RetrofitInstance;
 
-
 import java.util.List;
 
 import retrofit2.Call;

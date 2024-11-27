@@ -9,7 +9,9 @@ import androidx.media3.common.util.Log;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
 import android.view.View;
+
 import com.example.questease.Model.BDD.MotCryptex;
 
 public class PrixJusteAdapter extends RecyclerView.Adapter<PrixJusteAdapter.LobbyViewHolder> {

@@ -1,5 +1,4 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -10,9 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/bannerLayout"
@@ -25,9 +24,9 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_gravity="left"
-                android:src="@drawable/baseline_close_24"
                 android:scaleType="fitCenter"
-            app:tint="@android:color/black" />
+                android:src="@drawable/baseline_close_24"
+                app:tint="@android:color/black" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/Regles"
@@ -38,17 +37,18 @@
                 android:layout_weight="1"
                 android:alpha="0.5"
                 android:backgroundTint="#40FFFFFF"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
                 android:text="Identifiez le son"
                 android:textColor="@android:color/black"
                 app:icon="@drawable/baseline_arrow_drop_down_24"
                 app:iconGravity="textStart"
-                app:iconTint="@android:color/black"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
                 app:iconPadding="8dp"
                 app:iconSize="25dp"
+                app:iconTint="@android:color/black"
 
-            />
+                />
+
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp">
@@ -63,133 +63,132 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/playbutton"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:width="150dp"
+                android:height="150dp"
                 android:backgroundTint="?attr/colorButtonBackground"
+                android:elevation="10dp"
+                android:padding="16dp"
+                app:cornerRadius="30dp"
                 app:icon="@drawable/baseline_volume_up_24"
                 app:iconGravity="textStart"
                 app:iconSize="100dp"
-                android:padding="16dp"
-                android:width="150dp"
-                android:height="150dp"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                app:iconTint="@color/black"
-                app:cornerRadius="30dp"
-                android:elevation="10dp" />
+                app:iconTint="@color/black" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="8dp"
-            app:cardCornerRadius="16dp"
-            app:cardBackgroundColor="@android:color/white"
-            android:layout_margin="16dp"
-            android:padding="16dp">
+                android:layout_margin="16dp"
+                android:padding="16dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-                <TextView
-                    android:id="@+id/card_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Titre de la carte"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/black"
-                    android:layout_marginBottom="8dp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="15dp"
-                    android:layout_gravity="top|center" />
-            <TextView
-                android:id="@+id/indice1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxHeight="75dp"
 
-                android:textAlignment="center"
-                android:text="Indice 1:\n\n\n\n\n\n\n\n\n"
-                android:textSize="16sp"
+                    <TextView
+                        android:id="@+id/card_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top|center"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="Titre de la carte"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-                android:textColor="@android:color/black"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="26dp">
+                    <TextView
+                        android:id="@+id/indice1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
 
-            </TextView>
+                        android:layout_marginTop="26dp"
+                        android:maxHeight="75dp"
+                        android:text="Indice 1:\n\n\n\n\n\n\n\n\n"
+
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp">
+
+                    </TextView>
+
                     <TextView
                         android:id="@+id/indice2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+
+                        android:layout_marginTop="26dp"
                         android:maxHeight="75dp"
+                        android:text="Indice 2:\n\n\n\n\n\n\n\n\n"
 
                         android:textAlignment="center"
-                        android:text="Indice 2:\n\n\n\n\n\n\n\n\n"
-                        android:textSize="16sp"
-
                         android:textColor="@android:color/black"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="26dp">
+                        android:textSize="16sp">
 
                     </TextView>
+
                     <TextView
                         android:id="@+id/indice3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:maxHeight="75dp"
-                        android:textAlignment="center"
-                        android:text="Indice 3:\n\n\n\n\n\n\n\n\n\n\n\n"
-                        android:textSize="16sp"
-
-                        android:textColor="@android:color/black"
                         android:layout_marginLeft="16dp"
                         android:layout_marginTop="26dp"
-                        android:layout_marginBottom="16dp">
+                        android:layout_marginBottom="16dp"
+                        android:maxHeight="75dp"
+
+                        android:text="Indice 3:\n\n\n\n\n\n\n\n\n\n\n\n"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp">
 
                     </TextView>
                 </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+            </com.google.android.material.card.MaterialCardView>
 
 
+        </LinearLayout>
 
-    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <EditText
-                    android:id="@+id/messageEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Entrez votre message"
-                    android:inputType="text" />
+                android:id="@+id/messageEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Entrez votre message"
+                android:inputType="text" />
 
 
             <Button
                 android:id="@+id/sendButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:backgroundTint="?attr/colorButtonBackground"
                 android:text="Envoyer"
-                android:textColor="@color/black"
-                android:layout_gravity="end" />
-
-
-
-
-
-
+                android:textColor="@color/black" />
 
 
         </LinearLayout>
     </LinearLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

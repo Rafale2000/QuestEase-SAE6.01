@@ -10,12 +10,13 @@ import com.example.questease.Model.BDD.MotCryptex;;
 
 public class MotCryptexHandler extends MyDatabaseHelper {
     private SQLiteOpenHelper dbHelper;
-    public MotCryptexHandler(Context context){
+
+    public MotCryptexHandler(Context context) {
         super(context);
         dbHelper = new MyDatabaseHelper(context);
     }
 
-    public int addMotCryptex (MotCryptex motCryptex){
+    public int addMotCryptex(MotCryptex motCryptex) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_ID_INDICE, motCryptex.getId());
@@ -29,9 +30,9 @@ public class MotCryptexHandler extends MyDatabaseHelper {
 
     public MotCryptex getCryptex(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_MOTCRYPTEX, new String[] { KEY_ID_CRYPTEX,
-                        KEY_MOT, KEY_DIFF, KEY_ID_INDICE }, KEY_ID_CRYPTEX + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+        Cursor cursor = db.query(TABLE_MOTCRYPTEX, new String[]{KEY_ID_CRYPTEX,
+                        KEY_MOT, KEY_DIFF, KEY_ID_INDICE}, KEY_ID_CRYPTEX + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
@@ -43,23 +44,24 @@ public class MotCryptexHandler extends MyDatabaseHelper {
 
     /**
      * supprime une chose à trouver
+     *
      * @param motCryptex
      */
     public void deleteCryptex(MotCryptex motCryptex) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(TABLE_MOTCRYPTEX, KEY_ID_CRYPTEX + " = ?",
-                new String[] { String.valueOf(motCryptex.getId()) });
+                new String[]{String.valueOf(motCryptex.getId())});
         db.close();
     }
 
 
-    public int updateCryptex(MotCryptex motCryptex){
+    public int updateCryptex(MotCryptex motCryptex) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_MOT,motCryptex.getMot());
-        values.put(KEY_DIFF,motCryptex.getDiff());
-        values.put(KEY_ID_INDICE,motCryptex.getIdIndice());
-        long updateId=db.update(TABLE_CHOSE,values,
+        values.put(KEY_MOT, motCryptex.getMot());
+        values.put(KEY_DIFF, motCryptex.getDiff());
+        values.put(KEY_ID_INDICE, motCryptex.getIdIndice());
+        long updateId = db.update(TABLE_CHOSE, values,
                 KEY_ID_CRYPTEX + " = ?",
                 new String[]{String.valueOf(motCryptex.getId())});
         db.close();

@@ -19,7 +19,7 @@ public class infoSecuHandler extends MyDatabaseHelper {
         dbHelper = new MyDatabaseHelper(context);
     }
 
-    public int addInfoSecu (InfoSecu I){
+    public int addInfoSecu(InfoSecu I) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_IDSECU, I.getId());
@@ -33,9 +33,9 @@ public class infoSecuHandler extends MyDatabaseHelper {
 
     public InfoSecu getInfoSecu(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_INFOSECU, new String[] { KEY_IDSECU,
+        Cursor cursor = db.query(TABLE_INFOSECU, new String[]{KEY_IDSECU,
                         KEY_EMAIL, KEY_PASSWORD}, KEY_IDSECU + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+                new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
@@ -43,26 +43,27 @@ public class infoSecuHandler extends MyDatabaseHelper {
         return new InfoSecu(cursor.getInt(0),
                 cursor.getString(1), cursor.getString(2));
 
-        }
+    }
 
 
     /**
      * supprime une chose à trouver
+     *
      * @param I
      */
     public void deleteSecu(InfoSecu I) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(TABLE_INFOSECU, KEY_IDSECU + " = ?",
-                new String[] { String.valueOf(I.getId()) });
+                new String[]{String.valueOf(I.getId())});
         db.close();
     }
 
-    public int updateSecu(InfoSecu I){
+    public int updateSecu(InfoSecu I) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_EMAIL,I.getEmail());
-        values.put(KEY_PASSWORD,I.getPsswrd());
-        long updateId=db.update(TABLE_INFOSECU,values,
+        values.put(KEY_EMAIL, I.getEmail());
+        values.put(KEY_PASSWORD, I.getPsswrd());
+        long updateId = db.update(TABLE_INFOSECU, values,
                 KEY_IDSECU + " = ?",
                 new String[]{String.valueOf(I.getId())});
         db.close();

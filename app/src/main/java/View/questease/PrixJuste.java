@@ -90,7 +90,6 @@ public class PrixJuste extends Theme {
                     }
 
 
-
                     Log.d("MLKit", "Recognized Text: " + recognizedText);
                     Toast.makeText(this, "Text: " + recognizedText, Toast.LENGTH_SHORT).show();
                 })
@@ -102,8 +101,9 @@ public class PrixJuste extends Theme {
 
     /**
      * Initialize l'interface utilisateur et met en place des écouteurs pour certaines fonctionnalitées.
+     *
      * @param chose
-    */
+     */
     private void initializeUI(ChoseATrouverPrixJuste chose) {
         // Initialisation des TextViews
         TextView numberOfAttempts = findViewById(R.id.tv_attempts);
@@ -171,7 +171,6 @@ public class PrixJuste extends Theme {
             }
         });
     }
-
 
 
 }

@@ -10,12 +10,13 @@ import com.example.questease.Model.BDD.MotPendu;
 
 public class MotPenduHandler extends MyDatabaseHelper {
     private SQLiteOpenHelper dbHelper;
-    public MotPenduHandler(Context context){
+
+    public MotPenduHandler(Context context) {
         super(context);
         dbHelper = new MyDatabaseHelper(context);
     }
 
-    public int addMotPendu (MotPendu motPendu){
+    public int addMotPendu(MotPendu motPendu) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_ID_PENDU, motPendu.getId());
@@ -29,9 +30,9 @@ public class MotPenduHandler extends MyDatabaseHelper {
 
     public MotPendu getMotPendu(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_MOTPENDU, new String[] { KEY_ID_PENDU,
-                        KEY_MOT, KEY_DIFF, KEY_ID_INDICE }, KEY_ID_PENDU + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+        Cursor cursor = db.query(TABLE_MOTPENDU, new String[]{KEY_ID_PENDU,
+                        KEY_MOT, KEY_DIFF, KEY_ID_INDICE}, KEY_ID_PENDU + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
@@ -43,23 +44,24 @@ public class MotPenduHandler extends MyDatabaseHelper {
 
     /**
      * supprime une chose à trouver
+     *
      * @param motPendu
      */
     public void deleteMotPendu(MotPendu motPendu) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(TABLE_MOTPENDU, KEY_ID_PENDU + " = ?",
-                new String[] { String.valueOf(motPendu.getId()) });
+                new String[]{String.valueOf(motPendu.getId())});
         db.close();
     }
 
 
-    public int updatePendu(MotPendu motPendu){
+    public int updatePendu(MotPendu motPendu) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_ID_PENDU,motPendu.getMot());
-        values.put(KEY_DIFF,motPendu.getDiff());
-        values.put(KEY_ID_INDICE,motPendu.getIdIndice());
-        long updateId=db.update(TABLE_MOTPENDU,values,
+        values.put(KEY_ID_PENDU, motPendu.getMot());
+        values.put(KEY_DIFF, motPendu.getDiff());
+        values.put(KEY_ID_INDICE, motPendu.getIdIndice());
+        long updateId = db.update(TABLE_MOTPENDU, values,
                 KEY_ID_PENDU + " = ?",
                 new String[]{String.valueOf(motPendu.getId())});
         db.close();

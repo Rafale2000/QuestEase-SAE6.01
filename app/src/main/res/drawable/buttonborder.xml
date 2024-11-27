@@ -6,8 +6,8 @@
         android:color="#36940e" />
 
     <padding
+        android:bottom="4dp"
         android:left="0dp"
-        android:top="0dp"
         android:right="4dp"
-        android:bottom="4dp" />
+        android:top="0dp" />
 </shape>

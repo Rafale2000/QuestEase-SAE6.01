@@ -8,9 +8,10 @@ import org.junit.jupiter.api.Test;
 
 public class PrixJusteTest {
     static PrixJusteJeu prix;
+
     @BeforeAll
     static void setUpBeforeAll() {
-        prix = new PrixJusteJeu(5,50);
+        prix = new PrixJusteJeu(5, 50);
     }
 
     @Test
@@ -21,13 +22,14 @@ public class PrixJusteTest {
     }
 
     @Test
-    void testInferieur(){
+    void testInferieur() {
         System.out.println("Running test 2");
         Assertions.assertEquals(PrixJusteJeu.Result.TROP_BAS, prix.checkGuess(40));
 
     }
+
     @Test
-    void testEgal(){
+    void testEgal() {
         System.out.println("Running test 3");
         Assertions.assertEquals(PrixJusteJeu.Result.CORRECT, prix.checkGuess(50));
     }

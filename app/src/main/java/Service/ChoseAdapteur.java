@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-
-
 import android.view.View;
 
 import com.example.questease.Model.BDD.ChoseATrouverPrixJuste;

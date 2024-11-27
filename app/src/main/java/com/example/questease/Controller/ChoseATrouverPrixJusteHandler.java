@@ -30,9 +30,9 @@ public class ChoseATrouverPrixJusteHandler extends MyDatabaseHelper {
 
     public ChoseATrouverPrixJuste getChose(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_CHOSE, new String[] { KEY_ID_CHOSE,
-                        KEY_NOM, KEY_PRIX, KEY_PATH_TO_PICTURE }, KEY_ID_CHOSE + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+        Cursor cursor = db.query(TABLE_CHOSE, new String[]{KEY_ID_CHOSE,
+                        KEY_NOM, KEY_PRIX, KEY_PATH_TO_PICTURE}, KEY_ID_CHOSE + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
@@ -43,23 +43,24 @@ public class ChoseATrouverPrixJusteHandler extends MyDatabaseHelper {
 
     /**
      * supprime une chose à trouver
+     *
      * @param chose
      */
     public void deleteChose(ChoseATrouverPrixJuste chose) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(TABLE_CHOSE, KEY_ID_CHOSE + " = ?",
-                new String[] { String.valueOf(chose.getId()) });
+                new String[]{String.valueOf(chose.getId())});
         db.close();
     }
 
 
-    public int updateChose(ChoseATrouverPrixJuste chose){
+    public int updateChose(ChoseATrouverPrixJuste chose) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_NOM,chose.getNom());
-        values.put(KEY_PRIX,chose.getValeur());
-        values.put(KEY_PATH_TO_PICTURE,chose.getCheminImage());
-        long updateId=db.update(TABLE_CHOSE,values,
+        values.put(KEY_NOM, chose.getNom());
+        values.put(KEY_PRIX, chose.getValeur());
+        values.put(KEY_PATH_TO_PICTURE, chose.getCheminImage());
+        long updateId = db.update(TABLE_CHOSE, values,
                 KEY_ID_CHOSE + " = ?",
                 new String[]{String.valueOf(chose.getId())});
         db.close();

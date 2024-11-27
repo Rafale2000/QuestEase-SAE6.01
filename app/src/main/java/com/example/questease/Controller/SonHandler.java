@@ -10,12 +10,13 @@ import com.example.questease.Model.BDD.Son;
 
 public class SonHandler extends MyDatabaseHelper {
     private SQLiteOpenHelper dbHelper;
-    public SonHandler(Context context){
+
+    public SonHandler(Context context) {
         super(context);
         dbHelper = new MyDatabaseHelper(context);
     }
 
-    public int addSon (Son son){
+    public int addSon(Son son) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_ID_PENDU, son.getId());
@@ -29,36 +30,37 @@ public class SonHandler extends MyDatabaseHelper {
 
     public Son getSon(int id) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_SON, new String[] { KEY_ID_SON,
-                        KEY_PATH_SON, KEY_ID_INDICE }, KEY_ID_SON + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+        Cursor cursor = db.query(TABLE_SON, new String[]{KEY_ID_SON,
+                        KEY_PATH_SON, KEY_ID_INDICE}, KEY_ID_SON + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
         assert cursor != null;
-        return new Son(cursor.getInt(0),cursor.getString(1), cursor.getInt(2));
+        return new Son(cursor.getInt(0), cursor.getString(1), cursor.getInt(2));
 
     }
 
     /**
      * supprime une chose à trouver
+     *
      * @param son
      */
     public void deleteMotSon(Son son) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete(TABLE_SON, KEY_ID_SON + " = ?",
-                new String[] { String.valueOf(son.getId()) });
+                new String[]{String.valueOf(son.getId())});
         db.close();
     }
 
 
-    public int updateSon(Son son){
+    public int updateSon(Son son) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_ID_SON,son.getId());
-        values.put(KEY_PATH_SON,son.getSon());
-        values.put(KEY_ID_INDICE,son.getIdIndice());
-        long updateId=db.update(TABLE_SON,values,
+        values.put(KEY_ID_SON, son.getId());
+        values.put(KEY_PATH_SON, son.getSon());
+        values.put(KEY_ID_INDICE, son.getIdIndice());
+        long updateId = db.update(TABLE_SON, values,
                 KEY_ID_SON + " = ?",
                 new String[]{String.valueOf(son.getId())});
         db.close();

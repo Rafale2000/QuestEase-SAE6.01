@@ -46,7 +46,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     //TABLE INDICE
     public static final String TABLE_INDICE = "Indice";
-    public static final String KEY_INDICE= "indice";
+    public static final String KEY_INDICE = "indice";
 
     //TABLE RESULTAT
     public static final String TABLE_RESULTAT = "Resultat";
@@ -56,9 +56,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public static final String KEY_IS_EPREUVE3 = "IsEreuve3";
     public static final String KEY_IS_EPREUVE4 = "IsEreuve4";
     public static final String KEY_ID_PARTIE = "idPartie";
-
-
-
 
 
     // Constructor
@@ -76,11 +73,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 + KEY_PATH_TO_PICTURE + " TEXT NOT NULL)";
         db.execSQL(CREATE_TABLE_CHOSE);
 
-        String infoSecu_TABLE = "CREATE TABLE " + TABLE_INFOSECU+ "("
-                +  KEY_IDSECU +"INTEGER PRIMARY KEY AUTOINCREMENT,"
-                +  KEY_PASSWORD +" TEXT NOT NULL,"
-                +  KEY_EMAIL +"TEXT NOT NULL,"
-                + "FOREIGN KEY ("+KEY_ID_INDICE+") REFERENCES Indice("+KEY_ID_INDICE+"))";
+        String infoSecu_TABLE = "CREATE TABLE " + TABLE_INFOSECU + "("
+                + KEY_IDSECU + "INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_PASSWORD + " TEXT NOT NULL,"
+                + KEY_EMAIL + "TEXT NOT NULL,"
+                + "FOREIGN KEY (" + KEY_ID_INDICE + ") REFERENCES Indice(" + KEY_ID_INDICE + "))";
         db.execSQL(infoSecu_TABLE);
 
         String CREATE_TABLE_USER = "CREATE TABLE " + TABLE_UTILISATEUR + " ("
@@ -90,29 +87,29 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 + KEY_EMAIL + "email TEXT NOT NULL)";
         db.execSQL(CREATE_TABLE_USER);
 
-        String Indice_TABLE = "CREATE TABLE "+ TABLE_INDICE+"("
-                + KEY_ID_INDICE +"INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + KEY_INDICE +"TEXT NOT NULL)";
+        String Indice_TABLE = "CREATE TABLE " + TABLE_INDICE + "("
+                + KEY_ID_INDICE + "INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_INDICE + "TEXT NOT NULL)";
         db.execSQL(Indice_TABLE);
 
-        String MotCryptex_TABLE = "CREATE TABLE " +TABLE_MOTCRYPTEX+ "("
-                + KEY_ID_CRYPTEX +" PRIMARY KEY AUTOINCREMENT,"
-                + KEY_MOT+ "TEXT NOT NULL UNIQUE,"
-                + KEY_DIFF+ "int NOT NULL,"
-                + "FOREIGN KEY ("+KEY_ID_INDICE+") REFERENCES Indice("+KEY_ID_INDICE+"))";
+        String MotCryptex_TABLE = "CREATE TABLE " + TABLE_MOTCRYPTEX + "("
+                + KEY_ID_CRYPTEX + " PRIMARY KEY AUTOINCREMENT,"
+                + KEY_MOT + "TEXT NOT NULL UNIQUE,"
+                + KEY_DIFF + "int NOT NULL,"
+                + "FOREIGN KEY (" + KEY_ID_INDICE + ") REFERENCES Indice(" + KEY_ID_INDICE + "))";
         db.execSQL(MotCryptex_TABLE);
 
-        String MotPendu_TABLE = "CREATE TABLE "+ TABLE_MOTPENDU+"("
-                + KEY_ID_PENDU+" INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + KEY_MOT +"TEXT NOT NULL,"
-                + KEY_DIFF+" int NOT NULL,"
-                + "FOREIGN KEY ("+KEY_ID_INDICE+") REFERENCES Indice("+KEY_ID_INDICE+"))";
+        String MotPendu_TABLE = "CREATE TABLE " + TABLE_MOTPENDU + "("
+                + KEY_ID_PENDU + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_MOT + "TEXT NOT NULL,"
+                + KEY_DIFF + " int NOT NULL,"
+                + "FOREIGN KEY (" + KEY_ID_INDICE + ") REFERENCES Indice(" + KEY_ID_INDICE + "))";
         db.execSQL(MotPendu_TABLE);
 
-        String Son_TABLE = "CREATE TABLE "+ TABLE_SON +"("
-                +  KEY_ID_SON +"INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + KEY_PATH_SON+ " TEXT NOT NULL,"
-                + "FOREIGN KEY ("+KEY_ID_INDICE+") REFERENCES Indice("+KEY_ID_INDICE+"))";
+        String Son_TABLE = "CREATE TABLE " + TABLE_SON + "("
+                + KEY_ID_SON + "INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + KEY_PATH_SON + " TEXT NOT NULL,"
+                + "FOREIGN KEY (" + KEY_ID_INDICE + ") REFERENCES Indice(" + KEY_ID_INDICE + "))";
         db.execSQL(Son_TABLE);
 
         String Resultat_TABLE = "CREATE TABLE " + TABLE_RESULTAT + " ("

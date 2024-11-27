@@ -11,14 +11,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
-        android:text="Bienvenue"
-        android:textColor="@android:color/black"
         android:gravity="center"
         android:padding="16dp"
+        android:text="Bienvenue"
+        android:textColor="@android:color/black"
         android:textSize="@dimen/text_size_large"
         android:textStyle="bold|italic"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
@@ -45,24 +45,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-         />
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/Parametres"
         android:layout_width="400dp"
         android:layout_height="124dp"
         android:layout_marginTop="324dp"
 
+        android:backgroundTint="?attr/colorButtonBackground2"
         android:text="Parametres"
         android:textAlignment="center"
-        android:backgroundTint="?attr/colorButtonBackground2"
         android:textColor="?attr/colorButtonText"
         android:textSize="@dimen/text_size_large"
         android:textStyle="bold|italic"
 
         app:cornerRadius="24dp"
-        app:strokeColor="@color/black"
-        app:strokeWidth="2dp"
         app:icon="@drawable/baseline_settings_24"
         app:iconGravity="start"
         app:iconPadding="8dp"
@@ -71,7 +69,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"
         android:layout_width="wrap_content"
@@ -83,6 +84,7 @@
         app:layout_constraintGuide_begin="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"

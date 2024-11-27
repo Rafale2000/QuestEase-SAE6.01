@@ -1,14 +1,13 @@
 package com.example.questease.Model.BDD;
 
 
-
 public class MotPendu {
     private int id;
     private String mot;
     private int diff;
     private int idIndice;
 
-    public MotPendu(int id,String mot, int diff, int idIndice) {
+    public MotPendu(int id, String mot, int diff, int idIndice) {
         this.id = id;
         this.mot = mot;
         this.diff = diff;

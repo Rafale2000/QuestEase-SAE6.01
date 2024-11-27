@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:id="@+id/main">
+    android:padding="16dp">
 
     <!-- Top Bar with Exit and Switch Button -->
     <LinearLayout
@@ -16,10 +16,9 @@
             android:id="@+id/btn_exit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/exit"
             android:backgroundTint="?attr/colorButtonBackground"
-            android:textSize="@dimen/text_size_medium"
-            />
+            android:text="@string/exit"
+            android:textSize="@dimen/text_size_medium" />
 
         <Space
             android:layout_width="0dp"
@@ -32,7 +31,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/change_input_selector"
             android:backgroundTint="?attr/colorButtonBackground"
-            android:textSize="@dimen/text_size_medium"/>
+            android:textSize="@dimen/text_size_medium" />
     </LinearLayout>
 
     <TextView
@@ -41,8 +40,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/nbr_coup"
-        android:textSize="@dimen/text_size_medium"
-         />
+        android:textSize="@dimen/text_size_medium" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -57,8 +55,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/indice"
-            android:textSize="@dimen/text_size_small"
-            />
+            android:textSize="@dimen/text_size_small" />
 
         <ImageView
             android:id="@+id/image_view"
@@ -75,7 +72,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/entrez_un_nombre"
         android:inputType="number"
-        android:textSize="@dimen/text_size_medium"/>
+        android:textSize="@dimen/text_size_medium" />
 
     <TextView
         android:id="@+id/tv_previous_number"
@@ -89,8 +86,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_valider"
@@ -99,18 +95,16 @@
             android:layout_gravity="start|left"
             android:backgroundTint="?attr/colorButtonBackground"
             android:text="@string/valider"
-            android:textSize="@dimen/text_size_medium"
-             />
+            android:textSize="@dimen/text_size_medium" />
 
         <Button
             android:id="@+id/btn_reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/reset"
             android:layout_gravity="center"
             android:backgroundTint="?attr/colorButtonBackground"
-            android:textSize="@dimen/text_size_medium"
-            />
+            android:text="@string/reset"
+            android:textSize="@dimen/text_size_medium" />
 
         <Button
             android:id="@+id/btn_fleche"

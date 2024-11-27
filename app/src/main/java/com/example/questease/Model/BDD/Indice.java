@@ -1,8 +1,6 @@
 package com.example.questease.Model.BDD;
 
 
-
-
 public class Indice {
 
     private int id;

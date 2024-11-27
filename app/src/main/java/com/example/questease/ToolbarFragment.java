@@ -2,10 +2,13 @@ package com.example.questease;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.appcompat.widget.Toolbar;
 
 
@@ -64,12 +67,12 @@ public class ToolbarFragment extends Fragment {
         return view;
     }
 
-// permet de retourner au menu principale ou le lobby de recherche
+    // permet de retourner au menu principale ou le lobby de recherche
 // en appuyant sur la fléche
     public void onBackButtonClicked(View view) {
         Intent intent;
         // si c'est dans le salon de la partie, retourner dans le salon des lobby
-        if (getActivity() instanceof SplashActivity){
+        if (getActivity() instanceof SplashActivity) {
             intent = new Intent(requireActivity(), Searchlobby.class);
         }
         // sinon on revient au menu principale

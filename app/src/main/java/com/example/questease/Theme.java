@@ -25,20 +25,19 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 
-
 public abstract class Theme extends AppCompatActivity {
 
     private static final String DALTONISME_STRING = "daltonisme";
 
-    public void ApplyParameters(SharedPreferences sharedPreferences){
+    public void ApplyParameters(SharedPreferences sharedPreferences) {
         //Protanomalie = 1
         //Protanopie = 2
         //deuteranomalie = 3
         //deuteranopie = 4
         //contraste élevé = 5
         Log.d("SharedPreferences", "Valeur de daltonisme: " + sharedPreferences.getInt(DALTONISME_STRING, 0));
-        Log.d("SharedPreferences","je vais essayer d'appliquer un thème");
-        switch (sharedPreferences.getInt(DALTONISME_STRING,0)){
+        Log.d("SharedPreferences", "je vais essayer d'appliquer un thème");
+        switch (sharedPreferences.getInt(DALTONISME_STRING, 0)) {
             case 1:
                 setTheme(R.style.Theme_Questease_Protanomalie);
                 break;
@@ -95,23 +94,21 @@ public abstract class Theme extends AppCompatActivity {
                     textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize24spInPx);
                 } else if (textView.getTextSize() == textSize24spInPx) {
                     textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize31spInPx);
-                }
-                else if (textView.getTextSize() == textSize31spInPx) {
+                } else if (textView.getTextSize() == textSize31spInPx) {
                     textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize35spInPx);
                 }
             } else if (view instanceof Button) {
                 Button button = (Button) view;
                 if (button.getTextSize() == textSize14spInPx) {
                     button.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize19spInPx);
-                } else if(button.getTextSize()==textSize19spInPx) {
-                    button.setTextSize(TypedValue.COMPLEX_UNIT_PX,textSize24spInPx);
-                } else if(button.getTextSize()==textSize24spInPx) {
-                    button.setTextSize(TypedValue.COMPLEX_UNIT_PX,textSize31spInPx);
-                } else if(button.getTextSize()==textSize31spInPx) {
-                    button.setTextSize(TypedValue.COMPLEX_UNIT_PX,textSize35spInPx);
+                } else if (button.getTextSize() == textSize19spInPx) {
+                    button.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize24spInPx);
+                } else if (button.getTextSize() == textSize24spInPx) {
+                    button.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize31spInPx);
+                } else if (button.getTextSize() == textSize31spInPx) {
+                    button.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize35spInPx);
                 }
-            }
-            else if (view instanceof CheckBox) {
+            } else if (view instanceof CheckBox) {
                 CheckBox checkBox = (CheckBox) view;
                 if (checkBox.getTextSize() == textSize14spInPx) {
                     checkBox.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize19spInPx);
@@ -147,7 +144,6 @@ public abstract class Theme extends AppCompatActivity {
         cardContent.setText(content);
         tutorialDialog.show();
     }
-
 
 
 }

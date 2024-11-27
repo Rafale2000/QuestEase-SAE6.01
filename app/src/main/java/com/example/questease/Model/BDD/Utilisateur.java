@@ -32,7 +32,7 @@ public class Utilisateur {
         this.resultatPasse = resultatPasse;
     }
 
-    public Utilisateur(){
+    public Utilisateur() {
         this.username = "john";
         this.xp = 0;
     }

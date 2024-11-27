@@ -1,8 +1,6 @@
 /*package Service;
 
 
-
-
 import com.example.questease.Model.BDD.MotCryptex;
 
 import java.util.List;

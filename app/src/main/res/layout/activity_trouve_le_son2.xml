@@ -6,15 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TrouveLeSon2">
+
     <LinearLayout
         android:id="@+id/main"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <LinearLayout
@@ -28,8 +28,8 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_gravity="left"
-                android:src="@drawable/baseline_close_24"
                 android:scaleType="fitCenter"
+                android:src="@drawable/baseline_close_24"
                 app:tint="@android:color/black" />
 
             <com.google.android.material.button.MaterialButton
@@ -41,15 +41,16 @@
                 android:layout_weight="1"
                 android:alpha="0.5"
                 android:backgroundTint="#40FFFFFF"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
                 android:text="Identifiez le son"
                 android:textColor="@android:color/black"
                 app:icon="@drawable/baseline_arrow_drop_down_24"
                 app:iconGravity="textStart"
-                app:iconTint="@android:color/black"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
                 app:iconPadding="8dp"
-                app:iconSize="25dp" />
+                app:iconSize="25dp"
+                app:iconTint="@android:color/black" />
+
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp">
@@ -59,13 +60,12 @@
         </LinearLayout>
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="50dp"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
 
             <TextView
@@ -73,24 +73,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50dp"
-                android:textSize="@dimen/text_size_large"
                 android:text="Vous êtes le Rédacteur"
-                />
+                android:textSize="@dimen/text_size_large" />
+
             <TextView
                 android:id="@+id/messages"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:textSize="@dimen/text_size_medium"
-                android:text="Messages"/>
+                android:text="Messages"
+                android:textSize="@dimen/text_size_medium" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardElevation="8dp"
-                app:cardCornerRadius="16dp"
                 app:cardBackgroundColor="@android:color/white"
-                >
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp">
 
                 <ScrollView
                     android:layout_width="match_parent"
@@ -104,19 +103,21 @@
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="test"
+                            android:gravity="center"
 
-                            android:gravity="center"/>
+                            android:text="test" />
+
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="ça doit être un raton laveur"
-                            android:gravity="center"/>
+                            android:gravity="center"
+                            android:text="ça doit être un raton laveur" />
+
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="salut à tous c'est fanta aujourd'hui on se retrouve pour la météo du bitcoin"
-                            android:gravity="center"/>
+                            android:gravity="center"
+                            android:text="salut à tous c'est fanta aujourd'hui on se retrouve pour la météo du bitcoin" />
                     </LinearLayout>
 
                 </ScrollView>
@@ -124,6 +125,7 @@
 
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -141,14 +143,12 @@
                 android:id="@+id/sendButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:backgroundTint="?attr/colorButtonBackground"
                 android:text="valider"
-                app:cornerRadius="10dp"
                 android:textColor="@color/black"
-                android:layout_gravity="end" />
+                app:cornerRadius="10dp" />
         </LinearLayout>
-
-
 
 
     </LinearLayout>

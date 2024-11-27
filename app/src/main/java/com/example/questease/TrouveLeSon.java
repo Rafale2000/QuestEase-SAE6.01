@@ -14,9 +14,10 @@ import com.google.android.material.button.MaterialButton;
 
 public class TrouveLeSon extends Theme {
     private MediaPlayer mediaPlayer;
-    private String rulestitle ="Règles du jeu";
-    private String rulescontent  ="Le jeu est séparé en deux parties :\n\n - Le premier joueur est l'auditeur, il doit appuyer sur un bouton pour entendre un son et le reconnaître.\n \n - Le rédacteur recevra des messages de l'auditeur et devra entrer dans son terminal de quel élément provient le son.";
+    private String rulestitle = "Règles du jeu";
+    private String rulescontent = "Le jeu est séparé en deux parties :\n\n - Le premier joueur est l'auditeur, il doit appuyer sur un bouton pour entendre un son et le reconnaître.\n \n - Le rédacteur recevra des messages de l'auditeur et devra entrer dans son terminal de quel élément provient le son.";
     private ViewGroup main;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -30,12 +31,12 @@ public class TrouveLeSon extends Theme {
             return insets;
         });
         main = findViewById(R.id.main);
-       showTutorialPopup(rulestitle,rulescontent,main);
+        showTutorialPopup(rulestitle, rulescontent, main);
 
         regles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showTutorialPopup(rulestitle,rulescontent,main);
+                showTutorialPopup(rulestitle, rulescontent, main);
             }
         });
         mediaPlayer = MediaPlayer.create(this, R.raw.yoda_sound);

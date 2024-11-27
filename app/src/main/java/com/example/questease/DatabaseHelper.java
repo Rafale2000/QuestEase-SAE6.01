@@ -23,13 +23,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Création des tables ici
         String CREATE_TABLE = "CREATE TABLE parametres (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "daltonisme TEXT, "+
-                "cecite INTEGER,"+
-                "assistance_vocale INTEGER,"+
-                "vision_peripherique INTEGER,"+
-                "diplopie INTEGER,"+
-                "myopie INTEGER,"+
-                "vision_centrale_reduite INTEGER,"+
+                "daltonisme TEXT, " +
+                "cecite INTEGER," +
+                "assistance_vocale INTEGER," +
+                "vision_peripherique INTEGER," +
+                "diplopie INTEGER," +
+                "myopie INTEGER," +
+                "vision_centrale_reduite INTEGER," +
                 "albinisme INTEGER)";
         db.execSQL(CREATE_TABLE);
     }
@@ -41,10 +41,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public Cursor getValue(SQLiteDatabase db){
+    public Cursor getValue(SQLiteDatabase db) {
         // Exécute la requête SQL pour récupérer toutes les valeurs de la table
-        System.out.println(db.rawQuery("SELECT * FROM parametre " , null));;
-        return db.rawQuery("SELECT * FROM parametre " , null);
+        System.out.println(db.rawQuery("SELECT * FROM parametre ", null));
+        ;
+        return db.rawQuery("SELECT * FROM parametre ", null);
     }
 }
 
