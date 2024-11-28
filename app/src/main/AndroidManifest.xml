@@ -27,14 +27,14 @@
             android:exported="true" />
         <!-- Activities -->
         <activity
-            android:name="View.questease.TrouveLeSon"
+            android:name=".TrouveLeSon"
             android:exported="false" />
         <activity
             android:name="View.questease.PrixJuste"
             android:exported="true" />
 
 
-        <activity android:name="View.questease.PrixJusteActivity"
+        <activity android:name=".PrixJusteActivity"
             android:exported="true"/>
 
 
@@ -42,13 +42,13 @@
             android:name="View.questease.Gyroscope"
             android:exported="false" />
         <activity
-            android:name="View.questease.Searchlobby"
+            android:name=".Searchlobby"
             android:exported="false" />
         <activity
-            android:name="View.questease.Parametres"
+            android:name=".Parametres"
             android:exported="false" />
         <activity
-            android:name="View.questease.Lobby"
+            android:name=".Lobby"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
