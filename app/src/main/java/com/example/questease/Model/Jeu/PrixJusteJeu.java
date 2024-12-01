@@ -12,7 +12,9 @@ public class PrixJusteJeu {
     public int getRemainingAttempts() {
         return remainingAttempts;
     }
-
+    public void decreaseRemainingAttemps(){
+        remainingAttempts--;
+    }
     public Result checkGuess(int guess) {
         if (guess == targetNumber) {
             remainingAttempts = 0; // Game over, player wins

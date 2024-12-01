@@ -11,6 +11,7 @@
         <item name="colorProfileBackground">#899295</item>
         <item name="iconcolor">#FFFFFF</item>
         <item name="texte">#FFFFFF</item>
+        <item name = "exitButton">#F60000</item>
         <item name="bordercolor">#F6F6F6</item>
     </style>
 
@@ -25,6 +26,8 @@
         <item name="iconcolor">#FFFFFF</item> <!-- Blanc pour les icônes -->
         <item name="texte">#FFFFFF</item> <!-- Texte blanc général -->
         <item name="bordercolor">#F6F6F6</item> <!-- Bordure noire pour contraste -->
+        <item name="exitButton">#EAA221</item> <!-- Orange foncé -->
+
     </style>
 
     <style name="Theme.Questease.Deuteranopie" parent="Theme.Material3.DayNight.NoActionBar">
@@ -39,6 +42,7 @@
         <item name="iconcolor">#FFFFFF</item> <!-- Icônes blanches -->
         <item name="texte">#FFFFFF</item> <!-- Texte blanc -->
         <item name="bordercolor">#F6F6F6</item> <!-- Bordure noire -->
+        <item name="exitButton">#B59F36</item> <!-- Jaune-brun -->
     </style>
 
     <style name="Theme.Questease.Protanomalie" parent="Theme.Material3.DayNight.NoActionBar">
@@ -52,6 +56,7 @@
         <item name="iconcolor">#FFFFFF</item> <!-- Icônes blanches -->
         <item name="texte">#FFFFFF</item> <!-- Texte blanc -->
         <item name="bordercolor">#F6F6F6</item> <!-- Bordure noire -->
+        <item name="exitButton">#D98825</item> <!-- Orange clair -->
     </style>
 
     <style name="Theme.Questease.Protanopie" parent="Theme.Material3.DayNight.NoActionBar">
@@ -65,6 +70,7 @@
         <item name="iconcolor">#FFFFFF</item> <!-- Icônes blanches -->
         <item name="texte">#FFFFFF</item> <!-- Texte blanc -->
         <item name="bordercolor">#F6F6F6</item> <!-- Bordure noire -->
+        <item name="exitButton">#A56738</item> <!-- Brun orangé -->
     </style>
 
     <style name="Theme.Questease.ContrasteEleve" parent="Theme.Material3.DayNight.NoActionBar">
@@ -85,15 +91,13 @@
         <item name="colorProfileBackground">#000000
         </item> <!-- Couleur de fond pour les profils (noir pur pour contraste maximal) -->
 
-        <item name="iconcolor">#FFFFFF
+        <item name="iconcolor">#000000
         </item> <!-- Couleur des icônes (blanc sur fond sombre pour fort contraste) -->
         <item name="texte">#FFFFFF</item> <!-- Couleur du texte (blanc pour fond sombre) -->
 
         <item name="bordercolor">#FFFF00
         </item> <!-- Couleur de la bordure (jaune vif pour fort contraste avec les fonds) -->
     </style>
-
-
 </resources>
 
 

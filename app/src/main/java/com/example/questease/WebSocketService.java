@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import org.json.JSONObject;
 
 public class WebSocketService extends Service {
 
@@ -29,16 +30,15 @@ public class WebSocketService extends Service {
     public IBinder onBind(Intent intent) {
         return binder;
     }
-
     @Override
     public void onCreate() {
         super.onCreate();
         connectWebSocket();
-    }
 
+    }
     private void connectWebSocket() {
         try {
-            URI uri = new URI("ws://192.168.118.206:8080/ws");
+            URI uri = new URI("ws://192.168.109.254:8080/ws");
             webSocketClient = new WebSocketClient(uri) {
                 @Override
                 public void onOpen(ServerHandshake handshakedata) {
@@ -51,14 +51,12 @@ public class WebSocketService extends Service {
                     Intent intent = new Intent("WebSocketMessage");
                     intent.putExtra("message", message);
                     sendBroadcast(intent);
-                    Log.d("WebSocketService", "Broadcast sent with message: " + message);
+                    Log.d("WebSocketService", "BrFoadcast sent with message: " + message);
                 }
-
                 @Override
                 public void onClose(int code, String reason, boolean remote) {
                     Log.d(TAG, "WebSocket Closed: " + reason);
                 }
-
                 @Override
                 public void onError(Exception ex) {
                     Log.e(TAG, "WebSocket Error: " + ex.getMessage());
@@ -69,7 +67,6 @@ public class WebSocketService extends Service {
             Log.e(TAG, "Invalid WebSocket URI: " + e.getMessage());
         }
     }
-
     public void sendMessage(String tag, String message) {
         if (webSocketClient != null && webSocketClient.isOpen()) {
             try {
@@ -82,8 +79,23 @@ public class WebSocketService extends Service {
             } catch (Exception e) {
                 Log.e(TAG, "Failed to send message: " + e.getMessage());
             }
-        } else {
-            Log.e(TAG, "WebSocket is not connected!");
+        }else {
+            JSONObject jsonMessage = new JSONObject();
+            try {
+                jsonMessage.put("tag", "WebSocketError"); // Ajoutez le "tag" que vous souhaitez
+                jsonMessage.put("message", "WebSocket is not connected!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String messageString = jsonMessage.toString();
+
+            Intent intent = new Intent("WebSocketMessage");
+            intent.putExtra("message", messageString);
+            Log.d(TAG, "Envoi du broadcast avec l'action : " + intent.getAction());
+            Log.d(TAG, "Contenu du message : " + intent.getStringExtra("message"));
+            sendBroadcast(intent);
+
+
         }
     }
 

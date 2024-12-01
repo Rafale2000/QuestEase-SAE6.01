@@ -1,8 +1,17 @@
-apply plugin: "org.sonarqube"
+plugins {
+    alias(libs.plugins.android.application)
+
+}
 
 android {
     namespace 'com.example.questease'
     compileSdk 34
+
+    packaging {
+        resources {
+            excludes += ['META-INF/LICENSE-notice.md']
+        }
+    }
 
     defaultConfig {
         applicationId "com.example.questease"
@@ -12,6 +21,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "io.cucumber.android.runner.CucumberAndroidJUnitRunner"
         testInstrumentationRunnerArguments(optionsAnnotationPackage: "app.java.com.example.questease.TestIntegration")
     }
 
@@ -21,7 +31,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -29,25 +38,10 @@ android {
 
     packaging {
         resources {
-            excludes += ['META-INF/LICENSE-notice.md', 'META-INF/LICENSE.md']
+            excludes += ["META-INF/LICENSE.md"]
         }
     }
 }
-
-sonarqube {
-    properties {
-        property "sonar.projectName", "QuestEase" // Nom du projet
-        property "sonar.projectKey", "questease" // Clé unique pour le projet
-        property "sonar.host.url", "http://localhost:9000" // URL de votre serveur SonarQube
-        property "sonar.sources", "src/main/java" // Répertoire source
-        property "sonar.tests", "src/test/java" // Répertoire des tests
-        property "sonar.sourceEncoding", "UTF-8" // Encodage des fichiers
-        property "sonar.login", "admin" // Nom d'utilisateur
-        property "sonar.password", "Choupinou15@" // Mot de passe
-    }
-}
-
-
 
 dependencies {
     implementation libs.datastore.core.android
@@ -65,7 +59,16 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
     implementation 'com.google.android.material:material:1.9.0'
 
+    androidTestImplementation 'io.cucumber:cucumber-android:7.13.0'
+    androidTestImplementation 'io.cucumber:cucumber-picocontainer:7.0.0'
 
+    testImplementation 'org.robolectric:robolectric:4.10.3'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.19.0'
+    // Bibliothèques de test Android nécessaires
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test:rules:1.5.0'
     implementation libs.appcompat
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation libs.material

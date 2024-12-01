@@ -21,7 +21,7 @@ import java.util.List;
 
 
 public class Parametres extends Theme {
-    private SharedPreferences sharedPreferences;
+    public SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "QuestEasePrefs";
     private boolean isCreated = false;
     //valeur string en constante
@@ -154,7 +154,7 @@ public class Parametres extends Theme {
 
 
         tailleTexte.setOnClickListener(view -> {
-            Log.i("taille ta grand mère", "change taille ");
+
             boolean isChecked = tailleTexte.isChecked();
             sharedPreferences.edit().putBoolean(TAILLE_TEXTE_STRING, isChecked).apply();
             recreate();
@@ -247,7 +247,7 @@ public class Parametres extends Theme {
         });
     }
 
-    private void initializePreference(String key, int defaultValue) {
+    public void initializePreference(String key, int defaultValue) {
         if (!sharedPreferences.contains(key)) {
             sharedPreferences.edit().putInt(key, defaultValue).apply();
         }

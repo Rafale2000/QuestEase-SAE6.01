@@ -1,122 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:id="@+id/main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Lobby">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <!-- AppBar avec Toolbar -->
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-                <ImageView
-                    android:id="@+id/logo_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:contentDescription="Logo"
-                    android:src="@drawable/baseline_arrow_back_24" />
-            </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp"
-            app:layout_anchor="@+id/linearLayout"
-            app:layout_anchorGravity="center"></LinearLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-    <Button
-        android:id="@+id/Person1"
-        style="@style/Widget.Material3.Button.ElevatedButton.Icon"
-        android:layout_width="385dp"
-        android:layout_height="197dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="11dp"
-        android:text="Person2"
-        android:textColor="?attr/texte"
-        android:textSize="@dimen/text_size_xlarge"
-        app:backgroundTint="?attr/colorProfileBackground"
-        app:cornerRadius="24dp"
-        app:icon="@drawable/baseline_person_24"
-        app:iconSize="70dp"
-        app:iconTint="?attr/iconcolor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Person2" />
-
-
-    <Button
-        android:id="@+id/Person2"
-        android:layout_width="377dp"
-        android:layout_height="184dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="6dp"
-        android:text="Person1"
-        android:textColor="?attr/texte"
-        android:textSize="@dimen/text_size_xlarge"
-        app:backgroundTint="?attr/colorProfileBackground"
-        app:cornerRadius="24dp"
-        app:icon="@drawable/baseline_person_24"
-        app:iconSize="70dp"
-        app:iconTint="?attr/iconcolor"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.083"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/text_joueurs_prets"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingTop="50dp"
-        android:text="Joueurs prêts 0/2"
-        android:textColor="?attr/texte"
-        android:textSize="@dimen/text_size_medium"
-        app:layout_constraintBottom_toTopOf="@id/button2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Person1"
-        app:layout_constraintVertical_bias="0.1" />
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <Button
-        android:id="@+id/button2"
-        style="@style/Widget.Material3.Button.ElevatedButton.Icon"
-        android:layout_width="390dp"
-        android:layout_height="106dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="6dp"
-        android:backgroundTint="?attr/colorButtonBackground"
-        android:text="Prêt"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_xlarge"
-        app:cornerRadius="24dp"
-        app:iconSize="70dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_joueurs_prets" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <ImageView
+                android:id="@+id/logo_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_arrow_back_24"
+                android:layout_gravity="start"
+                android:contentDescription="Logo" />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Contenu principal -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal">
+
+        <!-- Bouton Person2 -->
+        <Button
+            android:id="@+id/Person1"
+            android:layout_width="match_parent"
+            android:layout_height="184dp"
+            android:layout_marginBottom="16dp"
+            android:text=""
+            android:textColor="?attr/texte"
+            android:textSize="@dimen/text_size_xlarge"
+            app:backgroundTint="?attr/colorProfileBackground"
+            app:cornerRadius="24dp"
+            app:icon="@drawable/baseline_person_24"
+            app:iconSize="70dp"
+            app:iconTint="?attr/iconcolor" />
+
+        <!-- Bouton Person1 -->
+        <Button
+            android:id="@+id/Person2"
+            android:layout_width="match_parent"
+            android:layout_height="197dp"
+            android:layout_marginBottom="16dp"
+            android:text=""
+            android:textColor="?attr/texte"
+            android:textSize="@dimen/text_size_xlarge"
+            app:backgroundTint="?attr/colorProfileBackground"
+            app:cornerRadius="24dp"
+            app:icon="@drawable/baseline_person_24"
+            app:iconSize="70dp"
+            app:iconTint="?attr/iconcolor" />
+
+        <!-- Texte joueurs prêts -->
+        <TextView
+            android:id="@+id/text_joueurs_prets"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:text="Joueurs prêts 0/2"
+            android:textColor="?attr/texte"
+            android:textSize="@dimen/text_size_medium" />
+
+        <!-- Bouton Prêt -->
+        <Button
+            android:id="@+id/buttonReady"
+            android:layout_width="match_parent"
+            android:layout_height="106dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="?attr/colorButtonBackground"
+            android:text="Prêt"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_xlarge"
+            app:cornerRadius="24dp"
+            app:iconSize="70dp" />
+    </LinearLayout>
+</LinearLayout>

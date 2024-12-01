@@ -1,6 +1,7 @@
 package com.example.questease;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.RenderEffect;
@@ -20,15 +21,20 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+
+import View.questease.PrixJuste;
 
 
 public abstract class Theme extends AppCompatActivity {
 
     private static final String DALTONISME_STRING = "daltonisme";
-
+    private Dialog tutorialDialog; // Référence au dialog
+    private TextView cardTitle;    // Référence au titre
+    private TextView cardContent;
     public void ApplyParameters(SharedPreferences sharedPreferences) {
         //Protanomalie = 1
         //Protanopie = 2
@@ -124,26 +130,79 @@ public abstract class Theme extends AppCompatActivity {
     }
 
     public void showTutorialPopup(String title, String content, ViewGroup view) {
+        // Si le popup existe déjà, mets simplement à jour le contenu
+        if (tutorialDialog != null && tutorialDialog.isShowing()) {
+            cardTitle.setText(title);
+            cardContent.setText(content);
+            return;
+        }
+
+        // Appliquer l'effet de flou
         RenderEffect blurEffect = RenderEffect.createBlurEffect(
                 10, 10, Shader.TileMode.CLAMP);
         view.setRenderEffect(blurEffect);
 
-        Dialog tutorialDialog = new Dialog(this);
+        // Créer un nouveau Dialog si nécessaire
+        tutorialDialog = new Dialog(this);
         tutorialDialog.setContentView(R.layout.popuprules);
         tutorialDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         tutorialDialog.setCanceledOnTouchOutside(true);
         tutorialDialog.setOnCancelListener(dialog -> view.setRenderEffect(null));
+
         FloatingActionButton closeButton = tutorialDialog.findViewById(R.id.closeButton);
         closeButton.setOnClickListener(v -> {
             tutorialDialog.dismiss();
             view.setRenderEffect(null);
         });
-        TextView cardTitle = tutorialDialog.findViewById(R.id.cardTitle);
+
+        // Initialiser les vues et les sauvegarder
+        cardTitle = tutorialDialog.findViewById(R.id.cardTitle);
+        cardContent = tutorialDialog.findViewById(R.id.cardContent);
+
+        // Définir le contenu
         cardTitle.setText(title);
-        TextView cardContent = tutorialDialog.findViewById(R.id.cardContent);
         cardContent.setText(content);
+
+        // Afficher le popup
         tutorialDialog.show();
     }
 
+    public void showServerErrorPopUp(ViewGroup view) {
+        RenderEffect blurEffect = RenderEffect.createBlurEffect(
+                10, 10, Shader.TileMode.CLAMP);
+        view.setRenderEffect(blurEffect);
+        Dialog errorDialog = new Dialog(this);
+        errorDialog.setContentView(R.layout.pop_up_error);
+        errorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        errorDialog.setCanceledOnTouchOutside(true);
+        errorDialog.setOnCancelListener(dialog -> view.setRenderEffect(null));
+        MaterialButton closeButton = errorDialog.findViewById(R.id.closeButton);
+        closeButton.setOnClickListener(v -> {
+            errorDialog.dismiss();
+            view.setRenderEffect(null);
+        });
+        errorDialog.show();
+    }
+
+    protected Intent identifyActivity(String message){
+        Intent intentgame = null;
+        if ("pendu".equals(message)) {
+            // intentgame = new Intent(Lobby.class, Pendu.class);
+        } else if ("prix_juste1".equals(message) || "prix_juste2".equals(message)) {
+            intentgame = new Intent(this, PrixJuste.class);
+        } else if ("rotating_pictures1".equals(message)) {
+            intentgame = new Intent(this, RotatingPictures.class);
+        } else if ("rotating_pictures2".equals(message)) {
+            intentgame = new Intent(this, RotatingPictures2.class);
+        } else if ("menteur".equals(message)) {
+            // intentgame = new Intent(Lobby.this, Menteur.class);
+        } else if ("cryptex".equals(message)) {
+            // intentgame = new Intent(Lobby.this, Cryptex.class);
+        } else {
+            Log.e("Lobby", "Valeur inattendue pour message : " + message);
+        }
+
+        return intentgame;
+    }
 
 }

@@ -8,7 +8,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class WebSocketClient {
 
-    private static final String URL = "ws://192.168.118.69:8080/ws";
+    private static final String URL = "ws://192.168.190.230:8080/ws";
     private WebSocket webSocket;
     private final CountDownLatch connectionLatch = new CountDownLatch(10);
 

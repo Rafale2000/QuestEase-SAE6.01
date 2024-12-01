@@ -10,30 +10,27 @@
         <item name="colorButtonBackground2">#606060</item>
         <item name="colorButtonText">#000000</item> <!-- Texte du bouton -->
         <item name="colorProfileBackground">#4c4745</item>
-        <item name="iconcolor">#F6F6F6</item>
+        <item name="iconcolor">#000000</item>
         <item name="texte">#000000</item>
-        <item name="bordercolor">#000000
-        </item><!-- couleur utilisé pour contraster les samples de couleur et le fond -->
+         <item name = "exitButton">#F60000</item>
+        <item name="bordercolor">#000000</item> <!-- couleur utilisé pour contraster les samples de couleur et le fond -->
 
     </style>
-
+    
     <style name="Theme.Questease.Deuteranomalie" parent="Theme.Questease">
-        <item name="colorPrimary">#9F63FF
-        </item> <!-- Adaptation de violet à un ton plus perceptible -->
+        <item name="colorPrimary">#9F63FF</item> <!-- Adaptation de violet à un ton plus perceptible -->
         <item name="colorPrimaryVariant">#7D4DC3</item> <!-- Variante assombrie du violet -->
         <item name="colorOnPrimary">#FFFFFF</item> <!-- Blanc, pas de changement -->
-        <item name="colorButtonBackground">#00A4A4
-        </item> <!-- Conversion de vert vif en vert cyan -->
-        <item name="colorButtonBackground2">#5A5A5A
-        </item> <!-- Légère adaptation du gris pour un meilleur contraste -->
+        <item name="colorButtonBackground">#00A4A4</item> <!-- Conversion de vert vif en vert cyan -->
+        <item name="colorButtonBackground2">#5A5A5A</item> <!-- Légère adaptation du gris pour un meilleur contraste -->
         <item name="colorButtonText">#000000</item> <!-- Noir, pas de changement -->
-        <item name="colorProfileBackground">#484545
-        </item> <!-- Gris foncé, légère adaptation pour le contraste -->
+        <item name="colorProfileBackground">#484545</item> <!-- Gris foncé, légère adaptation pour le contraste -->
         <item name="iconcolor">#FFFFFF</item> <!-- Noir, pas de changement -->
+        <item name="exitButton">#EAA221</item> <!-- Orange foncé -->
+
         <item name="texte">#000000</item> <!-- Noir, pas de changement -->
 
     </style>
-
     <style name="Theme.Questease.deuteranopie" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Couleurs principales adaptées pour la deutéranopie -->
         <item name="colorPrimary">#5A5AFF</item> <!-- Couleur principale modifiée -->
@@ -47,6 +44,7 @@
         <item name="colorButtonBackground2">#808080
         </item> <!-- Variante de fond du bouton, gris neutre -->
         <item name="colorButtonText">#000000</item> <!-- Texte du bouton, noir pour contraste -->
+        <item name="exitButton">#B59F36</item> <!-- Jaune-brun -->
 
         <!-- Autres couleurs d'interface -->
         <item name="colorProfileBackground">#595959
@@ -55,12 +53,12 @@
         <item name="texte">#000000
         </item> <!-- Couleur du texte, noir pour le contraste sur fond clair -->
     </style>
-
     <style name="Theme.Questease.Protanomalie" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Couleurs principales pour le mode clair adaptées à la protanomalie -->
         <item name="colorPrimary">#6B8AFF</item> <!-- Couleur principale ajustée (plus bleutée) -->
         <item name="colorPrimaryVariant">#5A6FCE</item> <!-- Variante principale ajustée -->
         <item name="colorOnPrimary">#FFFFFF</item> <!-- Texte sur fond coloré (inchangé) -->
+        <item name="exitButton">#D98825</item> <!-- Orange clair -->
 
         <item name="colorButtonBackground">#00E500
         </item> <!-- Couleur du bouton personnalisé (plus vert) -->
@@ -77,7 +75,6 @@
         <item name="bordercolor">#5C5C5C
         </item> <!-- Couleur de la bordure pour mieux contraster (gris moyen) -->
     </style>
-
     <style name="Theme.Questease.Protanopie" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Couleurs principales pour le mode clair adaptées à la protanopie -->
         <item name="colorPrimary">#6B8AFF</item> <!-- Couleur principale ajustée (bleue) -->
@@ -118,7 +115,7 @@
         <item name="colorProfileBackground">#000000
         </item> <!-- Couleur de fond pour les profils (noir pur pour contraste maximal) -->
 
-        <item name="iconcolor">#FFFFFF
+        <item name="iconcolor">#000000
         </item> <!-- Couleur des icônes (blanc sur fond sombre pour fort contraste) -->
         <item name="texte">#FFFFFF</item> <!-- Couleur du texte (blanc pour fond sombre) -->
 

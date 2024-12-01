@@ -20,14 +20,11 @@ public class PrixJusteTest {
         Assertions.assertEquals(PrixJusteJeu.Result.TROP_HAUT, prix.checkGuess(75));
         Assertions.assertEquals(4, prix.getRemainingAttempts());
     }
-
     @Test
     void testInferieur() {
         System.out.println("Running test 2");
         Assertions.assertEquals(PrixJusteJeu.Result.TROP_BAS, prix.checkGuess(40));
-
     }
-
     @Test
     void testEgal() {
         System.out.println("Running test 3");

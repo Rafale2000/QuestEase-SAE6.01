@@ -52,6 +52,8 @@ public class Searchlobby extends Theme {
     Dialog namePopupDialog;
     private String requestedLobby;
     private Boolean isCreated = false;
+    private Boolean isErrorPopupVisible = false;
+
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -61,7 +63,6 @@ public class Searchlobby extends Theme {
             Log.d("SearchLobby", "Service connected");
             webSocketService.sendMessage("requestLobbies", "salut à tous c'est fanta de searchlobby");
         }
-
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;
@@ -88,17 +89,17 @@ public class Searchlobby extends Theme {
                         }
                         Log.d("SearchLobby", "Tag: " + tag);
                         Log.d("SearchLobby", "Lobbies: " + lobbies);
-                        Log.d("info", "je vais esssayer d'afficher les lobby");
+                        Log.d("info","je vais esssayer d'afficher les lobby");
                         addLobbyButtons(lobbies);
 
                     } else if ("setnom".equals(tag)) {
                         if ("success".equalsIgnoreCase(message)) {
                             namePopupDialog.dismiss();
                             findViewById(R.id.main).setRenderEffect(null);
-                            webSocketService.sendMessage("createLobby", nom);
+                            webSocketService.sendMessage("createLobby",nom);
                             Intent intentNewActivity = new Intent(Searchlobby.this, Lobby.class);
                             intentNewActivity.putExtra("p1", nom);
-                            intentNewActivity.putExtra("lobbyName", nom);
+                            intentNewActivity.putExtra("lobbyName",nom);
                             startActivity(intentNewActivity);
                             onStop();
                         } else {
@@ -106,16 +107,26 @@ public class Searchlobby extends Theme {
                         }
                     } else if ("lobbyJoined".equals(tag)) {
                         Intent intentNewActivity = new Intent(Searchlobby.this, Lobby.class);
-                        intentNewActivity.putExtra("p1", nom);
-                        intentNewActivity.putExtra("p2", message);
-                        intentNewActivity.putExtra("lobbyName", requestedLobby);
+                        intentNewActivity.putExtra("p1", message);
+                        intentNewActivity.putExtra("p2",nom);
+                        webSocketService.sendMessage("setP2Name",nom);
+                        intentNewActivity.putExtra("lobbyName",requestedLobby);
                         startActivity(intentNewActivity);
                         onStop();
                     } else if ("LobbyRejected".equals(tag)) {
                         Toast.makeText(Searchlobby.this, "Lobby plein ou inexistant.", Toast.LENGTH_SHORT).show();
-                    } else if ("lobbyLeaved".equals(tag)) {
+                    }
+                    else if("lobbyLeaved".equals(tag)){
                         Toast.makeText(Searchlobby.this, "Vous avez quitté le lobby.", Toast.LENGTH_SHORT).show();
                         webSocketService.sendMessage("requestLobbies", "salut à tous c'est fanta j'ai delete le lobby");
+                    }
+                    if("WebSocketError".equals(tag)){
+                        if(!isErrorPopupVisible)
+                        {
+                            ViewGroup view = findViewById(R.id.main);
+                            showServerErrorPopUp(view);
+                            isErrorPopupVisible = true;}
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -123,9 +134,9 @@ public class Searchlobby extends Theme {
             }
         }
     };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("SearchLobby", "Nouvelle instance créée");
 
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -142,7 +153,7 @@ public class Searchlobby extends Theme {
         MaterialButton creerLobby = findViewById(R.id.creerLobby);
         creerLobby.setOnClickListener(view -> {
             ViewGroup rootView = findViewById(R.id.main);
-            shownamepopup(rootView, "createLobby", "");
+            shownamepopup(rootView,"createLobby","");
         });
 
         views.add(creerLobby);
@@ -166,15 +177,24 @@ public class Searchlobby extends Theme {
         namePopupDialog = new Dialog(this);
         namePopupDialog.setContentView(R.layout.popname);
         namePopupDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        Log.d("oui", "je suis crée");
-
+        Log.d("oui","je suis crée");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         Log.d("SearchLobby", "onStop() called");
+        if (isBound) {
+            unbindService(connection);
+
+            isBound = false;
+        }
+        try {
+            unregisterReceiver(messageReceiver);
+            Log.d("SearchLobby", "BroadcastReceiver unregistered");
+        } catch (IllegalArgumentException e) {
+            Log.e("SearchLobby", "BroadcastReceiver already unregistered", e);
+        }
     }
 
     @Override
@@ -187,13 +207,20 @@ public class Searchlobby extends Theme {
     protected void onResume() {
         super.onResume();
         Log.d("SearchLobby", "onResume() called");
-
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         Log.d("SearchLobby", "onPause() called");
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (isBound) {
+            unbindService(connection);
+            isBound = false;
+        }
     }
 
 
@@ -209,23 +236,26 @@ public class Searchlobby extends Theme {
     }
 
     private void addLobbyButtons(List<String> lobbies) {
-        Log.d("lobbybutton", "je suis dans le addlobbybutton");
+        Log.d("lobbybutton","je suis dans le addlobbybutton");
         this.layoutLobbies = findViewById(R.id.layoutlobbies);
         layoutLobbies.removeAllViews();
         for (String lobby : lobbies) {
             MaterialButton lobbyButton = (MaterialButton) LayoutInflater.from(this)
                     .inflate(R.layout.lobby_button, layoutLobbies, false);
-            lobbyButton.setText(lobby);
-            lobbyButton.setOnClickListener(v -> {
-                ViewGroup rootView = findViewById(R.id.main);
-                this.requestedLobby = lobby;
-                shownamepopup(rootView, "joinLobby", lobby);
-            });
-            layoutLobbies.addView(lobbyButton);
+            if (lobby !=null){
+                lobbyButton.setText(lobby);
+                lobbyButton.setOnClickListener(v -> {
+                    ViewGroup rootView = findViewById(R.id.main);
+                    this.requestedLobby = lobby;
+                    shownamepopup(rootView,"joinLobby",lobby);
+                });
+                layoutLobbies.addView(lobbyButton);
+            }
         }
-    }
+            }
 
-    public void shownamepopup(ViewGroup view, String action, String lobby) {
+
+    public void shownamepopup(ViewGroup view,String action,String lobby) {
         RenderEffect blurEffect = RenderEffect.createBlurEffect(10, 10, Shader.TileMode.CLAMP);
         view.setRenderEffect(blurEffect);
         namePopupDialog.setCanceledOnTouchOutside(true);
@@ -233,7 +263,7 @@ public class Searchlobby extends Theme {
         namePopupDialog.show();
 
         MaterialButton validatebutton = namePopupDialog.findViewById(R.id.validateButton);
-        if (action.equals("createLobby")) {
+        if(action.equals("createLobby")){
             validatebutton.setOnClickListener(v -> {
                 TextInputLayout nameInput = namePopupDialog.findViewById(R.id.textInputLayout);
                 String name = nameInput.getEditText().getText().toString().trim();
@@ -243,7 +273,7 @@ public class Searchlobby extends Theme {
                     try {
                         jsonRequest.put("tag", "setnom");
                         jsonRequest.put("name", name);
-                        webSocketService.sendMessage("setnom", name);
+                        webSocketService.sendMessage("setnom",name);
                         this.nom = name;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -261,7 +291,7 @@ public class Searchlobby extends Theme {
                     try {
                         jsonRequest.put("tag", "joinLobby");
                         jsonRequest.put("name", name);
-                        webSocketService.sendMessage("joinLobby", lobby);
+                        webSocketService.sendMessage("joinLobby",lobby);
                         this.nom = name;
                     } catch (Exception e) {
                         e.printStackTrace();

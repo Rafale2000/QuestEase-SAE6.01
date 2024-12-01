@@ -1,8 +1,4 @@
 // build.gradle (au niveau du projet)
-plugins {
-    alias(libs.plugins.android.application) apply false
-}
-
 buildscript {
     repositories {
         google()
@@ -12,4 +8,8 @@ buildscript {
     dependencies {
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.1.1" // Plugin SonarQube
     }
+}
+
+plugins {
+    alias(libs.plugins.android.application) apply false
 }

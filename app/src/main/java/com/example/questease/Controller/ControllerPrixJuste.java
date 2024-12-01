@@ -16,7 +16,9 @@ public class ControllerPrixJuste {
     public int getRemainingAttempts() {
         return prixJusteJeu.getRemainingAttempts();
     }
-
+    public void reduceRemainingAttempts() {
+        prixJusteJeu.decreaseRemainingAttemps();
+    }
     public String CheckGuess(int valeur) {
         return this.prixJusteJeu.checkGuess(valeur).name();
     }

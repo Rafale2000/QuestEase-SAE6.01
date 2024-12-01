@@ -1,36 +1,39 @@
 package com.example.questease;
 
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-
 import androidx.activity.EdgeToEdge;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.example.questease.Searchlobby;
 import com.example.questease.Theme;
 import com.example.questease.WebSocketService;
 import com.example.questease.Parametres;
-
 import android.content.SharedPreferences;
 import android.widget.TextView;
-
+import android.widget.Toast;
 import org.java_websocket.client.WebSocketClient;
-
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends Theme {
     private WebSocketService webSocketService;
     private boolean isBound = false;
     private boolean isCreated = false;
+    private boolean isErrorPopupVisible = false;
 
     private ServiceConnection connection = new ServiceConnection() {
         @Override
@@ -38,13 +41,11 @@ public class MainActivity extends Theme {
             WebSocketService.LocalBinder binder = (WebSocketService.LocalBinder) service;
             webSocketService = binder.getService();
             isBound = true;
-
             // Exemple : Envoyer un message une fois connecté
             if (webSocketService != null) {
                 Log.e("test", "Envoi d'un message via WebSocketService");
                 webSocketService.sendMessage("requestLobbies", "salut à tous c'est fanta");
             }
-
         }
 
         @Override
@@ -52,7 +53,31 @@ public class MainActivity extends Theme {
             isBound = false;
         }
     };
+    private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Log.d("MainActivity", "Broadcast received");
+            if (intent.getAction().equals("WebSocketMessage")) {
+                String jsonMessage = intent.getStringExtra("message");
+                Log.d("MainActivity", "Message reçu brut : " + jsonMessage);
+                try {
+                    JSONObject jsonObject = new JSONObject(jsonMessage);
+                    String tag = jsonObject.getString("tag");
+                    String message = jsonObject.getString("message");
+                    if("WebSocketError".equals(tag) && message.equals("WebSocket is not connected!")){
+                        if(!isErrorPopupVisible)
+                        {
+                        ViewGroup view = findViewById(R.id.main);
+                        showServerErrorPopUp(view);
+                        isErrorPopupVisible = true;}
 
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +110,12 @@ public class MainActivity extends Theme {
         jouer.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, Searchlobby.class);
             startActivity(intent);
+            try {
+                unregisterReceiver(messageReceiver);
+                Log.d("SearchLobby", "BroadcastReceiver unregistered");
+            } catch (IllegalArgumentException e) {
+                Log.e("SearchLobby", "BroadcastReceiver already unregistered", e);
+            }
         });
 
         parametres.setOnClickListener(view -> {
@@ -96,8 +127,13 @@ public class MainActivity extends Theme {
         Intent serviceIntent = new Intent(this, WebSocketService.class);
         startService(serviceIntent);
         bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
-    }
 
+        // Log pour vérifier quand le receiver est enregistré
+        Log.d("MainActivity", "Enregistrement du BroadcastReceiver");
+        IntentFilter filter = new IntentFilter("WebSocketMessage");
+        registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
+
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -106,7 +142,6 @@ public class MainActivity extends Theme {
             isBound = false;
         }
     }
-
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -114,7 +149,6 @@ public class MainActivity extends Theme {
             recreate();
         }
     }
-
     @Override
     protected void onPause() {
         super.onPause();

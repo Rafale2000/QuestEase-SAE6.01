@@ -24,7 +24,7 @@
     <string name="contraste_eleve">Contraste eleve</string>
     <string name="assistance_vocale">Assistance vocale</string>
     <string name="taille_texte">Taille texte</string>
-    <string name="connexion_impossible">Connexion au serveur impossible.</string>
+    <string name="connexion_impossible">Connexion au serveur impossible.\nVeuillez réessayer plus tard.</string>
     <string name="fermer">Fermer</string>
 
 

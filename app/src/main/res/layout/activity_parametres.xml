@@ -13,7 +13,7 @@
         android:name="com.example.questease.ToolbarFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"/>
 
     <LinearLayout
         android:id="@+id/checkboxes_daltonisme"
@@ -76,7 +76,7 @@
                 android:layout_marginLeft="40dp"
                 android:text="Protanopie"
                 android:textSize="@dimen/text_size_large"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
         </LinearLayout>
     </LinearLayout>

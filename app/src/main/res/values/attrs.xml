@@ -1,17 +1,18 @@
 <resources>
-    <attr name="colorPrimary" format="color" />
-    <attr name="colorPrimaryVariant" format="color" />
-    <attr name="colorOnPrimary" format="color" />
+    <attr name="colorPrimary" format="color"/>
+    <attr name="colorPrimaryVariant" format="color"/>
+    <attr name="colorOnPrimary" format="color"/>
     <attr name="colorButtonBackground" format="color" />
     <attr name="colorButtonText" format="color" />
-    <attr name="colorButtonBackground2" format="color" />
-    <attr name="colorProfileBackground" format="color" />
-    <attr name="iconcolor" format="color" />
-    <attr name="texte" format="color" />
-    <attr name="bordercolor" format="color" />
-    <attr name="text_size_small" format="dimension" />
-    <attr name="text_size_medium" format="dimension" />
-    <attr name="text_size_large" format="dimension" />
-    <attr name="text_size_xlarge" format="dimension" />
+    <attr name="colorButtonBackground2" format="color"/>
+    <attr name="colorProfileBackground" format="color"/>
+    <attr name="iconcolor" format="color"/>
+    <attr name="texte" format="color"/>
+    <attr name="bordercolor" format="color"/>
+    <attr name="text_size_small" format="dimension"/>
+    <attr name="text_size_medium" format="dimension"/>
+    <attr name="text_size_large" format="dimension"/>
+    <attr name="text_size_xlarge" format="dimension"/>
+    <attr name="exitButton" format="color"/>
 </resources>
 
