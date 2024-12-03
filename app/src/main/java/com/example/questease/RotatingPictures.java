@@ -35,7 +35,7 @@ public class RotatingPictures extends Theme {
     private boolean isBound = false;
     private MediaPlayer mediaPlayer;
     private String rulestitle = "\n\nBienvenue dans Raider Tomb";
-    private String rulescontent ="Votre équipe est composée de deux personnes\n\n Le premier est l'archéologue, ce dernier à trouvé d'étranges plaques en pierre.\n\n" +
+    private String rulescontent = "Votre équipe est composée de deux personnes\n\n Le premier est l'archéologue, ce dernier à trouvé d'étranges plaques en pierre.\n\n" +
             "Cependant les plaques sont en partie effacées par le temps\n\n" +
             "Le libraire lui à trouvé dans un ancien livre leur ancienne représentation.\n\n" +
             "Les plaques peuvent tourner,il doit donc trouver la bonne orientation des plaques en alignant le bon nombre d'étoiles\n\n" +
@@ -52,6 +52,7 @@ public class RotatingPictures extends Theme {
             isBound = true;
 
         }
+
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;
@@ -68,7 +69,7 @@ public class RotatingPictures extends Theme {
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
                     String message = jsonObject.getString("message");
-                    if("RotatingPicOrientation".equals(tag)){
+                    if ("RotatingPicOrientation".equals(tag)) {
 
                     } else if ("successPopup".equals(tag)) {
                         ViewGroup viewGroup = findViewById(R.id.main);
@@ -79,8 +80,7 @@ public class RotatingPictures extends Theme {
                                 "L'archéologue à bien trouvé la bonne orientation des plaques.\n\nVous allez passer au jeu suivant dans quelques secondes.",
                                 viewGroup
                         );
-                    }
-                    else if ("startActivity".equals(tag)) {
+                    } else if ("startActivity".equals(tag)) {
                         Log.d("Lobby", "Message reçu pour startActivity : " + message);
                         Intent intentgame = identifyActivity(message);
                         startActivity(intentgame);
@@ -92,6 +92,7 @@ public class RotatingPictures extends Theme {
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("RotatingPictures", "Nouvelle instance créée");
@@ -111,37 +112,37 @@ public class RotatingPictures extends Theme {
         ImageView crane = findViewById(R.id.crane);
         dragon.setOnClickListener(v -> {
             dragon.setRotation(dragon.getRotation() + 90);
-            dragonRotation+=1;
-            if(dragonRotation > 3){
-                dragonRotation =0;
+            dragonRotation += 1;
+            if (dragonRotation > 3) {
+                dragonRotation = 0;
             }
         });
         cheval.setOnClickListener(v -> {
             cheval.setRotation(cheval.getRotation() + 90);
-            chevalRotation+=1;
-            if(chevalRotation > 3){
-                chevalRotation =0;
+            chevalRotation += 1;
+            if (chevalRotation > 3) {
+                chevalRotation = 0;
             }
         });
         epee.setOnClickListener(v -> {
             epee.setRotation(epee.getRotation() + 90);
-            epeeRotation+=1;
-            if(epeeRotation > 3){
-                epeeRotation =0;
+            epeeRotation += 1;
+            if (epeeRotation > 3) {
+                epeeRotation = 0;
             }
         });
         crane.setOnClickListener(v -> {
             crane.setRotation(crane.getRotation() + 90);
-            craneRotation+=1;
-            if(craneRotation > 3){
-                craneRotation =0;
+            craneRotation += 1;
+            if (craneRotation > 3) {
+                craneRotation = 0;
             }
         });
         ViewGroup viewGroup = findViewById(R.id.main);
-        showTutorialPopup(this.rulestitle,this.rulescontent,viewGroup);
+        showTutorialPopup(this.rulestitle, this.rulescontent, viewGroup);
         MaterialButton rulesButton = findViewById(R.id.Regles);
         rulesButton.setOnClickListener(v -> {
-            showTutorialPopup(this.rulestitle,this.rulescontent,viewGroup);
+            showTutorialPopup(this.rulestitle, this.rulescontent, viewGroup);
         });
         Button sendButton = findViewById(R.id.sendButton);
         sendButton.setOnClickListener(v -> {
@@ -150,7 +151,7 @@ public class RotatingPictures extends Theme {
             rotations.add(chevalRotation);
             rotations.add(epeeRotation);
             rotations.add(craneRotation);
-            webSocketService.sendMessage("RotatingPicOrientation",rotations.toString());
+            webSocketService.sendMessage("RotatingPicOrientation", rotations.toString());
         });
         Intent serviceIntent = new Intent(this, WebSocketService.class);
         startService(serviceIntent);
@@ -161,6 +162,7 @@ public class RotatingPictures extends Theme {
         Log.d("SearchLobby", "lancement du BroadcastReceiver");
 
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

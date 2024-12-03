@@ -11,7 +11,7 @@ public class TouchListener implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        String chno= String.valueOf(event.getAction());
+        String chno = String.valueOf(event.getAction());
         actTV.setText("miw");
         //Log.i("#NAS_ARG message","wselt");
 

@@ -58,7 +58,7 @@ public class Sincere_Menteur extends AppCompatActivity {
     private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent.getAction().equals("WebSocketMessage")) {
+            if (intent.getAction().equals("WebSocketMessage")) {
                 String jsonMessage = intent.getStringExtra("message");
 
                 Log.d("SearchLobby", "Message reçu brut : " + jsonMessage);
@@ -137,7 +137,7 @@ public class Sincere_Menteur extends AppCompatActivity {
 
         // Envoyer les données au serveur
         envoyerReponses(data);
-        webSocketService.sendMessage("messageTest","ceci est un test, tuer moi");
+        webSocketService.sendMessage("messageTest", "ceci est un test, tuer moi");
     }
 
     private void envoyerReponses(Map<String, Object> data) {

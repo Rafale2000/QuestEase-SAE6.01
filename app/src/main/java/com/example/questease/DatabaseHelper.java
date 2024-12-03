@@ -32,7 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "myopie INTEGER," +
                 "vision_centrale_reduite INTEGER," +
                 "albinisme INTEGER)";
-        String tableSM = "CREATE TABLE jeuSM("+
+        String tableSM = "CREATE TABLE jeuSM(" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "idJoueur INTEGER NOT NULL," +
                 "reponse1 BOOLEAN NOT NULL," +
@@ -55,11 +55,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM parametre ", null);
     }
 
-    public Cursor getReponseSM(SQLiteDatabase db){
-        return db.rawQuery("SELECT * FROM jeuSM " , null);
+    public Cursor getReponseSM(SQLiteDatabase db) {
+        return db.rawQuery("SELECT * FROM jeuSM ", null);
     }
 
-    public void addReponseSM(SQLiteDatabase db, int id, boolean r1, boolean r2){
+    public void addReponseSM(SQLiteDatabase db, int id, boolean r1, boolean r2) {
         ContentValues values = new ContentValues();
         values.put("id", id);
         values.put("reponse1", r1);
@@ -67,7 +67,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert("jeuSM", null, values);
     }
 
-    public void DeleteSM(SQLiteDatabase db){
+    public void DeleteSM(SQLiteDatabase db) {
         db.execSQL("DELETE from jeuSM");
     }
 }

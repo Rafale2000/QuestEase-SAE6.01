@@ -54,7 +54,6 @@ public class LunetteControlClass extends FragmentActivity {
         loadPrefs();
 
 
-
         t1 = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {

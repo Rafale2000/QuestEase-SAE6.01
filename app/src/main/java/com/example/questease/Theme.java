@@ -35,6 +35,7 @@ public abstract class Theme extends AppCompatActivity {
     private Dialog tutorialDialog; // Référence au dialog
     private TextView cardTitle;    // Référence au titre
     private TextView cardContent;
+
     public void ApplyParameters(SharedPreferences sharedPreferences) {
         //Protanomalie = 1
         //Protanopie = 2
@@ -184,7 +185,7 @@ public abstract class Theme extends AppCompatActivity {
         errorDialog.show();
     }
 
-    protected Intent identifyActivity(String message){
+    protected Intent identifyActivity(String message) {
         Intent intentgame = null;
         if ("pendu".equals(message)) {
             // intentgame = new Intent(Lobby.class, Pendu.class);

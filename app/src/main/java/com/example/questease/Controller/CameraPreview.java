@@ -1,8 +1,6 @@
 package com.example.questease.Controller;
 
 
-
-
 import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE;
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
@@ -47,7 +45,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
 
 
-        if (mHolder.getSurface() == null){
+        if (mHolder.getSurface() == null) {
 
             return;
         }
@@ -55,7 +53,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
         try {
             mCamera.stopPreview();
-        } catch (Exception e){
+        } catch (Exception e) {
 
         }
 
@@ -63,7 +61,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
             mCamera.setPreviewDisplay(mHolder);
             mCamera.startPreview();
 
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.d(TAG, "Error starting camera preview: " + e.getMessage());
         }
     }
@@ -87,8 +85,6 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         } catch (Exception e) {
         }
     }
-
-    
 
 
 }
