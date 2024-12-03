@@ -1,7 +1,14 @@
 package com.example.questease;
 
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.IBinder;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
@@ -10,7 +17,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -25,6 +37,53 @@ public class Sincere_Menteur extends AppCompatActivity {
     private DatabaseHelper dbHelper;
     private SQLiteDatabase db;
     private SincereMenteurApi sincereMenteurApi;
+    private WebSocketService webSocketService;
+    private boolean isBound = false;
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            WebSocketService.LocalBinder binder = (WebSocketService.LocalBinder) service;
+            webSocketService = binder.getService();
+            isBound = true;
+            Log.d("SearchLobby", "Service connected");
+            webSocketService.sendMessage("requestLobbies", "salut à tous c'est fanta de searchlobby");
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            isBound = false;
+        }
+    };
+
+    private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent.getAction().equals("WebSocketMessage")) {
+                String jsonMessage = intent.getStringExtra("message");
+
+                Log.d("SearchLobby", "Message reçu brut : " + jsonMessage);
+
+                try {
+                    // Analyser le message JSON
+                    JSONObject jsonObject = new JSONObject(jsonMessage);
+                    String tag = jsonObject.getString("tag");
+                    String message = jsonObject.getString("message");
+
+                    // Vous pouvez maintenant traiter la liste contenue dans le message JSON
+                    JSONArray messageArray = new JSONArray(message);
+                    List<String> lobbies = new ArrayList<>();
+                    for (int i = 0; i < messageArray.length(); i++) {
+                        lobbies.add(messageArray.getString(i));
+                    }
+
+                    Log.d("SearchLobby", "Tag: " + tag);
+                    Log.d("SearchLobby", "Lobbies: " + lobbies);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +137,7 @@ public class Sincere_Menteur extends AppCompatActivity {
 
         // Envoyer les données au serveur
         envoyerReponses(data);
+        webSocketService.sendMessage("messageTest","ceci est un test, tuer moi");
     }
 
     private void envoyerReponses(Map<String, Object> data) {
