@@ -96,7 +96,6 @@ public class RotatingPictures2 extends Theme {
                     else if ("startActivity".equals(tag)) {
                         Log.d("Lobby", "Message reçu pour startActivity : " + message);
                         Intent intentgame = identifyActivity(message);
-                        Log.d("Lobby", "Intent game :"+intentgame);
                         startActivity(intentgame);
                         finish();
                     }
@@ -178,7 +177,7 @@ public class RotatingPictures2 extends Theme {
         }
         IntentFilter filter = new IntentFilter("WebSocketMessage");
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
-        Log.d("RotatingPictures2", "lancement du BroadcastReceiver");
+        Log.d("SearchLobby", "lancement du BroadcastReceiver");
         Button sendButton = findViewById(R.id.sendButton);
         sendButton.setOnClickListener(v -> {
             Log.d("les valeurs des plaques sont : ",dragonRotation + " " + chevalRotation + " " + epeeRotation + " " + craneRotation + "");
@@ -218,6 +217,8 @@ public class RotatingPictures2 extends Theme {
                }.start();
            }
         });
+
+
     }
     @Override
     protected void onDestroy() {

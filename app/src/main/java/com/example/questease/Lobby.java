@@ -63,7 +63,7 @@ public class Lobby extends Theme {
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
                     String message = jsonObject.getString("message");
-                    if("setP2Name".equals(tag)){
+                    if ("setP2Name".equals(tag)) {
                         Button person2 = findViewById(R.id.Person2);
                         person2.setText(message);
                         Toast.makeText(Lobby.this, message+" à rejoint la partie", Toast.LENGTH_SHORT).show();
@@ -108,7 +108,6 @@ public class Lobby extends Theme {
         sharedPreferences = getSharedPreferences("QuestEasePrefs", MODE_PRIVATE);
         ApplyParameters(sharedPreferences);
         EdgeToEdge.enable(this);
-
         setContentView(R.layout.activity_lobby);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -122,7 +121,7 @@ public class Lobby extends Theme {
         views.add(findViewById(R.id.Person2));
         views.add(findViewById(R.id.buttonReady));
         views.add(findViewById(R.id.text_joueurs_prets));
-        if(sharedPreferences.getBoolean("tailleTexte",false)){
+        if (sharedPreferences.getBoolean("tailleTexte", false)) {
             adjustTextSize(views);
         }
         if(sharedPreferences.getBoolean("dyslexie",false)){

@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import org.json.JSONObject;
 
 public class WebSocketService extends Service {
@@ -30,11 +31,13 @@ public class WebSocketService extends Service {
     public IBinder onBind(Intent intent) {
         return binder;
     }
+
     @Override
     public void onCreate() {
         super.onCreate();
         connectWebSocket();
     }
+
     private void connectWebSocket() {
         try {
             URI uri = new URI("ws://192.168.219.22:8080/ws");
@@ -51,10 +54,12 @@ public class WebSocketService extends Service {
                     sendBroadcast(intent);
                     Log.d("WebSocketService", "BrFoadcast sent with message: " + message);
                 }
+
                 @Override
                 public void onClose(int code, String reason, boolean remote) {
                     Log.d(TAG, "WebSocket Closed: " + reason);
                 }
+
                 @Override
                 public void onError(Exception ex) {
                     Log.e(TAG, "WebSocket Error: " + ex.getMessage());
@@ -65,6 +70,7 @@ public class WebSocketService extends Service {
             Log.e(TAG, "Invalid WebSocket URI: " + e.getMessage());
         }
     }
+
     public void sendMessage(String tag, String message) {
         if (webSocketClient != null && webSocketClient.isOpen()) {
             try {
@@ -77,7 +83,7 @@ public class WebSocketService extends Service {
             } catch (Exception e) {
                 Log.e(TAG, "Failed to send message: " + e.getMessage());
             }
-        }else {
+        } else {
             JSONObject jsonMessage = new JSONObject();
             try {
                 jsonMessage.put("tag", "WebSocketError"); // Ajoutez le "tag" que vous souhaitez

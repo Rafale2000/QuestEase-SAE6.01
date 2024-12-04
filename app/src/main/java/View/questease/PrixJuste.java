@@ -65,6 +65,7 @@ public class PrixJuste extends Theme {
             webSocketService = binder.getService();
             isBound = true;
         }
+
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;
@@ -90,8 +91,7 @@ public class PrixJuste extends Theme {
                     } else if ("PrixJusteTry".equals(tag)) {
                         handlePrixJusteTry(message);
                         canPlay = true;
-                    }
-                    else if ("successPopup".equals(tag)) {
+                    } else if ("successPopup".equals(tag)) {
                         ViewGroup viewGroup = findViewById(R.id.main);
                         mediaPlayer = MediaPlayer.create(PrixJuste.this, R.raw.professor_layton_sucess);
                         mediaPlayer.start();
@@ -101,7 +101,7 @@ public class PrixJuste extends Theme {
                                 viewGroup
                         );
                     } else if ("beginGame".equals(tag)) {
-                        canPlay= true;
+                        canPlay = true;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -109,6 +109,7 @@ public class PrixJuste extends Theme {
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,6 +132,7 @@ public class PrixJuste extends Theme {
                 controllerPrixJuste = new ControllerPrixJuste(intancePrixJuste);
                 initializeUI(chose);
             }
+
             @Override
             public void onFailure(String errorMessage) {
                 Log.e("PrixJuste", "Error retrieving data: " + errorMessage);
@@ -178,8 +180,9 @@ public class PrixJuste extends Theme {
 
     /**
      * Initialize l'interface utilisateur et met en place des écouteurs pour certaines fonctionnalitées.
+     *
      * @param chose
-    */
+     */
     private void initializeUI(ChoseATrouverPrixJuste chose) {
         // Initialisation des TextViews
         TextView numberOfAttempts = findViewById(R.id.tv_attempts);
@@ -223,7 +226,7 @@ public class PrixJuste extends Theme {
         btnValider.setOnClickListener(view -> {
             String userInput = inputNumber.getText().toString().trim();
             if (!userInput.isEmpty()) {
-                if(canPlay) {
+                if (canPlay) {
                     try {
 
                         // Conversion de l'entrée utilisateur en entier
@@ -284,8 +287,7 @@ public class PrixJuste extends Theme {
                     } catch (NumberFormatException e) {
                         Toast.makeText(PrixJuste.this, "Veuillez entrer un nombre valide.", Toast.LENGTH_SHORT).show();
                     }
-                }
-                else{
+                } else {
                     Toast.makeText(PrixJuste.this, "C'est pas ton tour !", Toast.LENGTH_SHORT).show();
                 }
             } else {
@@ -293,6 +295,7 @@ public class PrixJuste extends Theme {
             }
         });
     }
+
     private void handlePrixJusteTry(String message) {
         try {
             // Le message doit contenir le dernier essai
@@ -315,6 +318,7 @@ public class PrixJuste extends Theme {
             Log.e("PrixJuste", "Message reçu invalide : " + message, e);
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -324,8 +328,6 @@ public class PrixJuste extends Theme {
         }
         unregisterReceiver(messageReceiver);
     }
-
-
 
 
 }

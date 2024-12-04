@@ -12,20 +12,25 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
 import androidx.activity.EdgeToEdge;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
 import com.example.questease.Searchlobby;
 import com.example.questease.Theme;
 import com.example.questease.WebSocketService;
 import com.example.questease.Parametres;
+
 import android.content.SharedPreferences;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import org.java_websocket.client.WebSocketClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,12 +69,12 @@ public class MainActivity extends Theme {
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
                     String message = jsonObject.getString("message");
-                    if("WebSocketError".equals(tag) && message.equals("WebSocket is not connected!")){
-                        if(!isErrorPopupVisible)
-                        {
-                        ViewGroup view = findViewById(R.id.main);
-                        showServerErrorPopUp(view);
-                        isErrorPopupVisible = true;}
+                    if ("WebSocketError".equals(tag) && message.equals("WebSocket is not connected!")) {
+                        if (!isErrorPopupVisible) {
+                            ViewGroup view = findViewById(R.id.main);
+                            showServerErrorPopUp(view);
+                            isErrorPopupVisible = true;
+                        }
 
                     }
                 } catch (Exception e) {
@@ -78,6 +83,7 @@ public class MainActivity extends Theme {
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,6 +140,7 @@ public class MainActivity extends Theme {
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
 
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -142,6 +149,7 @@ public class MainActivity extends Theme {
             isBound = false;
         }
     }
+
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -149,6 +157,7 @@ public class MainActivity extends Theme {
             recreate();
         }
     }
+
     @Override
     protected void onPause() {
         super.onPause();

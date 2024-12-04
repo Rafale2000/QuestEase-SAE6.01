@@ -18,8 +18,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="?attr/exitButton"
             android:text="@string/exit"
-            android:textSize="@dimen/text_size_medium"
-            />
+            android:textSize="@dimen/text_size_medium" />
 
         <Space
             android:layout_width="0dp"

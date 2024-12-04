@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.robolectric.RobolectricTestRunner;
+
 import static org.junit.Assert.*;
 
 import android.content.SharedPreferences;
@@ -26,6 +27,7 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
 
     }
+
     @Test
     public void testInitializePreference() {
         SharedPreferences mockSharedPreferences = Mockito.mock(SharedPreferences.class);
@@ -43,6 +45,7 @@ public class ExampleUnitTest {
         Mockito.verify(mockEditor).putInt("test_key", 42);
         Mockito.verify(mockEditor).apply();
     }
+
     @Test
     public void testAdjustTextSize() {
 
@@ -50,7 +53,7 @@ public class ExampleUnitTest {
         TextView mockTextView2 = Mockito.mock(TextView.class);
 
         List<View> views = new ArrayList<>(Arrays.asList(
-                mockTextView1,mockTextView2
+                mockTextView1, mockTextView2
         ));
         Parametres parametres = new Parametres();
         parametres.adjustTextSize(views);
