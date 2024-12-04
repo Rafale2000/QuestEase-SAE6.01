@@ -34,17 +34,15 @@ public class WebSocketService extends Service {
     public void onCreate() {
         super.onCreate();
         connectWebSocket();
-
     }
     private void connectWebSocket() {
         try {
-            URI uri = new URI("ws://192.168.109.254:8080/ws");
+            URI uri = new URI("ws://192.168.219.22:8080/ws");
             webSocketClient = new WebSocketClient(uri) {
                 @Override
                 public void onOpen(ServerHandshake handshakedata) {
                     Log.d(TAG, "WebSocket Opened");
                 }
-
                 @Override
                 public void onMessage(String message) {
                     Log.d(TAG, "Message received: " + message);

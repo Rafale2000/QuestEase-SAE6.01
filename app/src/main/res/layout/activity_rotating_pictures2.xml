@@ -44,7 +44,7 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="Règles"
-                android:textColor="@android:color/black"
+                android:textColor="?attr/texte"
                 app:icon="@drawable/baseline_arrow_drop_down_24"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
@@ -85,6 +85,7 @@
                 android:textSize="@dimen/text_size_medium" />
 
             <TextView
+                android:id="@+id/instructions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="les flèches indiquent l'orientation à suivre"

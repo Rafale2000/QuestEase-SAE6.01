@@ -186,8 +186,8 @@ public abstract class Theme extends AppCompatActivity {
 
     protected Intent identifyActivity(String message){
         Intent intentgame = null;
-        if ("pendu".equals(message)) {
-            // intentgame = new Intent(Lobby.class, Pendu.class);
+        if ("pendu1".equals(message) || "pendu2".equals(message)) {
+            intentgame = new Intent(this, Pendu.class);
         } else if ("prix_juste1".equals(message) || "prix_juste2".equals(message)) {
             intentgame = new Intent(this, PrixJuste.class);
         } else if ("rotating_pictures1".equals(message)) {
@@ -198,7 +198,12 @@ public abstract class Theme extends AppCompatActivity {
             // intentgame = new Intent(Lobby.this, Menteur.class);
         } else if ("cryptex".equals(message)) {
             // intentgame = new Intent(Lobby.this, Cryptex.class);
-        } else {
+        }else if("son1".equals(message)){
+            intentgame = new Intent(this, TrouveLeSon.class);
+        }else if("son2".equals(message)){
+            intentgame = new Intent(this, TrouveLeSon2.class);
+        }
+        else {
             Log.e("Lobby", "Valeur inattendue pour message : " + message);
         }
 

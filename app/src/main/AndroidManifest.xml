@@ -16,28 +16,29 @@
         android:theme="@style/Theme.Questease"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Pendu"
+            android:exported="false" />
+        <activity
             android:name=".RotatingPictures2"
             android:exported="false" />
         <activity
             android:name=".RotatingPictures"
             android:exported="false" />
-
         <activity
             android:name="View.questease.MotCryptexActivity"
-            android:exported="true" />
-        <!-- Activities -->
+            android:exported="true" /> <!-- Activities -->
         <activity
             android:name=".TrouveLeSon"
             android:exported="false" />
         <activity
+            android:name=".TrouveLeSon2"
+            android:exported="false" />
+        <activity
             android:name="View.questease.PrixJuste"
             android:exported="true" />
-
-
-        <activity android:name=".PrixJusteActivity"
-            android:exported="true"/>
-
-
+        <activity
+            android:name=".PrixJusteActivity"
+            android:exported="true" />
         <activity
             android:name="View.questease.Gyroscope"
             android:exported="false" />
@@ -63,11 +64,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".WebSocketService"
+
+        <service
+            android:name=".WebSocketService"
             android:enabled="true"
-            android:exported="false"/>
-
-
+            android:exported="false" />
     </application>
 
 </manifest>

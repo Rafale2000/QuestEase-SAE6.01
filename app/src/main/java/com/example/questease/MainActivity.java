@@ -112,9 +112,9 @@ public class MainActivity extends Theme {
             startActivity(intent);
             try {
                 unregisterReceiver(messageReceiver);
-                Log.d("SearchLobby", "BroadcastReceiver unregistered");
+                Log.d("MainActivity", "BroadcastReceiver unregistered");
             } catch (IllegalArgumentException e) {
-                Log.e("SearchLobby", "BroadcastReceiver already unregistered", e);
+                Log.e("MainActivity", "BroadcastReceiver already unregistered", e);
             }
         });
 

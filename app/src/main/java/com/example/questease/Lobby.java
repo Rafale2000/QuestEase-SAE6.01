@@ -105,7 +105,10 @@ public class Lobby extends Theme {
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("Lobby", "Nouvelle instance créée");
         super.onCreate(savedInstanceState);
+        sharedPreferences = getSharedPreferences("QuestEasePrefs", MODE_PRIVATE);
+        ApplyParameters(sharedPreferences);
         EdgeToEdge.enable(this);
+
         setContentView(R.layout.activity_lobby);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -113,7 +116,7 @@ public class Lobby extends Theme {
             return insets;
         });
 
-        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
         List<View> views = new ArrayList<>();
         views.add(findViewById(R.id.Person1));
         views.add(findViewById(R.id.Person2));
@@ -177,9 +180,7 @@ public class Lobby extends Theme {
 
         IntentFilter filter = new IntentFilter("WebSocketMessage");
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
-        Log.d("SearchLobby", "lancement du BroadcastReceiver");
-
-
+        Log.d("Lobby", "lancement du BroadcastReceiver");
     }
     @Override
     protected void onStop() {
@@ -204,9 +205,9 @@ public class Lobby extends Theme {
         }
         try {
             unregisterReceiver(messageReceiver);
-            Log.d("SearchLobby", "BroadcastReceiver unregistered");
+            Log.d("Lobby", "BroadcastReceiver unregistered");
         } catch (IllegalArgumentException e) {
-            Log.e("SearchLobby", "BroadcastReceiver already unregistered", e);
+            Log.e("Lobby", "BroadcastReceiver already unregistered", e);
         }
     }
     @Override
@@ -247,9 +248,9 @@ public class Lobby extends Theme {
             }
             try {
                 unregisterReceiver(messageReceiver);
-                Log.d("SearchLobby", "BroadcastReceiver unregistered");
+                Log.d("Lobby", "BroadcastReceiver unregistered");
             } catch (IllegalArgumentException e) {
-                Log.e("SearchLobby", "BroadcastReceiver already unregistered", e);
+                Log.e("Lobby", "BroadcastReceiver already unregistered", e);
             }
     }
 

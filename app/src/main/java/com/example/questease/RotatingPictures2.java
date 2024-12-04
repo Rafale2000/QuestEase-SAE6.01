@@ -7,11 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,6 +30,10 @@ import com.google.android.material.button.MaterialButton;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RotatingPictures2 extends Theme {
     private WebSocketService webSocketService;
@@ -63,7 +69,7 @@ public class RotatingPictures2 extends Theme {
     private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("SearchLobby", "Broadcast received");
+            Log.d("RotatingPictures2", "Broadcast received");
             if (intent.getAction().equals("WebSocketMessage")) {
                 String jsonMessage = intent.getStringExtra("message");
                 Log.d("RotatingPictures2", "Message reçu brut : " + jsonMessage);
@@ -90,6 +96,7 @@ public class RotatingPictures2 extends Theme {
                     else if ("startActivity".equals(tag)) {
                         Log.d("Lobby", "Message reçu pour startActivity : " + message);
                         Intent intentgame = identifyActivity(message);
+                        Log.d("Lobby", "Intent game :"+intentgame);
                         startActivity(intentgame);
                         finish();
                     }
@@ -102,7 +109,8 @@ public class RotatingPictures2 extends Theme {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("RotatingPictures2", "Nouvelle instance créée");
-
+        SharedPreferences sharedPreferences = getSharedPreferences("QuestEasePrefs", MODE_PRIVATE);
+        ApplyParameters(sharedPreferences);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_rotating_pictures2);
@@ -110,8 +118,8 @@ public class RotatingPictures2 extends Theme {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
-
         });
+
         ImageView dragon = findViewById(R.id.dragon);
         ImageView cheval = findViewById(R.id.cheval);
         ImageView epee = findViewById(R.id.epee);
@@ -153,10 +161,24 @@ public class RotatingPictures2 extends Theme {
         Intent serviceIntent = new Intent(this, WebSocketService.class);
         startService(serviceIntent);
         bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
-
+        List<View> views = new ArrayList<>();
+        Button button = findViewById(R.id.Regles);
+        TextView role = findViewById(R.id.role);
+        TextView consigne = findViewById(R.id.consigne);
+        TextView instructions = findViewById(R.id.instructions);
+        views.add(button);
+        views.add(role);
+        views.add(consigne);
+        views.add(instructions);
+        if(sharedPreferences.getBoolean("tailleTexte",false)){
+            adjustTextSize(views);
+        }
+        if(sharedPreferences.getBoolean("dyslexie",false)){
+            applyFont(views);
+        }
         IntentFilter filter = new IntentFilter("WebSocketMessage");
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
-        Log.d("SearchLobby", "lancement du BroadcastReceiver");
+        Log.d("RotatingPictures2", "lancement du BroadcastReceiver");
         Button sendButton = findViewById(R.id.sendButton);
         sendButton.setOnClickListener(v -> {
             Log.d("les valeurs des plaques sont : ",dragonRotation + " " + chevalRotation + " " + epeeRotation + " " + craneRotation + "");
@@ -178,7 +200,6 @@ public class RotatingPictures2 extends Theme {
                    @Override
                    public void onTick(long millisUntilFinished) {
                        secondsRemaining--;
-
                        // Mettre à jour le contenu du popup
                        if (tutorialDialog != null && tutorialDialog.isShowing()) {
                            cardContent.setText(
@@ -186,28 +207,17 @@ public class RotatingPictures2 extends Theme {
                            );
                        }
                    }
-
                    @Override
                    public void onFinish() {
                        webSocketService.sendMessage("startGame", "");
                        if (tutorialDialog != null) {
                            tutorialDialog.dismiss();
                        }
-                       try {
-                           unregisterReceiver(messageReceiver);
-                           Log.d("SearchLobby", "BroadcastReceiver unregistered");
-                       } catch (IllegalArgumentException e) {
-                           Log.e("SearchLobby", "BroadcastReceiver already unregistered", e);
-                       }
+
                    }
                }.start();
-
            }
-
-
         });
-
-
     }
     @Override
     protected void onDestroy() {
@@ -217,9 +227,9 @@ public class RotatingPictures2 extends Theme {
             isBound = false;
             try {
                 unregisterReceiver(messageReceiver);
-                Log.d("SearchLobby", "BroadcastReceiver unregistered");
+                Log.d("RotatingPictures2", "BroadcastReceiver unregistered");
             } catch (IllegalArgumentException e) {
-                Log.e("SearchLobby", "BroadcastReceiver already unregistered", e);
+                Log.e("RotatingPictures2", "BroadcastReceiver already unregistered", e);
             }
         }
     }
@@ -229,9 +239,9 @@ public class RotatingPictures2 extends Theme {
         super.onStop();
         try {
             unregisterReceiver(messageReceiver);
-            Log.d("SearchLobby", "BroadcastReceiver unregistered");
+            Log.d("RotatingPictures2", "BroadcastReceiver unregistered");
         } catch (IllegalArgumentException e) {
-            Log.e("SearchLobby", "BroadcastReceiver already unregistered", e);
+            Log.e("RotatingPictures2", "BroadcastReceiver already unregistered", e);
         }
     }
 }

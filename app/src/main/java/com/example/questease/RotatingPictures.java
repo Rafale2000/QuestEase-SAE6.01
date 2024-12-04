@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -16,7 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.view.View;
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,8 +28,10 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.button.MaterialButton;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RotatingPictures extends Theme {
     private WebSocketService webSocketService;
@@ -60,7 +63,7 @@ public class RotatingPictures extends Theme {
     private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("SearchLobby", "Broadcast received");
+            Log.d("RotatingPictures", "Broadcast received");
             if (intent.getAction().equals("WebSocketMessage")) {
                 String jsonMessage = intent.getStringExtra("message");
                 Log.d("RotatingPictures.java", "Message reçu brut : " + jsonMessage);
@@ -95,7 +98,8 @@ public class RotatingPictures extends Theme {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("RotatingPictures", "Nouvelle instance créée");
-
+        SharedPreferences sharedPreferences = getSharedPreferences("QuestEasePrefs", MODE_PRIVATE);
+        ApplyParameters(sharedPreferences);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_rotating_pictures);
@@ -105,6 +109,7 @@ public class RotatingPictures extends Theme {
             return insets;
 
         });
+
         ImageView dragon = findViewById(R.id.dragon);
         ImageView cheval = findViewById(R.id.cheval);
         ImageView epee = findViewById(R.id.epee);
@@ -158,8 +163,23 @@ public class RotatingPictures extends Theme {
 
         IntentFilter filter = new IntentFilter("WebSocketMessage");
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
-        Log.d("SearchLobby", "lancement du BroadcastReceiver");
+        Log.d("RotatingPictures", "lancement du BroadcastReceiver");
+        List<View> views = new ArrayList<>();
+        Button button = findViewById(R.id.Regles);
+        TextView role = findViewById(R.id.role);
+        TextView consigne = findViewById(R.id.consigne);
 
+
+        views.add(button);
+        views.add(role);
+        views.add(consigne);
+        views.add(sendButton);
+        if(sharedPreferences.getBoolean("tailleTexte",false)){
+            adjustTextSize(views);
+        }
+        if(sharedPreferences.getBoolean("dyslexie",false)){
+            applyFont(views);
+        }
     }
     @Override
     protected void onDestroy() {
@@ -169,9 +189,9 @@ public class RotatingPictures extends Theme {
             isBound = false;
             try {
                 unregisterReceiver(messageReceiver);
-                Log.d("SearchLobby", "BroadcastReceiver unregistered");
+                Log.d("RotatingPictures", "BroadcastReceiver unregistered");
             } catch (IllegalArgumentException e) {
-                Log.e("SearchLobby", "BroadcastReceiver already unregistered", e);
+                Log.e("RotatingPictures", "BroadcastReceiver already unregistered", e);
             }
         }
     }
@@ -181,9 +201,9 @@ public class RotatingPictures extends Theme {
         super.onStop();
         try {
             unregisterReceiver(messageReceiver);
-            Log.d("SearchLobby", "BroadcastReceiver unregistered");
+            Log.d("RotatingPictures", "BroadcastReceiver unregistered");
         } catch (IllegalArgumentException e) {
-            Log.e("SearchLobby", "BroadcastReceiver already unregistered", e);
+            Log.e("RotatingPictures", "BroadcastReceiver already unregistered", e);
         }
     }
 }
