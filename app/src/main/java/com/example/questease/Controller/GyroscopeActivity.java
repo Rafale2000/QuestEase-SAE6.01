@@ -23,13 +23,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.questease.R;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.questease.R;
 import com.example.questease.RotatingPictures;
 import com.example.questease.RotatingPictures2;
 import com.example.questease.Theme;
 import com.example.questease.WebSocketService;
+
 import android.media.MediaPlayer;
 
 import org.json.JSONObject;
@@ -51,7 +55,7 @@ public class GyroscopeActivity extends Theme implements SensorEventListener {
 
     private boolean isErrorPopupVisible = false;
     private String rulestitle = "\n\n\"Règles du jeu\"";
-    private String rulescontent ="\"Tournez votre téléphone pour aligner l'aiguille\n\n sur les bons angles : 45°, 180°, et 300°.\n\n \" +\n" +
+    private String rulescontent = "\"Tournez votre téléphone pour aligner l'aiguille\n\n sur les bons angles : 45°, 180°, et 300°.\n\n \" +\n" +
             "                        \"Quand tous les codes sont trouvés, vous aurez terminé le jeu.\"";
 
 
@@ -96,8 +100,7 @@ public class GyroscopeActivity extends Theme implements SensorEventListener {
                             showServerErrorPopUp(view);
                             isErrorPopupVisible = true;
                         }
-                    }
-                    else if ("successPopup".equals(tag)) {
+                    } else if ("successPopup".equals(tag)) {
                         ViewGroup viewGroup = findViewById(R.id.main);
                         mediaPlayer = MediaPlayer.create(GyroscopeActivity.this, R.raw.professor_layton_sucess);
                         mediaPlayer.start();
@@ -106,8 +109,7 @@ public class GyroscopeActivity extends Theme implements SensorEventListener {
                                 "Félicitation vous avez dévérouillé le coffre.\n\nVous allez passer voir son contenu dans quelques secondes",
                                 viewGroup
                         );
-                    }
-                    else if ("startActivity".equals(tag)) {
+                    } else if ("startActivity".equals(tag)) {
                         Log.d("Lobby", "Message reçu pour startActivity : " + message);
                         Intent intentgame = identifyActivity(message);
                         startActivity(intentgame);
@@ -120,6 +122,7 @@ public class GyroscopeActivity extends Theme implements SensorEventListener {
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,7 +145,6 @@ public class GyroscopeActivity extends Theme implements SensorEventListener {
             Toast.makeText(this, "Capteur de rotation vectorielle non disponible", Toast.LENGTH_SHORT).show();
             finish();
         }
-
 
 
         // Bouton pour quitter le jeu
@@ -211,10 +213,11 @@ public class GyroscopeActivity extends Theme implements SensorEventListener {
                 viewGroup
         );
 
-        webSocketService.sendMessage("successPopup","");
+        webSocketService.sendMessage("successPopup", "");
         // Créer un compteur
         new CountDownTimer(counter * 1000, 1000) {
             int secondsRemaining = counter;
+
             @Override
             public void onTick(long millisUntilFinished) {
                 secondsRemaining--;
@@ -225,6 +228,7 @@ public class GyroscopeActivity extends Theme implements SensorEventListener {
                     );
                 }
             }
+
             @Override
             public void onFinish() {
                 webSocketService.sendMessage("startGame", "");
@@ -234,6 +238,7 @@ public class GyroscopeActivity extends Theme implements SensorEventListener {
             }
         }.start();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -242,6 +247,7 @@ public class GyroscopeActivity extends Theme implements SensorEventListener {
             isBound = false;
         }
     }
+
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
         // Non utilisé

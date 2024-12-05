@@ -43,7 +43,7 @@ public class Sincere_Menteur2 extends Theme {
             webSocketService = binder.getService();
             isBound = true;
             Log.d("SincereMenteur", "Service connected");
-            webSocketService.sendMessage("getAllIDs","obtient mon id");
+            webSocketService.sendMessage("getAllIDs", "obtient mon id");
             webSocketService.sendMessage("requestLobbies", "salut à tous c'est fanta de SM");
         }
 
@@ -109,7 +109,6 @@ public class Sincere_Menteur2 extends Theme {
                             finish();
 
 
-
                             // Pas d'autres cas ici, vous pouvez en ajouter d'autres plus tard si nécessaire.
                         default:
                             Log.d("SearchLobby", "Message avec un tag inconnu : " + tag);
@@ -150,7 +149,7 @@ public class Sincere_Menteur2 extends Theme {
             @Override
             public void onClick(View v) {
                 verifierReponses();
-                webSocketService.sendMessage("startGame","au suivant !");
+                webSocketService.sendMessage("startGame", "au suivant !");
 
 
             }
@@ -179,7 +178,7 @@ public class Sincere_Menteur2 extends Theme {
 
         // Envoyer les données au serveur
         envoyerReponses(data);
-        webSocketService.sendMessage("messageTest","ceci est un test, tuer moi");
+        webSocketService.sendMessage("messageTest", "ceci est un test, tuer moi");
     }
 
     private void envoyerReponses(Map<String, Object> data) {

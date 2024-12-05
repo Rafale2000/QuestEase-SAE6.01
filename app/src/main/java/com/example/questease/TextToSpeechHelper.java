@@ -59,7 +59,6 @@ public class TextToSpeechHelper {
         }
 
 
-
     }
 
     // Méthode pour libérer les ressources

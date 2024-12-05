@@ -43,7 +43,7 @@ public class RotatingPictures2 extends Theme {
     private TextView cardContent;  // Référence au contenu
 
     private String rulestitle = "\n\nBienvenue dans Raider Tomb";
-    private String rulescontent ="Votre équipe est composée de deux personnes\n\n Le premier est l'archéologue, ce dernier à trouvé d'étranges plaques en pierre.\n\n" +
+    private String rulescontent = "Votre équipe est composée de deux personnes\n\n Le premier est l'archéologue, ce dernier à trouvé d'étranges plaques en pierre.\n\n" +
             "Cependant les plaques sont en partie effacées par le temps\n\n" +
             "Le libraire lui à trouvé dans un ancien livre leur ancienne représentation.\n\n" +
             "Les plaques peuvent tourner,il doit donc trouver la bonne orientation des plaques en alignant le bon nombre d'étoiles\n\n" +
@@ -61,6 +61,7 @@ public class RotatingPictures2 extends Theme {
             isBound = true;
 
         }
+
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;
@@ -77,7 +78,7 @@ public class RotatingPictures2 extends Theme {
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
                     String message = jsonObject.getString("message");
-                    if("RotatingPicOrientation".equals(tag)){
+                    if ("RotatingPicOrientation".equals(tag)) {
                         JSONArray jsonArray = new JSONArray(message);
                         int[] array = new int[jsonArray.length()];
 
@@ -88,13 +89,12 @@ public class RotatingPictures2 extends Theme {
                         ImageView arrow2 = findViewById(R.id.arrow2);
                         ImageView arrow3 = findViewById(R.id.arrow3);
                         ImageView arrow4 = findViewById(R.id.arrow4);
-                        arrow1.setRotation(array[0]*90);
-                        arrow2.setRotation(array[1]*90);
-                        arrow3.setRotation(array[2]*90);
-                        arrow4.setRotation(array[3]*90);
+                        arrow1.setRotation(array[0] * 90);
+                        arrow2.setRotation(array[1] * 90);
+                        arrow3.setRotation(array[2] * 90);
+                        arrow4.setRotation(array[3] * 90);
                         Toast.makeText(RotatingPictures2.this, "Le libraire à envoyé son étude", Toast.LENGTH_SHORT).show();
-                    }
-                    else if ("startActivity".equals(tag)) {
+                    } else if ("startActivity".equals(tag)) {
                         Log.d("Lobby", "Message reçu pour startActivity : " + message);
                         Intent intentgame = identifyActivity(message);
                         startActivity(intentgame);
@@ -106,6 +106,7 @@ public class RotatingPictures2 extends Theme {
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -121,7 +122,7 @@ public class RotatingPictures2 extends Theme {
             return insets;
         });
         ViewGroup layout = findViewById(R.id.main);
-        if(sharedPreferences.getBoolean("assistance_vocale", false)){
+        if (sharedPreferences.getBoolean("assistance_vocale", false)) {
             lireTextViews(layout);
         }
         ImageView dragon = findViewById(R.id.dragon);
@@ -130,37 +131,37 @@ public class RotatingPictures2 extends Theme {
         ImageView crane = findViewById(R.id.crane);
         dragon.setOnClickListener(v -> {
             dragon.setRotation(dragon.getRotation() + 90);
-            dragonRotation+=1;
-            if(dragonRotation > 3){
-                dragonRotation =0;
+            dragonRotation += 1;
+            if (dragonRotation > 3) {
+                dragonRotation = 0;
             }
         });
         cheval.setOnClickListener(v -> {
             cheval.setRotation(cheval.getRotation() + 90);
-            chevalRotation+=1;
-            if(chevalRotation > 3){
-                chevalRotation =0;
+            chevalRotation += 1;
+            if (chevalRotation > 3) {
+                chevalRotation = 0;
             }
         });
         epee.setOnClickListener(v -> {
             epee.setRotation(epee.getRotation() + 90);
-            epeeRotation+=1;
-            if(epeeRotation > 3){
-                epeeRotation =0;
+            epeeRotation += 1;
+            if (epeeRotation > 3) {
+                epeeRotation = 0;
             }
         });
         crane.setOnClickListener(v -> {
             crane.setRotation(crane.getRotation() + 90);
-            craneRotation+=1;
-            if(craneRotation > 3){
-                craneRotation =0;
+            craneRotation += 1;
+            if (craneRotation > 3) {
+                craneRotation = 0;
             }
         });
         ViewGroup viewGroup = findViewById(R.id.main);
-        showTutorialPopup(this.rulestitle,this.rulescontent,viewGroup);
+        showTutorialPopup(this.rulestitle, this.rulescontent, viewGroup);
         MaterialButton rulesButton = findViewById(R.id.Regles);
         rulesButton.setOnClickListener(v -> {
-            showTutorialPopup(this.rulestitle,this.rulescontent,viewGroup);
+            showTutorialPopup(this.rulestitle, this.rulescontent, viewGroup);
         });
         Intent serviceIntent = new Intent(this, WebSocketService.class);
         startService(serviceIntent);
@@ -174,10 +175,10 @@ public class RotatingPictures2 extends Theme {
         views.add(role);
         views.add(consigne);
         views.add(instructions);
-        if(sharedPreferences.getBoolean("tailleTexte",false)){
+        if (sharedPreferences.getBoolean("tailleTexte", false)) {
             adjustTextSize(views);
         }
-        if(sharedPreferences.getBoolean("dyslexie",false)){
+        if (sharedPreferences.getBoolean("dyslexie", false)) {
             applyFont(views);
         }
 
@@ -186,42 +187,43 @@ public class RotatingPictures2 extends Theme {
         Log.d("SearchLobby", "lancement du BroadcastReceiver");
         Button sendButton = findViewById(R.id.sendButton);
         sendButton.setOnClickListener(v -> {
-            Log.d("les valeurs des plaques sont : ",dragonRotation + " " + chevalRotation + " " + epeeRotation + " " + craneRotation + "");
-           if(dragonRotation == 3 && chevalRotation == 0 && epeeRotation == 0 && craneRotation == 3) {
-               int counter = 10; // Durée en secondes
-               mediaPlayer = MediaPlayer.create(RotatingPictures2.this, R.raw.professor_layton_sucess);
-               mediaPlayer.start();
-               // Afficher le popup une première fois
-               showTutorialPopup(
-                       "Félicitations !",
-                       "Vous avez trouvé la bonne orientation des plaques !\n\nIl est temps de passer au jeu suivant dans " + counter + " secondes",
-                       viewGroup
-               );
-                webSocketService.sendMessage("successPopup","");
-               // Créer un compteur
-               new CountDownTimer(counter * 1000, 1000) {
-                   int secondsRemaining = counter;
+            Log.d("les valeurs des plaques sont : ", dragonRotation + " " + chevalRotation + " " + epeeRotation + " " + craneRotation + "");
+            if (dragonRotation == 3 && chevalRotation == 0 && epeeRotation == 0 && craneRotation == 3) {
+                int counter = 10; // Durée en secondes
+                mediaPlayer = MediaPlayer.create(RotatingPictures2.this, R.raw.professor_layton_sucess);
+                mediaPlayer.start();
+                // Afficher le popup une première fois
+                showTutorialPopup(
+                        "Félicitations !",
+                        "Vous avez trouvé la bonne orientation des plaques !\n\nIl est temps de passer au jeu suivant dans " + counter + " secondes",
+                        viewGroup
+                );
+                webSocketService.sendMessage("successPopup", "");
+                // Créer un compteur
+                new CountDownTimer(counter * 1000, 1000) {
+                    int secondsRemaining = counter;
 
-                   @Override
-                   public void onTick(long millisUntilFinished) {
-                       secondsRemaining--;
-                       // Mettre à jour le contenu du popup
-                       if (tutorialDialog != null && tutorialDialog.isShowing()) {
-                           cardContent.setText(
-                                   "Vous avez trouvé la bonne orientation des plaques !\n\nIl est temps de passer au jeu suivant dans " + secondsRemaining + " secondes"
-                           );
-                       }
-                   }
-                   @Override
-                   public void onFinish() {
-                       webSocketService.sendMessage("startGame", "");
-                       if (tutorialDialog != null) {
-                           tutorialDialog.dismiss();
-                       }
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+                        secondsRemaining--;
+                        // Mettre à jour le contenu du popup
+                        if (tutorialDialog != null && tutorialDialog.isShowing()) {
+                            cardContent.setText(
+                                    "Vous avez trouvé la bonne orientation des plaques !\n\nIl est temps de passer au jeu suivant dans " + secondsRemaining + " secondes"
+                            );
+                        }
+                    }
 
-                   }
-               }.start();
-           }
+                    @Override
+                    public void onFinish() {
+                        webSocketService.sendMessage("startGame", "");
+                        if (tutorialDialog != null) {
+                            tutorialDialog.dismiss();
+                        }
+
+                    }
+                }.start();
+            }
 
         });
         ImageView quitter = findViewById(R.id.quitter);
@@ -231,6 +233,7 @@ public class RotatingPictures2 extends Theme {
         });
 
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();

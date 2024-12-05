@@ -151,7 +151,7 @@ public class Searchlobby extends Theme {
             return insets;
         });
         ViewGroup layout = findViewById(R.id.main);
-        if(sharedPreferences.getBoolean("assistance_vocale", false)){
+        if (sharedPreferences.getBoolean("assistance_vocale", false)) {
             lireTextViews(layout);
         }
         MaterialButton creerLobby = findViewById(R.id.creerLobby);

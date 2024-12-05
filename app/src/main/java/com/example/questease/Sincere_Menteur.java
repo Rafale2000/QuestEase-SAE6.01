@@ -43,7 +43,7 @@ public class Sincere_Menteur extends Theme {
             webSocketService = binder.getService();
             isBound = true;
             Log.d("SincereMenteur", "Service connected");
-            webSocketService.sendMessage("getAllIDs","obtient mon id");
+            webSocketService.sendMessage("getAllIDs", "obtient mon id");
             webSocketService.sendMessage("requestLobbies", "salut à tous c'est fanta de SM");
         }
 
@@ -109,8 +109,7 @@ public class Sincere_Menteur extends Theme {
                             finish();
 
 
-
-                        // Pas d'autres cas ici, vous pouvez en ajouter d'autres plus tard si nécessaire.
+                            // Pas d'autres cas ici, vous pouvez en ajouter d'autres plus tard si nécessaire.
                         default:
                             Log.d("SearchLobby", "Message avec un tag inconnu : " + tag);
                             break;
@@ -144,7 +143,7 @@ public class Sincere_Menteur extends Theme {
 
         sincereMenteurApi = retrofit.create(SincereMenteurApi.class);
 
-        if (id == 1 ) {
+        if (id == 1) {
             partie2enigme();
         }
 
@@ -152,7 +151,7 @@ public class Sincere_Menteur extends Theme {
         buttonValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                webSocketService.sendMessage("startGame","au suivant !");
+                webSocketService.sendMessage("startGame", "au suivant !");
 
 
             }

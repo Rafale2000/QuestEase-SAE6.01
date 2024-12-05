@@ -40,8 +40,8 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="Identifiez le son"
-                android:textSize="@dimen/text_size_small"
                 android:textColor="?attr/texte"
+                android:textSize="@dimen/text_size_small"
                 app:icon="@drawable/baseline_arrow_drop_down_24"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
@@ -185,8 +185,8 @@
                 android:layout_gravity="end"
                 android:backgroundTint="?attr/colorButtonBackground"
                 android:text="Envoyer"
-                android:textSize="@dimen/text_size_small"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_small" />
 
 
         </LinearLayout>

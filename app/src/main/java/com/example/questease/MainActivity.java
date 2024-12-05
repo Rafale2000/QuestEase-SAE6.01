@@ -55,6 +55,7 @@ public class MainActivity extends Theme {
                 webSocketService.sendMessage("requestLobbies", "salut à tous c'est fanta");
             }
         }
+
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;
@@ -84,6 +85,7 @@ public class MainActivity extends Theme {
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +101,6 @@ public class MainActivity extends Theme {
             return insets;
         });
         ViewGroup layout = findViewById(R.id.main);
-
 
 
         // Configurer les boutons
@@ -141,7 +142,7 @@ public class MainActivity extends Theme {
         Log.d("MainActivity", "Enregistrement du BroadcastReceiver");
         IntentFilter filter = new IntentFilter("WebSocketMessage");
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
-        if(sharedPreferences.getBoolean("assistance_vocale", false)){
+        if (sharedPreferences.getBoolean("assistance_vocale", false)) {
             Log.d("MainActivity", "Lancement de lireTextViews");
             lireTextViews(layout);
         }

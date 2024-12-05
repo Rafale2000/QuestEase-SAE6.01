@@ -25,6 +25,7 @@ import android.widget.Toast;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.content.Context;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -58,7 +59,7 @@ public class Pendu extends Theme {
     private TextView cardContent;
     private ArrayList<String> tries;
     private String rulestitle = "\nBienvenue dans le pendu";
-    private String rulescontent ="Normalement c'est pas très compliqué\n\nOn reste sur un pendu classique mais les deux joueurs jouent simultanément \n.";
+    private String rulescontent = "Normalement c'est pas très compliqué\n\nOn reste sur un pendu classique mais les deux joueurs jouent simultanément \n.";
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -69,6 +70,7 @@ public class Pendu extends Theme {
                 webSocketService.sendMessage("getRandomMot", "");
             }
         }
+
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;
@@ -85,8 +87,8 @@ public class Pendu extends Theme {
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
                     String message = jsonObject.getString("message");
-                    if("setWord".equals(tag)){
-                        mot= message;
+                    if ("setWord".equals(tag)) {
+                        mot = message;
                         Log.d("Pendu", "Mot mystère =  : " + mot);
                         letterstofind = mot.length();
                         currentWordView = new StringBuilder();
@@ -95,27 +97,25 @@ public class Pendu extends Theme {
                         }
                         TextView textView = findViewById(R.id.lemot);
                         textView.setText(currentWordView.toString());
-                    }
-                    else if ("startActivity".equals(tag)) {
+                    } else if ("startActivity".equals(tag)) {
                         Intent intentgame = identifyActivity(message);
-                        if(intentgame != null){
+                        if (intentgame != null) {
                             startActivity(intentgame);
                             finish();
                         }
 
-                    }
-                    else if ("PenduTry".equals(tag)){
+                    } else if ("PenduTry".equals(tag)) {
                         String input = message;
                         Toast.makeText(context, "l'autre joueur à joué une lettre", Toast.LENGTH_SHORT).show();
                         tries.add(input);
                         ArrayList<Integer> result = getTryResult(input);
-                        if(result.isEmpty()){
+                        if (result.isEmpty()) {
                             triesLeft -= 1;
-                            if(triesLeft == 0){
+                            if (triesLeft == 0) {
                                 mediaPlayer = MediaPlayer.create(Pendu.this, R.raw.professor_layton_sucess);
                                 mediaPlayer.start();
                                 ViewGroup viewGroup = findViewById(R.id.main);
-                                showTutorialPopup("\nPerdu","Vous n'avez pas trouvé le mot à temps.\n Vous ne gagnerez pas de récompenses,\nCependant vous pouvez continuer à jouer\n",viewGroup);
+                                showTutorialPopup("\nPerdu", "Vous n'avez pas trouvé le mot à temps.\n Vous ne gagnerez pas de récompenses,\nCependant vous pouvez continuer à jouer\n", viewGroup);
                             }
                             updateImage();
                         }
@@ -127,9 +127,8 @@ public class Pendu extends Theme {
                             letterstofind -= result.size();
                         });
 
-                    }
-                     else if ("successPopup".equals(tag)) {
-                    ViewGroup viewGroup = findViewById(R.id.main);
+                    } else if ("successPopup".equals(tag)) {
+                        ViewGroup viewGroup = findViewById(R.id.main);
                         mediaPlayer = MediaPlayer.create(Pendu.this, R.raw.professor_layton_sucess);
                         mediaPlayer.start();
                         showTutorialPopup(
@@ -137,8 +136,7 @@ public class Pendu extends Theme {
                                 "Vous avez trouvé le bon mot .\n\nVous allez passer au jeu suivant dans quelques secondes.",
                                 viewGroup
                         );
-                    }
-                    else if ("startActivity".equals(tag)) {
+                    } else if ("startActivity".equals(tag)) {
                         Log.d("Lobby", "Message reçu pour startActivity : " + message);
                         Intent intentgame = identifyActivity(message);
                         startActivity(intentgame);
@@ -167,7 +165,7 @@ public class Pendu extends Theme {
             return insets;
         });
         ViewGroup layout = findViewById(R.id.main);
-        if(sharedPreferences.getBoolean("assistance_vocale", false)){
+        if (sharedPreferences.getBoolean("assistance_vocale", false)) {
             lireTextViews(layout);
         }
         List<View> views = new ArrayList<>();
@@ -183,10 +181,10 @@ public class Pendu extends Theme {
         views.add(lemot);
         views.add(lettersTry);
         views.add(materialButton);
-        if(sharedPreferences.getBoolean("tailleTexte",false)){
+        if (sharedPreferences.getBoolean("tailleTexte", false)) {
             adjustTextSize(views);
         }
-        if(sharedPreferences.getBoolean("dyslexie",false)){
+        if (sharedPreferences.getBoolean("dyslexie", false)) {
             applyFont(views);
         }
         Log.d("Pendu", "Nouvelle instance créée");
@@ -204,10 +202,10 @@ public class Pendu extends Theme {
             String input = textInputEditText.getText().toString();
             Log.d("Pendu", "Lettre entrée : " + input);
             Log.d("Pendu", "Lettres déjà essayées : " + tries);
-            Log.d("Pendu","Taille de l'input"+input.length());
-            Log.d("Pendu","résultat du tries.contains(input)"+tries.contains(input));
-            if (input.length()==1 && tries.contains(input) == false) {
-                webSocketService.sendMessage("PenduTry",input);
+            Log.d("Pendu", "Taille de l'input" + input.length());
+            Log.d("Pendu", "résultat du tries.contains(input)" + tries.contains(input));
+            if (input.length() == 1 && tries.contains(input) == false) {
+                webSocketService.sendMessage("PenduTry", input);
                 tries.add(input);
                 textInputEditText.setText("");
                 ArrayList<Integer> result = getTryResult(input);
@@ -227,9 +225,10 @@ public class Pendu extends Theme {
                                 "Vous avez trouvé le bon mot !\n\nIl est temps de passer au jeu suivant dans " + counter + " secondes",
                                 viewGroup
                         );
-                        webSocketService.sendMessage("successPopup","");
+                        webSocketService.sendMessage("successPopup", "");
                         new CountDownTimer(counter * 1000, 1000) {
                             int secondsRemaining = counter;
+
                             @Override
                             public void onTick(long millisUntilFinished) {
                                 secondsRemaining--;
@@ -252,22 +251,20 @@ public class Pendu extends Theme {
                             }
                         }.start();
                     }
-                }
-                else{
+                } else {
                     triesLeft -= 1;
-                    if(triesLeft == 0){
+                    if (triesLeft == 0) {
                         mediaPlayer = MediaPlayer.create(Pendu.this, R.raw.professor_layton_sucess);
                         mediaPlayer.start();
                         ViewGroup viewGroup = findViewById(R.id.main);
-                        showTutorialPopup("\nPerdu","Vous n'avez pas trouvé le mot à temps.\n Vous ne gagnerez pas de récompenses,\nCependant vous pouvez continuer à jouer",viewGroup);
+                        showTutorialPopup("\nPerdu", "Vous n'avez pas trouvé le mot à temps.\n Vous ne gagnerez pas de récompenses,\nCependant vous pouvez continuer à jouer", viewGroup);
                     }
                     updateLeftTries();
                     updateImage();
                 }
                 updateTryView();
 
-            }
-            else{
+            } else {
                 mediaPlayer = MediaPlayer.create(Pendu.this, R.raw.prof_layton_forbidden);
                 mediaPlayer.start();
                 Toast.makeText(this, "Lettre déjà utilisée ou non valide", Toast.LENGTH_SHORT).show();
@@ -275,10 +272,10 @@ public class Pendu extends Theme {
 
         });
         ViewGroup viewGroup = findViewById(R.id.main);
-        showTutorialPopup(rulestitle,rulescontent,viewGroup);
+        showTutorialPopup(rulestitle, rulescontent, viewGroup);
         MaterialButton regles = findViewById(R.id.Regles);
         regles.setOnClickListener(v -> {
-            showTutorialPopup(rulestitle,rulescontent,viewGroup);
+            showTutorialPopup(rulestitle, rulescontent, viewGroup);
         });
         ImageView quitter = findViewById(R.id.quitter);
         quitter.setOnClickListener(v -> {
@@ -302,7 +299,7 @@ public class Pendu extends Theme {
         }, 3000); // Délai de 3 secondes
     }
 
-    private ArrayList<Integer> getTryResult(String letter){
+    private ArrayList<Integer> getTryResult(String letter) {
         ArrayList<Integer> result = new ArrayList<>();
         char target = letter.charAt(0);
         for (int i = 0; i < mot.length(); i++) {
@@ -313,10 +310,11 @@ public class Pendu extends Theme {
         return result;
     }
 
-    private void updateTryView(){
+    private void updateTryView() {
         TextView textView = findViewById(R.id.lettersTry);
-        textView.setText("lettres essayées : "+tries.toString());
+        textView.setText("lettres essayées : " + tries.toString());
     }
+
     private void updateWordView(ArrayList<Integer> result, String letter) {
         for (int index : result) {
             currentWordView.setCharAt(index * 2, letter.charAt(0)); // Mettre à jour la lettre (multiplié par 2 pour tenir compte des espaces)
@@ -325,7 +323,8 @@ public class Pendu extends Theme {
         TextView textView = findViewById(R.id.lemot);
         textView.setText(currentWordView.toString());
     }
-    private void updateImage(){
+
+    private void updateImage() {
         ImageView imageView = findViewById(R.id.penduImage);
         Context context = getApplicationContext();
 
@@ -344,14 +343,14 @@ public class Pendu extends Theme {
         }
 
 
-
     }
 
 
-    public void updateLeftTries(){
+    public void updateLeftTries() {
         TextView textView = findViewById(R.id.leftTries);
         textView.setText("essais restants: " + triesLeft);
     }
+
     public boolean isDarkMode(Context context) {
         // Vérifier la version Android
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {

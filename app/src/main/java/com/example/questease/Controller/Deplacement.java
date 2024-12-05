@@ -12,8 +12,11 @@ import android.os.SystemClock;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.Random;
+
 import com.example.questease.R;
 
 public class Deplacement extends AppCompatActivity implements SensorEventListener {
