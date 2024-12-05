@@ -8,11 +8,14 @@ import android.graphics.RenderEffect;
 import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Button;
 
@@ -35,7 +38,45 @@ public abstract class Theme extends AppCompatActivity {
     private Dialog tutorialDialog; // Référence au dialog
     private TextView cardTitle;    // Référence au titre
     private TextView cardContent;
+    private TextToSpeechHelper textToSpeechHelper;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        textToSpeechHelper = new TextToSpeechHelper(this);
+    }
+
+    protected void lireTextViews(ViewGroup layout) {
+        if (textToSpeechHelper == null) {
+            Log.e("Theme", "TextToSpeechHelper est null.");
+            return;
+        }
+
+        // Attendez que le TTS soit initialisé avant de continuer
+        if (!textToSpeechHelper.isInitialized()) {
+            Log.e("Theme", "TTS n'est pas encore prêt, réessayer...");
+            // Vous pouvez rappeler la méthode après un délai si TTS n'est pas encore prêt
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    lireTextViews(layout);
+                }
+            }, 3000); // Réessayer après 3 secondes
+            return;
+        }
+
+        // Si TTS est prêt, procéder à la lecture
+        textToSpeechHelper.lireTextViews(layout);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (textToSpeechHelper != null) {
+            textToSpeechHelper.stop();
+        }
+    }
     public void ApplyParameters(SharedPreferences sharedPreferences) {
         //Protanomalie = 1
         //Protanopie = 2
@@ -86,7 +127,6 @@ public abstract class Theme extends AppCompatActivity {
         // Convertir la taille de texte souhaitée en pixels pour la comparaison
 
         for (View view : views) {
-            Log.d("bla", "view: ");
             float textSize14spInPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14, this.getResources().getDisplayMetrics());
             float textSize19spInPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 19, this.getResources().getDisplayMetrics());
             float textSize24spInPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 24, this.getResources().getDisplayMetrics());
@@ -207,7 +247,6 @@ public abstract class Theme extends AppCompatActivity {
         else {
             Log.e("Lobby", "Valeur inattendue pour message : " + message);
         }
-
         return intentgame;
     }
 

@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -50,6 +51,10 @@ public class Parametres extends Theme {
             return insets;
         });
 
+        ViewGroup layout = findViewById(R.id.main);
+        if(sharedPreferences.getBoolean("assistance_vocale", false)){
+            lireTextViews(layout);
+        }
         // elements a taille variable
         TextView colorSampleText = findViewById(R.id.colorSamplesText);
         TextView dyslexieText = findViewById(R.id.DyslexieText);
@@ -88,7 +93,6 @@ public class Parametres extends Theme {
         MaterialSwitch dyslexie = findViewById(R.id.DyslexieSwitch);
         MaterialSwitch contrasteEleve = findViewById(R.id.contrasteEleveSwitch);
         MaterialSwitch vocal = findViewById(R.id.poled);
-
         vocal.setChecked(sharedPreferences.getBoolean(ASSISTANCE_VOCALE_STRING, false));
         contrasteEleve.setChecked(sharedPreferences.getBoolean(CONTRASTE_ELEVE_STRING, false));
         dyslexie.setChecked(sharedPreferences.getBoolean(DYSLEXIE_STRING, false));

@@ -110,7 +110,10 @@ public class RotatingPictures extends Theme {
             return insets;
 
         });
-
+        ViewGroup layout = findViewById(R.id.main);
+        if(sharedPreferences.getBoolean("assistance_vocale", false)){
+            lireTextViews(layout);
+        }
         ImageView dragon = findViewById(R.id.dragon);
         ImageView cheval = findViewById(R.id.cheval);
         ImageView epee = findViewById(R.id.epee);

@@ -107,6 +107,7 @@ public class RotatingPictures2 extends Theme {
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         Log.d("RotatingPictures2", "Nouvelle instance créée");
         SharedPreferences sharedPreferences = getSharedPreferences("QuestEasePrefs", MODE_PRIVATE);
         ApplyParameters(sharedPreferences);
@@ -118,7 +119,10 @@ public class RotatingPictures2 extends Theme {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        ViewGroup layout = findViewById(R.id.main);
+        if(sharedPreferences.getBoolean("assistance_vocale", false)){
+            lireTextViews(layout);
+        }
         ImageView dragon = findViewById(R.id.dragon);
         ImageView cheval = findViewById(R.id.cheval);
         ImageView epee = findViewById(R.id.epee);

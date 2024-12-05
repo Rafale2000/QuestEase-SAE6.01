@@ -166,6 +166,10 @@ public class Pendu extends Theme {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        ViewGroup layout = findViewById(R.id.main);
+        if(sharedPreferences.getBoolean("assistance_vocale", false)){
+            lireTextViews(layout);
+        }
         List<View> views = new ArrayList<>();
         MaterialButton button = findViewById(R.id.Regles);
         TextView consigne = findViewById(R.id.consigne);

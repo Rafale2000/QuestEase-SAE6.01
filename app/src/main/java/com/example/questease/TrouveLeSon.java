@@ -48,7 +48,6 @@ public class TrouveLeSon extends Theme {
             WebSocketService.LocalBinder binder = (WebSocketService.LocalBinder) service;
             webSocketService = binder.getService();
             isBound = true;
-
         }
         @Override
         public void onServiceDisconnected(ComponentName name) {
@@ -110,6 +109,10 @@ public class TrouveLeSon extends Theme {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        ViewGroup layout = findViewById(R.id.main);
+        if(sharedPreferences.getBoolean("assistance_vocale", false)){
+            lireTextViews(layout);
+        }
         main = findViewById(R.id.main);
         showTutorialPopup(rulestitle, rulescontent, main);
         Intent serviceIntent = new Intent(this, WebSocketService.class);

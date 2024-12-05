@@ -150,7 +150,10 @@ public class Searchlobby extends Theme {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        ViewGroup layout = findViewById(R.id.main);
+        if(sharedPreferences.getBoolean("assistance_vocale", false)){
+            lireTextViews(layout);
+        }
         MaterialButton creerLobby = findViewById(R.id.creerLobby);
         creerLobby.setOnClickListener(view -> {
             ViewGroup rootView = findViewById(R.id.main);

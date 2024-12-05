@@ -8,12 +8,14 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -24,6 +26,7 @@ import com.example.questease.WebSocketService;
 import com.example.questease.Parametres;
 
 import android.content.SharedPreferences;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -98,6 +101,9 @@ public class MainActivity extends Theme {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        ViewGroup layout = findViewById(R.id.main);
+
+
 
         // Configurer les boutons
         Button jouer = findViewById(R.id.Jouer);
@@ -138,6 +144,10 @@ public class MainActivity extends Theme {
         Log.d("MainActivity", "Enregistrement du BroadcastReceiver");
         IntentFilter filter = new IntentFilter("WebSocketMessage");
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
+        if(sharedPreferences.getBoolean("assistance_vocale", false)){
+            Log.d("MainActivity", "Lancement de lireTextViews");
+            lireTextViews(layout);
+        }
 
     }
 

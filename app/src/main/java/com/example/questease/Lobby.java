@@ -15,6 +15,7 @@ import android.sax.StartElementListener;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -114,8 +115,10 @@ public class Lobby extends Theme {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-
+        ViewGroup layout = findViewById(R.id.main);
+        if(sharedPreferences.getBoolean("assistance_vocale", false)){
+            lireTextViews(layout);
+        }
         List<View> views = new ArrayList<>();
         views.add(findViewById(R.id.Person1));
         views.add(findViewById(R.id.Person2));
