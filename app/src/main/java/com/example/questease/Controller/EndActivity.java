@@ -12,8 +12,5 @@ public class EndActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end);
-
-        TextView textView = findViewById(R.id.endMessage);
-        textView.setText("Félicitations ! Vous avez découvert le code du coffre !");
     }
 }
