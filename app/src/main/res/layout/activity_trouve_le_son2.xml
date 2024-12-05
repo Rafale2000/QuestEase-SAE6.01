@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:id="@+id/main"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
                 android:layout_gravity="left"
                 android:scaleType="fitCenter"
                 android:src="@drawable/baseline_close_24"
-                app:tint="@android:color/black" />
+                app:tint="?attr/texte" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/Regles"
@@ -40,11 +40,12 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:alpha="0.5"
-                android:backgroundTint="#40FFFFFF"
+                android:backgroundTint="#20FFFFFF"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="Identifiez le son"
-                android:textColor="@android:color/black"
+                android:textColor="?attr/texte"
+                android:textSize="@dimen/text_size_small"
                 app:icon="@drawable/baseline_arrow_drop_down_24"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
@@ -93,31 +94,17 @@
 
                 <ScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="300dp"
+                    android:maxHeight="300dp"
+                    android:minHeight="300dp">
 
                     <LinearLayout
+                        android:id="@+id/messagesLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:maxHeight="300dp">
 
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-
-                            android:text="test" />
-
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="ça doit être un raton laveur" />
-
-                        <Button
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="salut à tous c'est fanta aujourd'hui on se retrouve pour la météo du bitcoin" />
                     </LinearLayout>
 
                 </ScrollView>
@@ -146,6 +133,7 @@
                 android:layout_gravity="end"
                 android:backgroundTint="?attr/colorButtonBackground"
                 android:text="valider"
+                android:textSize="@dimen/text_size_small"
                 android:textColor="@color/black"
                 app:cornerRadius="10dp" />
         </LinearLayout>

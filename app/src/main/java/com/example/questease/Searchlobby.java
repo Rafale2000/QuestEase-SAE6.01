@@ -201,7 +201,13 @@ public class Searchlobby extends Theme {
     @Override
     protected void onRestart() {
         super.onRestart();
+        Intent serviceIntent = new Intent(this, WebSocketService.class);
+        startService(serviceIntent);
+        bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
 
+        IntentFilter filter = new IntentFilter("WebSocketMessage");
+        registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
+        Log.d("Lobby", "lancement du BroadcastReceiver");
     }
 
     @Override

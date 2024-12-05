@@ -74,7 +74,7 @@ public class PrixJuste extends Theme {
     private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("SearchLobby", "Broadcast received");
+            Log.d("PrixJuste", "Broadcast received");
             if (intent.getAction().equals("WebSocketMessage")) {
                 String jsonMessage = intent.getStringExtra("message");
                 Log.d("PrixJuste.java", "Message reçu brut : " + jsonMessage);
@@ -145,7 +145,7 @@ public class PrixJuste extends Theme {
 
         IntentFilter filter = new IntentFilter("WebSocketMessage");
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
-        Log.d("SearchLobby", "lancement du BroadcastReceiver");
+        Log.d("PrixJuste", "lancement du BroadcastReceiver");
 
     }
 
@@ -268,9 +268,9 @@ public class PrixJuste extends Theme {
                                     }
                                     try {
                                         unregisterReceiver(messageReceiver);
-                                        Log.d("SearchLobby", "BroadcastReceiver unregistered");
+                                        Log.d("PrixJuste", "BroadcastReceiver unregistered");
                                     } catch (IllegalArgumentException e) {
-                                        Log.e("SearchLobby", "BroadcastReceiver already unregistered", e);
+                                        Log.e("PrixJuste", "BroadcastReceiver already unregistered", e);
                                     }
                                 }
                             }.start();

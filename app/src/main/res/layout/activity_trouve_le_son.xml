@@ -40,7 +40,8 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="Identifiez le son"
-                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_small"
+                android:textColor="?attr/texte"
                 app:icon="@drawable/baseline_arrow_drop_down_24"
                 app:iconGravity="textStart"
                 app:iconPadding="8dp"
@@ -107,7 +108,7 @@
                         android:layout_marginBottom="8dp"
                         android:text="Titre de la carte"
                         android:textColor="@android:color/black"
-                        android:textSize="18sp"
+                        android:textSize="@dimen/text_size_medium"
                         android:textStyle="bold" />
 
                     <TextView
@@ -118,11 +119,11 @@
 
                         android:layout_marginTop="26dp"
                         android:maxHeight="75dp"
-                        android:text="Indice 1:\n\n\n\n\n\n\n\n\n"
+                        android:text="Indice 1:"
 
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
-                        android:textSize="16sp">
+                        android:textSize="@dimen/text_size_small">
 
                     </TextView>
 
@@ -138,7 +139,7 @@
 
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
-                        android:textSize="16sp">
+                        android:textSize="@dimen/text_size_small">
 
                     </TextView>
 
@@ -154,7 +155,7 @@
                         android:text="Indice 3:\n\n\n\n\n\n\n\n\n\n\n\n"
                         android:textAlignment="center"
                         android:textColor="@android:color/black"
-                        android:textSize="16sp">
+                        android:textSize="@dimen/text_size_small">
 
                     </TextView>
                 </LinearLayout>
@@ -184,6 +185,7 @@
                 android:layout_gravity="end"
                 android:backgroundTint="?attr/colorButtonBackground"
                 android:text="Envoyer"
+                android:textSize="@dimen/text_size_small"
                 android:textColor="@color/black" />
 
 
