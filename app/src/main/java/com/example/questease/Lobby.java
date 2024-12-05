@@ -1,7 +1,6 @@
 package com.example.questease;
 
 
-
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -48,6 +47,7 @@ public class Lobby extends Theme {
             isBound = true;
 
         }
+
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;
@@ -67,30 +67,28 @@ public class Lobby extends Theme {
                     if ("setP2Name".equals(tag)) {
                         Button person2 = findViewById(R.id.Person2);
                         person2.setText(message);
-                        Toast.makeText(Lobby.this, message+" à rejoint la partie", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Lobby.this, message + " à rejoint la partie", Toast.LENGTH_SHORT).show();
                     } else if ("p1Leaved".equals(tag)) {
                         finish();
                         Intent intentNewActivity = new Intent(Lobby.this, Searchlobby.class);
                         startActivity(intentNewActivity);
-                        finish();}
-                    else if("p2Leaved".equals(tag)){
+                        finish();
+                    } else if ("p2Leaved".equals(tag)) {
                         Button person2 = findViewById(R.id.Person2);
                         person2.setText("");
-                        Toast.makeText(Lobby.this, message+" à quitté la partie", Toast.LENGTH_SHORT).show();
-                    }
-                    else if("playerReady".equals(tag)){
+                        Toast.makeText(Lobby.this, message + " à quitté la partie", Toast.LENGTH_SHORT).show();
+                    } else if ("playerReady".equals(tag)) {
                         TextView textView = findViewById(R.id.text_joueurs_prets);
-                        if(message.equals("true")){
-                            readyCount +=1;
+                        if (message.equals("true")) {
+                            readyCount += 1;
                             checkReadyStatus();
+                        } else {
+                            readyCount -= 1;
                         }
-                        else{
-                            readyCount -=1;}
-                        textView.setText("Joueurs prêts "+readyCount+"/2");
-                    }
-                    else if ("startActivity".equals(tag)) {
+                        textView.setText("Joueurs prêts " + readyCount + "/2");
+                    } else if ("startActivity".equals(tag)) {
                         Intent intentgame = identifyActivity(message);
-                        if(intentgame != null){
+                        if (intentgame != null) {
                             startActivity(intentgame);
                             finish();
                         }
@@ -102,6 +100,7 @@ public class Lobby extends Theme {
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("Lobby", "Nouvelle instance créée");
@@ -116,7 +115,7 @@ public class Lobby extends Theme {
             return insets;
         });
         ViewGroup layout = findViewById(R.id.main);
-        if(sharedPreferences.getBoolean("assistance_vocale", false)){
+        if (sharedPreferences.getBoolean("assistance_vocale", false)) {
             lireTextViews(layout);
         }
         List<View> views = new ArrayList<>();
@@ -127,7 +126,7 @@ public class Lobby extends Theme {
         if (sharedPreferences.getBoolean("tailleTexte", false)) {
             adjustTextSize(views);
         }
-        if(sharedPreferences.getBoolean("dyslexie",false)){
+        if (sharedPreferences.getBoolean("dyslexie", false)) {
             applyFont(views);
         }
         this.readyCount = 0;
@@ -138,24 +137,24 @@ public class Lobby extends Theme {
             @Override
             public void onClick(View v) {
                 ready = !ready;
-                if(ready){
-                    webSocketService.sendMessage("ready","true");
-                    readyCount +=1;
+                if (ready) {
+                    webSocketService.sendMessage("ready", "true");
+                    readyCount += 1;
                     jouer.setText("Pas prêt");
                     TypedValue typedValue = new TypedValue();
                     getTheme().resolveAttribute(R.attr.colorButtonBackground2, typedValue, true);
                     int color = typedValue.data;
                     jouer.setBackgroundColor(color);
-                }
-                else{webSocketService.sendMessage("ready","false");
-                    readyCount -=1;
+                } else {
+                    webSocketService.sendMessage("ready", "false");
+                    readyCount -= 1;
                     jouer.setText("Prêt");
                     TypedValue typedValue = new TypedValue();
                     getTheme().resolveAttribute(R.attr.colorButtonBackground, typedValue, true);
                     int color = typedValue.data;
                     jouer.setBackgroundColor(color);
                 }
-                textView.setText("Joueurs prêts "+readyCount+"/2");
+                textView.setText("Joueurs prêts " + readyCount + "/2");
             }
         });
         Intent intent = getIntent();
@@ -163,12 +162,12 @@ public class Lobby extends Theme {
         String name2 = intent.getStringExtra("p2");
         String lobbyName = intent.getStringExtra("lobbyName");
 
-        if (lobbyName != null){
+        if (lobbyName != null) {
             this.lobbyname = lobbyName;
         }
         Button person1 = findViewById(R.id.Person1);
         Button person2 = findViewById(R.id.Person2);
-        if (name2!=null){
+        if (name2 != null) {
             person2.setText(name2);
         }
 
@@ -184,16 +183,17 @@ public class Lobby extends Theme {
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
         Log.d("Lobby", "lancement du BroadcastReceiver");
     }
+
     @Override
     protected void onStop() {
         Log.d("Lobby", "le big on stop est lancé la ");
         super.onStop();
         Log.d("Lobby", "le big on stop est passé par le super ");
-        Log.d("lobbyname",lobbyname);
+        Log.d("lobbyname", lobbyname);
 
         if (webSocketService != null && lobbyname != null) {
             // Envoyer une requête pour quitter le lobby
-            if(readyCount !=2){
+            if (readyCount != 2) {
                 webSocketService.sendMessage("leaveLobby", this.lobbyname);
                 Log.d("Lobby", "Requête leaveLobby envoyée pour le lobby : " + lobbyname);
             }
@@ -212,6 +212,7 @@ public class Lobby extends Theme {
             Log.e("Lobby", "BroadcastReceiver already unregistered", e);
         }
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -220,40 +221,41 @@ public class Lobby extends Theme {
             isBound = false;
         }
     }
-    private void checkReadyStatus(){
-        if (this.readyCount == 2){
-            webSocketService.sendMessage("startGame","");
+
+    private void checkReadyStatus() {
+        if (this.readyCount == 2) {
+            webSocketService.sendMessage("startGame", "");
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-            Log.d("Lobby", "le big on pause est lancé la ");
-            super.onStop();
-            Log.d("Lobby", "le big on pause est passé par le super ");
-            Log.d("lobbyname",lobbyname);
+        Log.d("Lobby", "le big on pause est lancé la ");
+        super.onStop();
+        Log.d("Lobby", "le big on pause est passé par le super ");
+        Log.d("lobbyname", lobbyname);
 
-            if (webSocketService != null && lobbyname != null) {
-                // Envoyer une requête pour quitter le lobby
-                if(readyCount !=2){
-                    webSocketService.sendMessage("leaveLobby", this.lobbyname);
-                    Log.d("Lobby", "Requête leaveLobby envoyée pour le lobby : " + lobbyname);
-                }
+        if (webSocketService != null && lobbyname != null) {
+            // Envoyer une requête pour quitter le lobby
+            if (readyCount != 2) {
+                webSocketService.sendMessage("leaveLobby", this.lobbyname);
+                Log.d("Lobby", "Requête leaveLobby envoyée pour le lobby : " + lobbyname);
+            }
 
-            } else {
-                Log.w("Lobby", "Impossible d'envoyer leaveLobby, service ou nom du lobby indisponible.");
-            }
-            if (isBound) {
-                unbindService(connection);
-                isBound = false;
-            }
-            try {
-                unregisterReceiver(messageReceiver);
-                Log.d("Lobby", "BroadcastReceiver unregistered");
-            } catch (IllegalArgumentException e) {
-                Log.e("Lobby", "BroadcastReceiver already unregistered", e);
-            }
+        } else {
+            Log.w("Lobby", "Impossible d'envoyer leaveLobby, service ou nom du lobby indisponible.");
+        }
+        if (isBound) {
+            unbindService(connection);
+            isBound = false;
+        }
+        try {
+            unregisterReceiver(messageReceiver);
+            Log.d("Lobby", "BroadcastReceiver unregistered");
+        } catch (IllegalArgumentException e) {
+            Log.e("Lobby", "BroadcastReceiver already unregistered", e);
+        }
     }
 
 }

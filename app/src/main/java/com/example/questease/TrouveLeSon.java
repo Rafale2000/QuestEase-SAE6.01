@@ -132,10 +132,10 @@ public class TrouveLeSon extends Theme {
         views.add(sendbutton);
         sharedPreferences = getSharedPreferences("QuestEasePrefs", MODE_PRIVATE);
         ApplyParameters(sharedPreferences);
-        if(sharedPreferences.getBoolean("tailleTexte",false)){
+        if (sharedPreferences.getBoolean("tailleTexte", false)) {
             adjustTextSize(views);
         }
-        if(sharedPreferences.getBoolean("dyslexie",false)){
+        if (sharedPreferences.getBoolean("dyslexie", false)) {
             applyFont(views);
         }
         IntentFilter filter = new IntentFilter("WebSocketMessage");
@@ -159,7 +159,7 @@ public class TrouveLeSon extends Theme {
         sendbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                webSocketService.sendMessage("TrouveLeSonMessage",editText.getText().toString());
+                webSocketService.sendMessage("TrouveLeSonMessage", editText.getText().toString());
             }
         });
         ImageView quitter = findViewById(R.id.quitter);

@@ -42,6 +42,7 @@ public abstract class Theme extends AppCompatActivity {
     private TextView cardContent;
 
     private TextToSpeechHelper textToSpeechHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +80,7 @@ public abstract class Theme extends AppCompatActivity {
             textToSpeechHelper.stop();
         }
     }
+
     public void ApplyParameters(SharedPreferences sharedPreferences) {
         //Protanomalie = 1
         //Protanopie = 2
@@ -239,19 +241,19 @@ public abstract class Theme extends AppCompatActivity {
             intentgame = new Intent(this, RotatingPictures2.class);
         } else if ("menteur1".equals(message)) {
             intentgame = new Intent(this, Sincere_Menteur.class);
-        } else if("menteur2".equals(message)){
+        } else if ("menteur2".equals(message)) {
             intentgame = new Intent(this, Sincere_Menteur2.class);
         } else if ("cryptex".equals(message)) {
             // intentgame = new Intent(Lobby.this, Cryptex.class);
-        }else if("son1".equals(message)){
+        } else if ("son1".equals(message)) {
             intentgame = new Intent(this, TrouveLeSon.class);
-        }else if("son2".equals(message)){
+        } else if ("son2".equals(message)) {
             intentgame = new Intent(this, TrouveLeSon2.class);
         } else if ("gyroscope1".equals(message)) {
             intentgame = new Intent(this, GyroscopeActivity.class);
         } else if ("gyroscope2".equals(message)) {
             intentgame = new Intent(this, StandBy.class);
-        } else if ("endActivity1".equals(message) || "endActivity2".equals(message)){
+        } else if ("endActivity1".equals(message) || "endActivity2".equals(message)) {
             intentgame = new Intent(this, EndActivity.class);
         } else {
             Log.e("Lobby", "Valeur inattendue pour message : " + message);

@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.questease.R;
 import com.example.questease.RotatingPictures;
 import com.example.questease.Theme;
@@ -70,8 +71,7 @@ public class StandBy extends Theme {
                             showServerErrorPopUp(view);
                             isErrorPopupVisible = true;
                         }
-                    }
-                    else if ("successPopup".equals(tag)) {
+                    } else if ("successPopup".equals(tag)) {
                         ViewGroup viewGroup = findViewById(R.id.main);
                         mediaPlayer = MediaPlayer.create(StandBy.this, R.raw.professor_layton_sucess);
                         mediaPlayer.start();
@@ -80,8 +80,7 @@ public class StandBy extends Theme {
                                 "Félicitation vous avez dévérouillé le coffre.\n\nVous allez passer voir son contenu dans quelques secondes",
                                 viewGroup
                         );
-                    }
-                    else if ("startActivity".equals(tag)) {
+                    } else if ("startActivity".equals(tag)) {
                         Log.d("StandBy", "Message reçu pour startActivity : " + message);
                         Intent intentgame = identifyActivity(message);
                         startActivity(intentgame);

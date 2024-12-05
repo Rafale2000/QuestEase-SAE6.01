@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import org.json.JSONObject;
 
 public class WebSocketService extends Service {
@@ -45,6 +46,7 @@ public class WebSocketService extends Service {
                 public void onOpen(ServerHandshake handshakedata) {
                     Log.d(TAG, "WebSocket Opened");
                 }
+
                 @Override
                 public void onMessage(String message) {
                     Log.d(TAG, "Message received: " + message);

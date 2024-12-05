@@ -18,7 +18,7 @@ public class MotPourSauverLePendu {
         this.motATrouver = str;
         this.mot = new ArrayList();
 
-        for(int i = 0; i < str.length(); ++i) {
+        for (int i = 0; i < str.length(); ++i) {
             System.out.println(str.charAt(i));
             this.mot.add(new HashSet());
         }
@@ -26,14 +26,14 @@ public class MotPourSauverLePendu {
     }
 
     public void replace(int indice, char let) {
-        ((Set)this.mot.get(indice)).clear();
-        ((Set)this.mot.get(indice)).add(String.valueOf(let));
+        ((Set) this.mot.get(indice)).clear();
+        ((Set) this.mot.get(indice)).add(String.valueOf(let));
     }
 
     public boolean find(char lettreChoisie) {
         boolean flag = false;
 
-        for(int i = 0; i < this.motATrouver.length(); ++i) {
+        for (int i = 0; i < this.motATrouver.length(); ++i) {
             if (lettreChoisie == this.motATrouver.charAt(i)) {
                 this.replace(i, lettreChoisie);
                 flag = true;
@@ -53,8 +53,8 @@ public class MotPourSauverLePendu {
                 return flag;
             }
 
-            set = (Set)var2.next();
-        } while(!set.isEmpty());
+            set = (Set) var2.next();
+        } while (!set.isEmpty());
 
         return false;
     }
@@ -62,8 +62,8 @@ public class MotPourSauverLePendu {
     public String afficherMot() {
         StringBuilder affichage = new StringBuilder();
 
-        for(int i = 0; i < this.motATrouver.length(); ++i) {
-            if (((Set)this.mot.get(i)).isEmpty()) {
+        for (int i = 0; i < this.motATrouver.length(); ++i) {
+            if (((Set) this.mot.get(i)).isEmpty()) {
                 affichage.append("_");
             } else {
                 affichage.append(this.motATrouver.charAt(i));

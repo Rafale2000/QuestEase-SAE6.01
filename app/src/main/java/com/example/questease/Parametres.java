@@ -52,7 +52,7 @@ public class Parametres extends Theme {
         });
 
         ViewGroup layout = findViewById(R.id.main);
-        if(sharedPreferences.getBoolean("assistance_vocale", false)){
+        if (sharedPreferences.getBoolean("assistance_vocale", false)) {
             lireTextViews(layout);
         }
         // elements a taille variable

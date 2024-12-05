@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
+
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -109,7 +110,7 @@ public class RotatingPictures extends Theme {
 
         });
         ViewGroup layout = findViewById(R.id.main);
-        if(sharedPreferences.getBoolean("assistance_vocale", false)){
+        if (sharedPreferences.getBoolean("assistance_vocale", false)) {
             lireTextViews(layout);
         }
         ImageView dragon = findViewById(R.id.dragon);
@@ -176,10 +177,10 @@ public class RotatingPictures extends Theme {
         views.add(role);
         views.add(consigne);
         views.add(sendButton);
-        if(sharedPreferences.getBoolean("tailleTexte",false)){
+        if (sharedPreferences.getBoolean("tailleTexte", false)) {
             adjustTextSize(views);
         }
-        if(sharedPreferences.getBoolean("dyslexie",false)){
+        if (sharedPreferences.getBoolean("dyslexie", false)) {
             applyFont(views);
         }
         ImageView quitter = findViewById(R.id.quitter);
