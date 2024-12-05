@@ -114,10 +114,7 @@ public class TrouveLeSon2 extends Theme {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        ViewGroup layout = findViewById(R.id.main);
-        if(sharedPreferences.getBoolean("assistance_vocale", false)){
-            lireTextViews(layout);
-        }
+
         main = findViewById(R.id.main);
         showTutorialPopup(rulestitle, rulescontent, main);
         MaterialButton regles = findViewById(R.id.Regles);

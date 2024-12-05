@@ -55,8 +55,8 @@ public class GyroscopeActivity extends Theme implements SensorEventListener {
             "                        \"Quand tous les codes sont trouvés, vous aurez terminé le jeu.\"";
 
 
-    private final float[] solutions = {45f, 180f, 275f}; // Les solutions pour déverrouiller
-    private final float tolerance = 5f; // Tolérance pour trouver une solution
+    private final float[] solutions = {70f, 180f, 275f}; // Les solutions pour déverrouiller
+    private final float tolerance = 3f; // Tolérance pour trouver une solution
     private HashSet<Float> foundSolutions = new HashSet<>(); // Garde trace des solutions trouvées
 
     private float[] rotationMatrix = new float[9];

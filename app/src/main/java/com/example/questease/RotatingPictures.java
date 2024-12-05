@@ -53,9 +53,7 @@ public class RotatingPictures extends Theme {
             WebSocketService.LocalBinder binder = (WebSocketService.LocalBinder) service;
             webSocketService = binder.getService();
             isBound = true;
-
         }
-
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;
@@ -172,8 +170,6 @@ public class RotatingPictures extends Theme {
         Button button = findViewById(R.id.Regles);
         TextView role = findViewById(R.id.role);
         TextView consigne = findViewById(R.id.consigne);
-
-
 
 
         views.add(button);

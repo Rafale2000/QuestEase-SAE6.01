@@ -42,7 +42,6 @@ public class MainActivity extends Theme {
     private boolean isBound = false;
     private boolean isCreated = false;
     private boolean isErrorPopupVisible = false;
-
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
