@@ -24,6 +24,11 @@
         <activity android:name=".Sincere_Menteur"
             android:exported="true"/>
 
+        <activity android:name=".Sincere_Menteur2"
+            android:exported="true"/>
+
+
+
         <activity
             android:name="View.questease.MotCryptexActivity"
             android:exported="true" />
