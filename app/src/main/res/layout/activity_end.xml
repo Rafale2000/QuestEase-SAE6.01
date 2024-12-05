@@ -9,7 +9,7 @@
         android:layout_height="323dp"
         android:layout_gravity="center_horizontal|top"
         android:layout_marginTop="50dp"
-        android:src="@drawable/BayBus" />
+        android:src="@drawable/baybus" />
 
     <TextView
         android:id="@+id/endMessage"

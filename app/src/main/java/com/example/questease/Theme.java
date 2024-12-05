@@ -24,6 +24,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 
 
+import com.example.questease.Controller.EndActivity;
+import com.example.questease.Controller.GyroscopeActivity;
+import com.example.questease.Controller.StandBy;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -38,8 +41,8 @@ public abstract class Theme extends AppCompatActivity {
     private Dialog tutorialDialog; // Référence au dialog
     private TextView cardTitle;    // Référence au titre
     private TextView cardContent;
-    private TextToSpeechHelper textToSpeechHelper;
 
+    private TextToSpeechHelper textToSpeechHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -243,8 +246,13 @@ public abstract class Theme extends AppCompatActivity {
             intentgame = new Intent(this, TrouveLeSon.class);
         }else if("son2".equals(message)){
             intentgame = new Intent(this, TrouveLeSon2.class);
-        }
-        else {
+        } else if ("gyroscope1".equals(message)) {
+            intentgame = new Intent(this, GyroscopeActivity.class);
+        } else if ("gyroscope2".equals(message)) {
+            intentgame = new Intent(this, StandBy.class);
+        } else if ("endActivity1".equals(message) || "endActivity2".equals(message)){
+            intentgame = new Intent(this, EndActivity.class);
+        } else {
             Log.e("Lobby", "Valeur inattendue pour message : " + message);
         }
         return intentgame;

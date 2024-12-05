@@ -61,7 +61,7 @@ public class Searchlobby extends Theme {
             webSocketService = binder.getService();
             isBound = true;
             Log.d("SearchLobby", "Service connected");
-            webSocketService.sendMessage("requestLobbies", "salut à tous c'est fanta de searchlobby");
+            webSocketService.sendMessage("requestLobbies", "");
         }
 
         @Override

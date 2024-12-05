@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -162,6 +163,11 @@ public class TrouveLeSon extends Theme {
             public void onClick(View view) {
                 webSocketService.sendMessage("TrouveLeSonMessage",editText.getText().toString());
             }
+        });
+        ImageView quitter = findViewById(R.id.quitter);
+        quitter.setOnClickListener(v -> {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
         });
     }
 

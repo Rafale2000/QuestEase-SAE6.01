@@ -209,6 +209,7 @@ public class Pendu extends Theme {
             if (input.length()==1 && tries.contains(input) == false) {
                 webSocketService.sendMessage("PenduTry",input);
                 tries.add(input);
+                textInputEditText.setText("");
                 ArrayList<Integer> result = getTryResult(input);
                 if (!result.isEmpty()) {
                     updateWordView(result, input);
@@ -267,6 +268,8 @@ public class Pendu extends Theme {
 
             }
             else{
+                mediaPlayer = MediaPlayer.create(Pendu.this, R.raw.prof_layton_forbidden);
+                mediaPlayer.start();
                 Toast.makeText(this, "Lettre déjà utilisée ou non valide", Toast.LENGTH_SHORT).show();
             }
 
@@ -276,6 +279,11 @@ public class Pendu extends Theme {
         MaterialButton regles = findViewById(R.id.Regles);
         regles.setOnClickListener(v -> {
             showTutorialPopup(rulestitle,rulescontent,viewGroup);
+        });
+        ImageView quitter = findViewById(R.id.quitter);
+        quitter.setOnClickListener(v -> {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
         });
     }
 

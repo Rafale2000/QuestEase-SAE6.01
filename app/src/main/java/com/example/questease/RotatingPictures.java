@@ -174,6 +174,8 @@ public class RotatingPictures extends Theme {
         TextView consigne = findViewById(R.id.consigne);
 
 
+
+
         views.add(button);
         views.add(role);
         views.add(consigne);
@@ -184,6 +186,12 @@ public class RotatingPictures extends Theme {
         if(sharedPreferences.getBoolean("dyslexie",false)){
             applyFont(views);
         }
+        ImageView quitter = findViewById(R.id.quitter);
+        quitter.setOnClickListener(v -> {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        });
+
     }
 
     @Override

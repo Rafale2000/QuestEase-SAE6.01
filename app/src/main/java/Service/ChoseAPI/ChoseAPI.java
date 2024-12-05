@@ -11,9 +11,9 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 
 public interface ChoseAPI {
-    @GET("/chose")
+    @GET("/choseATrouver")
     Call<List<ChoseATrouverPrixJuste>> getMotChose();
 
-    @GET("/chose/random")
+    @GET("/choseATrouver/random")
     Call<ChoseATrouverPrixJuste> getChoseRandom();
 }

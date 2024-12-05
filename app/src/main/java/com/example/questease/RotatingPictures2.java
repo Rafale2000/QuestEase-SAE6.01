@@ -80,6 +80,7 @@ public class RotatingPictures2 extends Theme {
                     if("RotatingPicOrientation".equals(tag)){
                         JSONArray jsonArray = new JSONArray(message);
                         int[] array = new int[jsonArray.length()];
+
                         for (int i = 0; i < jsonArray.length(); i++) {
                             array[i] = jsonArray.getInt(i);
                         }
@@ -179,6 +180,7 @@ public class RotatingPictures2 extends Theme {
         if(sharedPreferences.getBoolean("dyslexie",false)){
             applyFont(views);
         }
+
         IntentFilter filter = new IntentFilter("WebSocketMessage");
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
         Log.d("SearchLobby", "lancement du BroadcastReceiver");
@@ -220,8 +222,13 @@ public class RotatingPictures2 extends Theme {
                    }
                }.start();
            }
-        });
 
+        });
+        ImageView quitter = findViewById(R.id.quitter);
+        quitter.setOnClickListener(v -> {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        });
 
     }
     @Override
