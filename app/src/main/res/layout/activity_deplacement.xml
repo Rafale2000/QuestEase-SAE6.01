@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Nombre de pas -->
+    <TextView
+        android:id="@+id/steps_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Pas : 0"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Direction affichée -->
+    <TextView
+        android:id="@+id/direction_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/steps_text"
+        android:layout_centerHorizontal="true"
+        android:text="Direction"
+        android:textSize="18sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Image pour la flèche -->
+    <ImageView
+        android:id="@+id/arrow_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/direction_text"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/arrow_up" />
+
+    <!-- Boutons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/arrow_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/start_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/pause_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pause"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/reset_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset" />
+    </LinearLayout>
+</RelativeLayout>
