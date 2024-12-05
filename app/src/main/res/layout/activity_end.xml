@@ -18,7 +18,7 @@
         android:layout_gravity="center_horizontal|center_vertical"
         android:gravity="bottom"
         android:text="Félicitations ! Vous avez retrouvé le bus perdu de Monsieur Bay !"
-        android:textColor="#ffff"
-        android:textSize="24sp" />
+        android:textColor="?attr/texte"
+        android:textSize="@dimen/text_size_large" />
 
 </FrameLayout>
