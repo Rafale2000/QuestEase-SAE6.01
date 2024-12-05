@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -31,7 +32,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Sincere_Menteur extends AppCompatActivity {
+public class Sincere_Menteur extends Theme {
 
     private int id;
     private DatabaseHelper dbHelper;
@@ -45,8 +46,9 @@ public class Sincere_Menteur extends AppCompatActivity {
             WebSocketService.LocalBinder binder = (WebSocketService.LocalBinder) service;
             webSocketService = binder.getService();
             isBound = true;
-            Log.d("SearchLobby", "Service connected");
-            webSocketService.sendMessage("requestLobbies", "salut à tous c'est fanta de searchlobby");
+            Log.d("SincereMenteur", "Service connected");
+            webSocketService.sendMessage("getAllIDs","obtient mon id");
+            webSocketService.sendMessage("requestLobbies", "salut à tous c'est fanta de SM");
         }
 
         @Override
@@ -58,7 +60,7 @@ public class Sincere_Menteur extends AppCompatActivity {
     private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent.getAction().equals("WebSocketMessage")) {
+            if (intent.getAction().equals("WebSocketMessage")) {
                 String jsonMessage = intent.getStringExtra("message");
 
                 Log.d("SearchLobby", "Message reçu brut : " + jsonMessage);
@@ -69,15 +71,46 @@ public class Sincere_Menteur extends AppCompatActivity {
                     String tag = jsonObject.getString("tag");
                     String message = jsonObject.getString("message");
 
-                    // Vous pouvez maintenant traiter la liste contenue dans le message JSON
-                    JSONArray messageArray = new JSONArray(message);
-                    List<String> lobbies = new ArrayList<>();
-                    for (int i = 0; i < messageArray.length(); i++) {
-                        lobbies.add(messageArray.getString(i));
-                    }
+                    // Traiter le message uniquement si le tag est "getMyID"
+                    switch (tag) {
+                        case "getMyID":
+                            // Traitement du message pour récupérer l'ID
+                            id = Integer.parseInt(message);  // Si message contient l'ID
+                            Log.d("SearchLobby", "Mon ID: " + id);
+                            break;
 
-                    Log.d("SearchLobby", "Tag: " + tag);
-                    Log.d("SearchLobby", "Lobbies: " + lobbies);
+                        case "getAllIDs":
+                            // Analyser le message contenant une liste d'IDs
+                            JSONArray idArray = new JSONArray(message);
+
+                            // Vérification que la liste contient exactement 2 éléments
+                            if (idArray.length() == 2) {
+                                int firstID = idArray.getInt(0);
+                                int secondID = idArray.getInt(1);
+
+                                // Déterminer si l'ID du joueur est dans le premier ou le second élément
+                                int id;
+                                if (Sincere_Menteur.this.id == firstID) {
+                                    id = 1;
+                                } else if (Sincere_Menteur.this.id == secondID) {
+                                    id = 2;
+                                } else {
+                                    id = -1; // Cas où l'ID du joueur n'est dans aucune des deux positions
+                                }
+
+                                // Afficher le résultat
+                                Log.d("SearchLobby", "Position du joueur : " + id);
+                            } else {
+                                Log.e("SearchLobby", "La liste reçue ne contient pas exactement deux éléments !");
+                            }
+                            break;
+
+
+                        // Pas d'autres cas ici, vous pouvez en ajouter d'autres plus tard si nécessaire.
+                        default:
+                            Log.d("SearchLobby", "Message avec un tag inconnu : " + tag);
+                            break;
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -88,21 +121,26 @@ public class Sincere_Menteur extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sincere_menteur);
+        Intent serviceIntent = new Intent(this, WebSocketService.class);
+        startService(serviceIntent);
+        bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
 
-        id = 2;
+        IntentFilter filter = new IntentFilter("WebSocketMessage");
+        registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
+        Log.d("Lobby", "lancement du BroadcastReceiver");
+        setContentView(R.layout.sincere_menteur);
         dbHelper = new DatabaseHelper(this);
         db = dbHelper.getWritableDatabase();
 
         // Initialiser Retrofit
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://<IP_DU_SERVEUR>:<PORT>")  // Remplace avec l'IP et le port du serveur
+                .baseUrl("http://192.168.56.1:8080")  // Remplace avec l'IP et le port du serveur
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
         sincereMenteurApi = retrofit.create(SincereMenteurApi.class);
 
-        if (id == 2) {
+        if (id == 2 ) {
             partie2enigme();
         }
 
