@@ -28,7 +28,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Sincere_Menteur extends Theme {
+public class Sincere_Menteur2 extends Theme {
 
     private int id;
     private DatabaseHelper dbHelper;
@@ -86,9 +86,9 @@ public class Sincere_Menteur extends Theme {
 
                                 // Déterminer si l'ID du joueur est dans le premier ou le second élément
                                 int id;
-                                if (Sincere_Menteur.this.id == firstID) {
+                                if (Sincere_Menteur2.this.id == firstID) {
                                     id = 1;
-                                } else if (Sincere_Menteur.this.id == secondID) {
+                                } else if (Sincere_Menteur2.this.id == secondID) {
                                     id = 2;
                                 } else {
                                     id = -1; // Cas où l'ID du joueur n'est dans aucune des deux positions
@@ -110,7 +110,7 @@ public class Sincere_Menteur extends Theme {
 
 
 
-                        // Pas d'autres cas ici, vous pouvez en ajouter d'autres plus tard si nécessaire.
+                            // Pas d'autres cas ici, vous pouvez en ajouter d'autres plus tard si nécessaire.
                         default:
                             Log.d("SearchLobby", "Message avec un tag inconnu : " + tag);
                             break;
@@ -143,15 +143,13 @@ public class Sincere_Menteur extends Theme {
                 .build();
 
         sincereMenteurApi = retrofit.create(SincereMenteurApi.class);
-
-        if (id == 1 ) {
-            partie2enigme();
-        }
+        partie2enigme();
 
         Button buttonValider = findViewById(R.id.button5);
         buttonValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                verifierReponses();
                 webSocketService.sendMessage("startGame","au suivant !");
 
 
@@ -181,7 +179,7 @@ public class Sincere_Menteur extends Theme {
 
         // Envoyer les données au serveur
         envoyerReponses(data);
-        webSocketService.sendMessage("messageTest", "ceci est un test, tuer moi");
+        webSocketService.sendMessage("messageTest","ceci est un test, tuer moi");
     }
 
     private void envoyerReponses(Map<String, Object> data) {
@@ -190,15 +188,15 @@ public class Sincere_Menteur extends Theme {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(Sincere_Menteur.this, "Réponses envoyées avec succès", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Sincere_Menteur2.this, "Réponses envoyées avec succès", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(Sincere_Menteur.this, "Erreur lors de l'envoi", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Sincere_Menteur2.this, "Erreur lors de l'envoi", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(Sincere_Menteur.this, "Erreur de connexion au serveur", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Sincere_Menteur2.this, "Erreur de connexion au serveur", Toast.LENGTH_SHORT).show();
             }
         });
     }
