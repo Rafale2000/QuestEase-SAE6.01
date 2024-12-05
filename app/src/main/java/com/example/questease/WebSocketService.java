@@ -12,7 +12,6 @@ import org.json.JSONObject;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import org.json.JSONObject;
 
 public class WebSocketService extends Service {
