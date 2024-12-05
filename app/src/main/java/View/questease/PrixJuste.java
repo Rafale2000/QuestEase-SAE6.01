@@ -266,12 +266,6 @@ public class PrixJuste extends Theme {
                                     if (tutorialDialog != null) {
                                         tutorialDialog.dismiss();
                                     }
-                                    try {
-                                        unregisterReceiver(messageReceiver);
-                                        Log.d("PrixJuste", "BroadcastReceiver unregistered");
-                                    } catch (IllegalArgumentException e) {
-                                        Log.e("PrixJuste", "BroadcastReceiver already unregistered", e);
-                                    }
                                 }
                             }.start();
                         }
@@ -310,9 +304,9 @@ public class PrixJuste extends Theme {
 
             // Afficher les essais restants
             numberOfAttempts.setText(getString(R.string.nbr_coup_restant, controllerPrixJuste.getRemainingAttempts()));
-
+            String res = controllerPrixJuste.CheckGuess(lastGuess).toString();
             // Afficher le dernier essai
-            previousNumber.setText(getString(R.string.nbr_essaye, lastGuess, "Tentative reçue"));
+            previousNumber.setText("Nombre essayé :"+ lastGuess +"-" +res);
 
         } catch (NumberFormatException e) {
             Log.e("PrixJuste", "Message reçu invalide : " + message, e);

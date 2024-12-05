@@ -79,7 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/nombre_essay"
+        android:text="Nombre essayé : "
         android:textSize="@dimen/text_size_small_large" />
 
     <!-- Buttons for validation and reset -->

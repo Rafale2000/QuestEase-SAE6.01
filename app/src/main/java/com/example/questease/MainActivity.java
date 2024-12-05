@@ -55,7 +55,6 @@ public class MainActivity extends Theme {
                 webSocketService.sendMessage("requestLobbies", "salut à tous c'est fanta");
             }
         }
-
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;
@@ -78,7 +77,6 @@ public class MainActivity extends Theme {
                             showServerErrorPopUp(view);
                             isErrorPopupVisible = true;
                         }
-
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -86,7 +84,6 @@ public class MainActivity extends Theme {
             }
         }
     };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

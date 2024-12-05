@@ -189,7 +189,9 @@ public class RotatingPictures extends Theme {
         ImageView quitter = findViewById(R.id.quitter);
         quitter.setOnClickListener(v -> {
             startActivity(new Intent(this, MainActivity.class));
+            webSocketService.sendMessage("LeaveLobby", "");
             finish();
+
         });
 
     }

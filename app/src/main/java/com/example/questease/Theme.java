@@ -239,8 +239,7 @@ public abstract class Theme extends AppCompatActivity {
             intentgame = new Intent(this, RotatingPictures2.class);
         } else if ("menteur1".equals(message)) {
             intentgame = new Intent(this, Sincere_Menteur.class);
-        }
-          else if("menteur2".equals(message)){
+        } else if("menteur2".equals(message)){
             intentgame = new Intent(this, Sincere_Menteur2.class);
         } else if ("cryptex".equals(message)) {
             // intentgame = new Intent(Lobby.this, Cryptex.class);
