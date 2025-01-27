@@ -40,13 +40,12 @@ public class WebSocketService extends Service {
 
     private void connectWebSocket() {
         try {
-            URI uri = new URI("ws://192.168.219.197:8080/ws");
+            URI uri = new URI("ws://192.168.219.104:8080/ws");
             webSocketClient = new WebSocketClient(uri) {
                 @Override
                 public void onOpen(ServerHandshake handshakedata) {
                     Log.d(TAG, "WebSocket Opened");
                 }
-
                 @Override
                 public void onMessage(String message) {
                     Log.d(TAG, "Message received: " + message);

@@ -55,7 +55,7 @@ public class GyroscopeActivity extends Theme implements SensorEventListener {
 
     private boolean isErrorPopupVisible = false;
     private String rulestitle = "\n\n\"Règles du jeu\"";
-    private String rulescontent = "\"Tournez votre téléphone pour aligner l'aiguille\n\n sur les bons angles : 45°, 180°, et 300°.\n\n \" +\n" +
+    private String rulescontent = "\"Tournez votre téléphone pour aligner l'aiguille\n sur les bons angles : 45°, 180°, et 300°.\" +\n" +
             "                        \"Quand tous les codes sont trouvés, vous aurez terminé le jeu.\"";
 
 
