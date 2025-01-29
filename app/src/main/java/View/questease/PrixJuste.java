@@ -40,8 +40,8 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
 import org.json.JSONObject;
 
-import service.ChoseAPI.ChoseCallBack;
-import service.ChoseAPI.ChoseHandler;
+import service.choseapi.ChoseCallBack;
+import service.choseapi.ChoseHandler;
 
 
 public class PrixJuste extends Theme {
@@ -122,7 +122,7 @@ public class PrixJuste extends Theme {
         bnt.setOnClickListener(view -> drawView.clearCanvas());
 
         ChoseHandler handlerObjectAPI = new ChoseHandler(this);
-        handlerObjectAPI.GetRandomChose(new ChoseCallBack() {
+        handlerObjectAPI.getRandomChose(new ChoseCallBack() {
             @Override
             public void onChoseReceived(ChoseATrouverPrixJuste chose) {
                 intancePrixJuste = new PrixJusteJeu(10, chose.getValeur());
