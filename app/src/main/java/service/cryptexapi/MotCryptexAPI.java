@@ -1,4 +1,4 @@
-package service.CryptexAPI;
+package service.cryptexapi;
 
 import retrofit2.Call;
 
