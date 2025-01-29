@@ -1,4 +1,4 @@
-package View.questease;
+package com.example.questease;
 
 import static android.content.ContentValues.TAG;
 
@@ -29,9 +29,6 @@ import com.example.questease.controller.ControllerPrixJuste;
 import com.example.questease.controller.DrawView;
 import com.example.questease.model.bdd.ChoseATrouverPrixJuste;
 import com.example.questease.model.jeu.PrixJusteJeu;
-import com.example.questease.R;
-import com.example.questease.Theme;
-import com.example.questease.WebSocketService;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
@@ -39,6 +36,8 @@ import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
 
 import org.json.JSONObject;
+
+import java.util.Objects;
 
 import service.choseapi.ChoseCallBack;
 import service.choseapi.ChoseHandler;
@@ -50,12 +49,14 @@ public class PrixJuste extends Theme {
     private DrawView drawView;
     private WebSocketService webSocketService;
     private boolean isBound = false;
-    private MediaPlayer mediaPlayer;
     private Dialog tutorialDialog; // Référence au dialog
-    private TextView cardTitle;    // Référence au titre
     private TextView cardContent;  // Référence au contenu
     private boolean canPlay = false;
-    private ServiceConnection connection = new ServiceConnection() {
+    private static final String PRIXJUSTESTR = "PrixJuste";
+    private static final String FELICITATIONSTR = "Félicitation";
+
+
+    private final ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             WebSocketService.LocalBinder binder = (WebSocketService.LocalBinder) service;
@@ -68,18 +69,46 @@ public class PrixJuste extends Theme {
             isBound = false;
         }
     };
-    private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver messageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("PrixJuste", "Broadcast received");
-            if (intent.getAction().equals("WebSocketMessage")) {
+            Log.d(PRIXJUSTESTR, "Broadcast received");
+            if (Objects.equals(intent.getAction(), "WebSocketMessage")) {
                 String jsonMessage = intent.getStringExtra("message");
-                Log.d("PrixJuste.java", "Message reçu brut : " + jsonMessage);
+                Log.d(PRIXJUSTESTR, "Message reçu brut : " + jsonMessage);
                 try {
+                    assert jsonMessage != null;
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
                     String message = jsonObject.getString("message");
 
+                    switch (tag) {
+                        case "startActivity":
+                            Intent intentgame = identifyActivity(message);
+                            startActivity(intentgame);
+                            finish();
+                            break;
+                        case "PrixJusteTry":
+                            handlePrixJusteTry(message);
+                            canPlay = true;
+                            break;
+                        case "successPopup":
+                            ViewGroup viewGroup = findViewById(R.id.main);
+                            MediaPlayer mediaPlayer = MediaPlayer.create(PrixJuste.this, R.raw.professor_layton_sucess);
+                            mediaPlayer.start();
+                            showTutorialPopup(
+                                    FELICITATIONSTR,
+                                    "Vous avez trouvé le bon nombre, il est temps de passer au jeu suivant",
+                                    viewGroup
+                            );
+                            break;
+                        case "beginGame":
+                            canPlay = true;
+                            break;
+                        default:
+                            break;
+                    }
+                    /*
                     if ("startActivity".equals(tag)) {
                         Log.d("Lobby", "Message reçu pour startActivity : " + message);
                         Intent intentgame = identifyActivity(message);
@@ -90,7 +119,7 @@ public class PrixJuste extends Theme {
                         canPlay = true;
                     } else if ("successPopup".equals(tag)) {
                         ViewGroup viewGroup = findViewById(R.id.main);
-                        mediaPlayer = MediaPlayer.create(PrixJuste.this, R.raw.professor_layton_sucess);
+                        MediaPlayer mediaPlayer = MediaPlayer.create(PrixJuste.this, R.raw.professor_layton_sucess);
                         mediaPlayer.start();
                         showTutorialPopup(
                                 "Félicitations !",
@@ -100,6 +129,8 @@ public class PrixJuste extends Theme {
                     } else if ("beginGame".equals(tag)) {
                         canPlay = true;
                     }
+
+                     */
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -132,7 +163,7 @@ public class PrixJuste extends Theme {
 
             @Override
             public void onFailure(String errorMessage) {
-                Log.e("PrixJuste", "Error retrieving data: " + errorMessage);
+                Log.e(PRIXJUSTESTR, "Error retrieving data: " + errorMessage);
                 Toast.makeText(PrixJuste.this, "Failed to load game data", Toast.LENGTH_SHORT).show();
             }
         });
@@ -142,7 +173,7 @@ public class PrixJuste extends Theme {
 
         IntentFilter filter = new IntentFilter("WebSocketMessage");
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
-        Log.d("PrixJuste", "lancement du BroadcastReceiver");
+        Log.d(PRIXJUSTESTR, "lancement du BroadcastReceiver");
 
     }
 
@@ -163,6 +194,7 @@ public class PrixJuste extends Theme {
 
 
                     if (editText != null || !visionText.getText().isEmpty()) {
+                        assert editText != null;
                         editText.setText(recognizedText);
                     }
 
@@ -178,7 +210,7 @@ public class PrixJuste extends Theme {
     /**
      * Initialize l'interface utilisateur et met en place des écouteurs pour certaines fonctionnalitées.
      *
-     * @param chose
+     * @param chose objet de la classe ChoseATrouverPrixJuste
      */
     private void initializeUI(ChoseATrouverPrixJuste chose) {
         // Initialisation des TextViews
@@ -242,7 +274,7 @@ public class PrixJuste extends Theme {
                             );
                             webSocketService.sendMessage("successPopup", "");
                             // Créer un compteur
-                            new CountDownTimer(counter * 1000, 1000) {
+                            new CountDownTimer((counter * 1000), 1000) {
                                 int secondsRemaining = counter;
 
                                 @Override
@@ -272,7 +304,7 @@ public class PrixJuste extends Theme {
                         // Réinitialisation du champ de saisie
                         inputNumber.setText("");
                         drawView.clearCanvas();
-                        // TODO : Envoyer la proposition à l'autre joueur et gérer sa réponse
+
                         webSocketService.sendMessage("PrixJusteTry", "" + guess);
                         canPlay = false;
                     } catch (NumberFormatException e) {
@@ -301,12 +333,12 @@ public class PrixJuste extends Theme {
 
             // Afficher les essais restants
             numberOfAttempts.setText(getString(R.string.nbr_coup_restant, controllerPrixJuste.getRemainingAttempts()));
-            String res = controllerPrixJuste.CheckGuess(lastGuess).toString();
+            String res = controllerPrixJuste.CheckGuess(lastGuess);
             // Afficher le dernier essai
-            previousNumber.setText("Nombre essayé :"+ lastGuess +"-" +res);
+            previousNumber.setText("Nombre essayé :" + lastGuess + "-" + res);
 
         } catch (NumberFormatException e) {
-            Log.e("PrixJuste", "Message reçu invalide : " + message, e);
+            Log.e(PRIXJUSTESTR, "Message reçu invalide : " + message, e);
         }
     }
 
