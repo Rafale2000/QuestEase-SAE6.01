@@ -4,7 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 
-import com.example.questease.model.BDD.MotCryptex;
+import com.example.questease.model.bdd.MotCryptex;
 
 import service.RetrofitInstance;
 import retrofit2.Call;

@@ -27,8 +27,8 @@ import android.widget.Toast;
 
 import com.example.questease.controller.ControllerPrixJuste;
 import com.example.questease.controller.DrawView;
-import com.example.questease.model.BDD.ChoseATrouverPrixJuste;
-import com.example.questease.model.Jeu.PrixJusteJeu;
+import com.example.questease.model.bdd.ChoseATrouverPrixJuste;
+import com.example.questease.model.jeu.PrixJusteJeu;
 import com.example.questease.R;
 import com.example.questease.Theme;
 import com.example.questease.WebSocketService;

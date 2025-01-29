@@ -1,4 +1,4 @@
-package com.example.questease.model.BDD;
+package com.example.questease.model.bdd;
 
 public class Resultat {
     private int idUtilisateur;

@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.questease.model.BDD.MotPendu;
+import com.example.questease.model.bdd.MotPendu;
 
 public class MotPenduHandler extends MyDatabaseHelper {
     private SQLiteOpenHelper dbHelper;

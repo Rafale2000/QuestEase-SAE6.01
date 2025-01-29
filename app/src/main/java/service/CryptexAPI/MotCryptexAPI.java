@@ -2,8 +2,8 @@ package service.CryptexAPI;
 
 import retrofit2.Call;
 
-import com.example.questease.model.BDD.Indice;
-import com.example.questease.model.BDD.MotCryptex;
+import com.example.questease.model.bdd.Indice;
+import com.example.questease.model.bdd.MotCryptex;
 
 import java.util.List;
 

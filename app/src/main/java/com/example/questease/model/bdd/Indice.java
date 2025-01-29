@@ -1,4 +1,4 @@
-package com.example.questease.model.BDD;
+package com.example.questease.model.bdd;
 
 
 public class Indice {
@@ -24,7 +24,7 @@ public class Indice {
         return hint;
     }
 
-    public void setIndice(String indice) {
+    public void setIndice(String hint) {
         this.hint = hint;
     }
 }

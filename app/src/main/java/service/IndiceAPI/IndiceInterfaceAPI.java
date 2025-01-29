@@ -1,6 +1,6 @@
 package service.IndiceAPI;
 
-import com.example.questease.model.BDD.Indice;
+import com.example.questease.model.bdd.Indice;
 
 import java.util.List;
 

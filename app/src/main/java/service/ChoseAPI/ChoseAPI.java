@@ -3,7 +3,7 @@ package service.ChoseAPI;
 
 //TODO Reprendre les paramètrs du manifest
 
-import com.example.questease.model.BDD.ChoseATrouverPrixJuste;
+import com.example.questease.model.bdd.ChoseATrouverPrixJuste;
 
 import java.util.List;
 

@@ -1,23 +1,19 @@
-package com.example.questease.model.BDD;
+package com.example.questease.model.bdd;
 
 public class Son {
     private int id;
-    private String cheminSon;
-    private int IdIndice;
+    private final String cheminSon;
+    private final int idIndice;
 
     public Son(int id, String cheminSon, int idIndice) {
         this.id = id;
         this.cheminSon = cheminSon;
-        IdIndice = idIndice;
+        this.idIndice = idIndice;
     }
 
 
     public int getIdIndice() {
-        return IdIndice;
-    }
-
-    public void setIdIndice(int idIndice) {
-        IdIndice = idIndice;
+        return idIndice;
     }
 
     public int getId() {
@@ -33,7 +29,4 @@ public class Son {
         return this.cheminSon;
     }
 
-    public void setSon(String son) {
-        this.cheminSon = cheminSon;
-    }
 }

@@ -1,6 +1,6 @@
 package service.MotCryptexAPI;
 
-import com.example.questease.model.BDD.MotCryptex;
+import com.example.questease.model.bdd.MotCryptex;
 
 public interface MotCryptexCallback {
     MotCryptex onMotCryptexReceived(MotCryptex motCryptex);

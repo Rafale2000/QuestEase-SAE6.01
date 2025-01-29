@@ -1,4 +1,4 @@
-package com.example.questease.model.Jeu;
+package com.example.questease.model.jeu;
 
 public class PrixJusteJeu {
     private final int targetNumber;

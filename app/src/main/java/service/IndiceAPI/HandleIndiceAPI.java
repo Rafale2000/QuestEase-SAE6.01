@@ -3,7 +3,7 @@ package service.IndiceAPI;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.questease.model.BDD.Indice;
+import com.example.questease.model.bdd.Indice;
 
 import service.RetrofitInstance;
 import retrofit2.Call;

@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.questease.model.BDD.InfoSecu;
+import com.example.questease.model.bdd.InfoSecu;
 
 
 public class infoSecuHandler extends MyDatabaseHelper {

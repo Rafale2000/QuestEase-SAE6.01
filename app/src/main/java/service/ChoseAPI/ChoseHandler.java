@@ -3,7 +3,7 @@ package service.ChoseAPI;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.questease.model.BDD.ChoseATrouverPrixJuste;
+import com.example.questease.model.bdd.ChoseATrouverPrixJuste;
 
 import service.RetrofitInstance;
 import retrofit2.Call;

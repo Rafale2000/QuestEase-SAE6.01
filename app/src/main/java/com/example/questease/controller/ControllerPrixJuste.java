@@ -1,7 +1,7 @@
 package com.example.questease.controller;
 
 
-import com.example.questease.model.Jeu.PrixJusteJeu;
+import com.example.questease.model.jeu.PrixJusteJeu;
 
 /**
  * controller qui fait le lien entre l'application et le jeu

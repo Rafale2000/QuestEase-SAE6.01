@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.questease.model.BDD.Indice;
+import com.example.questease.model.bdd.Indice;
 
 
 public class IndiceHandler extends MyDatabaseHelper {

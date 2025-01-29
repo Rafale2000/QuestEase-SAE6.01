@@ -11,8 +11,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.questease.model.BDD.Indice;
-import com.example.questease.model.BDD.MotCryptex;
+import com.example.questease.model.bdd.Indice;
+import com.example.questease.model.bdd.MotCryptex;
 import com.example.questease.R;
 import com.example.questease.Theme;
 

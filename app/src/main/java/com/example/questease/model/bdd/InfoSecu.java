@@ -1,4 +1,4 @@
-package com.example.questease.model.BDD;
+package com.example.questease.model.bdd;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
@@ -10,8 +10,8 @@ public class InfoSecu {
     private String psswrd;
     private String email;
 
-    public InfoSecu(int I, String psswrd, String email) {
-        this.id = I;
+    public InfoSecu(int id, String psswrd, String email) {
+        this.id = id;
         this.psswrd = psswrd;
         this.email = this.hashEmail(email);
     }

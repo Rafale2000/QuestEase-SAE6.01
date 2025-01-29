@@ -12,7 +12,7 @@ import java.util.List;
 
 import android.view.View;
 
-import com.example.questease.model.BDD.MotCryptex;
+import com.example.questease.model.bdd.MotCryptex;
 
 public class PrixJusteAdapter extends RecyclerView.Adapter<PrixJusteAdapter.LobbyViewHolder> {
 
