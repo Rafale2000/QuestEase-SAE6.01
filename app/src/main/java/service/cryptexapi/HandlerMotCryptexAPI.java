@@ -16,7 +16,7 @@ import retrofit2.Response;
 public class HandlerMotCryptexAPI {
     private Context context;
     MotCryptexAPI mcAPI = RetrofitInstance.getRetrofitInstance().create(MotCryptexAPI.class);
-    private final String rq = "Request failed: ";
+    private static final String RQ = "Request failed: ";
 
     public HandlerMotCryptexAPI(Context context) {
         this.context = context;
@@ -32,8 +32,8 @@ public class HandlerMotCryptexAPI {
                 if (response.isSuccessful() && response.body() != null) {
                     callback.onMotCryptexReceived(response.body());
                 } else {
-                    Log.d("HandlerObjectAPI", rq + response.code());
-                    callback.onFailure(rq + response.code());
+                    Log.d("HandlerObjectAPI", RQ + response.code());
+                    callback.onFailure(RQ + response.code());
                 }
             }
 
@@ -56,8 +56,8 @@ public class HandlerMotCryptexAPI {
                 if (response.isSuccessful() && response.body() != null) {
                     callback.onMotCryptexReceived(response.body());
                 } else {
-                    Log.d("HandlerMotCryptexAPI", rq + response.code());
-                    callback.onFailure(rq + response.code());
+                    Log.d("HandlerMotCryptexAPI", RQ + response.code());
+                    callback.onFailure(RQ + response.code());
                 }
             }
 

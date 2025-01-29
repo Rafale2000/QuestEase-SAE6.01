@@ -15,7 +15,7 @@ import retrofit2.Response;
 public class HandleIndiceAPI {
     private Context context;
     IndiceInterfaceAPI indAPI = RetrofitInstance.getRetrofitInstance().create(IndiceInterfaceAPI.class);
-    private final String rq = "Request failed: ";
+    private static final String RQ = "Request failed: ";
 
     public HandleIndiceAPI(Context context) {
         this.context = context;
@@ -23,7 +23,7 @@ public class HandleIndiceAPI {
 
     // Fetch Indice by ID with a callback
     public void getIndice(int id, IndiceCallBack callback) {
-        Call<Indice> call = indAPI.GetIndiceById(id);
+        Call<Indice> call = indAPI.getIndiceById(id);
 
         call.enqueue(new Callback<Indice>() {
             @Override
@@ -31,8 +31,8 @@ public class HandleIndiceAPI {
                 if (response.isSuccessful() && response.body() != null) {
                     callback.OnIndiceReceived(response.body());  // Assuming this method exists in IndiceCallBack
                 } else {
-                    Log.d("HandleCryptexAPI", rq + response.code());
-                    callback.OnFailure(rq + response.code());
+                    Log.d("HandleCryptexAPI", RQ + response.code());
+                    callback.OnFailure(RQ + response.code());
                 }
             }
 
