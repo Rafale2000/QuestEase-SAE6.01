@@ -19,8 +19,8 @@ import com.example.questease.Theme;
 
 import service.cryptexapi.HandlerMotCryptexAPI;
 import service.cryptexapi.MotCryptexCallback;
-import service.IndiceAPI.HandleIndiceAPI;
-import service.IndiceAPI.IndiceCallBack;
+import service.indiceapi.HandleIndiceAPI;
+import service.indiceapi.IndiceCallBack;
 
 public class MotCryptexActivity extends Theme {
 
@@ -48,7 +48,7 @@ public class MotCryptexActivity extends Theme {
                 mc = motCryptex;
 
                 HandleIndiceAPI handleIndiceAPI = new HandleIndiceAPI(MotCryptexActivity.this);
-                handleIndiceAPI.GetIndice(motCryptex.getIndice().getId(), new IndiceCallBack() {
+                handleIndiceAPI.getIndice(motCryptex.getIndice().getId(), new IndiceCallBack() {
 
                     @Override
                     public void OnIndiceReceived(Indice indice) {

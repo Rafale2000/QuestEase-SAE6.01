@@ -1,4 +1,4 @@
-package service.IndiceAPI;
+package service.indiceapi;
 
 import com.example.questease.model.bdd.Indice;
 
