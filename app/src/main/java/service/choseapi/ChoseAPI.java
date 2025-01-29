@@ -1,7 +1,4 @@
-package service.ChoseAPI;
-
-
-//TODO Reprendre les paramètrs du manifest
+package service.choseapi;
 
 import com.example.questease.model.bdd.ChoseATrouverPrixJuste;
 
