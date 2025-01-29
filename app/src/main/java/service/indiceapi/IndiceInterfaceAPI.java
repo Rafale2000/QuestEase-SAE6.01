@@ -13,5 +13,5 @@ public interface IndiceInterfaceAPI {
     Call<List<Indice>> GetIndiceList();
 
     @GET("/indice/{id}")
-    Call<Indice> GetIndiceById(@Path("id") int id);  // Corrected path and parameter
+    Call<Indice> getIndiceById(@Path("id") int id);  // Corrected path and parameter
 }
