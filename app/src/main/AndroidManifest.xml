@@ -54,10 +54,10 @@
 
 
         <activity
-            android:name=".Controller.EndActivity"
+            android:name=".controller.EndActivity"
             android:exported="false" />
         <activity
-            android:name=".Controller.StandBy"
+            android:name=".controller.StandBy"
             android:exported="false" />
         <activity
             android:name="View.questease.MotCryptexActivity"
@@ -69,7 +69,7 @@
             android:name=".TrouveLeSon2"
             android:exported="false" />
         <activity
-            android:name=".Controller.GyroscopeActivity"
+            android:name=".controller.GyroscopeActivity"
             android:exported="false" />
         <activity
             android:name="View.questease.PrixJuste"

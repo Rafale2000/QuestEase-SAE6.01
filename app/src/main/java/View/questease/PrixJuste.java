@@ -25,13 +25,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.questease.Controller.ControllerPrixJuste;
-import com.example.questease.Controller.DrawView;
-import com.example.questease.Model.BDD.ChoseATrouverPrixJuste;
-import com.example.questease.Model.Jeu.PrixJusteJeu;
+import com.example.questease.controller.ControllerPrixJuste;
+import com.example.questease.controller.DrawView;
+import com.example.questease.model.BDD.ChoseATrouverPrixJuste;
+import com.example.questease.model.Jeu.PrixJusteJeu;
 import com.example.questease.R;
-import com.example.questease.RotatingPictures;
-import com.example.questease.RotatingPictures2;
 import com.example.questease.Theme;
 import com.example.questease.WebSocketService;
 import com.google.mlkit.vision.common.InputImage;
@@ -40,11 +38,10 @@ import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import Service.ChoseAPI.ChoseCallBack;
-import Service.ChoseAPI.ChoseHandler;
+import service.ChoseAPI.ChoseCallBack;
+import service.ChoseAPI.ChoseHandler;
 
 
 public class PrixJuste extends Theme {

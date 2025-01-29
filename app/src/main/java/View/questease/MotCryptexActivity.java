@@ -11,16 +11,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.questease.Model.BDD.Indice;
-import com.example.questease.Model.BDD.MotCryptex;
+import com.example.questease.model.BDD.Indice;
+import com.example.questease.model.BDD.MotCryptex;
 import com.example.questease.R;
 import com.example.questease.Theme;
 
 
-import Service.CryptexAPI.HandlerMotCryptexAPI;
-import Service.CryptexAPI.MotCryptexCallback;
-import Service.IndiceAPI.HandleIndiceAPI;
-import Service.IndiceAPI.IndiceCallBack;
+import service.CryptexAPI.HandlerMotCryptexAPI;
+import service.CryptexAPI.MotCryptexCallback;
+import service.IndiceAPI.HandleIndiceAPI;
+import service.IndiceAPI.IndiceCallBack;
 
 public class MotCryptexActivity extends Theme {
 

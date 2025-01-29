@@ -1,6 +1,6 @@
 package com.example.questease.TestUnitaire;
 
-import com.example.questease.Model.Jeu.PrixJusteJeu;
+import com.example.questease.model.Jeu.PrixJusteJeu;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
