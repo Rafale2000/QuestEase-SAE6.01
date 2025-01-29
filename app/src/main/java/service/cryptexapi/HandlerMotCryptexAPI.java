@@ -16,7 +16,7 @@ import retrofit2.Response;
 public class HandlerMotCryptexAPI {
     private Context context;
     MotCryptexAPI mcAPI = RetrofitInstance.getRetrofitInstance().create(MotCryptexAPI.class);
-    private String rq = "Request failed: ";
+    private final String rq = "Request failed: ";
 
     public HandlerMotCryptexAPI(Context context) {
         this.context = context;
