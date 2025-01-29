@@ -1,4 +1,4 @@
-package service.MotCryptexAPI;
+package service.motcryptexapi;
 
 import com.example.questease.model.bdd.MotCryptex;
 
