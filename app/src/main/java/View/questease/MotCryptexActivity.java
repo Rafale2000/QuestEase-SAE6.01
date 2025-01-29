@@ -17,8 +17,8 @@ import com.example.questease.R;
 import com.example.questease.Theme;
 
 
-import service.CryptexAPI.HandlerMotCryptexAPI;
-import service.CryptexAPI.MotCryptexCallback;
+import service.cryptexapi.HandlerMotCryptexAPI;
+import service.cryptexapi.MotCryptexCallback;
 import service.IndiceAPI.HandleIndiceAPI;
 import service.IndiceAPI.IndiceCallBack;
 
@@ -41,7 +41,7 @@ public class MotCryptexActivity extends Theme {
         this.textViewIndice = findViewById(R.id.indice_motCryptex); //indice_mot_cryptex
         Button buttonConfirm = findViewById(R.id.btn_confirm);
         HandlerMotCryptexAPI handlerMotCryptexAPI = new HandlerMotCryptexAPI(this);
-        handlerMotCryptexAPI.GetRandomMotCryptex(new MotCryptexCallback() {
+        handlerMotCryptexAPI.getRandomMotCryptex(new MotCryptexCallback() {
 
             @Override
             public void onMotCryptexReceived(MotCryptex motCryptex) {
