@@ -17,17 +17,13 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.content.res.Configuration;
 import android.os.Build;
-import android.content.Context;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -36,14 +32,10 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.Objects;
 
 public class Pendu extends Theme {
     private String mot;
@@ -52,15 +44,16 @@ public class Pendu extends Theme {
 
     private MediaPlayer mediaPlayer;
     private int triesLeft = 12;
-    private int letterstofind;
+    private int lettersToFind;
     private StringBuilder currentWordView;
     private Dialog tutorialDialog; // Référence au dialog
-    private TextView cardTitle;    // Référence au titre
     private TextView cardContent;
     private ArrayList<String> tries;
-    private String rulestitle = "\nBienvenue dans le pendu";
-    private String rulescontent = "Normalement c'est pas très compliqué\n\nOn reste sur un pendu classique mais les deux joueurs jouent simultanément \n.";
-    private ServiceConnection connection = new ServiceConnection() {
+    private static final String rulesTitle = "\nBienvenue dans le pendu";
+    private static final String rulesContent = "Normalement c'est pas très compliqué\n\nOn reste sur un pendu classique mais les deux joueurs jouent simultanément \n.";
+    private static final String PENDU_STR = "Pendu";
+
+    private final ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             WebSocketService.LocalBinder binder = (WebSocketService.LocalBinder) service;
@@ -76,11 +69,11 @@ public class Pendu extends Theme {
             isBound = false;
         }
     };
-    private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver messageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("Pendu", "Broadcast received");
-            if (intent.getAction().equals("WebSocketMessage")) {
+            Log.d(PENDU_STR, "Broadcast received");
+            if (Objects.equals(intent.getAction(), "WebSocketMessage")) {
                 String jsonMessage = intent.getStringExtra("message");
                 Log.d("RotatingPictures.java", "Message reçu brut : " + jsonMessage);
                 try {
@@ -89,8 +82,8 @@ public class Pendu extends Theme {
                     String message = jsonObject.getString("message");
                     if ("setWord".equals(tag)) {
                         mot = message;
-                        Log.d("Pendu", "Mot mystère =  : " + mot);
-                        letterstofind = mot.length();
+                        Log.d(PENDU_STR, "Mot mystère =  : " + mot);
+                        lettersToFind = mot.length();
                         currentWordView = new StringBuilder();
                         for (int i = 0; i < mot.length(); i++) {
                             currentWordView.append("_ ");
@@ -105,10 +98,9 @@ public class Pendu extends Theme {
                         }
 
                     } else if ("PenduTry".equals(tag)) {
-                        String input = message;
                         Toast.makeText(context, "l'autre joueur à joué une lettre", Toast.LENGTH_SHORT).show();
-                        tries.add(input);
-                        ArrayList<Integer> result = getTryResult(input);
+                        tries.add(message);
+                        ArrayList<Integer> result = getTryResult(message);
                         if (result.isEmpty()) {
                             triesLeft -= 1;
                             if (triesLeft == 0) {
@@ -121,11 +113,9 @@ public class Pendu extends Theme {
                         }
                         updateTryView();
                         updateLeftTries();
-                        updateWordView(result, input);
+                        updateWordView(result, message);
                         updateLeftTries();
-                        runOnUiThread(() -> {
-                            letterstofind -= result.size();
-                        });
+                        runOnUiThread(() -> lettersToFind -= result.size());
 
                     } else if ("successPopup".equals(tag)) {
                         ViewGroup viewGroup = findViewById(R.id.main);
@@ -151,7 +141,7 @@ public class Pendu extends Theme {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("Pendu", "Nouvelle instance créée");
+        Log.d(PENDU_STR, "Nouvelle instance créée");
         super.onCreate(savedInstanceState);
         this.tries = new ArrayList<>();
         SharedPreferences sharedPreferences = getSharedPreferences("QuestEasePrefs", MODE_PRIVATE);
@@ -187,7 +177,7 @@ public class Pendu extends Theme {
         if (sharedPreferences.getBoolean("dyslexie", false)) {
             applyFont(views);
         }
-        Log.d("Pendu", "Nouvelle instance créée");
+        Log.d(PENDU_STR, "Nouvelle instance créée");
 
         Intent serviceIntent = new Intent(this, WebSocketService.class);
         startService(serviceIntent);
@@ -199,23 +189,23 @@ public class Pendu extends Theme {
         TextInputEditText textInputEditText = findViewById(R.id.textInputEditText);
         MaterialButton validateButton = findViewById(R.id.validateButton);
         validateButton.setOnClickListener(v -> {
-            String input = textInputEditText.getText().toString();
+            String input = Objects.requireNonNull(textInputEditText.getText()).toString();
             Log.d("Pendu", "Lettre entrée : " + input);
             Log.d("Pendu", "Lettres déjà essayées : " + tries);
             Log.d("Pendu", "Taille de l'input" + input.length());
             Log.d("Pendu", "résultat du tries.contains(input)" + tries.contains(input));
-            if (input.length() == 1 && tries.contains(input) == false) {
+            if (input.length() == 1 && !tries.contains(input)) {
                 webSocketService.sendMessage("PenduTry", input);
                 tries.add(input);
                 textInputEditText.setText("");
                 ArrayList<Integer> result = getTryResult(input);
                 if (!result.isEmpty()) {
                     updateWordView(result, input);
-                    letterstofind -= result.size();
+                    lettersToFind -= result.size();
 
 
                     updateWordView(result, input);
-                    if (letterstofind == 0) {
+                    if (lettersToFind == 0) {
                         mediaPlayer = MediaPlayer.create(Pendu.this, R.raw.professor_layton_sucess);
                         mediaPlayer.start();
                         ViewGroup viewGroup = findViewById(R.id.main);
@@ -226,7 +216,7 @@ public class Pendu extends Theme {
                                 viewGroup
                         );
                         webSocketService.sendMessage("successPopup", "");
-                        new CountDownTimer(counter * 1000, 1000) {
+                        new CountDownTimer(counter * 1000L, 1000) {
                             int secondsRemaining = counter;
 
                             @Override
@@ -272,11 +262,9 @@ public class Pendu extends Theme {
 
         });
         ViewGroup viewGroup = findViewById(R.id.main);
-        showTutorialPopup(rulestitle, rulescontent, viewGroup);
+        showTutorialPopup(rulesTitle, rulesContent, viewGroup);
         MaterialButton regles = findViewById(R.id.Regles);
-        regles.setOnClickListener(v -> {
-            showTutorialPopup(rulestitle, rulescontent, viewGroup);
-        });
+        regles.setOnClickListener(v -> showTutorialPopup(rulesTitle, rulesContent, viewGroup));
         ImageView quitter = findViewById(R.id.quitter);
         quitter.setOnClickListener(v -> {
             startActivity(new Intent(this, MainActivity.class));

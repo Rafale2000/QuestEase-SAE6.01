@@ -8,45 +8,33 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.questease.Searchlobby;
-import com.example.questease.Theme;
-import com.example.questease.WebSocketService;
-import com.example.questease.Parametres;
-
 import android.content.SharedPreferences;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.java_websocket.client.WebSocketClient;
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends Theme {
-    private WebSocketService webSocketService;
     private boolean isBound = false;
     private boolean isCreated = false;
     private boolean isErrorPopupVisible = false;
-    private ServiceConnection connection = new ServiceConnection() {
+    private static final String MAIN_ACTIVITY_STR = "MainActivity";
+    private final ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             WebSocketService.LocalBinder binder = (WebSocketService.LocalBinder) service;
-            webSocketService = binder.getService();
+            WebSocketService webSocketService = binder.getService();
             isBound = true;
             // Exemple : Envoyer un message une fois connecté
             if (webSocketService != null) {
@@ -60,24 +48,23 @@ public class MainActivity extends Theme {
             isBound = false;
         }
     };
-    private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver messageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("MainActivity", "Broadcast received");
-            if (intent.getAction().equals("WebSocketMessage")) {
+            Log.d(MAIN_ACTIVITY_STR, "Broadcast received");
+            if (Objects.equals(intent.getAction(), "WebSocketMessage")) {
                 String jsonMessage = intent.getStringExtra("message");
-                Log.d("MainActivity", "Message reçu brut : " + jsonMessage);
+                Log.d(MAIN_ACTIVITY_STR, "Message reçu brut : " + jsonMessage);
                 try {
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
                     String message = jsonObject.getString("message");
-                    if ("WebSocketError".equals(tag) && message.equals("WebSocket is not connected!")) {
-                        if (!isErrorPopupVisible) {
+                    if ("WebSocketError".equals(tag) && message.equals("WebSocket is not connected!") && !isErrorPopupVisible) {
                             ViewGroup view = findViewById(R.id.main);
                             showServerErrorPopUp(view);
                             isErrorPopupVisible = true;
                         }
-                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -121,9 +108,9 @@ public class MainActivity extends Theme {
             startActivity(intent);
             try {
                 unregisterReceiver(messageReceiver);
-                Log.d("MainActivity", "BroadcastReceiver unregistered");
+                Log.d(MAIN_ACTIVITY_STR, "BroadcastReceiver unregistered");
             } catch (IllegalArgumentException e) {
-                Log.e("MainActivity", "BroadcastReceiver already unregistered", e);
+                Log.e(MAIN_ACTIVITY_STR, "BroadcastReceiver already unregistered", e);
             }
         });
 
@@ -138,11 +125,11 @@ public class MainActivity extends Theme {
         bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
 
         // Log pour vérifier quand le receiver est enregistré
-        Log.d("MainActivity", "Enregistrement du BroadcastReceiver");
+        Log.d(MAIN_ACTIVITY_STR, "Enregistrement du BroadcastReceiver");
         IntentFilter filter = new IntentFilter("WebSocketMessage");
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
         if (sharedPreferences.getBoolean("assistance_vocale", false)) {
-            Log.d("MainActivity", "Lancement de lireTextViews");
+            Log.d(MAIN_ACTIVITY_STR, "Lancement de lireTextViews");
             lireTextViews(layout);
         }
 

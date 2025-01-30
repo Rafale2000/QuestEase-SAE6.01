@@ -22,7 +22,7 @@ import java.util.List;
 
 
 public class Parametres extends Theme {
-    public SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "QuestEasePrefs";
     private boolean isCreated = false;
     //valeur string en constante
@@ -52,7 +52,7 @@ public class Parametres extends Theme {
         });
 
         ViewGroup layout = findViewById(R.id.main);
-        if (sharedPreferences.getBoolean("assistance_vocale", false)) {
+        if (sharedPreferences.getBoolean(ASSISTANCE_VOCALE_STRING, false)) {
             lireTextViews(layout);
         }
         // elements a taille variable
