@@ -85,7 +85,6 @@ public class Sincere_Menteur extends Theme {
                                 int secondID = idArray.getInt(1);
 
                                 // Déterminer si l'ID du joueur est dans le premier ou le second élément
-                                int id;
                                 if (Sincere_Menteur.this.id == firstID) {
                                     id = 1;
                                 } else if (Sincere_Menteur.this.id == secondID) {
@@ -107,6 +106,7 @@ public class Sincere_Menteur extends Theme {
                             Intent intentgame = identifyActivity(message);
                             startActivity(intentgame);
                             finish();
+                            break;
 
 
                             // Pas d'autres cas ici, vous pouvez en ajouter d'autres plus tard si nécessaire.
@@ -148,39 +148,7 @@ public class Sincere_Menteur extends Theme {
         }
 
         Button buttonValider = findViewById(R.id.button5);
-        buttonValider.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                webSocketService.sendMessage("startGame", "au suivant !");
-
-
-            }
-        });
-    }
-
-    private void verifierReponses() {
-        // Récupérer les choix des joueurs
-        RadioGroup radioGroup1 = findViewById(R.id.radioGroup);
-        int selectedId1 = radioGroup1.getCheckedRadioButtonId();
-
-        RadioGroup radioGroup2 = findViewById(R.id.radioGroup2);
-        int selectedId2 = radioGroup2.getCheckedRadioButtonId();
-
-        boolean r1Sincere = (selectedId1 == R.id.radioButtonSincere);
-        boolean r2Sincere = (selectedId2 == R.id.radioButtonSincere2);
-
-        // Enregistrer les réponses dans la base de données locale
-        dbHelper.addReponseSM(db, id, r1Sincere, r2Sincere);
-
-        // Créer une Map pour envoyer les données
-        Map<String, Object> data = new HashMap<>();
-        data.put("id", id);
-        data.put("reponse1", r1Sincere);
-        data.put("reponse2", r2Sincere);
-
-        // Envoyer les données au serveur
-        envoyerReponses(data);
-        webSocketService.sendMessage("messageTest", "ceci est un test, tuer moi");
+        buttonValider.setOnClickListener(v -> webSocketService.sendMessage("startGame", "au suivant !"));
     }
 
     private void envoyerReponses(Map<String, Object> data) {

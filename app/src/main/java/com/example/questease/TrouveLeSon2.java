@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -35,16 +34,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrouveLeSon2 extends Theme {
-    private String rulestitle = "Règles du jeu";
-    private String rulescontent = "Le jeu est séparé en deux parties :\n\n - Le premier joueur est l'auditeur, il doit appuyer sur un bouton pour entendre un son et le reconnaître.\n\n - Le rédacteur recevra des messages de l'auditeur et devra entrer dans son terminal de quel élément provient le son.";
+    private static final String rulesTitle = "Règles du jeu";
+    private String rulesContent = "Le jeu est séparé en deux parties :\n\n - Le premier joueur est l'auditeur, il doit appuyer sur un bouton pour entendre un son et le reconnaître.\n\n - Le rédacteur recevra des messages de l'auditeur et devra entrer dans son terminal de quel élément provient le son.";
     private ViewGroup main;
     private MediaPlayer mediaPlayer;
     private WebSocketService webSocketService;
     private SharedPreferences sharedPreferences;
     private boolean isBound = false;
     private Dialog tutorialDialog; // Référence au dialog
-    private TextView cardTitle;    // Référence au titre
-    private TextView cardContent;
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -116,12 +113,12 @@ public class TrouveLeSon2 extends Theme {
         });
 
         main = findViewById(R.id.main);
-        showTutorialPopup(rulestitle, rulescontent, main);
+        showTutorialPopup(rulesTitle, rulesContent, main);
         MaterialButton regles = findViewById(R.id.Regles);
         regles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showTutorialPopup(rulestitle, rulescontent, main);
+                showTutorialPopup(rulesTitle, rulesContent, main);
             }
         });
 
@@ -159,7 +156,7 @@ public class TrouveLeSon2 extends Theme {
                     showTutorialPopup("\nFélicitations","Le mot était bien Windows Xp,un système d'exploitation sorti en 2003\n\nVous allez bientot être redirigé vers le prochain jeu",main);
                     webSocketService.sendMessage("successPopup","Windows Xp");
                     int counter = 10; // Durée en secondes
-                    new CountDownTimer(counter * 1000, 1000) {
+                    new CountDownTimer(counter * 1000L, 1000) {
                         int secondsRemaining = counter;
                         @Override
                         public void onTick(long millisUntilFinished) {
@@ -184,7 +181,7 @@ public class TrouveLeSon2 extends Theme {
                 webSocketService.sendMessage("TrouveLeSonMessage",messages.getText().toString());
             }
         });
-        };
+        }
 }
 
 

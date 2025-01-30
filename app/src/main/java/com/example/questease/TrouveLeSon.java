@@ -33,8 +33,8 @@ import java.util.List;
 
 public class TrouveLeSon extends Theme {
     private MediaPlayer mediaPlayer;
-    private String rulestitle = "Règles du jeu";
-    private String rulescontent = "Le jeu est séparé en deux parties :\n\n - Le premier joueur est l'auditeur, il doit appuyer sur un bouton pour entendre un son et le reconnaître.\n \n - Le rédacteur recevra des messages de l'auditeur et devra entrer dans son terminal de quel élément provient le son.";
+    private static final String rulesTitle = "Règles du jeu";
+    private static final String rulesContent = "Le jeu est séparé en deux parties :\n\n - Le premier joueur est l'auditeur, il doit appuyer sur un bouton pour entendre un son et le reconnaître.\n \n - Le rédacteur recevra des messages de l'auditeur et devra entrer dans son terminal de quel élément provient le son.";
     private ViewGroup main;
     private WebSocketService webSocketService;
     private SharedPreferences sharedPreferences;
@@ -113,7 +113,7 @@ public class TrouveLeSon extends Theme {
 
 
         main = findViewById(R.id.main);
-        showTutorialPopup(rulestitle, rulescontent, main);
+        showTutorialPopup(rulesTitle, rulesContent, main);
         Intent serviceIntent = new Intent(this, WebSocketService.class);
         startService(serviceIntent);
         bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
@@ -144,7 +144,7 @@ public class TrouveLeSon extends Theme {
         regles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showTutorialPopup(rulestitle, rulescontent, main);
+                showTutorialPopup(rulesTitle, rulesContent, main);
             }
         });
         mediaPlayer = MediaPlayer.create(this, R.raw.windows_xp_startup);

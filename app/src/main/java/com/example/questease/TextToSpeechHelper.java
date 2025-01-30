@@ -11,7 +11,7 @@ import android.os.Handler;
 public class TextToSpeechHelper {
     private TextToSpeech textToSpeech;
     private boolean isTtsInitialized = false;
-    private final int RETRY_DELAY = 1000; // Délai en millisecondes avant de réessayer
+    private static final int RETRY_DELAY = 1000; // Délai en millisecondes avant de réessayer
 
     public TextToSpeechHelper(Context context) {
         textToSpeech = new TextToSpeech(context, new TextToSpeech.OnInitListener() {

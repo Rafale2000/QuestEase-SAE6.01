@@ -13,12 +13,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HandleIndiceAPI {
-    private Context context;
     IndiceInterfaceAPI indAPI = RetrofitInstance.getRetrofitInstance().create(IndiceInterfaceAPI.class);
     private static final String RQ = "Request failed: ";
 
     public HandleIndiceAPI(Context context) {
-        this.context = context;
     }
 
     // Fetch Indice by ID with a callback

@@ -13,8 +13,6 @@ import org.json.JSONObject;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.json.JSONObject;
-
 public class WebSocketService extends Service {
 
     private static final String TAG = "WebSocketService";
@@ -79,7 +77,7 @@ public class WebSocketService extends Service {
                 jsonMessage.put("message", message);
 
                 webSocketClient.send(jsonMessage.toString());
-                Log.d(TAG, "Message sent: " + jsonMessage.toString());
+                Log.d(TAG, "Message sent: " + jsonMessage);
             } catch (Exception e) {
                 Log.e(TAG, "Failed to send message: " + e.getMessage());
             }
