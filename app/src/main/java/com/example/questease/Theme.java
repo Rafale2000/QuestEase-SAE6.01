@@ -16,7 +16,6 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Button;
 import android.content.Context;
@@ -27,9 +26,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 
-import com.example.questease.Controller.EndActivity;
-import com.example.questease.Controller.GyroscopeActivity;
-import com.example.questease.Controller.StandBy;
+import com.example.questease.controller.EndActivity;
+import com.example.questease.controller.GyroscopeActivity;
+import com.example.questease.controller.StandBy;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
