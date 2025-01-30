@@ -3,7 +3,7 @@
   <component name="deploymentTargetSelector">
     <selectionStates>
       <SelectionState runConfigName="app">
-        <option name="selectionMode" value="DROPDOWN" />
+        <option name="selectionMode" value="DIALOG" />
         <DropdownSelection timestamp="2024-10-16T08:12:36.260452800Z">
           <Target type="DEFAULT_BOOT">
             <handle>
@@ -11,27 +11,16 @@
             </handle>
           </Target>
         </DropdownSelection>
-        <DialogSelection />
-      </SelectionState>
-      <SelectionState runConfigName="SplashActivity">
-        <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-12-06T09:04:22.463306800Z">
-          <Target type="DEFAULT_BOOT">
-            <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=86620a76" />
-            </handle>
-          </Target>
-        </DropdownSelection>
         <DialogSelection>
           <targets>
             <Target type="DEFAULT_BOOT">
               <handle>
-                <DeviceId pluginId="PhysicalDevice" identifier="serial=86620a76" />
+                <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\depla\.android\avd\Pixel_8a_API_VanillaIceCream.avd" />
               </handle>
             </Target>
             <Target type="DEFAULT_BOOT">
               <handle>
-                <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\depla\.android\avd\Pixel_8a_API_VanillaIceCream.avd" />
+                <DeviceId pluginId="PhysicalDevice" identifier="serial=86620a76" />
               </handle>
             </Target>
           </targets>

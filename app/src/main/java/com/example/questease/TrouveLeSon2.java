@@ -98,7 +98,6 @@ public class TrouveLeSon2 extends Theme {
                         finish();
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
         }
@@ -137,7 +136,7 @@ public class TrouveLeSon2 extends Theme {
         views.add(role);
         views.add(sendbutton);
         views.add(messages);
-        sharedPreferences = getSharedPreferences("QuestEasePrefs", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSecurePreferences(this);
         ApplyParameters(sharedPreferences);
         if(sharedPreferences.getBoolean("tailleTexte",false)){
             adjustTextSize(views);
@@ -184,7 +183,7 @@ public class TrouveLeSon2 extends Theme {
                 webSocketService.sendMessage("TrouveLeSonMessage",messages.getText().toString());
             }
         });
-        };
+    };
 }
 
 

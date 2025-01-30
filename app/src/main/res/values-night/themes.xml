@@ -11,6 +11,8 @@
         <item name="colorProfileBackground">#899295</item>
         <item name="iconcolor">#FFFFFF</item>
         <item name="texte">#FFFFFF</item>
+        <item name="difficulty2">#FFFF00</item>
+        <item name="difficulty3">#FFA500</item>
         <item name = "exitButton">#F60000</item>
         <item name="bordercolor">#F6F6F6</item>
     </style>
@@ -27,7 +29,8 @@
         <item name="texte">#FFFFFF</item> <!-- Texte blanc général -->
         <item name="bordercolor">#F6F6F6</item> <!-- Bordure noire pour contraste -->
         <item name="exitButton">#EAA221</item> <!-- Orange foncé -->
-
+        <item name="difficulty2">#E1C300</item> <!-- Pour deutéranomalie -->
+        <item name="difficulty3">#D88C00</item> <!-- Pour deutéranopie -->
     </style>
 
     <style name="Theme.Questease.Deuteranopie" parent="Theme.Material3.DayNight.NoActionBar">
@@ -43,6 +46,8 @@
         <item name="texte">#FFFFFF</item> <!-- Texte blanc -->
         <item name="bordercolor">#F6F6F6</item> <!-- Bordure noire -->
         <item name="exitButton">#B59F36</item> <!-- Jaune-brun -->
+        <item name="difficulty2">#E1C300</item> <!-- Pour deutéranomalie -->
+        <item name="difficulty3">#D88C00</item> <!-- Pour deutéranopie -->
     </style>
 
     <style name="Theme.Questease.Protanomalie" parent="Theme.Material3.DayNight.NoActionBar">
@@ -57,6 +62,8 @@
         <item name="texte">#FFFFFF</item> <!-- Texte blanc -->
         <item name="bordercolor">#F6F6F6</item> <!-- Bordure noire -->
         <item name="exitButton">#D98825</item> <!-- Orange clair -->
+        <item name="difficulty2">#FFC700</item> <!-- Pour protanomalie -->
+        <item name="difficulty3">#E68000</item> <!-- Pour protanopie -->
     </style>
 
     <style name="Theme.Questease.Protanopie" parent="Theme.Material3.DayNight.NoActionBar">
@@ -71,6 +78,8 @@
         <item name="texte">#FFFFFF</item> <!-- Texte blanc -->
         <item name="bordercolor">#F6F6F6</item> <!-- Bordure noire -->
         <item name="exitButton">#A56738</item> <!-- Brun orangé -->
+        <item name="difficulty2">#FFC700</item> <!-- Pour protanomalie -->
+        <item name="difficulty3">#E68000</item> <!-- Pour protanopie -->
     </style>
 
     <style name="Theme.Questease.ContrasteEleve" parent="Theme.Material3.DayNight.NoActionBar">

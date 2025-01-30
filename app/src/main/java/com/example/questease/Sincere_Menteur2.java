@@ -115,7 +115,6 @@ public class Sincere_Menteur2 extends Theme {
                             break;
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
         }

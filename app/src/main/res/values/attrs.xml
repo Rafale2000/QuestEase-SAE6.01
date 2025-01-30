@@ -14,5 +14,7 @@
     <attr name="text_size_large" format="dimension"/>
     <attr name="text_size_xlarge" format="dimension"/>
     <attr name="exitButton" format="color"/>
+    <attr name="difficulty2" format="color"/>
+    <attr name="difficulty3" format="color"/>
 </resources>
 

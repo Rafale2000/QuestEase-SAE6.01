@@ -7,16 +7,19 @@
         <item name="colorPrimaryVariant">#3700B3</item> <!-- Variante principale -->
         <item name="colorOnPrimary">#FFFFFF</item> <!-- Texte sur fond coloré -->
         <item name="colorButtonBackground">#00F600</item> <!-- Couleur du bouton personnalisé -->
+
         <item name="colorButtonBackground2">#606060</item>
         <item name="colorButtonText">#000000</item> <!-- Texte du bouton -->
         <item name="colorProfileBackground">#4c4745</item>
         <item name="iconcolor">#000000</item>
         <item name="texte">#000000</item>
-         <item name = "exitButton">#F60000</item>
+        <item name="difficulty2">#FFFF00</item>
+        <item name="difficulty3">#FFA500</item>
+        <item name ="exitButton">#F60000</item>
         <item name="bordercolor">#000000</item> <!-- couleur utilisé pour contraster les samples de couleur et le fond -->
 
     </style>
-    
+
     <style name="Theme.Questease.Deuteranomalie" parent="Theme.Questease">
         <item name="colorPrimary">#9F63FF</item> <!-- Adaptation de violet à un ton plus perceptible -->
         <item name="colorPrimaryVariant">#7D4DC3</item> <!-- Variante assombrie du violet -->
@@ -27,7 +30,8 @@
         <item name="colorProfileBackground">#484545</item> <!-- Gris foncé, légère adaptation pour le contraste -->
         <item name="iconcolor">#FFFFFF</item> <!-- Noir, pas de changement -->
         <item name="exitButton">#EAA221</item> <!-- Orange foncé -->
-
+        <item name="difficulty2">#E1C300</item> <!-- Pour deutéranomalie -->
+        <item name="difficulty3">#D88C00</item> <!-- Pour deutéranopie -->
         <item name="texte">#000000</item> <!-- Noir, pas de changement -->
 
     </style>
@@ -45,7 +49,8 @@
         </item> <!-- Variante de fond du bouton, gris neutre -->
         <item name="colorButtonText">#000000</item> <!-- Texte du bouton, noir pour contraste -->
         <item name="exitButton">#B59F36</item> <!-- Jaune-brun -->
-
+        <item name="difficulty2">#E1C300</item> <!-- Pour deutéranomalie -->
+        <item name="difficulty3">#D88C00</item> <!-- Pour deutéranopie -->
         <!-- Autres couleurs d'interface -->
         <item name="colorProfileBackground">#595959
         </item> <!-- Fond de profil, gris pour un meilleur contraste -->
@@ -59,7 +64,8 @@
         <item name="colorPrimaryVariant">#5A6FCE</item> <!-- Variante principale ajustée -->
         <item name="colorOnPrimary">#FFFFFF</item> <!-- Texte sur fond coloré (inchangé) -->
         <item name="exitButton">#D98825</item> <!-- Orange clair -->
-
+        <item name="difficulty2">#FFC700</item> <!-- Pour protanomalie -->
+        <item name="difficulty3">#E68000</item> <!-- Pour protanopie -->
         <item name="colorButtonBackground">#00E500
         </item> <!-- Couleur du bouton personnalisé (plus vert) -->
         <item name="colorButtonBackground2">#808080
@@ -86,7 +92,8 @@
         <item name="colorButtonBackground2">#808080
         </item> <!-- Couleur secondaire pour les boutons (gris neutre) -->
         <item name="colorButtonText">#000000</item> <!-- Texte du bouton (inchangé) -->
-
+        <item name="difficulty2">#FFC700</item> <!-- Pour protanomalie -->
+        <item name="difficulty3">#E68000</item> <!-- Pour protanopie -->
         <item name="colorProfileBackground">#4D4745
         </item> <!-- Couleur de fond pour les profils (léger ajustement du contraste) -->
 

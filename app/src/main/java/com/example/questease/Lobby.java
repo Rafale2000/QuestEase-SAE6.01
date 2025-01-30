@@ -93,9 +93,7 @@ public class Lobby extends Theme {
                             finish();
                         }
                     }
-
                 } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
         }
@@ -105,7 +103,7 @@ public class Lobby extends Theme {
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("Lobby", "Nouvelle instance créée");
         super.onCreate(savedInstanceState);
-        sharedPreferences = getSharedPreferences("QuestEasePrefs", MODE_PRIVATE);
+        sharedPreferences = getSecurePreferences(this);
         ApplyParameters(sharedPreferences);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_lobby);
@@ -161,7 +159,6 @@ public class Lobby extends Theme {
         String name = intent.getStringExtra("p1");
         String name2 = intent.getStringExtra("p2");
         String lobbyName = intent.getStringExtra("lobbyName");
-
         if (lobbyName != null) {
             this.lobbyname = lobbyName;
         }
@@ -170,11 +167,9 @@ public class Lobby extends Theme {
         if (name2 != null) {
             person2.setText(name2);
         }
-
         if (name != null) {
             person1.setText(name);
         }
-
         Intent serviceIntent = new Intent(this, WebSocketService.class);
         startService(serviceIntent);
         bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
@@ -190,14 +185,11 @@ public class Lobby extends Theme {
         super.onStop();
         Log.d("Lobby", "le big on stop est passé par le super ");
         Log.d("lobbyname", lobbyname);
-
         if (webSocketService != null && lobbyname != null) {
-            // Envoyer une requête pour quitter le lobby
             if (readyCount != 2) {
                 webSocketService.sendMessage("leaveLobby", this.lobbyname);
                 Log.d("Lobby", "Requête leaveLobby envoyée pour le lobby : " + lobbyname);
             }
-
         } else {
             Log.w("Lobby", "Impossible d'envoyer leaveLobby, service ou nom du lobby indisponible.");
         }
@@ -235,14 +227,12 @@ public class Lobby extends Theme {
         super.onStop();
         Log.d("Lobby", "le big on pause est passé par le super ");
         Log.d("lobbyname", lobbyname);
-
         if (webSocketService != null && lobbyname != null) {
             // Envoyer une requête pour quitter le lobby
             if (readyCount != 2) {
                 webSocketService.sendMessage("leaveLobby", this.lobbyname);
                 Log.d("Lobby", "Requête leaveLobby envoyée pour le lobby : " + lobbyname);
             }
-
         } else {
             Log.w("Lobby", "Impossible d'envoyer leaveLobby, service ou nom du lobby indisponible.");
         }

@@ -17,12 +17,14 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -97,6 +99,7 @@ public class Searchlobby extends Theme {
                         if ("success".equalsIgnoreCase(message)) {
                             namePopupDialog.dismiss();
                             findViewById(R.id.main).setRenderEffect(null);
+
                             webSocketService.sendMessage("createLobby", nom);
                             Intent intentNewActivity = new Intent(Searchlobby.this, Lobby.class);
                             intentNewActivity.putExtra("p1", nom);
@@ -120,16 +123,15 @@ public class Searchlobby extends Theme {
                         Toast.makeText(Searchlobby.this, "Vous avez quitté le lobby.", Toast.LENGTH_SHORT).show();
                         webSocketService.sendMessage("requestLobbies", "salut à tous c'est fanta j'ai delete le lobby");
                     }
+
                     if ("WebSocketError".equals(tag)) {
                         if (!isErrorPopupVisible) {
                             ViewGroup view = findViewById(R.id.main);
                             showServerErrorPopUp(view);
                             isErrorPopupVisible = true;
                         }
-
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
         }
@@ -141,7 +143,7 @@ public class Searchlobby extends Theme {
 
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        SharedPreferences sharedPreferences = getSharedPreferences("QuestEasePrefs", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSecurePreferences(this);
         ApplyParameters(sharedPreferences);
         setContentView(R.layout.activity_searchlobby);
 
@@ -272,7 +274,7 @@ public class Searchlobby extends Theme {
         namePopupDialog.setCanceledOnTouchOutside(true);
         namePopupDialog.setOnCancelListener(dialog -> view.setRenderEffect(null));
         namePopupDialog.show();
-
+        ViewGroup layout = findViewById(R.id.main);
         MaterialButton validatebutton = namePopupDialog.findViewById(R.id.validateButton);
         if (action.equals("createLobby")) {
             validatebutton.setOnClickListener(v -> {
@@ -287,7 +289,6 @@ public class Searchlobby extends Theme {
                         webSocketService.sendMessage("setnom", name);
                         this.nom = name;
                     } catch (Exception e) {
-                        e.printStackTrace();
                     }
                 } else {
                     Toast.makeText(Searchlobby.this, "Veuillez entrer un nom valide.", Toast.LENGTH_SHORT).show();
@@ -305,7 +306,6 @@ public class Searchlobby extends Theme {
                         webSocketService.sendMessage("joinLobby", lobby);
                         this.nom = name;
                     } catch (Exception e) {
-                        e.printStackTrace();
                     }
                 } else {
                     Toast.makeText(Searchlobby.this, "Veuillez entrer un nom valide.", Toast.LENGTH_SHORT).show();

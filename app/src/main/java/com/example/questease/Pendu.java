@@ -143,7 +143,6 @@ public class Pendu extends Theme {
                         finish();
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
         }
@@ -154,7 +153,7 @@ public class Pendu extends Theme {
         Log.d("Pendu", "Nouvelle instance créée");
         super.onCreate(savedInstanceState);
         this.tries = new ArrayList<>();
-        SharedPreferences sharedPreferences = getSharedPreferences("QuestEasePrefs", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSecurePreferences(this);
         ApplyParameters(sharedPreferences);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_pendu);

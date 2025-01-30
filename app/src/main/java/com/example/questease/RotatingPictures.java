@@ -89,7 +89,6 @@ public class RotatingPictures extends Theme {
                         finish();
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
                 }
             }
         }
@@ -98,7 +97,7 @@ public class RotatingPictures extends Theme {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("RotatingPictures", "Nouvelle instance créée");
-        SharedPreferences sharedPreferences = getSharedPreferences("QuestEasePrefs", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSecurePreferences(this);
         ApplyParameters(sharedPreferences);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);

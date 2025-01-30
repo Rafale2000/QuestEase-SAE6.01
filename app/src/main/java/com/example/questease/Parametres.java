@@ -3,17 +3,20 @@ package com.example.questease;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.materialswitch.MaterialSwitch;
 
 import java.util.ArrayList;
@@ -22,6 +25,7 @@ import java.util.List;
 
 
 public class Parametres extends Theme {
+    private static final String DIFFICULTY = "difficulty";
     public SharedPreferences sharedPreferences;
     private static final String PREFS_NAME = "QuestEasePrefs";
     private boolean isCreated = false;
@@ -40,7 +44,8 @@ public class Parametres extends Theme {
         isCreated = true;
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        //sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        sharedPreferences = getSecurePreferences(this);
         // applique le theme
         ApplyParameters(sharedPreferences);
         setContentView(R.layout.activity_parametres);
@@ -66,6 +71,10 @@ public class Parametres extends Theme {
         CheckBox deuteranopie = findViewById(R.id.deuteranopie);
         CheckBox protanomalie = findViewById(R.id.protanomalie);
         CheckBox protanopie = findViewById(R.id.protanopie);
+        MaterialButton difficultyButton1 = findViewById(R.id.difficultyButton1);
+        MaterialButton difficultyButton2 = findViewById(R.id.difficultyButton2);
+        MaterialButton difficultyButton3 = findViewById(R.id.difficultyButton3);
+
         List<View> views = new ArrayList<>(Arrays.asList(
                 colorSampleText,
                 dyslexieText,
@@ -241,14 +250,41 @@ public class Parametres extends Theme {
                 protanomalie.setChecked(false);
                 deuteranomalie.setChecked(false);
                 protanopie.setChecked(false);
-
             } else {
                 sharedPreferences.edit().putInt(DALTONISME_STRING, 0).apply();
-
             }
             recreate();
             Log.e(SHARED_PREFS_STRING, DALTONISME_VALEUR_STRING + sharedPreferences.getInt(DALTONISME_STRING, 0));
         });
+        difficultyButton1.setOnClickListener(view -> {
+            sharedPreferences.edit().putInt(DIFFICULTY,1).apply();
+            difficultyButton1.setAlpha(1.0f);
+            difficultyButton2.setAlpha(0.3f);
+            difficultyButton3.setAlpha(0.3f);
+            Toast toast = Toast.makeText(this, "difficultée sélectionnée : Facile", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.BOTTOM, 0, 100);
+            toast.show();
+        });
+        difficultyButton2.setOnClickListener(view -> {
+            sharedPreferences.edit().putInt(DIFFICULTY,2).apply();
+            difficultyButton1.setAlpha(0.3f);
+            difficultyButton2.setAlpha(1.0f);
+            difficultyButton3.setAlpha(0.3f);
+        });
+        difficultyButton3.setOnClickListener(view -> {
+            sharedPreferences.edit().putInt(DIFFICULTY,3).apply();
+            difficultyButton1.setAlpha(0.3f);
+            difficultyButton2.setAlpha(0.3f);
+            difficultyButton3.setAlpha(1.0f);
+        });
+        int difficulty = sharedPreferences.getInt(DIFFICULTY, 0);
+        if (difficulty == 1 || difficulty == 0) {
+            difficultyButton1.performClick();
+        } else if (difficulty == 2) {
+            difficultyButton2.performClick();
+        } else if (difficulty == 3) {
+            difficultyButton3.performClick();
+        }
     }
 
     public void initializePreference(String key, int defaultValue) {
