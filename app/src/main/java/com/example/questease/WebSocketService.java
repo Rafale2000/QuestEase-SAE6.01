@@ -13,11 +13,13 @@ import org.json.JSONObject;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.json.JSONObject;
 
 public class WebSocketService extends Service {
 
     private static final String TAG = "WebSocketService";
+    private static final String MESSAGE_STR = "message";
+    private static final String WEB_SOCKET_SERVICE_STR = "WebSocketService";
+
     private WebSocketClient webSocketClient;
     private final IBinder binder = new LocalBinder();
 
@@ -38,6 +40,9 @@ public class WebSocketService extends Service {
         connectWebSocket();
     }
 
+    /**
+     * Fonction qui permet de se connecter au serveur spring
+     */
     private void connectWebSocket() {
         try {
             URI uri = new URI("ws://192.168.219.104:8080/ws");
@@ -50,9 +55,9 @@ public class WebSocketService extends Service {
                 public void onMessage(String message) {
                     Log.d(TAG, "Message received: " + message);
                     Intent intent = new Intent("WebSocketMessage");
-                    intent.putExtra("message", message);
+                    intent.putExtra(MESSAGE_STR, message);
                     sendBroadcast(intent);
-                    Log.d("WebSocketService", "BrFoadcast sent with message: " + message);
+                    Log.d(WEB_SOCKET_SERVICE_STR, "BrFoadcast sent with message: " + message);
                 }
 
                 @Override
@@ -76,10 +81,10 @@ public class WebSocketService extends Service {
             try {
                 JSONObject jsonMessage = new JSONObject();
                 jsonMessage.put("tag", tag);
-                jsonMessage.put("message", message);
+                jsonMessage.put(MESSAGE_STR, message);
 
                 webSocketClient.send(jsonMessage.toString());
-                Log.d(TAG, "Message sent: " + jsonMessage.toString());
+                Log.d(TAG, "Message sent: " + jsonMessage);
             } catch (Exception e) {
                 Log.e(TAG, "Failed to send message: " + e.getMessage());
             }
@@ -87,16 +92,16 @@ public class WebSocketService extends Service {
             JSONObject jsonMessage = new JSONObject();
             try {
                 jsonMessage.put("tag", "WebSocketError"); // Ajoutez le "tag" que vous souhaitez
-                jsonMessage.put("message", "WebSocket is not connected!");
+                jsonMessage.put(MESSAGE_STR, "WebSocket is not connected!");
             } catch (Exception e) {
                 e.printStackTrace();
             }
             String messageString = jsonMessage.toString();
 
             Intent intent = new Intent("WebSocketMessage");
-            intent.putExtra("message", messageString);
+            intent.putExtra(MESSAGE_STR, messageString);
             Log.d(TAG, "Envoi du broadcast avec l'action : " + intent.getAction());
-            Log.d(TAG, "Contenu du message : " + intent.getStringExtra("message"));
+            Log.d(TAG, "Contenu du message : " + intent.getStringExtra(MESSAGE_STR));
             sendBroadcast(intent);
 
 
