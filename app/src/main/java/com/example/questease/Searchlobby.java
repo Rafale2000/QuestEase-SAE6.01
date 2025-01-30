@@ -13,20 +13,16 @@ import android.graphics.RenderEffect;
 import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.constraintlayout.widget.Group;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -36,14 +32,12 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Searchlobby extends Theme {
-    private static final Logger log = LoggerFactory.getLogger(Searchlobby.class);
     private List<View> views = new ArrayList<>();
     private WebSocketService webSocketService;
     private boolean isBound = false;
@@ -51,19 +45,36 @@ public class Searchlobby extends Theme {
     LinearLayout layoutLobbies;
     Dialog namePopupDialog;
     private String requestedLobby;
-    private Boolean isCreated = false;
     private Boolean isErrorPopupVisible = false;
 
+    private static final String SEARCH_LOBBY_STR = "SearchLobby";
+    private static final String CREATE_LOBBY_STR = "createLobby";
+    private static final String WEB_SOCKET_MSG_STR = "WebSocketMessage";
+    private static final String SET_NOM_STR = "setnom";
+    private static final String JOIN_LOBBY_STR = "joinLobby";
+
+
+
     private ServiceConnection connection = new ServiceConnection() {
+
+        /**
+         * est utilisé quand le web socket est connecté au serveur
+         * @param name nom du web socket
+         * @param service utilisé par le web socket
+         */
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             WebSocketService.LocalBinder binder = (WebSocketService.LocalBinder) service;
             webSocketService = binder.getService();
             isBound = true;
-            Log.d("SearchLobby", "Service connected");
+            Log.d(SEARCH_LOBBY_STR, "Service connected");
             webSocketService.sendMessage("requestLobbies", "");
         }
 
+        /**
+         * est utilisé quand le web socket est déconnecté
+         * @param name nom du component
+         */
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;
@@ -71,63 +82,77 @@ public class Searchlobby extends Theme {
     };
 
     private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
+
+        /**
+         * est utilisé quand le web socket recoit quelque chose
+         * @param context page sur la quel le web socket est
+         * @param intent truc au pif
+         */
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("SearchLobby", "Broadcast received");
-            if (intent.getAction().equals("WebSocketMessage")) {
+            Log.d(SEARCH_LOBBY_STR, "Broadcast received");
+            if (Objects.equals(intent.getAction(), WEB_SOCKET_MSG_STR)) {
                 String jsonMessage = intent.getStringExtra("message");
-                Log.d("SearchLobby", "Message reçu brut : " + jsonMessage);
+                Log.d(SEARCH_LOBBY_STR, "Message reçu brut : " + jsonMessage);
                 try {
+                    assert jsonMessage != null;
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
                     String message = jsonObject.getString("message");
 
-                    if ("Lobbylist".equals(tag)) {
-                        JSONArray messageArray = new JSONArray(message);
-                        List<String> lobbies = new ArrayList<>();
-                        for (int i = 0; i < messageArray.length(); i++) {
-                            lobbies.add(messageArray.getString(i));
-                        }
-                        Log.d("SearchLobby", "Tag: " + tag);
-                        Log.d("SearchLobby", "Lobbies: " + lobbies);
-                        Log.d("info", "je vais esssayer d'afficher les lobby");
-                        addLobbyButtons(lobbies);
+                    switch (tag) {
+                        case "Lobbylist":
+                            JSONArray messageArray = new JSONArray(message);
+                            List<String> lobbies = new ArrayList<>();
+                            for (int i = 0; i < messageArray.length(); i++) {
+                                lobbies.add(messageArray.getString(i));
+                            }
+                            Log.d(SEARCH_LOBBY_STR, "Tag: " + tag);
+                            Log.d(SEARCH_LOBBY_STR, "Lobbies: " + lobbies);
+                            Log.d("info", "je vais esssayer d'afficher les lobby");
+                            addLobbyButtons(lobbies);
 
-                    } else if ("setnom".equals(tag)) {
-                        if ("success".equalsIgnoreCase(message)) {
-                            namePopupDialog.dismiss();
-                            findViewById(R.id.main).setRenderEffect(null);
-                            webSocketService.sendMessage("createLobby", nom);
+                            break;
+                        case SET_NOM_STR:
+                            if ("success".equalsIgnoreCase(message)) {
+                                namePopupDialog.dismiss();
+                                findViewById(R.id.main).setRenderEffect(null);
+                                webSocketService.sendMessage(CREATE_LOBBY_STR, nom);
+                                Intent intentNewActivity = new Intent(Searchlobby.this, Lobby.class);
+                                intentNewActivity.putExtra("p1", nom);
+                                intentNewActivity.putExtra("lobbyName", nom);
+                                startActivity(intentNewActivity);
+                                onStop();
+                            } else {
+                                Toast.makeText(Searchlobby.this, "Nom déjà pris ou invalide.", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
+                        case "lobbyJoined":
                             Intent intentNewActivity = new Intent(Searchlobby.this, Lobby.class);
-                            intentNewActivity.putExtra("p1", nom);
-                            intentNewActivity.putExtra("lobbyName", nom);
+                            intentNewActivity.putExtra("p1", message);
+                            intentNewActivity.putExtra("p2", nom);
+                            webSocketService.sendMessage("setP2Name", nom);
+                            intentNewActivity.putExtra("lobbyName", requestedLobby);
                             startActivity(intentNewActivity);
                             onStop();
-                        } else {
-                            Toast.makeText(Searchlobby.this, "Nom déjà pris ou invalide.", Toast.LENGTH_SHORT).show();
-                        }
-                    } else if ("lobbyJoined".equals(tag)) {
-                        Intent intentNewActivity = new Intent(Searchlobby.this, Lobby.class);
-                        intentNewActivity.putExtra("p1", message);
-                        intentNewActivity.putExtra("p2", nom);
-                        webSocketService.sendMessage("setP2Name", nom);
-                        intentNewActivity.putExtra("lobbyName", requestedLobby);
-                        startActivity(intentNewActivity);
-                        onStop();
-                    } else if ("LobbyRejected".equals(tag)) {
-                        Toast.makeText(Searchlobby.this, "Lobby plein ou inexistant.", Toast.LENGTH_SHORT).show();
-                    } else if ("lobbyLeaved".equals(tag)) {
-                        Toast.makeText(Searchlobby.this, "Vous avez quitté le lobby.", Toast.LENGTH_SHORT).show();
-                        webSocketService.sendMessage("requestLobbies", "salut à tous c'est fanta j'ai delete le lobby");
+                            break;
+                        case "LobbyRejected":
+                            Toast.makeText(Searchlobby.this, "Lobby plein ou inexistant.", Toast.LENGTH_SHORT).show();
+                            break;
+                        case "lobbyLeaved":
+                            Toast.makeText(Searchlobby.this, "Vous avez quitté le lobby.", Toast.LENGTH_SHORT).show();
+                            webSocketService.sendMessage("requestLobbies", "salut à tous c'est fanta j'ai delete le lobby");
+                            break;
+                        default:
+                            break;
                     }
-                    if ("WebSocketError".equals(tag)) {
-                        if (!isErrorPopupVisible) {
+                    if ("WebSocketError".equals(tag) && Boolean.FALSE.equals(isErrorPopupVisible)) {
                             ViewGroup view = findViewById(R.id.main);
                             showServerErrorPopUp(view);
                             isErrorPopupVisible = true;
                         }
 
-                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -135,9 +160,13 @@ public class Searchlobby extends Theme {
         }
     };
 
+    /**
+     * créer les élements de la page quand la page est lancé
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("SearchLobby", "Nouvelle instance créée");
+        Log.d(SEARCH_LOBBY_STR, "Nouvelle instance créée");
 
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -157,7 +186,7 @@ public class Searchlobby extends Theme {
         MaterialButton creerLobby = findViewById(R.id.creerLobby);
         creerLobby.setOnClickListener(view -> {
             ViewGroup rootView = findViewById(R.id.main);
-            shownamepopup(rootView, "createLobby", "");
+            shownamepopup(rootView, CREATE_LOBBY_STR, "");
         });
 
         views.add(creerLobby);
@@ -174,20 +203,23 @@ public class Searchlobby extends Theme {
         startService(serviceIntent);
         bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
 
-        IntentFilter filter = new IntentFilter("WebSocketMessage");
+        IntentFilter filter = new IntentFilter(WEB_SOCKET_MSG_STR);
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
-        Log.d("SearchLobby", "lancement du BroadcastReceiver");
+        Log.d(SEARCH_LOBBY_STR, "lancement du BroadcastReceiver");
 
         namePopupDialog = new Dialog(this);
         namePopupDialog.setContentView(R.layout.popname);
-        namePopupDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(namePopupDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Log.d("oui", "je suis crée");
     }
 
+    /**
+     * est utilisé quand le web socket se stop
+     */
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("SearchLobby", "onStop() called");
+        Log.d(SEARCH_LOBBY_STR, "onStop() called");
         if (isBound) {
             unbindService(connection);
 
@@ -195,12 +227,15 @@ public class Searchlobby extends Theme {
         }
         try {
             unregisterReceiver(messageReceiver);
-            Log.d("SearchLobby", "BroadcastReceiver unregistered");
+            Log.d(SEARCH_LOBBY_STR, "BroadcastReceiver unregistered");
         } catch (IllegalArgumentException e) {
-            Log.e("SearchLobby", "BroadcastReceiver already unregistered", e);
+            Log.e(SEARCH_LOBBY_STR, "BroadcastReceiver already unregistered", e);
         }
     }
 
+    /**
+     * quand el web socket redémare
+     */
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -208,23 +243,32 @@ public class Searchlobby extends Theme {
         startService(serviceIntent);
         bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
 
-        IntentFilter filter = new IntentFilter("WebSocketMessage");
+        IntentFilter filter = new IntentFilter(WEB_SOCKET_MSG_STR);
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
         Log.d("Lobby", "lancement du BroadcastReceiver");
     }
 
+    /**
+     *
+     */
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d("SearchLobby", "onResume() called");
+        Log.d(SEARCH_LOBBY_STR, "onResume() called");
     }
 
+    /**
+     * quand le websocket se pose
+     */
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("SearchLobby", "onPause() called");
+        Log.d(SEARCH_LOBBY_STR, "onPause() called");
     }
 
+    /**
+     * quand le websocket se détruit
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -234,18 +278,25 @@ public class Searchlobby extends Theme {
         }
     }
 
-
+    /**
+     * renvoie les bouttons de la page
+     * @param parent page de l'application android
+     */
     private void getButtons(ViewGroup parent) {
         for (int i = 0; i < parent.getChildCount(); i++) {
             View child = parent.getChildAt(i);
             if (child instanceof MaterialButton) {
-                views.add((MaterialButton) child);
+                views.add(child);
             } else if (child instanceof ViewGroup) {
                 getButtons((ViewGroup) child);
             }
         }
     }
 
+    /**
+     * ajoute des boutons au loby aka serveur
+     * @param lobbies les lobbies qui existent déjà
+     */
     private void addLobbyButtons(List<String> lobbies) {
         Log.d("lobbybutton", "je suis dans le addlobbybutton");
         this.layoutLobbies = findViewById(R.id.layoutlobbies);
@@ -258,14 +309,19 @@ public class Searchlobby extends Theme {
                 lobbyButton.setOnClickListener(v -> {
                     ViewGroup rootView = findViewById(R.id.main);
                     this.requestedLobby = lobby;
-                    shownamepopup(rootView, "joinLobby", lobby);
+                    shownamepopup(rootView, JOIN_LOBBY_STR, lobby);
                 });
                 layoutLobbies.addView(lobbyButton);
             }
         }
     }
 
-
+    /**
+     * affiche les lobby existant pour pouvoir se connecter dessus
+     * @param view page de l'application
+     * @param action nom du joueur
+     * @param lobby nom du lobby
+     */
     public void shownamepopup(ViewGroup view, String action, String lobby) {
         RenderEffect blurEffect = RenderEffect.createBlurEffect(10, 10, Shader.TileMode.CLAMP);
         view.setRenderEffect(blurEffect);
@@ -274,17 +330,17 @@ public class Searchlobby extends Theme {
         namePopupDialog.show();
 
         MaterialButton validatebutton = namePopupDialog.findViewById(R.id.validateButton);
-        if (action.equals("createLobby")) {
+        if (action.equals(CREATE_LOBBY_STR)) {
             validatebutton.setOnClickListener(v -> {
                 TextInputLayout nameInput = namePopupDialog.findViewById(R.id.textInputLayout);
-                String name = nameInput.getEditText().getText().toString().trim();
+                String name = Objects.requireNonNull(nameInput.getEditText()).getText().toString().trim();
 
                 if (!name.isEmpty()) {
                     JSONObject jsonRequest = new JSONObject();
                     try {
-                        jsonRequest.put("tag", "setnom");
+                        jsonRequest.put("tag", SET_NOM_STR);
                         jsonRequest.put("name", name);
-                        webSocketService.sendMessage("setnom", name);
+                        webSocketService.sendMessage(SET_NOM_STR, name);
                         this.nom = name;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -293,16 +349,16 @@ public class Searchlobby extends Theme {
                     Toast.makeText(Searchlobby.this, "Veuillez entrer un nom valide.", Toast.LENGTH_SHORT).show();
                 }
             });
-        } else if (action.equals("joinLobby")) {
+        } else if (action.equals(JOIN_LOBBY_STR)) {
             validatebutton.setOnClickListener(v -> {
                 TextInputLayout nameInput = namePopupDialog.findViewById(R.id.textInputLayout);
-                String name = nameInput.getEditText().getText().toString().trim();
+                String name = Objects.requireNonNull(nameInput.getEditText()).getText().toString().trim();
                 if (!name.isEmpty()) {
                     JSONObject jsonRequest = new JSONObject();
                     try {
-                        jsonRequest.put("tag", "joinLobby");
+                        jsonRequest.put("tag", JOIN_LOBBY_STR);
                         jsonRequest.put("name", name);
-                        webSocketService.sendMessage("joinLobby", lobby);
+                        webSocketService.sendMessage(JOIN_LOBBY_STR, lobby);
                         this.nom = name;
                     } catch (Exception e) {
                         e.printStackTrace();
