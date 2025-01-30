@@ -29,6 +29,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class RotatingPictures extends Theme {
     private WebSocketService webSocketService;
@@ -62,7 +63,7 @@ public class RotatingPictures extends Theme {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d(ROTATING_PICTURES_STR, "Broadcast received");
-            if (intent.getAction().equals("WebSocketMessage")) {
+            if (Objects.equals(intent.getAction(), "WebSocketMessage")) {
                 String jsonMessage = intent.getStringExtra("message");
                 Log.d(ROTATING_PICTURES_STR, "Message reçu brut : " + jsonMessage);
                 try {

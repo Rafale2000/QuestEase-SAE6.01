@@ -24,11 +24,11 @@ public class StandBy extends Theme {
     private WebSocketService webSocketService;
     private boolean isBound = false;
     private boolean isCreated = false;
-    private Dialog tutorialDialog; // Référence au dialog
-    private TextView cardTitle;    // Référence au titre
     private TextView cardContent;
     private boolean isErrorPopupVisible = false;
     private MediaPlayer mediaPlayer;
+
+    private static final String STAND_BY_STR = "StandBy";
 
     private ServiceConnection connection = new ServiceConnection() {
         @Override
@@ -51,10 +51,10 @@ public class StandBy extends Theme {
     private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("StandBy", "Broadcast received");
+            Log.d(STAND_BY_STR, "Broadcast received");
             if (intent.getAction().equals("WebSocketMessage")) {
                 String jsonMessage = intent.getStringExtra("message");
-                Log.d("StandBy", "Message reçu brut : " + jsonMessage);
+                Log.d(STAND_BY_STR, "Message reçu brut : " + jsonMessage);
                 try {
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
@@ -75,7 +75,7 @@ public class StandBy extends Theme {
                                 viewGroup
                         );
                     } else if ("startActivity".equals(tag)) {
-                        Log.d("StandBy", "Message reçu pour startActivity : " + message);
+                        Log.d(STAND_BY_STR, "Message reçu pour startActivity : " + message);
                         Intent intentgame = identifyActivity(message);
                         startActivity(intentgame);
                         finish();
@@ -91,7 +91,7 @@ public class StandBy extends Theme {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.standby);
-        Log.d("StandBy", "Nouvelle instance créée");
+        Log.d(STAND_BY_STR, "Nouvelle instance créée");
         isCreated = true;
 
         Intent serviceIntent = new Intent(this, WebSocketService.class);

@@ -1,5 +1,7 @@
 package com.example.questease;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONObject;
 
 import okhttp3.*;
@@ -17,24 +19,24 @@ public class WebSocketClient {
         Request request = new Request.Builder().url(URL).build();
         WebSocketListener listener = new WebSocketListener() {
             @Override
-            public void onOpen(WebSocket webSocket, Response response) {
+            public void onOpen(@NonNull WebSocket webSocket, @NonNull Response response) {
                 System.out.println("WebSocket Opened");
                 WebSocketClient.this.webSocket = webSocket;  // Stockez l'objet WebSocket
                 connectionLatch.countDown();  // Signale que la connexion est établie
             }
 
             @Override
-            public void onMessage(WebSocket webSocket, String text) {
+            public void onMessage(@NonNull WebSocket webSocket, @NonNull String text) {
                 System.out.println("Message received: " + text);
             }
 
             @Override
-            public void onFailure(WebSocket webSocket, Throwable t, Response response) {
+            public void onFailure(@NonNull WebSocket webSocket, Throwable t, Response response) {
                 t.printStackTrace();
             }
 
             @Override
-            public void onClosed(WebSocket webSocket, int code, String reason) {
+            public void onClosed(@NonNull WebSocket webSocket, int code, @NonNull String reason) {
                 System.out.println("WebSocket Closed");
             }
         };
@@ -63,7 +65,9 @@ public class WebSocketClient {
         }
     }
 
-    // Méthode pour fermer la connexion WebSocket
+    /**
+     * Méthode pour fermer la connexion WebSocket
+     */
     public void close() {
         if (webSocket != null) {
             webSocket.close(1000, "Client closed the connection");

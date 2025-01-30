@@ -32,6 +32,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class RotatingPictures2 extends Theme {
     private WebSocketService webSocketService;
@@ -41,8 +42,8 @@ public class RotatingPictures2 extends Theme {
 
     private static final String ROTATING_PICTURE_2_STR = "RotatingPictures2";
 
-    private String rulesTitle = "\n\nBienvenue dans Raider Tomb";
-    private String rulesContent = "Votre équipe est composée de deux personnes\n\n Le premier est l'archéologue, ce dernier à trouvé d'étranges plaques en pierre.\n\n" +
+    private static final String RULESTITLES_STR = "\n\nBienvenue dans Raider Tomb";
+    private static final String RULES_CONTENT_STR = "Votre équipe est composée de deux personnes\n\n Le premier est l'archéologue, ce dernier à trouvé d'étranges plaques en pierre.\n\n" +
             "Cependant les plaques sont en partie effacées par le temps\n\n" +
             "Le libraire lui à trouvé dans un ancien livre leur ancienne représentation.\n\n" +
             "Les plaques peuvent tourner,il doit donc trouver la bonne orientation des plaques en alignant le bon nombre d'étoiles\n\n" +
@@ -70,7 +71,7 @@ public class RotatingPictures2 extends Theme {
         @Override
         public void onReceive(Context context, Intent intent) {
             Log.d(ROTATING_PICTURE_2_STR, "Broadcast received");
-            if (intent.getAction().equals("WebSocketMessage")) {
+            if (Objects.equals(intent.getAction(), "WebSocketMessage")) {
                 String jsonMessage = intent.getStringExtra("message");
                 Log.d(ROTATING_PICTURE_2_STR, "Message reçu brut : " + jsonMessage);
                 try {
@@ -157,9 +158,9 @@ public class RotatingPictures2 extends Theme {
             }
         });
         ViewGroup viewGroup = findViewById(R.id.main);
-        showTutorialPopup(this.rulesTitle, this.rulesContent, viewGroup);
+        showTutorialPopup(RULESTITLES_STR, RULES_CONTENT_STR, viewGroup);
         MaterialButton rulesButton = findViewById(R.id.Regles);
-        rulesButton.setOnClickListener(v -> showTutorialPopup(this.rulesTitle, this.rulesContent, viewGroup));
+        rulesButton.setOnClickListener(v -> showTutorialPopup(RULESTITLES_STR, RULES_CONTENT_STR, viewGroup));
         Intent serviceIntent = new Intent(this, WebSocketService.class);
         startService(serviceIntent);
         bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
@@ -184,7 +185,7 @@ public class RotatingPictures2 extends Theme {
         Log.d("SearchLobby", "lancement du BroadcastReceiver");
         Button sendButton = findViewById(R.id.sendButton);
         sendButton.setOnClickListener(v -> {
-            Log.d("les valeurs des plaques sont : ", dragonRotation + " " + chevalRotation + " " + epeeRotation + " " + craneRotation + "");
+            Log.d("les valeurs des plaques sont : ", dragonRotation + " " + chevalRotation + " " + epeeRotation + " " + craneRotation);
             if (dragonRotation == 3 && chevalRotation == 0 && epeeRotation == 0 && craneRotation == 3) {
                 int counter = 10; // Durée en secondes
                 mediaPlayer = MediaPlayer.create(RotatingPictures2.this, R.raw.professor_layton_sucess);

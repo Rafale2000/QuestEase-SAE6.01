@@ -37,12 +37,10 @@ public class GyroscopeActivity extends Theme implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor rotationVectorSensor;
     private boolean isBound = false;
-    private boolean isCreated = false;
     private ImageView lock, solidLock;
     private MediaPlayer mediaPlayer;
     private Button closeButton, rulesButton;
     private Dialog tutorialDialog; // Référence au dialog
-    private TextView cardTitle;    // Référence au titre
     private TextView cardContent;  // Référence au contenu
 
     private boolean isErrorPopupVisible = false;

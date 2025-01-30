@@ -20,19 +20,29 @@ import java.util.Random;
 import com.example.questease.R;
 
 public class Deplacement extends AppCompatActivity implements SensorEventListener {
-    private TextView chronometerText, stepsText, directionText;
+    private TextView chronometerText;
+    private TextView stepsText;
+    private TextView directionText;
     private ImageView arrowImage;
     private Handler handler = new Handler(Looper.getMainLooper());
     private SensorManager sensorManager;
     private Sensor stepCounter;
-    private long startTime, timeBuffer, updateTime = 0L;
-    private int seconds, minutes, milliseconds;
-    private int steps = 0, initialSteps = 0;
+
+    private long startTime  = 0L;
+    private long timeBuffer = 0L;
+    private long updateTime = 0L;
+
+    private int seconds;
+    private int minutes;
+    private int milliseconds;
+    private int steps = 0;
+    private int initialSteps = 0;
     private boolean isRunning = false;
     private String currentLine;
-    private int lowerBound, upperBound;
+    private int upperBound;
+    private int lowerBound;
+    private static final Random random = new Random();
 
-    private static final float STEP_LENGTH = 0.75f; // Longueur moyenne d'un pas en mètres
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -131,7 +141,7 @@ public class Deplacement extends AppCompatActivity implements SensorEventListene
 
     private void chooseRandomLine() {
         // Choisit une ligne au hasard
-        Random random = new Random();
+
         int line = random.nextInt(3); // 0, 1, ou 2 pour les lignes spécifiées
 
         switch (line) {
@@ -149,6 +159,8 @@ public class Deplacement extends AppCompatActivity implements SensorEventListene
                 currentLine = "118";
                 lowerBound = 28;
                 upperBound = 32;
+                break;
+            default:
                 break;
         }
 
