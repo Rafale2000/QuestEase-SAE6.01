@@ -2,7 +2,6 @@ package com.example.questease;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -48,27 +47,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public Cursor getValue(SQLiteDatabase db) {
-        // Exécute la requête SQL pour récupérer toutes les valeurs de la table
-        System.out.println(db.rawQuery("SELECT * FROM parametre ", null));
-        ;
-        return db.rawQuery("SELECT * FROM parametre ", null);
-    }
-
-    public Cursor getReponseSM(SQLiteDatabase db) {
-        return db.rawQuery("SELECT * FROM jeuSM ", null);
-    }
-
     public void addReponseSM(SQLiteDatabase db, int id, boolean r1, boolean r2) {
         ContentValues values = new ContentValues();
         values.put("id", id);
         values.put("reponse1", r1);
         values.put("reponse2", r2);
         db.insert("jeuSM", null, values);
-    }
-
-    public void DeleteSM(SQLiteDatabase db) {
-        db.execSQL("DELETE from jeuSM");
     }
 }
 
