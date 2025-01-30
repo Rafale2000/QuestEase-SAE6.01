@@ -13,10 +13,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ChoseHandler {
-    private final Context context;
 
     public ChoseHandler(Context context) {
-        this.context = context;
     }
 
     // Get random Chose with callback handling

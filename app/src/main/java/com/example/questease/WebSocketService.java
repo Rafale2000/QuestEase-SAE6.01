@@ -13,7 +13,6 @@ import org.json.JSONObject;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-
 public class WebSocketService extends Service {
 
     private static final String TAG = "WebSocketService";
