@@ -20,7 +20,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunner "io.cucumber.android.runner.CucumberAndroidJUnitRunner"
+
         testInstrumentationRunnerArguments(optionsAnnotationPackage: "app.java.com.example.questease.TestIntegration")
     }
 
@@ -40,8 +40,6 @@ dependencies {
     implementation libs.datastore.core.android
     implementation libs.filament.android
     implementation libs.media3.common
-    implementation 'org.postgresql:postgresql:42.6.0'
-
 
     implementation libs.games.activity
     implementation libs.play.services.vision
@@ -55,9 +53,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
     implementation 'com.google.android.material:material:1.9.0'
 
-    androidTestImplementation 'io.cucumber:cucumber-android:7.13.0'
-    androidTestImplementation 'io.cucumber:cucumber-picocontainer:7.0.0'
-    implementation 'androidx.security:security-crypto:1.1.0-alpha06'
+
     testImplementation 'org.robolectric:robolectric:4.10.3'
 
     testImplementation 'junit:junit:4.12'
@@ -84,9 +80,7 @@ dependencies {
 
     implementation 'com.google.mlkit:text-recognition:16.0.0'
     implementation 'com.google.mlkit:digital-ink-recognition:18.1.0'
-    testImplementation 'info.cukes:cucumber-java:1.2.5'
-    testImplementation 'info.cukes:cucumber-junit:1.2.5'
-    testImplementation 'info.cukes:cucumber-core:1.2.5'
+
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
