@@ -58,7 +58,7 @@ En cours d'amélioration: ajout de fonctionalité et correction de bug
 ## A l'intention de :
 
 - Rafik Belloum
-## Auteursau
+## Auteurs
 
 - [ @Duterte–Richardot Théo](https://github.com/Arirou)
 - [ @Faës Hugo](https://github.com/TWP444)
