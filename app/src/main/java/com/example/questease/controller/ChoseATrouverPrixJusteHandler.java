@@ -33,12 +33,23 @@ public class ChoseATrouverPrixJusteHandler extends MyDatabaseHelper {
         Cursor cursor = db.query(TABLE_CHOSE, new String[]{KEY_ID_CHOSE,
                         KEY_NOM, KEY_PRIX, KEY_PATH_TO_PICTURE}, KEY_ID_CHOSE + "=?",
                 new String[]{String.valueOf(id)}, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
 
-        return new ChoseATrouverPrixJuste(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2), cursor.getInt(3));
-
+        if (cursor != null && cursor.moveToFirst()) {
+            // Assurez-vous que le curseur contient des données avant d'accéder aux valeurs
+            ChoseATrouverPrixJuste chose = new ChoseATrouverPrixJuste(
+                    Integer.parseInt(cursor.getString(0)),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getInt(3)
+            );
+            cursor.close();  // Toujours fermer le curseur
+            return chose;
+        } else {
+            if (cursor != null) {
+                cursor.close();  // Fermer le curseur s'il est non nul
+            }
+            return null; // Retourne null si aucun résultat n'a été trouvé
+        }
     }
 
     /**

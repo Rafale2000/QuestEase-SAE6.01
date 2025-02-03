@@ -159,7 +159,7 @@ public class TrouveLeSon2 extends Theme {
                     showTutorialPopup("\nFélicitations", "Le mot était bien Windows Xp,un système d'exploitation sorti en 2003\n\nVous allez bientot être redirigé vers le prochain jeu", main);
                     webSocketService.sendMessage("successPopup", "Windows Xp");
                     int counter = 10; // Durée en secondes
-                    new CountDownTimer(counter * 1000, 1000) {
+                    new CountDownTimer(counter * 1000L, 1000) {
                         int secondsRemaining = counter;
 
                         @Override
