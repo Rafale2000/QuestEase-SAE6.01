@@ -18,7 +18,7 @@ En cours d'amélioration: ajout de fonctionalité et correction de bug
 
 
 
-## Deployment
+## éeploiement
 
 - Ouvrir le projet dans Android Studio
 - Vérifier que toutes les dépendances sont bien installées
@@ -58,7 +58,7 @@ En cours d'amélioration: ajout de fonctionalité et correction de bug
 ## A l'intention de :
 
 - Rafik Belloum
-## Authors
+## Auteursau
 
 - [ @Duterte–Richardot Théo](https://github.com/Arirou)
 - [ @Faës Hugo](https://github.com/TWP444)
