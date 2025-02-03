@@ -242,7 +242,7 @@ public class PrixJuste extends Theme {
                             );
                             webSocketService.sendMessage("successPopup", "");
                             // Créer un compteur
-                            new CountDownTimer(counter * 1000, 1000) {
+                            new CountDownTimer(counter * 1000L, 1000) {
                                 int secondsRemaining = counter;
 
                                 @Override

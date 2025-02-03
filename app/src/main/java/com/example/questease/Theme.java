@@ -216,6 +216,7 @@ public abstract class Theme extends AppCompatActivity {
         tutorialDialog.show();
     }
 
+
     public void showServerErrorPopUp(ViewGroup view) {
         RenderEffect blurEffect = RenderEffect.createBlurEffect(
                 10, 10, Shader.TileMode.CLAMP);

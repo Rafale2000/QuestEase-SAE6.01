@@ -1,0 +1,5 @@
+<lint>
+    <issue id="OnClick">
+        <ignore path="res/layout/fragment_toolbar.xml" />
+    </issue>
+</lint>

@@ -136,17 +136,13 @@ public class Pendu extends Theme {
                                 "Vous avez trouvé le bon mot .\n\nVous allez passer au jeu suivant dans quelques secondes.",
                                 viewGroup
                         );
-                    } else if ("startActivity".equals(tag)) {
-                        Log.d("Lobby", "Message reçu pour startActivity : " + message);
-                        Intent intentgame = identifyActivity(message);
-                        startActivity(intentgame);
-                        finish();
                     }
                 } catch (Exception e) {
                 }
             }
         }
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,7 +221,7 @@ public class Pendu extends Theme {
                                 viewGroup
                         );
                         webSocketService.sendMessage("successPopup", "");
-                        new CountDownTimer(counter * 1000, 1000) {
+                        new CountDownTimer(counter * 1000L, 1000) {
                             int secondsRemaining = counter;
 
                             @Override
@@ -340,10 +336,7 @@ public class Pendu extends Theme {
                 imageView.setImageResource(resId);
             }
         }
-
-
     }
-
 
     public void updateLeftTries() {
         TextView textView = findViewById(R.id.leftTries);
@@ -359,6 +352,4 @@ public class Pendu extends Theme {
             return false;
         }
     }
-
-
 }
