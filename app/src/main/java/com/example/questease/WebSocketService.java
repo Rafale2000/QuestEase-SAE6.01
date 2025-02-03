@@ -46,6 +46,7 @@ public class WebSocketService extends Service {
                 public void onOpen(ServerHandshake handshakedata) {
                     Log.d(TAG, "WebSocket Opened");
                 }
+
                 @Override
                 public void onMessage(String message) {
                     Log.d(TAG, "Message received: " + message);

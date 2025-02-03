@@ -89,10 +89,10 @@ public class RotatingPictures2 extends Theme {
                         ImageView arrow2 = findViewById(R.id.arrow2);
                         ImageView arrow3 = findViewById(R.id.arrow3);
                         ImageView arrow4 = findViewById(R.id.arrow4);
-                        arrow1.setRotation(array[0] * 90);
-                        arrow2.setRotation(array[1] * 90);
-                        arrow3.setRotation(array[2] * 90);
-                        arrow4.setRotation(array[3] * 90);
+                        arrow1.setRotation((float) array[0] * 90);
+                        arrow2.setRotation((float) array[1] * 90);
+                        arrow3.setRotation((float) array[2] * 90);
+                        arrow4.setRotation((float) array[3] * 90);
                         Toast.makeText(RotatingPictures2.this, "Le libraire à envoyé son étude", Toast.LENGTH_SHORT).show();
                     } else if ("startActivity".equals(tag)) {
                         Log.d("Lobby", "Message reçu pour startActivity : " + message);

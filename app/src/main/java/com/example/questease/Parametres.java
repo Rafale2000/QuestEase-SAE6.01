@@ -71,9 +71,8 @@ public class Parametres extends Theme {
         CheckBox deuteranopie = findViewById(R.id.deuteranopie);
         CheckBox protanomalie = findViewById(R.id.protanomalie);
         CheckBox protanopie = findViewById(R.id.protanopie);
-        MaterialButton difficultyButton1 = findViewById(R.id.difficultyButton1);
-        MaterialButton difficultyButton2 = findViewById(R.id.difficultyButton2);
-        MaterialButton difficultyButton3 = findViewById(R.id.difficultyButton3);
+
+
 
         List<View> views = new ArrayList<>(Arrays.asList(
                 colorSampleText,
@@ -150,6 +149,7 @@ public class Parametres extends Theme {
                     daltonisme.performClick();
                 }
                 sharedPreferences.edit().putInt(DALTONISME_STRING, 5).apply();
+
             } else {
                 sharedPreferences.edit().putInt(DALTONISME_STRING, 0).apply();
 
@@ -163,6 +163,7 @@ public class Parametres extends Theme {
             sharedPreferences.edit().putBoolean(DYSLEXIE_STRING, isChecked).apply();
             recreate();
         });
+
 
         tailleTexte.setOnClickListener(view -> {
 

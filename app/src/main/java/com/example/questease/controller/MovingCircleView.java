@@ -8,7 +8,7 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-public class MovingCircleView extends View {
+public class    MovingCircleView extends View {
 
     private float circleX = 0f, circleY = 0f;
     private float circleRadius = 50f;
@@ -48,13 +48,10 @@ public class MovingCircleView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        float centerX = getWidth() / 2;
-        float centerY = getHeight() / 2;
-
+        float centerX = (float) getWidth() / 2; // Cast getWidth() to float
+        float centerY = (float) getHeight() / 2; // Cast getHeight() to float
         // Draw the moving circle (blue)
         canvas.drawCircle(centerX + circleX, centerY + circleY, circleRadius, bluePaint);
-
         // Draw the targets (red)
         for (float[] target : targets) {
             canvas.drawCircle(target[0], target[1], targetRadius, redPaint);

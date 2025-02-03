@@ -5,8 +5,6 @@
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission
         android:name="android.permission.ACCESS_FINE_LOCATION"
@@ -21,8 +19,6 @@
     <uses-feature
         android:name="android.hardware.sensor.stepdetector"
         android:required="true" />
-
-    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
 
     <application
         android:allowBackup="true"
@@ -46,11 +42,11 @@
             android:exported="false" />
         <activity
             android:name=".Sincere_Menteur"
-            android:exported="true" />
+            android:exported="false" />
 
         <activity
             android:name=".Sincere_Menteur2"
-            android:exported="true" />
+            android:exported="false" />
 
 
         <activity
@@ -61,7 +57,7 @@
             android:exported="false" />
         <activity
             android:name="View.questease.MotCryptexActivity"
-            android:exported="true" /> <!-- Activities -->
+            android:exported="false" /> <!-- Activities -->
         <activity
             android:name=".TrouveLeSon"
             android:exported="false" />
@@ -73,10 +69,10 @@
             android:exported="false" />
         <activity
             android:name="View.questease.PrixJuste"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".PrixJusteActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name="View.questease.Gyroscope"
             android:exported="false" />

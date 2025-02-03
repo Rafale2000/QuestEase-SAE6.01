@@ -53,6 +53,7 @@ public class TrouveLeSon2 extends Theme {
             isBound = true;
 
         }
+
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;
@@ -69,10 +70,10 @@ public class TrouveLeSon2 extends Theme {
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
                     String message = jsonObject.getString("message");
-                    if("TrouveLeSonMessage".equals(tag)){
+                    if ("TrouveLeSonMessage".equals(tag)) {
                         LinearLayout messagesLayout = findViewById(R.id.messagesLayout);
                         if (messagesLayout != null) {
-                            if(message != null){
+                            if (message != null) {
                                 View buttonTemplate = getLayoutInflater().inflate(R.layout.button_template, messagesLayout, false);
                                 Button newButton = (Button) buttonTemplate;
                                 newButton.setText(message);
@@ -90,8 +91,7 @@ public class TrouveLeSon2 extends Theme {
                                 "L'archéologue à bien trouvé la bonne orientation des plaques.\n\nVous allez passer au jeu suivant dans quelques secondes.",
                                 viewGroup
                         );
-                    }
-                    else if ("startActivity".equals(tag)) {
+                    } else if ("startActivity".equals(tag)) {
                         Log.d("Lobby", "Message reçu pour startActivity : " + message);
                         Intent intentgame = identifyActivity(message);
                         startActivity(intentgame);
@@ -102,6 +102,7 @@ public class TrouveLeSon2 extends Theme {
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("TrouveLeSon2", "onCreate");
@@ -138,10 +139,10 @@ public class TrouveLeSon2 extends Theme {
         views.add(messages);
         SharedPreferences sharedPreferences = getSecurePreferences(this);
         ApplyParameters(sharedPreferences);
-        if(sharedPreferences.getBoolean("tailleTexte",false)){
+        if (sharedPreferences.getBoolean("tailleTexte", false)) {
             adjustTextSize(views);
         }
-        if(sharedPreferences.getBoolean("dyslexie",false)){
+        if (sharedPreferences.getBoolean("dyslexie", false)) {
             applyFont(views);
         }
         IntentFilter filter = new IntentFilter("WebSocketMessage");
@@ -155,15 +156,17 @@ public class TrouveLeSon2 extends Theme {
                 if (userInput.equals("windows xp") || userInput.equals("windowsxp")) {
                     mediaPlayer = MediaPlayer.create(TrouveLeSon2.this, R.raw.professor_layton_sucess);
                     mediaPlayer.start();
-                    showTutorialPopup("\nFélicitations","Le mot était bien Windows Xp,un système d'exploitation sorti en 2003\n\nVous allez bientot être redirigé vers le prochain jeu",main);
-                    webSocketService.sendMessage("successPopup","Windows Xp");
+                    showTutorialPopup("\nFélicitations", "Le mot était bien Windows Xp,un système d'exploitation sorti en 2003\n\nVous allez bientot être redirigé vers le prochain jeu", main);
+                    webSocketService.sendMessage("successPopup", "Windows Xp");
                     int counter = 10; // Durée en secondes
                     new CountDownTimer(counter * 1000, 1000) {
                         int secondsRemaining = counter;
+
                         @Override
                         public void onTick(long millisUntilFinished) {
                             secondsRemaining--;
                         }
+
                         @Override
                         public void onFinish() {
                             webSocketService.sendMessage("startGame", "");
@@ -178,12 +181,14 @@ public class TrouveLeSon2 extends Theme {
                     mediaPlayer = MediaPlayer.create(TrouveLeSon2.this, R.raw.prof_layton_forbidden);
                     mediaPlayer.start();
                     Toast.makeText(TrouveLeSon2.this, "çe n'est pas la bonne réponse", Toast.LENGTH_SHORT).show();
-                    webSocketService.sendMessage("showTip","");
+                    webSocketService.sendMessage("showTip", "");
                 }
-                webSocketService.sendMessage("TrouveLeSonMessage",messages.getText().toString());
+                webSocketService.sendMessage("TrouveLeSonMessage", messages.getText().toString());
             }
         });
-    };
+    }
+
+    ;
 }
 
 

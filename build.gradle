@@ -11,5 +11,16 @@ buildscript {
 }
 
 plugins {
+    id "org.sonarqube" version "5.1.0.4882"
     alias(libs.plugins.android.application) apply false
+}
+sonarqube {
+    properties {
+        property "sonar.projectKey", "Android"
+        property "sonar.projectName", "Android"
+        property "sonar.sourceEncoding", "UTF-8"
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.token", "sqp_cde3882854f827e42635e2a7f99e142181419892"
+        property "sonar.java.binaries", "build/intermediates/javac/debug/classes/" // Chemin des classes compilées
+    }
 }
