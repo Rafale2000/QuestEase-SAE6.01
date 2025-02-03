@@ -212,7 +212,6 @@ public class RotatingPictures2 extends Theme {
                             );
                         }
                     }
-
                     @Override
                     public void onFinish() {
                         webSocketService.sendMessage("startGame", "");
@@ -223,14 +222,12 @@ public class RotatingPictures2 extends Theme {
                     }
                 }.start();
             }
-
         });
         ImageView quitter = findViewById(R.id.quitter);
         quitter.setOnClickListener(v -> {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         });
-
     }
 
     @Override

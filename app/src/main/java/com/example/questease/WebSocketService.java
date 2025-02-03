@@ -40,7 +40,7 @@ public class WebSocketService extends Service {
 
     private void connectWebSocket() {
         try {
-            URI uri = new URI("ws://192.168.219.104:8080/ws");
+            URI uri = new URI("ws://192.168.56.1:8080/ws");
             webSocketClient = new WebSocketClient(uri) {
                 @Override
                 public void onOpen(ServerHandshake handshakedata) {
@@ -78,6 +78,37 @@ public class WebSocketService extends Service {
                 jsonMessage.put("tag", tag);
                 jsonMessage.put("message", message);
 
+                webSocketClient.send(jsonMessage.toString());
+                Log.d(TAG, "Message sent: " + jsonMessage.toString());
+            } catch (Exception e) {
+                Log.e(TAG, "Failed to send message: " + e.getMessage());
+            }
+        } else {
+            JSONObject jsonMessage = new JSONObject();
+            try {
+                jsonMessage.put("tag", "WebSocketError"); // Ajoutez le "tag" que vous souhaitez
+                jsonMessage.put("message", "WebSocket is not connected!");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String messageString = jsonMessage.toString();
+
+            Intent intent = new Intent("WebSocketMessage");
+            intent.putExtra("message", messageString);
+            Log.d(TAG, "Envoi du broadcast avec l'action : " + intent.getAction());
+            Log.d(TAG, "Contenu du message : " + intent.getStringExtra("message"));
+            sendBroadcast(intent);
+
+
+        }
+    }
+    public void sendCreateLobby(String tag,String message,int difficulty){
+        if (webSocketClient != null && webSocketClient.isOpen()) {
+            try {
+                JSONObject jsonMessage = new JSONObject();
+                jsonMessage.put("tag", tag);
+                jsonMessage.put("message", message);
+                jsonMessage.put("difficulty", difficulty);
                 webSocketClient.send(jsonMessage.toString());
                 Log.d(TAG, "Message sent: " + jsonMessage.toString());
             } catch (Exception e) {

@@ -8,7 +8,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class WebSocketClient {
 
-    private static final String URL = "ws://192.168.190.230:8080/ws";
+    private static final String URL = "ws://192.168.56.1:8080/ws";
     private WebSocket webSocket;
     private final CountDownLatch connectionLatch = new CountDownLatch(10);
 
@@ -22,7 +22,6 @@ public class WebSocketClient {
                 WebSocketClient.this.webSocket = webSocket;  // Stockez l'objet WebSocket
                 connectionLatch.countDown();  // Signale que la connexion est établie
             }
-
             @Override
             public void onMessage(WebSocket webSocket, String text) {
                 System.out.println("Message received: " + text);

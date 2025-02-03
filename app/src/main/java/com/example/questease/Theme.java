@@ -263,20 +263,19 @@ public abstract class Theme extends AppCompatActivity {
         }
         return intentgame;
     }
-    protected static SharedPreferences getSecurePreferences(Context context) {
+    public SharedPreferences getSecurePreferences(Context context) {
         try {
             String masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC);
-
             return EncryptedSharedPreferences.create(
-                    "secure_prefs", // Nom du fichier SharedPreferences
+                    "secure_prefs",
                     masterKeyAlias,
                     context,
                     EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
                     EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
             );
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            Log.e("SecurePreferences", "Erreur lors de la création des préférences sécurisées", e);
+            return context.getSharedPreferences("fallback_prefs", Context.MODE_PRIVATE);
         }
     }
 

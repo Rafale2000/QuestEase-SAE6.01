@@ -150,7 +150,6 @@ public class Parametres extends Theme {
                     daltonisme.performClick();
                 }
                 sharedPreferences.edit().putInt(DALTONISME_STRING, 5).apply();
-
             } else {
                 sharedPreferences.edit().putInt(DALTONISME_STRING, 0).apply();
 
@@ -164,7 +163,6 @@ public class Parametres extends Theme {
             sharedPreferences.edit().putBoolean(DYSLEXIE_STRING, isChecked).apply();
             recreate();
         });
-
 
         tailleTexte.setOnClickListener(view -> {
 
@@ -256,35 +254,7 @@ public class Parametres extends Theme {
             recreate();
             Log.e(SHARED_PREFS_STRING, DALTONISME_VALEUR_STRING + sharedPreferences.getInt(DALTONISME_STRING, 0));
         });
-        difficultyButton1.setOnClickListener(view -> {
-            sharedPreferences.edit().putInt(DIFFICULTY,1).apply();
-            difficultyButton1.setAlpha(1.0f);
-            difficultyButton2.setAlpha(0.3f);
-            difficultyButton3.setAlpha(0.3f);
-            Toast toast = Toast.makeText(this, "difficultée sélectionnée : Facile", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.BOTTOM, 0, 100);
-            toast.show();
-        });
-        difficultyButton2.setOnClickListener(view -> {
-            sharedPreferences.edit().putInt(DIFFICULTY,2).apply();
-            difficultyButton1.setAlpha(0.3f);
-            difficultyButton2.setAlpha(1.0f);
-            difficultyButton3.setAlpha(0.3f);
-        });
-        difficultyButton3.setOnClickListener(view -> {
-            sharedPreferences.edit().putInt(DIFFICULTY,3).apply();
-            difficultyButton1.setAlpha(0.3f);
-            difficultyButton2.setAlpha(0.3f);
-            difficultyButton3.setAlpha(1.0f);
-        });
-        int difficulty = sharedPreferences.getInt(DIFFICULTY, 0);
-        if (difficulty == 1 || difficulty == 0) {
-            difficultyButton1.performClick();
-        } else if (difficulty == 2) {
-            difficultyButton2.performClick();
-        } else if (difficulty == 3) {
-            difficultyButton3.performClick();
-        }
+
     }
 
     public void initializePreference(String key, int defaultValue) {

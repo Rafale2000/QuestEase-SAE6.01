@@ -1,16 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.button.MaterialButton xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="290dp"
-    android:layout_height="100dp"
-    android:backgroundTint="?attr/colorButtonBackground2"
-    android:text="Default Lobby Name"
-    android:textAlignment="center"
-    android:textColor="?attr/colorButtonText"
-    android:textSize="@dimen/text_size_large"
-    android:textStyle="bold|italic"
-    app:cornerRadius="24dp"
-    app:icon="@drawable/baseline_person_24"
-    app:iconPadding="0dp"
-    app:iconSize="40dp"
-    app:iconTint="@android:color/black" />
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!-- Bouton principal -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/myButton"
+        android:layout_width="290dp"
+        android:layout_height="100dp"
+        android:backgroundTint="?attr/colorButtonBackground2"
+        android:text="Default Lobby Name"
+        android:textAlignment="center"
+        android:textColor="?attr/colorButtonText"
+        android:textSize="@dimen/text_size_large"
+        android:textStyle="bold|italic"
+        app:cornerRadius="24dp"
+        app:icon="@drawable/baseline_person_24"
+        app:iconPadding="0dp"
+        app:iconSize="40dp"
+        app:iconTint="@android:color/black" />
+
+    <!-- Badge (chiffre dans un cadre) -->
+    <TextView
+        android:id="@+id/badgeNumber"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="end|center"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/badge_background"
+        android:backgroundTint="@color/black"
+        android:gravity="center"
+        android:text="5"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+</FrameLayout>

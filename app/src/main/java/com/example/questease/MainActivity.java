@@ -42,6 +42,7 @@ public class MainActivity extends Theme {
     private boolean isBound = false;
     private boolean isCreated = false;
     private boolean isErrorPopupVisible = false;
+    private static final String DIFFICULTY = "difficulty";
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -105,6 +106,10 @@ public class MainActivity extends Theme {
         Button jouer = findViewById(R.id.Jouer);
         Button parametres = findViewById(R.id.Parametres);
         TextView banner = findViewById(R.id.banner);
+        int difficulty = sharedPreferences.getInt(DIFFICULTY, 0);
+        if (difficulty< 1 || difficulty > 3){
+            sharedPreferences.edit().putInt(DIFFICULTY,3).apply();
+        }
 
         List<View> views = List.of(jouer, parametres, banner);
         if (sharedPreferences.getBoolean("tailleTexte", false)) {
