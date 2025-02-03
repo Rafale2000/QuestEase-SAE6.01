@@ -40,7 +40,7 @@ En cours d'amélioration: ajout de fonctionalité et correction de bug
     androidTestImplementation libs.junit.jupiter
     def fragment_version = "1.8.3"
 
-    // Java language implementation
+    //Java language implementation
     implementation "androidx.fragment:fragment:$fragment_version"
     implementation 'com.google.android.material:material:1.9.0'
     implementation libs.appcompat
