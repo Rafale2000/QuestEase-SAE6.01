@@ -44,6 +44,7 @@ dependencies {
     implementation libs.games.activity
     implementation libs.play.services.vision
     implementation libs.vision.common
+    implementation libs.security.crypto
     androidTestImplementation libs.junit.jupiter
     //implementation libs.datastore.preferences.core.jvm
     def fragment_version = "1.8.3"

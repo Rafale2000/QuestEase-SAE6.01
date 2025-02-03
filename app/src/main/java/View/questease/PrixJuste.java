@@ -303,7 +303,7 @@ public class PrixJuste extends Theme {
             numberOfAttempts.setText(getString(R.string.nbr_coup_restant, controllerPrixJuste.getRemainingAttempts()));
             String res = controllerPrixJuste.CheckGuess(lastGuess).toString();
             // Afficher le dernier essai
-            previousNumber.setText("Nombre essayé :"+ lastGuess +"-" +res);
+            previousNumber.setText("Nombre essayé :" + lastGuess + "-" + res);
 
         } catch (NumberFormatException e) {
             Log.e("PrixJuste", "Message reçu invalide : " + message, e);

@@ -50,6 +50,7 @@ public class TrouveLeSon extends Theme {
             webSocketService = binder.getService();
             isBound = true;
         }
+
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;
@@ -66,28 +67,25 @@ public class TrouveLeSon extends Theme {
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
                     String message = jsonObject.getString("message");
-                    if("showTip".equals(tag)){
+                    if ("showTip".equals(tag)) {
                         TextView indice1view = findViewById(R.id.indice1);
                         TextView indice2view = findViewById(R.id.indice2);
                         TextView indice3view = findViewById(R.id.indice3);
                         Toast.makeText(context, "le j2 a eu faux, voici un indice", Toast.LENGTH_SHORT).show();
-                        if(indicestatus == 1){
-                            indice1view.setText("Indice 1:"+indice1);
-                        }
-                        else if(indicestatus == 2){
-                            indice2view.setText("Indice 2:"+indice2);
-                        }
-                        else if(indicestatus == 3){
-                            indice3view.setText("Indice 3:"+indice3);
+                        if (indicestatus == 1) {
+                            indice1view.setText("Indice 1:" + indice1);
+                        } else if (indicestatus == 2) {
+                            indice2view.setText("Indice 2:" + indice2);
+                        } else if (indicestatus == 3) {
+                            indice3view.setText("Indice 3:" + indice3);
 
                         }
-                        indicestatus ++;
+                        indicestatus++;
                     } else if ("successPopup".equals(tag)) {
                         mediaPlayer = MediaPlayer.create(TrouveLeSon.this, R.raw.professor_layton_sucess);
                         mediaPlayer.start();
-                        showTutorialPopup("\nFélicitations","Le mot était bien Windows Xp,un système d'exploitation sorti en 2003\n\nVous allez bientot être redirigé vers le prochain jeu",main);
-                    }
-                    else if ("startActivity".equals(tag)) {
+                        showTutorialPopup("\nFélicitations", "Le mot était bien Windows Xp,un système d'exploitation sorti en 2003\n\nVous allez bientot être redirigé vers le prochain jeu", main);
+                    } else if ("startActivity".equals(tag)) {
                         Log.d("Lobby", "Message reçu pour startActivity : " + message);
                         Intent intentgame = identifyActivity(message);
                         startActivity(intentgame);
@@ -98,6 +96,7 @@ public class TrouveLeSon extends Theme {
             }
         }
     };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

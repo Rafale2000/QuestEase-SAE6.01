@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Button;
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import androidx.security.crypto.EncryptedSharedPreferences;
 import androidx.security.crypto.MasterKeys;
 import androidx.appcompat.app.AppCompatActivity;
@@ -263,6 +264,7 @@ public abstract class Theme extends AppCompatActivity {
         }
         return intentgame;
     }
+
     protected static SharedPreferences getSecurePreferences(Context context) {
         try {
             String masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC);

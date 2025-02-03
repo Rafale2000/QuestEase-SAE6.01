@@ -1,4 +1,4 @@
-package service.MotPendu;
+package service.MotPenduAPI;
 
 public interface PenduAPI {
 }

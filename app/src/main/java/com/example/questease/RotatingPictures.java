@@ -55,6 +55,7 @@ public class RotatingPictures extends Theme {
             webSocketService = binder.getService();
             isBound = true;
         }
+
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;

@@ -1,4 +1,4 @@
-package com.example.questease;
+package service.SincereMenteurAPI;
 
 import java.util.Map;
 

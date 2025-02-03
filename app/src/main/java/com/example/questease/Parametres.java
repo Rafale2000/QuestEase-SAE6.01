@@ -257,7 +257,7 @@ public class Parametres extends Theme {
             Log.e(SHARED_PREFS_STRING, DALTONISME_VALEUR_STRING + sharedPreferences.getInt(DALTONISME_STRING, 0));
         });
         difficultyButton1.setOnClickListener(view -> {
-            sharedPreferences.edit().putInt(DIFFICULTY,1).apply();
+            sharedPreferences.edit().putInt(DIFFICULTY, 1).apply();
             difficultyButton1.setAlpha(1.0f);
             difficultyButton2.setAlpha(0.3f);
             difficultyButton3.setAlpha(0.3f);
@@ -266,13 +266,13 @@ public class Parametres extends Theme {
             toast.show();
         });
         difficultyButton2.setOnClickListener(view -> {
-            sharedPreferences.edit().putInt(DIFFICULTY,2).apply();
+            sharedPreferences.edit().putInt(DIFFICULTY, 2).apply();
             difficultyButton1.setAlpha(0.3f);
             difficultyButton2.setAlpha(1.0f);
             difficultyButton3.setAlpha(0.3f);
         });
         difficultyButton3.setOnClickListener(view -> {
-            sharedPreferences.edit().putInt(DIFFICULTY,3).apply();
+            sharedPreferences.edit().putInt(DIFFICULTY, 3).apply();
             difficultyButton1.setAlpha(0.3f);
             difficultyButton2.setAlpha(0.3f);
             difficultyButton3.setAlpha(1.0f);
