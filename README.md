@@ -18,7 +18,7 @@ En cours d'amélioration: ajout de fonctionalité et correction de bug
 
 
 
-## éeploiement
+## Déploiement
 
 - Ouvrir le projet dans Android Studio
 - Vérifier que toutes les dépendances sont bien installées
