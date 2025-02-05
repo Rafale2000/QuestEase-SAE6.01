@@ -31,11 +31,10 @@ public class Deplacement extends AppCompatActivity implements SensorEventListene
     private boolean isRunning = false;
     private String currentLine;
     private int lowerBound, upperBound;
-
+    private final Random random = new Random();
     private static final float STEP_LENGTH = 0.75f; // Longueur moyenne d'un pas en mètres
 
     // Déclarez une instance de Random pour réutilisation
-    private Random random = new Random();
 
     @SuppressLint("MissingInflatedId")
     @Override
