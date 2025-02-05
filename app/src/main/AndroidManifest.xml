@@ -32,6 +32,12 @@
         android:theme="@style/Theme.Questease"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".CreationCompte"
+            android:exported="false" />
+        <activity
+            android:name=".Connexion"
+            android:exported="false" />
+        <activity
             android:name=".Pendu"
             android:exported="false" />
         <activity
@@ -43,12 +49,9 @@
         <activity
             android:name=".Sincere_Menteur"
             android:exported="false" />
-
         <activity
             android:name=".Sincere_Menteur2"
             android:exported="false" />
-
-
         <activity
             android:name=".controller.EndActivity"
             android:exported="false" />

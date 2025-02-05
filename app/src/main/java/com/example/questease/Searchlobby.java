@@ -200,7 +200,7 @@ public class Searchlobby extends Theme {
         namePopupDialog = new Dialog(this);
         namePopupDialog.setContentView(R.layout.popname);
         namePopupDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        Log.d("oui", "je suis crée");
+
 
     }
 

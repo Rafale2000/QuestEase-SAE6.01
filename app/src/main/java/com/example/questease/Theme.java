@@ -32,6 +32,9 @@ import com.example.questease.controller.StandBy;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.List;
 
 import View.questease.PrixJuste;
@@ -278,5 +281,13 @@ public abstract class Theme extends AppCompatActivity {
             return context.getSharedPreferences("fallback_prefs", Context.MODE_PRIVATE);
         }
     }
-
+    public static String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hash = md.digest(password.getBytes());
+            return Base64.getEncoder().encodeToString(hash);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Erreur de hachage", e);
+        }
+    }
 }
