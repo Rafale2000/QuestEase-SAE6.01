@@ -26,6 +26,7 @@ import com.example.questease.WebSocketService;
 import com.example.questease.Parametres;
 
 import android.content.SharedPreferences;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -105,7 +106,7 @@ public class MainActivity extends Theme {
         // Configurer les boutons
         Button jouer = findViewById(R.id.Jouer);
         Button parametres = findViewById(R.id.Parametres);
-        TextView banner = findViewById(R.id.banner);
+        LinearLayout banner = findViewById(R.id.bannerLayout);
         int difficulty = sharedPreferences.getInt(DIFFICULTY, 0);
         if (difficulty< 1 || difficulty > 3){
             sharedPreferences.edit().putInt(DIFFICULTY,3).apply();
@@ -149,6 +150,12 @@ public class MainActivity extends Theme {
             Log.d("MainActivity", "Lancement de lireTextViews");
             lireTextViews(layout);
         }
+        isCreated = true;
+        ImageView connexion  = findViewById(R.id.connexion);
+        connexion.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, Connexion.class);
+            startActivity(intent);
+        });
 
     }
 
