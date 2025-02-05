@@ -34,6 +34,9 @@ public class Deplacement extends AppCompatActivity implements SensorEventListene
 
     private static final float STEP_LENGTH = 0.75f; // Longueur moyenne d'un pas en mètres
 
+    // Déclarez une instance de Random pour réutilisation
+    private Random random = new Random();
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,8 +133,7 @@ public class Deplacement extends AppCompatActivity implements SensorEventListene
     }
 
     private void chooseRandomLine() {
-        // Choisit une ligne au hasard
-        Random random = new Random();
+        // Choisit une ligne au hasard en réutilisant l'instance de Random
         int line = random.nextInt(3); // 0, 1, ou 2 pour les lignes spécifiées
 
         switch (line) {
