@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.example.questease.R;
+import com.google.android.datatransport.backend.cct.BuildConfig;
 
 import java.io.IOException;
 import java.util.Set;
@@ -179,7 +180,9 @@ public class LunetteBluetooth extends AppCompatActivity {
             try {
                 bluetoothSocket.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                if (BuildConfig.DEBUG) {
+                    e.printStackTrace(); // Affiche les erreurs seulement en mode debug
+                }
             }
         }
     }

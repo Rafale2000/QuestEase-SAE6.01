@@ -37,7 +37,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.List;
 
-import View.questease.PrixJuste;
+import view.questease.PrixJuste;
 
 
 public abstract class Theme extends AppCompatActivity {

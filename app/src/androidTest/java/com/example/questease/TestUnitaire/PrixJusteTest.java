@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-public class PrixJusteTest {
+class PrixJusteTest {
     static PrixJusteJeu prix;
 
     @BeforeAll
