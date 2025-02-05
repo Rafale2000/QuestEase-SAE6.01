@@ -1,5 +1,7 @@
 package com.example.questease;
 
+import android.util.Log;
+
 import org.json.JSONObject;
 
 import okhttp3.*;
@@ -29,8 +31,9 @@ public class WebSocketClient {
 
             @Override
             public void onFailure(WebSocket webSocket, Throwable t, Response response) {
-                t.printStackTrace();
+                Log.e("WebSocket", "Erreur de connexion : " + t.getMessage());
             }
+
 
             @Override
             public void onClosed(WebSocket webSocket, int code, String reason) {

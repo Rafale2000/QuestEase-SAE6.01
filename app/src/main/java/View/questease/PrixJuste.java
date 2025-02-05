@@ -79,7 +79,6 @@ public class PrixJuste extends Theme {
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
                     String message = jsonObject.getString("message");
-
                     if ("startActivity".equals(tag)) {
                         Log.d("Lobby", "Message reçu pour startActivity : " + message);
                         Intent intentgame = identifyActivity(message);
@@ -101,11 +100,13 @@ public class PrixJuste extends Theme {
                         canPlay = true;
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    // Gestion des erreurs sans afficher de stacktrace
+                    Log.e("PrixJuste", "Erreur lors du traitement du message JSON : " + e.getMessage());
                 }
             }
         }
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
