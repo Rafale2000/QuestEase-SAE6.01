@@ -1,7 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
 }
-
+configurations {
+    cucumberRuntime {
+        extendsFrom testImplementation
+    }
+}
 android {
     namespace 'com.example.questease'
     compileSdk 34
@@ -70,10 +74,13 @@ dependencies {
 
     implementation 'org.java-websocket:Java-WebSocket:1.5.2'
     implementation 'org.slf4j:slf4j-android:1.7.36'
+
     // Testing dependencies
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
+    testImplementation libs.cucumber.java
+
     implementation "androidx.datastore:datastore-preferences:1.0.0"
     implementation "androidx.datastore:datastore-core:1.0.0"
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
