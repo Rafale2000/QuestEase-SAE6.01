@@ -24,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -36,6 +37,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -64,6 +66,8 @@ public class Searchlobby extends Theme {
     private String requestedLobby;
     private Boolean isCreated = false;
     private Boolean isErrorPopupVisible = false;
+    private boolean connected= false;
+
 
     private ServiceConnection connection = new ServiceConnection() {
         @Override
@@ -107,13 +111,32 @@ public class Searchlobby extends Theme {
                         Log.d("SearchLobby", "Lobbies: " + lobbies);
                         Log.d("info", "je vais essayer d'afficher les lobby");
                         addLobbyButtons(lobbies);
+                        if(sharedPreferences.getBoolean("connected",false)){
+                            List <String> logs = new ArrayList<>();
+                            logs.add(sharedPreferences.getString("username",""));
+                            logs.add(sharedPreferences.getString("password",""));
+                            webSocketService.sendMessage("connectAccount",logs.toString());
+                        }
+                    }
+                    else if ("ConnectionSuccess".equals(tag)) {
+                        ImageView connexion = findViewById(R.id.connexion);
+                        TextView username = findViewById(R.id.username);
+                        String pseudo = sharedPreferences.getString("username", "0");
+                        connexion.setVisibility(View.GONE);
+                        username.setText(pseudo);
+                        username.setVisibility(View.VISIBLE);
+                        Toast.makeText(context, "Connecté en tant que "+pseudo, Toast.LENGTH_SHORT).show();
+                        sharedPreferences.edit().putBoolean("connected",true).apply();
+                    }
+                    else if("ConnectionError".equals(tag)){
+                        Toast.makeText(context, "Erreur de connexion au compte", Toast.LENGTH_SHORT).show();
+                        sharedPreferences.edit().putBoolean("connected",false).apply();
                     }
                     else if ("setnom".equals(tag)) {
                         if ("success".equalsIgnoreCase(message)) {
                             namePopupDialog.dismiss();
                             findViewById(R.id.main).setRenderEffect(null);
                             Log.d("SearchLobby", "je vais essayer récupérer la difficulty");
-
                             int difficulty  = sharedPreferences.getInt(DIFFICULTY,0);
                             Log.d("SearchLobby", "difficulty: " + difficulty);
                             Log.d("SearchLobby", "je vais envoyer un createlobby");
@@ -124,7 +147,9 @@ public class Searchlobby extends Theme {
                             intentNewActivity.putExtra("lobbyName", nom);
                             startActivity(intentNewActivity);
                             onStop();
-                        } else {
+                        }
+
+                        else {
                             Toast.makeText(Searchlobby.this, "Nom déjà pris ou invalide.", Toast.LENGTH_SHORT).show();
                         }
                     } else if ("lobbyJoined".equals(tag)) {
@@ -200,8 +225,20 @@ public class Searchlobby extends Theme {
         namePopupDialog = new Dialog(this);
         namePopupDialog.setContentView(R.layout.popname);
         namePopupDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-
+         if(sharedPreferences.getBoolean("connected",false)){
+             this.connected = true;
+         }
+         ImageView connexion  = findViewById(R.id.connexion);
+         connexion.setOnClickListener(view -> {
+            Intent intent = new Intent(Searchlobby.this, Connexion.class);
+            startActivity(intent);
+            try {
+                unregisterReceiver(messageReceiver);
+                Log.d("SearchLobby", "BroadcastReceiver unregistered");
+            } catch (IllegalArgumentException e) {
+                Log.e("SearchLobby", "BroadcastReceiver already unregistered", e);
+            }
+        });
     }
 
     @Override
@@ -273,13 +310,11 @@ public class Searchlobby extends Theme {
 
         for (Map.Entry<String, Integer> entry : lobbies.entrySet()) {
             String lobby = entry.getKey();
-            int status = entry.getValue(); // Valeur associée au lobby
+            int status = entry.getValue();
 
-            // Inflater le layout du bouton (FrameLayout contenant le bouton + badge)
             View lobbyView = LayoutInflater.from(this)
                     .inflate(R.layout.lobby_button, layoutLobbies, false);
 
-            // Récupérer le bouton et le badge
             MaterialButton lobbyButton = lobbyView.findViewById(R.id.myButton);
             TextView badgeText = lobbyView.findViewById(R.id.badgeNumber);
 
@@ -296,13 +331,13 @@ public class Searchlobby extends Theme {
                 int attrColor;
                 switch (status) {
                     case 1:
-                        attrColor = R.attr.colorButtonBackground; // Lobby disponible
+                        attrColor = R.attr.colorButtonBackground;
                         break;
                     case 2:
-                        attrColor = R.attr.difficulty2; // Autre statut
+                        attrColor = R.attr.difficulty2;
                         break;
                     default:
-                        attrColor = R.attr.exitButton; // Couleur par défaut
+                        attrColor = R.attr.exitButton;
                         break;
                 }
 
@@ -317,14 +352,13 @@ public class Searchlobby extends Theme {
                 } else {
                     badgeText.setVisibility(View.VISIBLE);
                 }
-
                 layoutLobbies.addView(lobbyView);
             }
         }
     }
     public void shownamepopup(ViewGroup view, String action, String lobby) {
         SharedPreferences sharedPreferences = getSecurePreferences(this);
-
+        String username = sharedPreferences.getString("username", "");
         RenderEffect blurEffect = RenderEffect.createBlurEffect(10, 10, Shader.TileMode.CLAMP);
         view.setRenderEffect(blurEffect);
 
@@ -337,7 +371,15 @@ public class Searchlobby extends Theme {
             Log.e("shownamepopup", "Erreur : la vue du Dialog est null !");
             return;
         }
+        TextView cardTitle  = dialogView.findViewById(R.id.cardTitle);
+        TextView cardContent = dialogView.findViewById(R.id.cardContent);
+        TextInputEditText textInputLayout = dialogView.findViewById(R.id.textInputEditText);
 
+        if(connected){
+            cardTitle.setText("Choisissez la difficulté");
+            cardContent.setText("Pour pouvoir rejoindre un lobby il vous faut une difficulté");
+            textInputLayout.setVisibility(View.GONE);
+        }
         MaterialButton difficultyButton1 = dialogView.findViewById(R.id.difficultyButton1);
         MaterialButton difficultyButton2 = dialogView.findViewById(R.id.difficultyButton2);
         MaterialButton difficultyButton3 = dialogView.findViewById(R.id.difficultyButton3);
@@ -348,10 +390,16 @@ public class Searchlobby extends Theme {
         }
         if (action.equals("joinLobby")){
             difficultyButton1.setVisibility(View.GONE);
+            //TODO adapter pour le mec qui rejoint et qui a déja un compte , et pour celui qui n'en a pas
             difficultyButton2.setVisibility(View.GONE);
             difficultyButton3.setVisibility(View.GONE);
             MaterialTextView difficulty = dialogView.findViewById(R.id.difficultyText);
             difficulty.setVisibility(View.GONE);
+            if (connected){
+                cardTitle.setText("Rejoindre le lobby "+lobby+" ?");
+                cardContent.setText("");
+                textInputLayout.setText(username);
+            }
         }
         difficultyButton1.setOnClickListener(v -> {
             sharedPreferences.edit().putInt(DIFFICULTY,1).apply();
@@ -406,7 +454,7 @@ public class Searchlobby extends Theme {
             }
 
             String name = nameInput.getEditText().getText().toString().trim();
-            if (name.isEmpty()) {
+            if (name.isEmpty() && !connected) {
                 Toast.makeText(Searchlobby.this, "Veuillez entrer un nom valide.", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -414,10 +462,20 @@ public class Searchlobby extends Theme {
             try {
                 JSONObject jsonRequest = new JSONObject();
                 if ("createLobby".equals(action)) {
-                    jsonRequest.put("tag", "setnom");
-                    jsonRequest.put("name", name);
-                    webSocketService.sendMessage("setnom", name);
-                    this.nom = name;
+                    if(sharedPreferences.getBoolean("connected", false)) {
+
+                        jsonRequest.put("tag", "ConnectedCreate");
+                        jsonRequest.put("name", username);
+                        webSocketService.sendMessage("ConnectedCreate", username);
+                        this.nom = username;
+                    }
+                    else{
+                        jsonRequest.put("tag", "setnom");
+                        jsonRequest.put("name", name);
+                        webSocketService.sendMessage("setnom", name);
+                        this.nom = name;
+                    }
+
                 } else if ("joinLobby".equals(action)) {
                     jsonRequest.put("tag", "joinLobby");
                     jsonRequest.put("name", name);

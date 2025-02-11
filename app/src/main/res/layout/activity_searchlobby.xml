@@ -7,15 +7,47 @@
     android:layout_height="match_parent"
     tools:context=".Searchlobby">
 
-
-    <fragment
-        android:id="@+id/toolbar_fragment"
-        android:name="com.example.questease.ToolbarFragment"
+    <LinearLayout
+        android:id="@+id/banniere"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:backgroundTint="?attr/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Le fragment prend tout l'espace restant grâce à layout_weight -->
+        <fragment
+            android:id="@+id/toolbar_fragment"
+            android:name="com.example.questease.ToolbarFragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <!-- ImageView et TextView s'affichent en wrap_content à droite -->
+        <ImageView
+            android:id="@+id/connexion"
+            android:layout_width="48dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/connexion_icon"
+            app:tint="?attr/texte"
+            android:background="?attr/colorPrimary"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="placeholder"
+            android:textColor="@color/white"
+            android:visibility="gone"
+            android:textSize="@dimen/text_size_medium"
+            app:tint="?attr/texte"
+            android:background="?attr/colorPrimary"
+            android:gravity="center"
+            android:layout_marginEnd="5dp" />
+    </LinearLayout>
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -24,7 +56,7 @@
         app:layout_constraintBottom_toTopOf="@id/creerLobby"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_fragment">
+        app:layout_constraintTop_toBottomOf="@id/banniere">
 
         <LinearLayout
             android:id="@+id/layoutlobbies"

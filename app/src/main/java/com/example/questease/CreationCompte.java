@@ -64,21 +64,34 @@ public class CreationCompte extends Theme {
                 try {
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
-
-                    if ("CreateSucess".equals(tag)) {
+                    Log.d("aled","j'ai reçu un message du serveur");
+                    if ("CreateSuccess".equals(tag)) {
+                        Log.d("aled","la création de compte est un succès");
                         sharedPreferences.edit().putBoolean("connected", true).apply();
+                        Log.d("aled","j'ai passé le premier sharedpreferences");
                         sharedPreferences.edit().putString("username", pseudoString).apply();
+                        Log.d("aled","j'ai passé le second");
                         sharedPreferences.edit().putString("password", passwordString).apply();
-                        Intent intentNewActivity = new Intent(CreationCompte.this, Lobby.class);
-                        startActivity(intentNewActivity);
-                        onStop();
+                        Log.d("aled","j'ai passé le troisième");
+                        Intent newintent = new Intent(CreationCompte.this, MainActivity.class);
+                        startActivity(newintent);
+                        try {
+                            unregisterReceiver(messageReceiver);
+                            Log.d("MainActivity", "BroadcastReceiver unregistered");
+                        } catch (IllegalArgumentException e) {
+                            Log.e("MainActivity", "BroadcastReceiver already unregistered", e);
+                        }
+                        Log.d("aled","j'ai passé le startActivity");
+                        //onStop();
                     }
-
-                    else{
+                    else if ("CreateError".equals(tag)){
+                        Log.d("aled","la création de compte n'est pas un succès");
                         TextView errorMessage = findViewById(R.id.errorMessage);
                         errorMessage.setText("Pseudo déja existant");
+                        errorMessage.setVisibility(TextView.VISIBLE);
                     }
                 } catch (Exception e) {
+
                 }
             }
         }
@@ -97,6 +110,8 @@ public class CreationCompte extends Theme {
         Intent serviceIntent = new Intent(this, WebSocketService.class);
         startService(serviceIntent);
         bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
+        IntentFilter filter = new IntentFilter("WebSocketMessage");
+        registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
         EditText pseudo = findViewById(R.id.et_pseudo);
         EditText password = findViewById(R.id.et_password);
         Button button = findViewById(R.id.btn_login);
@@ -107,6 +122,17 @@ public class CreationCompte extends Theme {
             List<String> logs = new ArrayList<>();
             logs.addAll(Arrays.asList(pseudoString, passwordString));
             webSocketService.sendMessage("createAccount",logs.toString());
+        });
+        TextView signup = findViewById(R.id.tv_signup);
+        signup.setOnClickListener(view -> {
+            Intent intent = new Intent(CreationCompte.this, Connexion.class);
+            startActivity(intent);
+            try {
+                unregisterReceiver(messageReceiver);
+                Log.d("MainActivity", "BroadcastReceiver unregistered");
+            } catch (IllegalArgumentException e) {
+                Log.e("MainActivity", "BroadcastReceiver already unregistered", e);
+            }
         });
     }
 
@@ -133,7 +159,6 @@ public class CreationCompte extends Theme {
         Intent serviceIntent = new Intent(this, WebSocketService.class);
         startService(serviceIntent);
         bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
-
         IntentFilter filter = new IntentFilter("WebSocketMessage");
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
         Log.d("Lobby", "lancement du BroadcastReceiver");

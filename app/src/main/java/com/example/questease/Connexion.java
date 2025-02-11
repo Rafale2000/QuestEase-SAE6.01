@@ -65,17 +65,23 @@ public class Connexion extends Theme {
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
 
-                    if ("ConnexionSuccess".equals(tag)) {
+                    if ("ConnectionSuccess".equals(tag)) {
                         sharedPreferences.edit().putBoolean("connected", true).apply();
                         sharedPreferences.edit().putString("username", pseudoString).apply();
                         sharedPreferences.edit().putString("password", passwordString).apply();
-                        Intent intentNewActivity = new Intent(Connexion.this, Lobby.class);
-                        startActivity(intentNewActivity);
-                        onStop();
+                        Intent newintent = new Intent(Connexion.this, MainActivity.class);
+                        startActivity(newintent);
+                        try {
+                            unregisterReceiver(messageReceiver);
+                            Log.d("MainActivity", "BroadcastReceiver unregistered");
+                        } catch (IllegalArgumentException e) {
+                            Log.e("MainActivity", "BroadcastReceiver already unregistered", e);
+                        }
                     }
-                    else{
+                    else if("ConnectionError".equals(tag)){
                         TextView errorMessage = findViewById(R.id.errorMessage);
                         errorMessage.setText("Login ou mot de passe incorect");
+                        errorMessage.setVisibility(TextView.VISIBLE);
                     }
                 } catch (Exception e) {
                 }
@@ -96,6 +102,8 @@ public class Connexion extends Theme {
         Intent serviceIntent = new Intent(this, WebSocketService.class);
         startService(serviceIntent);
         bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
+        IntentFilter filter = new IntentFilter("WebSocketMessage");
+        registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
         EditText pseudo = findViewById(R.id.et_pseudo);
         EditText password = findViewById(R.id.et_password);
         Button button = findViewById(R.id.btn_login);
@@ -107,6 +115,18 @@ public class Connexion extends Theme {
             logs.addAll(Arrays.asList(pseudoString, passwordString));
             webSocketService.sendMessage("connectAccount",logs.toString());
         });
+        TextView signup = findViewById(R.id.tv_signup);
+        signup.setOnClickListener(view -> {
+            Intent intent = new Intent(Connexion.this, CreationCompte.class);
+            startActivity(intent);
+            try {
+                unregisterReceiver(messageReceiver);
+                Log.d("MainActivity", "BroadcastReceiver unregistered");
+            } catch (IllegalArgumentException e) {
+                Log.e("MainActivity", "BroadcastReceiver already unregistered", e);
+            }
+        });
+
     }
 
     @Override

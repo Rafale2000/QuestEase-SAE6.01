@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.text.Layout;
@@ -34,6 +35,7 @@ import android.widget.Toast;
 import org.java_websocket.client.WebSocketClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +71,7 @@ public class MainActivity extends Theme {
             if (intent.getAction().equals("WebSocketMessage")) {
                 String jsonMessage = intent.getStringExtra("message");
                 Log.d("MainActivity", "Message reçu brut : " + jsonMessage);
+                SharedPreferences sharedPreferences = getSecurePreferences(context);
                 try {
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
@@ -78,6 +81,27 @@ public class MainActivity extends Theme {
                             ViewGroup view = findViewById(R.id.main);
                             showServerErrorPopUp(view);
                             isErrorPopupVisible = true;
+                        }
+                    } else if ("ConnectionSuccess".equals(tag)) {
+                        ImageView connexion = findViewById(R.id.connexion);
+                        TextView username = findViewById(R.id.username);
+                        String pseudo = sharedPreferences.getString("username", "0");
+                        connexion.setVisibility(View.GONE);
+                        username.setText(pseudo);
+                        username.setVisibility(View.VISIBLE);
+                        Toast.makeText(context, "Connecté en tant que "+pseudo, Toast.LENGTH_SHORT).show();
+                        sharedPreferences.edit().putBoolean("connected",true).apply();
+                    }
+                    else if("ConnectionError".equals(tag)){
+                        Toast.makeText(context, "Erreur de connexion au compte", Toast.LENGTH_SHORT).show();
+                        sharedPreferences.edit().putBoolean("connected",false).apply();
+                    }
+                    else if("Lobbylist".equals(tag)){
+                        if(sharedPreferences.getBoolean("connected",false)){
+                            List <String> logs = new ArrayList<>();
+                            logs.add(sharedPreferences.getString("username",""));
+                            logs.add(sharedPreferences.getString("password",""));
+                            webSocketService.sendMessage("connectAccount",logs.toString());
                         }
                     }
                 } catch (Exception e) {
@@ -150,11 +174,18 @@ public class MainActivity extends Theme {
             Log.d("MainActivity", "Lancement de lireTextViews");
             lireTextViews(layout);
         }
+
         isCreated = true;
         ImageView connexion  = findViewById(R.id.connexion);
         connexion.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, Connexion.class);
             startActivity(intent);
+            try {
+                unregisterReceiver(messageReceiver);
+                Log.d("MainActivity", "BroadcastReceiver unregistered");
+            } catch (IllegalArgumentException e) {
+                Log.e("MainActivity", "BroadcastReceiver already unregistered", e);
+            }
         });
 
     }

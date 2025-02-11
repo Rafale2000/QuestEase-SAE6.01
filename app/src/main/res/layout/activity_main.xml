@@ -51,9 +51,21 @@
             android:layout_height="48dp"
             android:src="@drawable/connexion_icon"
             app:tint="?attr/texte"
+            android:visibility="visible"
             >
         </ImageView>
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="placeholder"
 
+                android:visibility="gone"
+                android:textSize="@dimen/text_size_medium"
+                app:tint="?attr/texte"
+                android:gravity="center"
+                android:layout_marginEnd="5dp"
+                />
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
