@@ -1,4 +1,4 @@
-package View.questease;
+package view.questease;
 
 import android.os.Bundle;
 
