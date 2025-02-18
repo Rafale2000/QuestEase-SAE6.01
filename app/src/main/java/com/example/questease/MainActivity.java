@@ -85,7 +85,7 @@ public class MainActivity extends Theme {
                     } else if ("ConnectionSuccess".equals(tag)) {
                         ImageView connexion = findViewById(R.id.connexion);
                         TextView username = findViewById(R.id.username);
-                        String pseudo = sharedPreferences.getString("username", "0");
+                        String pseudo = sharedPreferences.getString("username", "");
                         connexion.setVisibility(View.GONE);
                         username.setText(pseudo);
                         username.setVisibility(View.VISIBLE);
@@ -103,6 +103,7 @@ public class MainActivity extends Theme {
                             logs.add(sharedPreferences.getString("password",""));
                             webSocketService.sendMessage("connectAccount",logs.toString());
                         }
+
                     }
                 } catch (Exception e) {
                 }
@@ -187,6 +188,19 @@ public class MainActivity extends Theme {
                 Log.e("MainActivity", "BroadcastReceiver already unregistered", e);
             }
         });
+
+        TextView username = findViewById(R.id.username);
+        username.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, Profil.class);
+            startActivity(intent);
+            try {
+                unregisterReceiver(messageReceiver);
+                Log.d("MainActivity", "BroadcastReceiver unregistered");
+            } catch (IllegalArgumentException e) {
+                Log.e("MainActivity", "BroadcastReceiver already unregistered", e);
+            }
+        });
+
 
     }
 

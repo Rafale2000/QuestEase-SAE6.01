@@ -59,7 +59,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="placeholder"
-
                 android:visibility="gone"
                 android:textSize="@dimen/text_size_medium"
                 app:tint="?attr/texte"

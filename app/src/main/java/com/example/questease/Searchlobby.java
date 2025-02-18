@@ -239,6 +239,17 @@ public class Searchlobby extends Theme {
                 Log.e("SearchLobby", "BroadcastReceiver already unregistered", e);
             }
         });
+        TextView username = findViewById(R.id.username);
+        username.setOnClickListener(view -> {
+            Intent intent = new Intent(Searchlobby.this, Profil.class);
+            startActivity(intent);
+            try {
+                unregisterReceiver(messageReceiver);
+                Log.d("MainActivity", "BroadcastReceiver unregistered");
+            } catch (IllegalArgumentException e) {
+                Log.e("MainActivity", "BroadcastReceiver already unregistered", e);
+            }
+        });
     }
 
     @Override

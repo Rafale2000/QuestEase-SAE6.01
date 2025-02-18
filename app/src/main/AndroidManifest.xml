@@ -21,7 +21,6 @@
         android:required="true" />
 
     <application
-
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -31,7 +30,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Questease"
-        android:usesCleartextTraffic="false"> <!-- ca va maybe tout peter a remettre en True if casser -->
+        android:usesCleartextTraffic="false">
+        <activity
+            android:name=".Profil"
+            android:exported="false" />
+        <!-- ca va maybe tout peter a remettre en True if casser -->
         <activity
             android:name=".CreationCompte"
             android:exported="false" />

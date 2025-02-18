@@ -1,5 +1,4 @@
-package com.example.questease.controller;
-
+package com.example.questease;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -7,36 +6,31 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.questease.Profil;
-import com.example.questease.R;
-import com.example.questease.Theme;
-import com.example.questease.WebSocketService;
-
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import android.content.SharedPreferences;
 
-public class EndActivity extends Theme {
-    MediaPlayer mediaPlayer = new MediaPlayer();
+public class Profil extends Theme {
     private WebSocketService webSocketService;
     private boolean isBound = false;
     private boolean isCreated = false;
@@ -51,11 +45,8 @@ public class EndActivity extends Theme {
             // Exemple : Envoyer un message une fois connecté
             if (webSocketService != null) {
                 Log.e("test", "Envoi d'un message via WebSocketService");
-                String username = getSecurePreferences(EndActivity.this).getString("username", "");
-                if(webSocketService != null){
-                    webSocketService.sendMessage("updateStats",""+username);
-                }
-
+                String username = getSecurePreferences(Profil.this).getString("username", "");
+                webSocketService.sendMessage("getStats",""+username);
             }
         }
 
@@ -82,12 +73,40 @@ public class EndActivity extends Theme {
                             showServerErrorPopUp(view);
                             isErrorPopupVisible = true;
                         }
+                    } else if ("ConnectionSuccess".equals(tag)) {
+                        ImageView connexion = findViewById(R.id.connexion);
+                        TextView username = findViewById(R.id.username);
+                        String pseudo = sharedPreferences.getString("username", "0");
+                        connexion.setVisibility(View.GONE);
+                        username.setText(pseudo);
+                        username.setVisibility(View.VISIBLE);
+                        Toast.makeText(context, "Connecté en tant que "+pseudo, Toast.LENGTH_SHORT).show();
+                        sharedPreferences.edit().putBoolean("connected",true).apply();
                     }
-                    else if("updateStatsSuccess".equals(tag)){
-                        Toast.makeText(context, "Stats mises à jour", Toast.LENGTH_SHORT).show();
+                    else if("ConnectionError".equals(tag)){
+                        Toast.makeText(context, "Erreur de connexion au compte", Toast.LENGTH_SHORT).show();
+                        sharedPreferences.edit().putBoolean("connected",false).apply();
                     }
-                    else if("updateStatsError".equals(tag)){
-                        Toast.makeText(context, "Erreur lors de la mise à jour des stats", Toast.LENGTH_SHORT).show();
+                    else if("Lobbylist".equals(tag)){
+                        if(sharedPreferences.getBoolean("connected",false)){
+                            List<String> logs = new ArrayList<>();
+                            logs.add(sharedPreferences.getString("username",""));
+                            logs.add(sharedPreferences.getString("password",""));
+                            webSocketService.sendMessage("connectAccount",logs.toString());
+                        }
+                    }
+                    else if("getStatsSuccess".equals(tag)){
+                        TextView playedGames = findViewById(R.id.playedGames);
+                        TextView wonGames = findViewById(R.id.wonGames);
+                        List<Integer> list = Arrays.stream(message.replaceAll("[\\[\\] ]", "").split(","))
+                                .map(Integer::parseInt)
+                                .collect(Collectors.toList());
+
+                        playedGames.append(" "+list.get(0));
+                        wonGames.append(" "+list.get(1));
+                    }
+                    else if("getStatsError".equals(tag)){
+                        Toast.makeText(context, "Erreur lors de la récupération des stats", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                 }
@@ -96,11 +115,9 @@ public class EndActivity extends Theme {
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        mediaPlayer = MediaPlayer.create(EndActivity.this, R.raw.yoshi_win_sound);
-        mediaPlayer.start();
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         SharedPreferences sharedPreferences = getSecurePreferences(this);
-        setContentView(R.layout.activity_end);
         ApplyParameters(sharedPreferences);
         setContentView(R.layout.activity_profil);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -108,20 +125,39 @@ public class EndActivity extends Theme {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
         Intent serviceIntent = new Intent(this, WebSocketService.class);
         startService(serviceIntent);
         bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
 
         // Log pour vérifier quand le receiver est enregistré
-        Log.d("EndActivity", "Enregistrement du BroadcastReceiver");
+        Log.d("Profil", "Enregistrement du BroadcastReceiver");
         IntentFilter filter = new IntentFilter("WebSocketMessage");
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
         if (sharedPreferences.getBoolean("assistance_vocale", false)) {
-            Log.d("EndActivity", "Lancement de lireTextViews");
+            Log.d("Profil", "Lancement de lireTextViews");
             //TODO lireTextViews(layout);
         }
+
         isCreated = true;
+        TextView username = findViewById(R.id.username);
+
+        username.setText(sharedPreferences.getString("username",""));
+
+        Button disconnectButton = findViewById(R.id.disconnectButton);
+
+        disconnectButton.setOnClickListener(View -> {
+            sharedPreferences.edit().putBoolean("connected",false).apply();
+            sharedPreferences.edit().putString("username","").apply();
+            sharedPreferences.edit().putString("password","").apply();
+            Intent intent = new Intent(Profil.this, MainActivity.class);
+            startActivity(intent);
+            try {
+                unregisterReceiver(messageReceiver);
+                Log.d("MainActivity", "BroadcastReceiver unregistered");
+            } catch (IllegalArgumentException e) {
+                Log.e("MainActivity", "BroadcastReceiver already unregistered", e);
+            }
+        });
 
     }
     @Override
@@ -146,5 +182,4 @@ public class EndActivity extends Theme {
         super.onPause();
         this.isCreated = false;
     }
-
 }

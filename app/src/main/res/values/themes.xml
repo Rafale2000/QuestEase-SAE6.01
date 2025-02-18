@@ -10,7 +10,7 @@
 
         <item name="colorButtonBackground2">#606060</item>
         <item name="colorButtonText">#000000</item> <!-- Texte du bouton -->
-        <item name="colorProfileBackground">#4c4745</item>
+        <item name="colorProfileBackground">#B1ADAD</item>
         <item name="iconcolor">#000000</item>
         <item name="texte">#000000</item>
         <item name="difficulty2">#FFFF00</item>
