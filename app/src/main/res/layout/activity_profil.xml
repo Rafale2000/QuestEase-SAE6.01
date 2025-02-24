@@ -81,6 +81,16 @@
             android:textColor="@color/white"
             android:backgroundTint="?attr/exitButton"
             />
+
+        <Button
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:id="@+id/deleteButton"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:text="Supprimer le compte (RGPD friendly)"
+            android:textColor="@color/white"
+            android:backgroundTint="?attr/exitButton"
+            />
     </LinearLayout>
 
 

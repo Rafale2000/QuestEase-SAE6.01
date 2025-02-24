@@ -1,4 +1,5 @@
 package com.example.questease;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -6,6 +7,10 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.RenderEffect;
+import android.graphics.Shader;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -22,6 +27,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.button.MaterialButton;
+
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
@@ -35,6 +42,7 @@ public class Profil extends Theme {
     private boolean isBound = false;
     private boolean isCreated = false;
     private boolean isErrorPopupVisible = false;
+    private String pseudo;
 
     private ServiceConnection connection = new ServiceConnection() {
         @Override
@@ -70,13 +78,13 @@ public class Profil extends Theme {
                     if ("WebSocketError".equals(tag) && message.equals("WebSocket is not connected!")) {
                         if (!isErrorPopupVisible) {
                             ViewGroup view = findViewById(R.id.main);
-                            showServerErrorPopUp(view);
+                            showServerErrorPopUp(view,sharedPreferences);
                             isErrorPopupVisible = true;
                         }
                     } else if ("ConnectionSuccess".equals(tag)) {
                         ImageView connexion = findViewById(R.id.connexion);
                         TextView username = findViewById(R.id.username);
-                        String pseudo = sharedPreferences.getString("username", "0");
+                        pseudo = sharedPreferences.getString("username", "0");
                         connexion.setVisibility(View.GONE);
                         username.setText(pseudo);
                         username.setVisibility(View.VISIBLE);
@@ -158,6 +166,10 @@ public class Profil extends Theme {
                 Log.e("MainActivity", "BroadcastReceiver already unregistered", e);
             }
         });
+        Button deleteButton = findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(View -> {
+            showServerErrorPopUp(this.findViewById(R.id.main),sharedPreferences);
+        });
 
     }
     @Override
@@ -181,5 +193,34 @@ public class Profil extends Theme {
     protected void onPause() {
         super.onPause();
         this.isCreated = false;
+    }
+    @Override
+    public void showTutorialPopup(String title, String content, ViewGroup view) {
+        super.showTutorialPopup(title, content, view);
+    }
+
+
+    public void showServerErrorPopUp(ViewGroup view,SharedPreferences sharedPreferences) {
+        RenderEffect blurEffect = RenderEffect.createBlurEffect(10, 10, Shader.TileMode.CLAMP);
+        view.setRenderEffect(blurEffect);
+        Dialog errorDialog = new Dialog(this);
+        errorDialog.setContentView(R.layout.pop_up_error);
+        TextView content = errorDialog.findViewById(R.id.cardContent);
+        TextView titre = errorDialog.findViewById(R.id.cardTitle);
+        MaterialButton closeButton = errorDialog.findViewById(R.id.closeButton);
+        titre.setText("Supprimer le compte ?");
+        content.setText("Voulez-vous vraiment supprimer votre compte ? \n Cette action est irréversible !");
+        closeButton.setText("Confirmer");
+        errorDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        errorDialog.setCanceledOnTouchOutside(true);
+        errorDialog.setOnCancelListener(dialog -> view.setRenderEffect(null));
+
+        closeButton.setOnClickListener(v -> {
+            errorDialog.dismiss();
+            view.setRenderEffect(null);
+            webSocketService.sendMessage("deleteAccount",""+sharedPreferences.getString("username",""));
+            Log.d("Profil", "Suppression du compte");
+        });
+        errorDialog.show();
     }
 }
