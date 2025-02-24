@@ -28,7 +28,7 @@ public class LunetteBluetooth extends AppCompatActivity {
     private BluetoothAdapter bluetoothAdapter;
     private ArrayAdapter<String> deviceListAdapter;
     private BluetoothSocket bluetoothSocket;
-    private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private static final UUID My_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     private TextView statusText;
     private Button scanButton, connectButton;
@@ -147,7 +147,7 @@ public class LunetteBluetooth extends AppCompatActivity {
                     // for ActivityCompat#requestPermissions for more details.
                     return;
                 }
-                bluetoothSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
+                bluetoothSocket = device.createRfcommSocketToServiceRecord(My_UUID);
                 bluetoothSocket.connect();
                 runOnUiThread(() -> {
                     if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {

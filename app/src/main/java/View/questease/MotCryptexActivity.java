@@ -17,10 +17,10 @@ import com.example.questease.R;
 import com.example.questease.Theme;
 
 
-import service.CryptexAPI.HandlerMotCryptexAPI;
-import service.CryptexAPI.MotCryptexCallback;
-import service.IndiceAPI.HandleIndiceAPI;
-import service.IndiceAPI.IndiceCallBack;
+import service.cryptexapi.HandlerMotCryptexAPI;
+import service.cryptexapi.MotCryptexCallback;
+import service.indiceapi.HandleIndiceAPI;
+import service.indiceapi.IndiceCallBack;
 
 public class MotCryptexActivity extends Theme {
 
@@ -41,14 +41,14 @@ public class MotCryptexActivity extends Theme {
         this.textViewIndice = findViewById(R.id.indice_motCryptex); //indice_mot_cryptex
         Button buttonConfirm = findViewById(R.id.btn_confirm);
         HandlerMotCryptexAPI handlerMotCryptexAPI = new HandlerMotCryptexAPI(this);
-        handlerMotCryptexAPI.GetRandomMotCryptex(new MotCryptexCallback() {
+        handlerMotCryptexAPI.getRandomMotCryptex(new MotCryptexCallback() {
 
             @Override
             public void onMotCryptexReceived(MotCryptex motCryptex) {
                 mc = motCryptex;
 
                 HandleIndiceAPI handleIndiceAPI = new HandleIndiceAPI(MotCryptexActivity.this);
-                handleIndiceAPI.GetIndice(motCryptex.getIndice().getId(), new IndiceCallBack() {
+                handleIndiceAPI.getIndice(motCryptex.getIndice().getId(), new IndiceCallBack() {
 
                     @Override
                     public void OnIndiceReceived(Indice indice) {

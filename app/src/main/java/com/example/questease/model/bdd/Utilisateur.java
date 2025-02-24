@@ -39,7 +39,7 @@ public class Utilisateur {
 
     // Getters and Setters for all fields
     public int getId() {
-        return id;
+        return id ;
     }
 
     public void setId(int id) {

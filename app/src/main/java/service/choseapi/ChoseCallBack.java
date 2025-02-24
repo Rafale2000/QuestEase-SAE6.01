@@ -1,4 +1,4 @@
-package service.ChoseAPI;
+package service.choseapi;
 
 import com.example.questease.model.bdd.ChoseATrouverPrixJuste;
 

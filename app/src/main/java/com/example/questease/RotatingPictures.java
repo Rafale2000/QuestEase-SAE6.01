@@ -1,6 +1,6 @@
 package com.example.questease;
 
-import android.app.Activity;
+
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -16,12 +16,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -29,7 +26,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.button.MaterialButton;
 
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +34,8 @@ public class RotatingPictures extends Theme {
     private WebSocketService webSocketService;
     private boolean isBound = false;
     private MediaPlayer mediaPlayer;
-    private String rulestitle = "\n\nBienvenue dans Raider Tomb";
-    private String rulescontent = "Votre équipe est composée de deux personnes\n\n Le premier est l'archéologue, ce dernier à trouvé d'étranges plaques en pierre.\n\n" +
+    private String rulesTitle = "\n\nBienvenue dans Raider Tomb";
+    private String rulesContent = "Votre équipe est composée de deux personnes\n\n Le premier est l'archéologue, ce dernier à trouvé d'étranges plaques en pierre.\n\n" +
             "Cependant les plaques sont en partie effacées par le temps\n\n" +
             "Le libraire lui à trouvé dans un ancien livre leur ancienne représentation.\n\n" +
             "Les plaques peuvent tourner,il doit donc trouver la bonne orientation des plaques en alignant le bon nombre d'étoiles\n\n" +
@@ -48,6 +44,8 @@ public class RotatingPictures extends Theme {
     private int chevalRotation = 1;
     private int epeeRotation = 2;
     private int craneRotation = 0;
+    private static final String ROTATING_PICTURES_STR = "RotatingPictures";
+
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -55,7 +53,6 @@ public class RotatingPictures extends Theme {
             webSocketService = binder.getService();
             isBound = true;
         }
-
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;
@@ -64,17 +61,15 @@ public class RotatingPictures extends Theme {
     private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("RotatingPictures", "Broadcast received");
+            Log.d(ROTATING_PICTURES_STR, "Broadcast received");
             if (intent.getAction().equals("WebSocketMessage")) {
                 String jsonMessage = intent.getStringExtra("message");
-                Log.d("RotatingPictures.java", "Message reçu brut : " + jsonMessage);
+                Log.d(ROTATING_PICTURES_STR, "Message reçu brut : " + jsonMessage);
                 try {
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
                     String message = jsonObject.getString("message");
-                    if ("RotatingPicOrientation".equals(tag)) {
-
-                    } else if ("successPopup".equals(tag)) {
+                    if ("successPopup".equals(tag)) {
                         ViewGroup viewGroup = findViewById(R.id.main);
                         mediaPlayer = MediaPlayer.create(RotatingPictures.this, R.raw.professor_layton_sucess);
                         mediaPlayer.start();
@@ -90,6 +85,7 @@ public class RotatingPictures extends Theme {
                         finish();
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -146,11 +142,9 @@ public class RotatingPictures extends Theme {
             }
         });
         ViewGroup viewGroup = findViewById(R.id.main);
-        showTutorialPopup(this.rulestitle, this.rulescontent, viewGroup);
+        showTutorialPopup(this.rulesTitle, this.rulesContent, viewGroup);
         MaterialButton rulesButton = findViewById(R.id.Regles);
-        rulesButton.setOnClickListener(v -> {
-            showTutorialPopup(this.rulestitle, this.rulescontent, viewGroup);
-        });
+        rulesButton.setOnClickListener(v -> showTutorialPopup(this.rulesTitle, this.rulesContent, viewGroup));
         Button sendButton = findViewById(R.id.sendButton);
         sendButton.setOnClickListener(v -> {
             ArrayList<Integer> rotations = new ArrayList<>();
@@ -166,7 +160,7 @@ public class RotatingPictures extends Theme {
 
         IntentFilter filter = new IntentFilter("WebSocketMessage");
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
-        Log.d("RotatingPictures", "lancement du BroadcastReceiver");
+        Log.d(ROTATING_PICTURES_STR, "lancement du BroadcastReceiver");
         List<View> views = new ArrayList<>();
         Button button = findViewById(R.id.Regles);
         TextView role = findViewById(R.id.role);
@@ -201,9 +195,9 @@ public class RotatingPictures extends Theme {
             isBound = false;
             try {
                 unregisterReceiver(messageReceiver);
-                Log.d("RotatingPictures", "BroadcastReceiver unregistered");
+                Log.d(ROTATING_PICTURES_STR, "BroadcastReceiver unregistered");
             } catch (IllegalArgumentException e) {
-                Log.e("RotatingPictures", "BroadcastReceiver already unregistered", e);
+                Log.e(ROTATING_PICTURES_STR, "BroadcastReceiver already unregistered", e);
             }
         }
     }
@@ -213,9 +207,9 @@ public class RotatingPictures extends Theme {
         super.onStop();
         try {
             unregisterReceiver(messageReceiver);
-            Log.d("RotatingPictures", "BroadcastReceiver unregistered");
+            Log.d(ROTATING_PICTURES_STR, "BroadcastReceiver unregistered");
         } catch (IllegalArgumentException e) {
-            Log.e("RotatingPictures", "BroadcastReceiver already unregistered", e);
+            Log.e(ROTATING_PICTURES_STR, "BroadcastReceiver already unregistered", e);
         }
     }
 }

@@ -54,7 +54,6 @@ public class ChoseATrouverPrixJusteHandler extends MyDatabaseHelper {
 
     /**
      * supprime une chose à trouver
-     *
      * @param chose
      */
     public void deleteChose(ChoseATrouverPrixJuste chose) {

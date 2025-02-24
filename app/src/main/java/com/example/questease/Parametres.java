@@ -44,7 +44,6 @@ public class Parametres extends Theme {
         isCreated = true;
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        //sharedPreferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         sharedPreferences = getSecurePreferences(this);
         // applique le theme
         ApplyParameters(sharedPreferences);
@@ -57,7 +56,7 @@ public class Parametres extends Theme {
         });
 
         ViewGroup layout = findViewById(R.id.main);
-        if (sharedPreferences.getBoolean("assistance_vocale", false)) {
+        if (sharedPreferences.getBoolean(ASSISTANCE_VOCALE_STRING, false)) {
             lireTextViews(layout);
         }
         // elements a taille variable

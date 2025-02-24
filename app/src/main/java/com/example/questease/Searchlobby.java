@@ -14,9 +14,7 @@ import android.graphics.RenderEffect;
 import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.IBinder;
-import android.os.Looper;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -31,7 +29,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.constraintlayout.widget.Group;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -51,6 +48,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Map;
 
 public class Searchlobby extends Theme {
@@ -64,21 +62,38 @@ public class Searchlobby extends Theme {
     LinearLayout layoutLobbies;
     Dialog namePopupDialog;
     private String requestedLobby;
-    private Boolean isCreated = false;
     private Boolean isErrorPopupVisible = false;
     private boolean connected= false;
 
 
+    private static final String SEARCH_LOBBY_STR = "SearchLobby";
+    private static final String CREATE_LOBBY_STR = "createLobby";
+    private static final String WEB_SOCKET_MSG_STR = "WebSocketMessage";
+    private static final String SET_NOM_STR = "setnom";
+    private static final String JOIN_LOBBY_STR = "joinLobby";
+
+
+
     private ServiceConnection connection = new ServiceConnection() {
+
+        /**
+         * est utilisé quand le web socket est connecté au serveur
+         * @param name nom du web socket
+         * @param service utilisé par le web socket
+         */
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             WebSocketService.LocalBinder binder = (WebSocketService.LocalBinder) service;
             webSocketService = binder.getService();
             isBound = true;
-            Log.d("SearchLobby", "Service connected");
+            Log.d(SEARCH_LOBBY_STR, "Service connected");
             webSocketService.sendMessage("requestLobbies", "");
         }
 
+        /**
+         * est utilisé quand le web socket est déconnecté
+         * @param name nom du component
+         */
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;
@@ -86,14 +101,20 @@ public class Searchlobby extends Theme {
     };
 
     private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
+
+        /**
+         * est utilisé quand le web socket recoit quelque chose
+         * @param context page sur la quel le web socket est
+         * @param intent truc au pif
+         */
         @Override
         public void onReceive(Context context, Intent intent) {
-            SharedPreferences sharedPreferences = getSecurePreferences(context);
-            Log.d("SearchLobby", "Broadcast received");
-            if (intent.getAction().equals("WebSocketMessage")) {
+            Log.d(SEARCH_LOBBY_STR, "Broadcast received");
+            if (Objects.equals(intent.getAction(), WEB_SOCKET_MSG_STR)) {
                 String jsonMessage = intent.getStringExtra("message");
-                Log.d("SearchLobby", "Message reçu brut : " + jsonMessage);
+                Log.d(SEARCH_LOBBY_STR, "Message reçu brut : " + jsonMessage);
                 try {
+                    assert jsonMessage != null;
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
                     String message = jsonObject.getString("message");
@@ -172,16 +193,22 @@ public class Searchlobby extends Theme {
                             showServerErrorPopUp(view);
                             isErrorPopupVisible = true;
                         }
+
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }
     };
 
+    /**
+     * créer les élements de la page quand la page est lancé
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d("SearchLobby", "Nouvelle instance créée");
+        Log.d(SEARCH_LOBBY_STR, "Nouvelle instance créée");
 
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
@@ -201,7 +228,7 @@ public class Searchlobby extends Theme {
         MaterialButton creerLobby = findViewById(R.id.creerLobby);
         creerLobby.setOnClickListener(view -> {
             ViewGroup rootView = findViewById(R.id.main);
-            shownamepopup(rootView, "createLobby", "");
+            shownamepopup(rootView, CREATE_LOBBY_STR, "");
         });
 
         views.add(creerLobby);
@@ -218,12 +245,14 @@ public class Searchlobby extends Theme {
         startService(serviceIntent);
         bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
 
-        IntentFilter filter = new IntentFilter("WebSocketMessage");
+        IntentFilter filter = new IntentFilter(WEB_SOCKET_MSG_STR);
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
-        Log.d("SearchLobby", "lancement du BroadcastReceiver");
+        Log.d(SEARCH_LOBBY_STR, "lancement du BroadcastReceiver");
 
         namePopupDialog = new Dialog(this);
         namePopupDialog.setContentView(R.layout.popname);
+        Objects.requireNonNull(namePopupDialog.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Log.d("oui", "je suis crée");
         namePopupDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
          if(sharedPreferences.getBoolean("connected",false)){
              this.connected = true;
@@ -252,10 +281,13 @@ public class Searchlobby extends Theme {
         });
     }
 
+    /**
+     * est utilisé quand le web socket se stop
+     */
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("SearchLobby", "onStop() called");
+        Log.d(SEARCH_LOBBY_STR, "onStop() called");
         if (isBound) {
             unbindService(connection);
 
@@ -263,12 +295,15 @@ public class Searchlobby extends Theme {
         }
         try {
             unregisterReceiver(messageReceiver);
-            Log.d("SearchLobby", "BroadcastReceiver unregistered");
+            Log.d(SEARCH_LOBBY_STR, "BroadcastReceiver unregistered");
         } catch (IllegalArgumentException e) {
-            Log.e("SearchLobby", "BroadcastReceiver already unregistered", e);
+            Log.e(SEARCH_LOBBY_STR, "BroadcastReceiver already unregistered", e);
         }
     }
 
+    /**
+     * quand el web socket redémare
+     */
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -276,23 +311,32 @@ public class Searchlobby extends Theme {
         startService(serviceIntent);
         bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
 
-        IntentFilter filter = new IntentFilter("WebSocketMessage");
+        IntentFilter filter = new IntentFilter(WEB_SOCKET_MSG_STR);
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
         Log.d("Lobby", "lancement du BroadcastReceiver");
     }
 
+    /**
+     *
+     */
     @Override
     protected void onResume() {
         super.onResume();
         Log.d("SearchLobby", "onResume() called");
     }
 
+    /**
+     * quand le websocket se pose
+     */
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("SearchLobby", "onPause() called");
+        Log.d(SEARCH_LOBBY_STR, "onPause() called");
     }
 
+    /**
+     * quand le websocket se détruit
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -302,39 +346,38 @@ public class Searchlobby extends Theme {
         }
     }
 
-
+    /**
+     * renvoie les bouttons de la page
+     * @param parent page de l'application android
+     */
     private void getButtons(ViewGroup parent) {
         for (int i = 0; i < parent.getChildCount(); i++) {
             View child = parent.getChildAt(i);
             if (child instanceof MaterialButton) {
-                views.add((MaterialButton) child);
+                views.add(child);
             } else if (child instanceof ViewGroup) {
                 getButtons((ViewGroup) child);
             }
         }
     }
 
-    private void addLobbyButtons(Map<String, Integer> lobbies) {
+    /**
+     * ajoute des boutons au loby aka serveur
+     * @param lobbies les lobbies qui existent déjà
+     */
+    private void addLobbyButtons(List<String> lobbies) {
         Log.d("lobbybutton", "je suis dans le addlobbybutton");
         this.layoutLobbies = findViewById(R.id.layoutlobbies);
         layoutLobbies.removeAllViews();
-
-        for (Map.Entry<String, Integer> entry : lobbies.entrySet()) {
-            String lobby = entry.getKey();
-            int status = entry.getValue();
-
-            View lobbyView = LayoutInflater.from(this)
+        for (String lobby : lobbies) {
+            MaterialButton lobbyButton = (MaterialButton) LayoutInflater.from(this)
                     .inflate(R.layout.lobby_button, layoutLobbies, false);
-
-            MaterialButton lobbyButton = lobbyView.findViewById(R.id.myButton);
-            TextView badgeText = lobbyView.findViewById(R.id.badgeNumber);
-
             if (lobby != null) {
                 lobbyButton.setText(lobby);
                 lobbyButton.setOnClickListener(v -> {
                     ViewGroup rootView = findViewById(R.id.main);
                     this.requestedLobby = lobby;
-                    shownamepopup(rootView, "joinLobby", lobby);
+                    shownamepopup(rootView, JOIN_LOBBY_STR, lobby);
                 });
 
                 TypedValue typedValue = new TypedValue();
@@ -351,22 +394,10 @@ public class Searchlobby extends Theme {
                         attrColor = R.attr.exitButton;
                         break;
                 }
-
-                theme.resolveAttribute(attrColor, typedValue, true);
-                int color = typedValue.data;
-                lobbyButton.setBackgroundTintList(ColorStateList.valueOf(color));
-
-                badgeText.setText(String.valueOf(status));
-
-                if (status == 0) {
-                    badgeText.setVisibility(View.GONE);
-                } else {
-                    badgeText.setVisibility(View.VISIBLE);
                 }
-                layoutLobbies.addView(lobbyView);
             }
-        }
-    }
+
+
     public void shownamepopup(ViewGroup view, String action, String lobby) {
         SharedPreferences sharedPreferences = getSecurePreferences(this);
         String username = sharedPreferences.getString("username", "");
@@ -377,126 +408,46 @@ public class Searchlobby extends Theme {
         namePopupDialog.setOnCancelListener(dialog -> view.setRenderEffect(null));
         namePopupDialog.show();
 
-        View dialogView = namePopupDialog.findViewById(android.R.id.content);
-        if (dialogView == null) {
-            Log.e("shownamepopup", "Erreur : la vue du Dialog est null !");
-            return;
-        }
-        TextView cardTitle  = dialogView.findViewById(R.id.cardTitle);
-        TextView cardContent = dialogView.findViewById(R.id.cardContent);
-        TextInputEditText textInputLayout = dialogView.findViewById(R.id.textInputEditText);
+        MaterialButton validatebutton = namePopupDialog.findViewById(R.id.validateButton);
+        if (action.equals("createLobby")) {
+            validatebutton.setOnClickListener(v -> {
+                TextInputLayout nameInput = namePopupDialog.findViewById(R.id.textInputLayout);
+                String name = nameInput.getEditText().getText().toString().trim();
 
-        if(connected){
-            cardTitle.setText("Choisissez la difficulté");
-            cardContent.setText("Pour pouvoir rejoindre un lobby il vous faut une difficulté");
-            textInputLayout.setVisibility(View.GONE);
-        }
-        MaterialButton difficultyButton1 = dialogView.findViewById(R.id.difficultyButton1);
-        MaterialButton difficultyButton2 = dialogView.findViewById(R.id.difficultyButton2);
-        MaterialButton difficultyButton3 = dialogView.findViewById(R.id.difficultyButton3);
-
-        if (difficultyButton1 == null || difficultyButton2 == null || difficultyButton3 == null) {
-            Log.e("shownamepopup", "Erreur : impossible de récupérer les boutons de difficulté !");
-            return;
-        }
-        if (action.equals("joinLobby")){
-            difficultyButton1.setVisibility(View.GONE);
-            //TODO adapter pour le mec qui rejoint et qui a déja un compte , et pour celui qui n'en a pas
-            difficultyButton2.setVisibility(View.GONE);
-            difficultyButton3.setVisibility(View.GONE);
-            MaterialTextView difficulty = dialogView.findViewById(R.id.difficultyText);
-            difficulty.setVisibility(View.GONE);
-            if (connected){
-                cardTitle.setText("Rejoindre le lobby "+lobby+" ?");
-                cardContent.setText("");
-                textInputLayout.setText(username);
-            }
-        }
-        difficultyButton1.setOnClickListener(v -> {
-            sharedPreferences.edit().putInt(DIFFICULTY,1).apply();
-            difficultyButton1.setAlpha(1.0f);
-            difficultyButton2.setAlpha(0.3f);
-            difficultyButton3.setAlpha(0.3f);
-            Toast toast = Toast.makeText(this, "Difficulté sélectionnée : Facile", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.BOTTOM, 0, 100);
-            toast.show();
-        });
-
-        difficultyButton2.setOnClickListener(v -> {
-            Toast toast = Toast.makeText(this, "Difficulté sélectionnée : Moyenne", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.BOTTOM, 0, 100);
-            toast.show();
-            sharedPreferences.edit().putInt(DIFFICULTY,2).apply();
-            difficultyButton1.setAlpha(0.3f);
-            difficultyButton2.setAlpha(1.0f);
-            difficultyButton3.setAlpha(0.3f);
-        });
-
-        difficultyButton3.setOnClickListener(v -> {
-            Toast toast = Toast.makeText(this, "Difficulté sélectionnée : Difficile", Toast.LENGTH_SHORT);
-            toast.setGravity(Gravity.BOTTOM, 0, 100);
-            toast.show();
-            sharedPreferences.edit().putInt(DIFFICULTY,3).apply();
-            difficultyButton1.setAlpha(0.3f);
-            difficultyButton2.setAlpha(0.3f);
-            difficultyButton3.setAlpha(1.0f);
-        });
-
-        int difficulty = sharedPreferences.getInt(DIFFICULTY, 0);
-        if (difficulty == 1 || difficulty == 0) {
-            difficultyButton1.performClick();
-        } else if (difficulty == 2) {
-            difficultyButton2.performClick();
-        } else if (difficulty == 3) {
-            difficultyButton3.performClick();
-        }
-
-        MaterialButton validateButton = dialogView.findViewById(R.id.validateButton);
-        if (validateButton == null) {
-            Log.e("shownamepopup", "Erreur : validateButton est null !");
-            return;
-        }
-
-        validateButton.setOnClickListener(v -> {
-            TextInputLayout nameInput = dialogView.findViewById(R.id.textInputLayout);
-            if (nameInput == null) {
-                Log.e("shownamepopup", "Erreur : textInputLayout est null !");
-                return;
-            }
-
-            String name = nameInput.getEditText().getText().toString().trim();
-            if (name.isEmpty() && !connected) {
-                Toast.makeText(Searchlobby.this, "Veuillez entrer un nom valide.", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            try {
-                JSONObject jsonRequest = new JSONObject();
-                if ("createLobby".equals(action)) {
-                    if(sharedPreferences.getBoolean("connected", false)) {
-
-                        jsonRequest.put("tag", "ConnectedCreate");
-                        jsonRequest.put("name", username);
-                        webSocketService.sendMessage("ConnectedCreate", username);
-                        this.nom = username;
-                    }
-                    else{
+                if (!name.isEmpty()) {
+                    JSONObject jsonRequest = new JSONObject();
+                    try {
                         jsonRequest.put("tag", "setnom");
                         jsonRequest.put("name", name);
                         webSocketService.sendMessage("setnom", name);
                         this.nom = name;
                     }
-
-                } else if ("joinLobby".equals(action)) {
-                    jsonRequest.put("tag", "joinLobby");
-                    jsonRequest.put("name", name);
-                    webSocketService.sendMessage("joinLobby", lobby);
-                    this.nom = name;
+                    catch (Exception e) {
+                        Log.e("shownamepopup", "Erreur JSON : " + e.getMessage());
+                    }
+                } else {
+                    Toast.makeText(Searchlobby.this, "Veuillez entrer un nom valide.", Toast.LENGTH_SHORT).show();
                 }
-            } catch (Exception e) {
-                Log.e("shownamepopup", "Erreur JSON : " + e.getMessage());
-            }
-        });
+            });
+        } else if (action.equals("joinLobby")) {
+            validatebutton.setOnClickListener(v -> {
+                TextInputLayout nameInput = namePopupDialog.findViewById(R.id.textInputLayout);
+                String name = nameInput.getEditText().getText().toString().trim();
+                if (!name.isEmpty()) {
+                    JSONObject jsonRequest = new JSONObject();
+                    try {
+                        jsonRequest.put("tag", "joinLobby");
+                        jsonRequest.put("name", name);
+                        webSocketService.sendMessage("joinLobby", lobby);
+                        this.nom = name;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(Searchlobby.this, "Veuillez entrer un nom valide.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
 

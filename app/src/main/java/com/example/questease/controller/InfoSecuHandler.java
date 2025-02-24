@@ -9,12 +9,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.example.questease.model.bdd.InfoSecu;
 
 
-public class infoSecuHandler extends MyDatabaseHelper {
+public class InfoSecuHandler extends MyDatabaseHelper {
 
     private SQLiteOpenHelper dbHelper;
 
 
-    public infoSecuHandler(Context context) {
+    public InfoSecuHandler(Context context) {
         super(context);
         dbHelper = new MyDatabaseHelper(context);
     }
@@ -48,7 +48,6 @@ public class infoSecuHandler extends MyDatabaseHelper {
 
     /**
      * supprime une chose à trouver
-     *
      * @param I
      */
     public void deleteSecu(InfoSecu I) {

@@ -9,42 +9,35 @@ import android.content.ServiceConnection;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.text.Layout;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import com.example.questease.Searchlobby;
-import com.example.questease.Theme;
-import com.example.questease.WebSocketService;
-import com.example.questease.Parametres;
 
 import android.content.SharedPreferences;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import org.java_websocket.client.WebSocketClient;
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends Theme {
     private WebSocketService webSocketService;
     private boolean isBound = false;
     private boolean isCreated = false;
     private boolean isErrorPopupVisible = false;
+    private static final String MAIN_ACTIVITY_STR = "MainActivity";
+    private final ServiceConnection connection = new ServiceConnection() {
     private static final String DIFFICULTY = "difficulty";
     private ServiceConnection connection = new ServiceConnection() {
         @Override
@@ -64,14 +57,13 @@ public class MainActivity extends Theme {
             isBound = false;
         }
     };
-    private BroadcastReceiver messageReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver messageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("MainActivity", "Broadcast received");
-            if (intent.getAction().equals("WebSocketMessage")) {
+            Log.d(MAIN_ACTIVITY_STR, "Broadcast received");
+            if (Objects.equals(intent.getAction(), "WebSocketMessage")) {
                 String jsonMessage = intent.getStringExtra("message");
-                Log.d("MainActivity", "Message reçu brut : " + jsonMessage);
-                SharedPreferences sharedPreferences = getSecurePreferences(context);
+                Log.d(MAIN_ACTIVITY_STR, "Message reçu brut : " + jsonMessage);
                 try {
                     JSONObject jsonObject = new JSONObject(jsonMessage);
                     String tag = jsonObject.getString("tag");
@@ -106,6 +98,7 @@ public class MainActivity extends Theme {
 
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -114,7 +107,7 @@ public class MainActivity extends Theme {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences sharedPreferences = getSecurePreferences(this);
+        SharedPreferences sharedPreferences = getSharedPreferences("QuestEasePrefs", MODE_PRIVATE);
         ApplyParameters(sharedPreferences);
 
         EdgeToEdge.enable(this);
@@ -151,9 +144,9 @@ public class MainActivity extends Theme {
             startActivity(intent);
             try {
                 unregisterReceiver(messageReceiver);
-                Log.d("MainActivity", "BroadcastReceiver unregistered");
+                Log.d(MAIN_ACTIVITY_STR, "BroadcastReceiver unregistered");
             } catch (IllegalArgumentException e) {
-                Log.e("MainActivity", "BroadcastReceiver already unregistered", e);
+                Log.e(MAIN_ACTIVITY_STR, "BroadcastReceiver already unregistered", e);
             }
         });
 
@@ -168,11 +161,11 @@ public class MainActivity extends Theme {
         bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE);
 
         // Log pour vérifier quand le receiver est enregistré
-        Log.d("MainActivity", "Enregistrement du BroadcastReceiver");
+        Log.d(MAIN_ACTIVITY_STR, "Enregistrement du BroadcastReceiver");
         IntentFilter filter = new IntentFilter("WebSocketMessage");
         registerReceiver(messageReceiver, filter, Context.RECEIVER_EXPORTED);
         if (sharedPreferences.getBoolean("assistance_vocale", false)) {
-            Log.d("MainActivity", "Lancement de lireTextViews");
+            Log.d(MAIN_ACTIVITY_STR, "Lancement de lireTextViews");
             lireTextViews(layout);
         }
 
