@@ -394,11 +394,11 @@ public class Searchlobby extends Theme {
                         attrColor = R.attr.exitButton;
                         break;
                 }
-                }
             }
+        }
 
 
-    public void shownamepopup(ViewGroup view, String action, String lobby) {
+        public void shownamepopup(ViewGroup view, String action, String lobby) {
         SharedPreferences sharedPreferences = getSecurePreferences(this);
         String username = sharedPreferences.getString("username", "");
         RenderEffect blurEffect = RenderEffect.createBlurEffect(10, 10, Shader.TileMode.CLAMP);
