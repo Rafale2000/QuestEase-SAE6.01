@@ -60,7 +60,7 @@ En cours d'amélioration: ajout de fonctionalité et correction de bug
 
 ## Coté Serveur :
 
-# Questease
+# Questease Serveur
 
 Questease étant un jeu en ligne ce dernier à besoin d'un serveur pour faire marcher ce dernier.
 Sans cela l'utilisateur ne pourra pas lancer de parties ou se connecter à son compte.
